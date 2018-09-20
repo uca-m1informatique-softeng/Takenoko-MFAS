@@ -61,6 +61,11 @@ public class Plateau {
         return list;
     }
 
+    public void poser(Parcelle p, Point3D coord){
+        keylist.add(coord);
+        map.put(coord,p);
+    }
+
 
 
 
