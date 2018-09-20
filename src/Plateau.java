@@ -34,5 +34,36 @@ public class Plateau {
         return map.get(p2);
     }
 
+    public ArrayList<Point3D> getParcelleVoisine(Point3D p){
+        double x=p.getX();
+        double y=p.getY();
+        double z=p.getZ();
+
+        ArrayList<Point3D> list = new ArrayList<Point3D>();
+        list.add(new Point3D(x+0,y+1,z-1));
+        list.add(new Point3D(x+1,y+0,z-1));
+        list.add(new Point3D(x+1,y-1,z+0));
+        list.add(new Point3D(x+0,y-1,z+1));
+        list.add(new Point3D(x-1,y+0,z+1));
+        list.add(new Point3D(x-1,y+1,z+0));
+        return list;
+    }
+
+    public ArrayList<Point3D> getParcelleVoisineLibre(Point3D p){
+        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+
+        for (int i = list.size()-1; i >=0; i--) {
+            if(keylist.contains(list.get(i)))
+            {
+                list.remove(i);
+            }
+        }
+        return list;
+    }
+
+
+
+
+
 
 }
