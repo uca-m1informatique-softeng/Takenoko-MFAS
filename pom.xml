@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
 
     <groupId>Takenoko-MFAS</groupId> <!-- CHANGE ME -->
-    <artifactId>takenoko</artifactId> <!-- CHANGE ME -->
+    <artifactId>Takenoko-MFAS</artifactId> <!-- CHANGE ME -->
     <version>0.1-SNAPSHOT</version> <!-- CHANGE ME -->
 
   <properties>
