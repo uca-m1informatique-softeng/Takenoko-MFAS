@@ -5,8 +5,20 @@ import java.util.HashMap;
 
 public class Plateau {
 
-    private HashMap<Point3D, Parcelle> map = new HashMap<>();
-    private ArrayList<Point3D> keylist = new ArrayList<Point3D>();
+    private HashMap<Point3D, Parcelle> map;
+    private ArrayList<Point3D> keylist;
+
+
+    public Plateau(){
+
+        Point3D p = new Point3D(0,0,0);
+        Parcelle par = new Parcelle();
+        keylist = new ArrayList<Point3D>();
+        keylist.add(p);
+        map = new HashMap<>();
+        map.put(p,par);
+
+    }
 
     public HashMap<Point3D, Parcelle> getMap() {
         return map;
@@ -14,17 +26,6 @@ public class Plateau {
 
     public void setMap(HashMap<Point3D, Parcelle> map) {
         this.map = map;
-    }
-
-    public Plateau(){
-
-        Point3D p = new Point3D(0,0,0);
-        Parcelle par = new Parcelle();
-        ArrayList<Point3D> keylist = new ArrayList<Point3D>();
-        keylist.add(p);
-        HashMap<Point3D, Parcelle> map = new HashMap<>();
-        map.put(p,par);
-
     }
 
     public Parcelle getParcelle(Point3D p){
@@ -60,6 +61,50 @@ public class Plateau {
         }
         return list;
     }
+
+    public ArrayList<Point3D> getParcelleVoisineOccupe(Point3D p){
+        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+
+        for (int i = list.size()-1; i >=0; i--) {
+            if(!keylist.contains(list.get(i))) {
+                list.remove(i);
+            }
+        }
+        return list;
+
+    }
+
+    public boolean isEmplacementAutorise(Point3D p){
+        ArrayList<Point3D> list=this.getParcelleVoisineOccupe(p);
+        if(list.size() > 1 || list.contains(new Point3D(0,0,0)) ){
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Point3D> emplacementsAutorise(){
+        ArrayList<Point3D> maListe = new ArrayList<>();
+        ArrayList<Point3D> listTemp;
+        Point3D point;
+        Point3D pointVoisin;
+
+        for(int i = 0; i < keylist.size(); i++){
+
+            point = keylist.get(i);
+
+            listTemp = getParcelleVoisineLibre(point);
+            if(listTemp.size() > 0){
+                for(int j = 0; j < listTemp.size(); j++){
+                    pointVoisin = listTemp.get(j);
+                    if(isEmplacementAutorise(pointVoisin) && !maListe.contains(pointVoisin) ){
+                        maListe.add(pointVoisin);
+                    }
+                }
+            }
+        }
+        return maListe;
+    }
+
 
     public void poser(Parcelle p, Point3D coord){
         keylist.add(coord);

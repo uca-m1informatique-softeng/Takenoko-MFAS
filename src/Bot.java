@@ -15,7 +15,7 @@ public class Bot {
     }
 
     public void play(Plateau plateau, Point3D coord){ // tester plus tard que coord correspond bien à une parcelle
-        ArrayList<Point3D> list = plateau.getParcelleVoisineLibre(coord);
+        ArrayList<Point3D> list = plateau.emplacementsAutorise();
         Parcelle p = piocherParcelle();
         if(list.size() > 0){
             Point3D point = list.get(0);
