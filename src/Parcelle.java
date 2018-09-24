@@ -1,11 +1,16 @@
 
 public class Parcelle {
     final TypeParcelle type; //Pour le moment il y a que etang
-    private boolean irrigue;
+    private boolean irriguee;
 
-    public Parcelle(TypeParcelle type, boolean irrigue){
+    public Parcelle(TypeParcelle type){
         this.type = type;
-        this.irrigue = irrigue;
+        if(this.type  == TypeParcelle.etang ){
+            this.irriguee = true;
+        }
+        else{
+            this.irriguee = false;
+        }
     }
 
     @Override

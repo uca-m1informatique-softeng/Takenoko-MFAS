@@ -12,7 +12,7 @@ public class Plateau {
     public Plateau(){
 
         Point3D p = new Point3D(0,0,0);
-        Parcelle par = new Parcelle(TypeParcelle.etang,true);
+        Parcelle par = new Parcelle(TypeParcelle.etang);
         keylist = new ArrayList<Point3D>();
         keylist.add(p);
         map = new HashMap<>();
