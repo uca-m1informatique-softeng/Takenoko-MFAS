@@ -11,7 +11,7 @@ public class Bot {
     }
 
     private Parcelle piocherParcelle(){
-        return new Parcelle();
+        return new Parcelle(TypeParcelle.etang,true);
     }
 
     public void play(Plateau plateau, Point3D coord){ // tester plus tard que coord correspond bien à une parcelle
