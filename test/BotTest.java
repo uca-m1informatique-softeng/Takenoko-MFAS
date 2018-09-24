@@ -24,11 +24,12 @@ public class BotTest {
         /*On test d'abord s'il y a une parcelle au point p2 */
         assertFalse(pla.getMap().containsKey(p2));
 
+
         j.play(pla,p1);
 
         /*Maintenant on regarde si la parcelle a été posée au bon endroit*/
         assertEquals(par1.toString(),pla.getParcelle(p2).toString());
-
+        assertTrue(pla.getMap().containsKey(p2));
     }
 
 }

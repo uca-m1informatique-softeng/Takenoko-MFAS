@@ -55,7 +55,7 @@ class PlateauTest {
         /*Recuperer la liste des emplacements voisins libres*/
         ArrayList<Point3D> list = pla.getParcelleVoisineLibre(p1);
 
-        /*Creer la liste des enplacements voisins libres*/
+        /*Creer la liste des emplacements voisins libres*/
         ArrayList<Point3D> list2 = new ArrayList<>();
         list2.add(new Point3D(1.0,-1.0,0.0));
         list2.add(new Point3D(0.0,1.0,-1.0));
@@ -63,9 +63,146 @@ class PlateauTest {
         for (int i = 0 ; i < list.size(); i++){
             assertEquals(list.get(i),list2.get(i));
         }
-
-
     }
 
+    @Test
+    void getParcelleVoisineLibre2() {
+
+        pla.poser(par1,p1);
+        pla.poser(par1,new Point3D(1,1,-2));
+        pla.poser(par1,new Point3D(2,0,-2));
+        pla.poser(par1,new Point3D(2,-1,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+        pla.poser(par1,new Point3D(0.0,1.0,-1.0));
+
+        /*Recuperer la liste des emplacements voisins libres*/
+        ArrayList<Point3D> list = pla.getParcelleVoisineLibre(p1);
+
+        /*Creer la liste des emplacements voisins libres*/
+        ArrayList<Point3D> list2 = new ArrayList<>();
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+    }
+
+    @Test
+    void getParcelleVoisineLibre3() {
+
+
+        /*Recuperer la liste des emplacements voisins libres*/
+        ArrayList<Point3D> list = pla.getParcelleVoisineLibre(p);
+
+        /*Creer la liste des emplacements voisins libres*/
+        ArrayList<Point3D> list2 = new ArrayList<>();
+        list2.add(new Point3D(0.0,1.0,-1.0));
+        list2.add(new Point3D(1.0,0.0,-1.0));
+        list2.add(new Point3D(1.0,-1.0,0.0));
+        list2.add(new Point3D(0.0,-1.0,1.0));
+        list2.add(new Point3D(-1.0,0.0,1.0));
+        list2.add(new Point3D(-1.0,1.0,0.0));
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+    }
+
+    @Test
+    void getParcelleVoisineOccupe() {
+
+        Point3D p1=new Point3D(0,0,0);
+
+        /*Recuperer la liste des emplacements voisins occupees*/
+        ArrayList<Point3D> list = pla.getParcelleVoisineOccupe(p1);
+        assertEquals(list.size(),0);
+
+
+        /*Creer la liste des emplacements voisins occupees*/
+        pla.poser(par1,new Point3D(0,1,-1));
+        list = pla.getParcelleVoisineOccupe(p1);
+        assertEquals(list.size(),1);
+
+        /*On ajoute des parcelles adjacentes*/
+        pla.poser(par1,new Point3D(1,0,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+        list = pla.getParcelleVoisineOccupe(p1);
+        assertEquals(list.size(),3);
+
+        /*On ajoute des parcelles adjacentes*/
+        pla.poser(par1,new Point3D(0,-1,1));
+        pla.poser(par1,new Point3D(-1,0,1));
+        pla.poser(par1,new Point3D(-1,1,0));
+        list = pla.getParcelleVoisineOccupe(p1);
+        assertEquals(list.size(),6);
+
+        ArrayList<Point3D> list2 = new ArrayList<>();
+        list2.add(new Point3D(0.0,1.0,-1.0));
+        list2.add(new Point3D(1.0,0.0,-1.0));
+        list2.add(new Point3D(1.0,-1.0,0.0));
+        list2.add(new Point3D(0.0,-1.0,1.0));
+        list2.add(new Point3D(-1.0,0.0,1.0));
+        list2.add(new Point3D(-1.0,1.0,0.0));
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+    }
+
+    @Test
+    void isEmplacementAutorise() {
+        //il n'y a que la parcelle de départ sur le plateau
+        boolean autorisation;
+
+        // on vérifie si on peut poser à coté de la parcelle de départ
+        autorisation = pla.isEmplacementAutorise(new Point3D(0,1,-1));
+
+        assertTrue(autorisation);
+
+        //on ajoute 2 parcelles adjacentes entres elles et adjacentes à la parcelle de départ
+        pla.poser(par1,new Point3D(1,0,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+
+        //on vérifie si on peut poser en étant adjacent aux 2 nouvelles parcelles posées
+        autorisation = pla.isEmplacementAutorise(new Point3D(2,-1,-1));
+
+        assertTrue(autorisation);
+
+        //on vérifie si on peut poser en étant adjacant à une seule parcelle qui n'est pas celle de départ
+        autorisation = pla.isEmplacementAutorise(new Point3D(1,1,-2));
+
+        assertFalse(autorisation);
+
+        //on vérifie si on peut poser à un endroit adjacent à aucune parcelle
+        autorisation = pla.isEmplacementAutorise(new Point3D(0,-2,2));
+
+        assertFalse(autorisation);
+    }
+
+    @Test
+    void emplacementAutorise(){
+
+        ArrayList<Point3D> list = pla.emplacementsAutorise();
+        assertEquals(list.size(),6);
+
+        ArrayList<Point3D> list2 = new ArrayList<>();
+        list2.add(new Point3D(0.0,1.0,-1.0));
+        list2.add(new Point3D(1.0,0.0,-1.0));
+        list2.add(new Point3D(1.0,-1.0,0.0));
+        list2.add(new Point3D(0.0,-1.0,1.0));
+        list2.add(new Point3D(-1.0,0.0,1.0));
+        list2.add(new Point3D(-1.0,1.0,0.0));
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+
+        pla.poser(par1,new Point3D(0.0,1.0,-1.0));
+        list2.remove(0);
+        list = pla.emplacementsAutorise();
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+    }
 
 }
