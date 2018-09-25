@@ -32,6 +32,14 @@ public class Plateau {
         this.map = map;
     }
 
+    public ArrayList<Point3D> getKeylist() {
+        return keylist;
+    }
+
+    public void setKeylist(ArrayList<Point3D> keylist) {
+        this.keylist = keylist;
+    }
+
     public Parcelle getParcelle(Point3D p){
         int index=keylist.indexOf(p);
         Point3D p2=keylist.get(index);
@@ -124,6 +132,16 @@ public class Plateau {
     //pour le deplacement
     public void DeplacerJardinier(Point3D p){
         Jardinier.setCoord(p);
+    }
+
+
+    public void pousserBambouMap(){
+        if(keylist.size() > 1){
+            for(int i = 1; i < keylist.size(); i++){
+                map.get(keylist.get(i)).pousserBambou();
+
+            }
+        }
     }
 
 

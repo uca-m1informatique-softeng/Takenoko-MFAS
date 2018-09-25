@@ -12,7 +12,7 @@ public class Main {
         Bot bot1 = new Bot("Bleu");
         Bot bot2 = new Bot("Rouge");
 
-        for(int i = 0; i < 3; i++){
+        while (bot1.getNombreObjectifs() == 0 && bot2.getNombreObjectifs() == 0){
             bot1.play(pla, new Point3D(0,0,0));
             bot2.play(pla, new Point3D(0,0,0));
         }
