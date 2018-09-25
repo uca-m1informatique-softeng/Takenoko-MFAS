@@ -206,6 +206,40 @@ class PlateauTest {
         for (int i = 0 ; i < list.size(); i++){
             assertEquals(list.get(i),list2.get(i));
         }
+        pla.poser(par1,new Point3D(1.0,0.0,-1.0));//on ajoute une parcelle adjacente aux 2 parcelles déja prÃ©sentes sur le plateau
+        //on actualise la liste des points attendus
+        list2.remove(0);
+        list2.add(new Point3D(1.0,1.0,-2.0));
+
+        list = pla.emplacementsAutorise();
+
+        assertEquals(list.size(),5);
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
+    }
+
+    @Test
+    void emplacementAutorise1(){
+        //on pose 2 parcelles non adjacentes entre elles
+        pla.poser(par1,new Point3D(0.0,1.0,-1.0));
+        pla.poser(par1,new Point3D(0.0,-1.0,1.0));
+
+        //on creer la liste des points attendus
+        ArrayList<Point3D> list2 = new ArrayList<>();
+        list2.add(new Point3D(1.0,0.0,-1.0));
+        list2.add(new Point3D(1.0,-1.0,0.0));
+        list2.add(new Point3D(-1.0,0.0,1.0));
+        list2.add(new Point3D(-1.0,1.0,0.0));
+
+        ArrayList<Point3D> list = pla.emplacementsAutorise();
+
+        assertEquals(list.size(),4);
+
+        for (int i = 0 ; i < list.size(); i++){
+            assertEquals(list.get(i),list2.get(i));
+        }
     }
 
 }
