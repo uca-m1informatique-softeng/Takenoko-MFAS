@@ -1,3 +1,4 @@
+package Moteur;
 
 public class Parcelle {
     final TypeParcelle type; //Pour le moment il y a que etang

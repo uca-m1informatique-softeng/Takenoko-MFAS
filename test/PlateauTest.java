@@ -1,3 +1,6 @@
+import Moteur.Parcelle;
+import Moteur.Plateau;
+import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

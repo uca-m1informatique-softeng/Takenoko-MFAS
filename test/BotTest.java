@@ -1,3 +1,7 @@
+import Joueur.Bot;
+import Moteur.Parcelle;
+import Moteur.Plateau;
+import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
 import org.junit.Test;
 

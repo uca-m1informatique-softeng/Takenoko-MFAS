@@ -1,3 +1,8 @@
+package Joueur;
+
+import Moteur.Parcelle;
+import Moteur.Plateau;
+import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;

@@ -1,4 +1,8 @@
+package Parties;
+
+import Moteur.Plateau;
 import javafx.geometry.Point3D;
+import Joueur.Bot;
 
 public class Main {
 
