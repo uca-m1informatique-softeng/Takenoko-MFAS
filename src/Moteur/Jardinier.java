@@ -2,6 +2,9 @@ package Moteur;
 
 import javafx.geometry.Point3D;
 
+/**
+ * C'est la classe du jardinier
+ */
 public class Jardinier {
 
     private Point3D coord;

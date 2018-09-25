@@ -2,11 +2,18 @@ package Moteur;
 
 import java.util.ArrayList;
 
+/**
+ *C'est la classe de la parcelle
+ */
 public class Parcelle {
     final TypeParcelle type; //Pour le moment il y a que etang
     private boolean irriguee;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 
+    /**
+     * Le constructeur
+     * @param type
+     */
     public Parcelle(TypeParcelle type){
         this.type = type;
         if(this.type  == TypeParcelle.etang ){
@@ -17,16 +24,23 @@ public class Parcelle {
         }
     }
 
+
     public int getNbBambou(){
         return listBambou.size();
     }
 
+    /**
+     * La methode qui permet de faire pousser le bambou
+     */
     public void pousserBambou(){
         if(listBambou.size() < 4){
             listBambou.add(new Bambou());
         }
     }
 
+    /**
+     * La methode qui permet d'enlever du bambou
+     */
     public void mangerBambou(){
         int i = listBambou.size();
         if(i > 0){
