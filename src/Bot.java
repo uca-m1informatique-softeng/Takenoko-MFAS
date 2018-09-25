@@ -23,8 +23,17 @@ public class Bot {
             System.out.println("( " + point.getX() + ", " + point.getY() + ", " + point.getZ() + ") tuile posé par le joueur " + couleur);
 
         }
+        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJardinier();
+        if(listdeplacementJardinier.size() > 0){
+            Point3D pointJaridnier = listdeplacementJardinier.get(0);
+            plateau.DeplacerJardinier(pointJaridnier);
+            System.out.println("le joueur " + couleur + " a deplacé le jardinier en (" + pointJaridnier.getX() + ", " + pointJaridnier.getY() + ", " + pointJaridnier.getZ() + ")");
+
+        }
+
 
 
     }
+
 
 }

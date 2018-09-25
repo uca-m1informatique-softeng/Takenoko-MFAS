@@ -113,6 +113,18 @@ public class Plateau {
         map.put(coord,p);
     }
 
+    //renvoyer la liste des deplacement possibles pour le jardinier (seul les voisins  pour le moment)
+    public ArrayList<Point3D> DestinationsPossiblesJardinier() {
+        return getParcelleVoisineOccupe(this.Jardinier.getCoord());
+    }
+
+
+    //pour le deplacement
+    public void DeplacerJardinier(Point3D p){
+        Jardinier.setCoord(p);
+    }
+
+
 
 
 }
