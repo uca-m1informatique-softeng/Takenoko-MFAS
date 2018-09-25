@@ -44,12 +44,20 @@ public class Parcelle {
     public void mangerBambou(){
         int i = listBambou.size();
         if(i > 0){
-            listBambou.remove(i);
+            listBambou.remove(0);
         }
     }
 
     @Override
     public String toString() {
         return "parcelle ok";
+    }
+
+    public ArrayList<Bambou> getListBambou() {
+        return listBambou;
+    }
+
+    public void setListBambou(ArrayList<Bambou> listBambou) {
+        this.listBambou = listBambou;
     }
 }
