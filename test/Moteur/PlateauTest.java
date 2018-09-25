@@ -1,3 +1,5 @@
+package Moteur;
+
 import Moteur.Parcelle;
 import Moteur.Plateau;
 import Moteur.TypeParcelle;
@@ -5,9 +7,9 @@ import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class PlateauTest {
+public class PlateauTest {
 
     Plateau pla = new Plateau();
     Point3D p = new Point3D(0,0,0);
@@ -16,13 +18,13 @@ class PlateauTest {
 
 
     @Test
-    void getParcelle() {
+    public void getParcelle() {
         Parcelle par2 = pla.getParcelle(p);
         assertEquals(par1.toString(),par2.toString());
     }
 
     @Test
-    void getParcelleVoisine() {
+    public void getParcelleVoisine() {
 
         ArrayList<Point3D> lis1 = pla.getParcelleVoisine(p1);
         ArrayList<Point3D> lis2 = new ArrayList<>(); // liste voisine attendue
@@ -41,14 +43,14 @@ class PlateauTest {
     }
 
     @Test
-    void poser() {
+    public void poser() {
         pla.poser(par1,p1);
         Parcelle par3 = pla.getParcelle(p1);
         assertEquals(par1,par3);
     }
 
     @Test
-    void getParcelleVoisineLibre() {
+    public void getParcelleVoisineLibre() {
 
         pla.poser(par1,p1);
         pla.poser(par1,new Point3D(1,1,-2));
@@ -69,7 +71,7 @@ class PlateauTest {
     }
 
     @Test
-    void getParcelleVoisineLibre2() {
+    public void getParcelleVoisineLibre2() {
 
         pla.poser(par1,p1);
         pla.poser(par1,new Point3D(1,1,-2));
@@ -90,7 +92,7 @@ class PlateauTest {
     }
 
     @Test
-    void getParcelleVoisineLibre3() {
+    public void getParcelleVoisineLibre3() {
 
 
         /*Recuperer la liste des emplacements voisins libres*/
@@ -111,7 +113,7 @@ class PlateauTest {
     }
 
     @Test
-    void getParcelleVoisineOccupe() {
+    public void getParcelleVoisineOccupe() {
 
         Point3D p1=new Point3D(0,0,0);
 
@@ -152,7 +154,7 @@ class PlateauTest {
     }
 
     @Test
-    void isEmplacementAutorise() {
+    public void isEmplacementAutorise() {
         //il n'y a que la parcelle de départ sur le plateau
         boolean autorisation;
 
@@ -182,7 +184,7 @@ class PlateauTest {
     }
 
     @Test
-    void emplacementAutorise(){
+    public void emplacementAutorise(){
 
         ArrayList<Point3D> list = pla.emplacementsAutorise();
         assertEquals(list.size(),6);
@@ -221,7 +223,7 @@ class PlateauTest {
     }
 
     @Test
-    void emplacementAutorise1(){
+    public void emplacementAutorise1(){
         //on pose 2 parcelles non adjacentes entre elles
         pla.poser(par1,new Point3D(0.0,1.0,-1.0));
         pla.poser(par1,new Point3D(0.0,-1.0,1.0));

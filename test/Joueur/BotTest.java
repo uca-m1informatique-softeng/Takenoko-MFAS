@@ -1,3 +1,5 @@
+package Joueur;
+
 import Joueur.Bot;
 import Moteur.Parcelle;
 import Moteur.Plateau;
