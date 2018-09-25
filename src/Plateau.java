@@ -7,6 +7,7 @@ public class Plateau {
 
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
+    private Jardinier Jardinier;
 
 
     public Plateau(){
@@ -17,6 +18,7 @@ public class Plateau {
         keylist.add(p);
         map = new HashMap<>();
         map.put(p,par);
+        this.Jardinier=new Jardinier();
 
     }
 
@@ -110,9 +112,6 @@ public class Plateau {
         keylist.add(coord);
         map.put(coord,p);
     }
-
-
-
 
 
 

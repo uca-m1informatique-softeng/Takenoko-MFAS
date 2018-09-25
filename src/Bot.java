@@ -21,7 +21,10 @@ public class Bot {
             Point3D point = list.get(0);
             plateau.poser(p, point);
             System.out.println("( " + point.getX() + ", " + point.getY() + ", " + point.getZ() + ") tuile posé par le joueur " + couleur);
+
         }
+
+
     }
 
 }
