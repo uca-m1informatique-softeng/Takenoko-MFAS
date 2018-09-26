@@ -24,38 +24,30 @@ public class Bot {
         this.couleur = couleur;
     }
 
-    private Parcelle piocherParcelle(){
+    public String getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
+
+    protected Parcelle piocherParcelle(){
         return new Parcelle(TypeParcelle.etang);
     }
 
     /**
      * Le déroulement des actions du bot
      * @param plateau
-     * @param coord
      */
-    public void play(Plateau plateau, Point3D coord){ // tester plus tard que coord correspond bien à une parcelle
+    public void play(Plateau plateau){ // tester plus tard que coord correspond bien à une parcelle
 
 
         verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
+        joueurPose(plateau);
 
-        ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle p = piocherParcelle();
-        if(list.size() > 0){
-            Point3D point = list.get(0);
-            plateau.poser(p, point);
-            System.out.println("( " + point.getX() + ", " + point.getY() + ", " + point.getZ() + ") tuile posé par le joueur " + couleur);
+        joueurDeplaceJardinier(plateau);
 
-        }
-        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJaridnier();
-        if(listdeplacementJardinier.size() > 0){
-            for (int i=0; i<listdeplacementJardinier.size();i++)
-            {System.out.println(listdeplacementJardinier.get(i));
-            }
-                    Point3D pointJaridnier = listdeplacementJardinier.get(0);
-            plateau.DeplacerJardinier(pointJaridnier);
-            System.out.println("le joueur " + couleur + " a deplacé le jardinier en (" + pointJaridnier.getX() + ", " + pointJaridnier.getY() + ", " + pointJaridnier.getZ() + ")");
-            //plateau.pousserBambouMap(); //le bambou pousse automatiquement sur toutes les parcelles
-        }
         verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
 
 
@@ -73,6 +65,27 @@ public class Bot {
                 nombreObjectifs++;
                 break;
             }
+        }
+    }
+
+    public void joueurPose(Plateau plateau){
+        ArrayList<Point3D> list = plateau.emplacementsAutorise();
+        Parcelle p = piocherParcelle();
+        if(list.size() > 0){
+            Point3D point = list.get(0);
+            plateau.poser(p, point);
+            System.out.println("( " + point.getX() + ", " + point.getY() + ", " + point.getZ() + ") tuile posé par le joueur " + couleur);
+
+        }
+    }
+
+    public void joueurDeplaceJardinier(Plateau plateau){
+        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJardinier();
+        if(listdeplacementJardinier.size() > 0){
+            Point3D pointJaridnier = listdeplacementJardinier.get(0);
+            plateau.DeplacerJardinier(pointJaridnier);
+            System.out.println("le joueur " + couleur + " a deplacé le jardinier en (" + pointJaridnier.getX() + ", " + pointJaridnier.getY() + ", " + pointJaridnier.getZ() + ")");
+            System.out.println("Il y a " + plateau.getParcelle(pointJaridnier).getNbBambou() + " bambou.");
         }
     }
 

@@ -169,7 +169,7 @@ public class Plateau {
      * @return
      */
     //
-    public ArrayList<Point3D> DestinationsPossiblesJaridnier() {
+    public ArrayList<Point3D> DestinationsPossiblesJardinier() {
         ArrayList<Point3D> listvoisin = getParcelleVoisine(new Point3D(0,0,0));
         ArrayList<Point3D> resultat=new ArrayList<>();
 

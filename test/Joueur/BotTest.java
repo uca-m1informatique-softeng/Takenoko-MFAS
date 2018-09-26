@@ -31,7 +31,7 @@ public class BotTest {
         assertFalse(pla.getMap().containsKey(p2));
 
 
-        j.play(pla,p1);
+        j.play(pla);
 
         /*Maintenant on regarde si la parcelle a été posée au bon endroit*/
         assertEquals(par1.toString(),pla.getParcelle(p2).toString());
