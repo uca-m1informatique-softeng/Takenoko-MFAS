@@ -15,6 +15,7 @@ public class Bot {
 
     private String couleur;
     private int nombreObjectifs = 0;
+    private Objectif objectif = new Objectif();
 
     /**
      * Le constructeur
@@ -30,6 +31,14 @@ public class Bot {
 
     public void setCouleur(String couleur) {
         this.couleur = couleur;
+    }
+
+    public Objectif getObjectif() {
+        return objectif;
+    }
+
+    public void setObjectif(Objectif objectif) {
+        this.objectif = objectif;
     }
 
     protected Parcelle piocherParcelle(){
@@ -60,8 +69,9 @@ public class Bot {
      */
     public void verifierMonObjectif(HashMap<Point3D,Parcelle> map, ArrayList<Point3D> keylist){
         for(int i = 0; i < map.size(); i++){
-            if( map.get( keylist.get(i) ).getNbBambou() == 3 ){
-                System.out.println("Le joueur "+ couleur +" réalise son objectif de faire pousser 3 bambous");
+            int ob = objectif.getNbBambouObjectif();
+            if( map.get( keylist.get(i) ).getNbBambou() == ob ){
+                System.out.println("Le joueur "+ couleur +" réalise son objectif de faire pousser "+ ob + " bambous");
                 nombreObjectifs++;
                 break;
             }
