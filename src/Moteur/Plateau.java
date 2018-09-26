@@ -13,6 +13,7 @@ public class Plateau {
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
     private Jardinier Jardinier;
+    private Panda Panda;
 
 
     /**
@@ -27,6 +28,7 @@ public class Plateau {
         map = new HashMap<>();
         map.put(p,par);
         this.Jardinier=new Jardinier();
+        this.Panda = new Panda();
 
     }
 
@@ -107,6 +109,10 @@ public class Plateau {
 
     }
 
+    public boolean isParcelleOccupee (Point3D p){
+        return keylist.contains(p);
+    }
+
     /**
      * La méthode qui rentre un point et confirme si on peut poser une parcelle
      * @param p
@@ -163,8 +169,23 @@ public class Plateau {
      * @return
      */
     //
-    public ArrayList<Point3D> DestinationsPossiblesJardinier() {
-        return getParcelleVoisineOccupe(this.Jardinier.getCoord());
+    public ArrayList<Point3D> DestinationsPossiblesJaridnier() {
+        ArrayList<Point3D> listvoisin = getParcelleVoisine(new Point3D(0,0,0));
+        ArrayList<Point3D> resultat=new ArrayList<>();
+
+        for (int i=0;i<6;i++) {
+            Point3D direction=listvoisin.get(i);
+            Point3D jardinier=this.Jardinier.getCoord();
+            Point3D temp= new Point3D(jardinier.getX()+direction.getX(),jardinier.getY()+direction.getY(),jardinier.getZ()+direction.getZ());
+            while(isParcelleOccupee(temp)){
+                resultat.add(temp);
+                double tempX=temp.getX();
+                double tempY=temp.getY();
+                double tempZ=temp.getZ();
+                temp= new Point3D(tempX+direction.getX(),tempY+direction.getY(),tempZ+direction.getZ());
+            }
+        }
+        return resultat;
     }
 
 
@@ -175,17 +196,35 @@ public class Plateau {
     //pour le deplacement (pas de verification)
     public void DeplacerJardinier(Point3D p){
         Jardinier.setCoord(p);
-        pousserBambouParcelle(p);
-    }
-
-
-    /**
-     * La méthode qui prends un point et fait pousser le bambou sur une parcelle
-     * @param p
-     */
-    public void pousserBambouParcelle(Point3D p){
         this.getParcelle(p).pousserBambou();
     }
+
+
+
+    public ArrayList<Point3D> DestinationsPossiblesPanda(){
+        ArrayList<Point3D> listvoisin = getParcelleVoisine(new Point3D(0,0,0));
+        ArrayList<Point3D> resultat=new ArrayList<>();
+
+        for (int i=0;i<6;i++) {
+            Point3D direction=listvoisin.get(i);
+            Point3D panda=this.Panda.getCoord();
+            Point3D temp= new Point3D(panda.getX()+direction.getX(),panda.getY()+direction.getY(),panda.getZ()+direction.getZ());
+            while(isParcelleOccupee(temp)){
+                resultat.add(temp);
+                double tempX=temp.getX();
+                double tempY=temp.getY();
+                double tempZ=temp.getZ();
+                temp= new Point3D(tempX+direction.getX(),tempY+direction.getY(),tempZ+direction.getZ());
+            }
+        }
+        return resultat;
+    }
+
+    public void DeplacerPanda(Point3D p){
+        Panda.setCoord(p);
+        this.getParcelle(p).mangerBambou();
+    }
+
 
 
 

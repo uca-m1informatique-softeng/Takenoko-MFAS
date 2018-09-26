@@ -46,9 +46,12 @@ public class Bot {
             System.out.println("( " + point.getX() + ", " + point.getY() + ", " + point.getZ() + ") tuile posé par le joueur " + couleur);
 
         }
-        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJardinier();
+        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJaridnier();
         if(listdeplacementJardinier.size() > 0){
-            Point3D pointJaridnier = listdeplacementJardinier.get(0);
+            for (int i=0; i<listdeplacementJardinier.size();i++)
+            {System.out.println(listdeplacementJardinier.get(i));
+            }
+                    Point3D pointJaridnier = listdeplacementJardinier.get(0);
             plateau.DeplacerJardinier(pointJaridnier);
             System.out.println("le joueur " + couleur + " a deplacé le jardinier en (" + pointJaridnier.getX() + ", " + pointJaridnier.getY() + ", " + pointJaridnier.getZ() + ")");
             //plateau.pousserBambouMap(); //le bambou pousse automatiquement sur toutes les parcelles
