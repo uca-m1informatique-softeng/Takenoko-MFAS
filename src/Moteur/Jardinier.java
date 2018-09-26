@@ -5,25 +5,16 @@ import javafx.geometry.Point3D;
 /**
  * C'est la classe du jardinier
  */
-public class Jardinier {
+public class Jardinier extends Personnage {
 
     private Point3D coord;
 
     public Jardinier(Point3D coord){
-        this.coord=coord;
+        super(coord);
     }
 
     public Jardinier()
     {
-        this.coord=new Point3D(0.0,0.0,0.0);
-    }
-
-
-    public Point3D getCoord() {
-        return coord;
-    }
-
-    public void setCoord(Point3D coord) {
-        this.coord = coord;
+        super();
     }
 }

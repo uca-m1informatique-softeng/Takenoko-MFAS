@@ -1,8 +1,7 @@
 package Parties;
 
-import Joueur.JoueurRandom;
+import Joueur.BotRandom;
 import Moteur.Plateau;
-import javafx.geometry.Point3D;
 import Joueur.Bot;
 
 public class Main {
@@ -12,12 +11,12 @@ public class Main {
 
         Bot bot1 = new Bot("Bleu");
         Bot bot2 = new Bot("Rouge");
-        JoueurRandom joueurRandom = new JoueurRandom("Vert");
+        BotRandom botRandom = new BotRandom("Vert");
 
-        while (bot1.getNombreObjectifs() == 0 && joueurRandom.getNombreObjectifs() == 0){
+        while (bot1.getNombreObjectifs() == 0 && botRandom.getNombreObjectifs() == 0){
             bot1.play(pla);
             //bot2.play(pla);
-            joueurRandom.play(pla);
+            botRandom.play(pla);
         }
 
     }

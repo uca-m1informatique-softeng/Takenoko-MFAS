@@ -7,13 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 
-public class JoueurRandom extends Bot{
+public class BotRandom extends Bot{
     /**
      * Le constructeur
      *
      * @param couleur
      */
-    public JoueurRandom(String couleur) {
+    public BotRandom(String couleur) {
         super(couleur);
     }
 
