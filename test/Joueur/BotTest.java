@@ -38,4 +38,28 @@ public class BotTest {
         assertTrue(pla.getMap().containsKey(p2));
     }
 
+    @Test
+    public void verifierMonObjectif(){
+        /*on crée notre plateau*/
+        Parcelle par2 = new Parcelle(TypeParcelle.etang);
+        pla.poser(par2,p1);
+
+        pla.poser(par1,new Point3D(0,0,0));
+        pla.poser(par1,new Point3D(1,-1,0));
+
+        Bot b= new Bot("Bleu");
+        b.verifierMonObjectif(pla.getMap(),pla.getKeylist());
+        assertEquals(0,b.getNombreObjectifs());
+
+        ///// Test 2 /////
+
+        int ob = b.getObjectif().getNbBambouObjectif(); //objectif expected
+        for(int i = 0; i < ob; i++){
+            par2.pousserBambou();
+        }
+        b.verifierMonObjectif(pla.getMap(),pla.getKeylist());
+        assertEquals(1,b.getNombreObjectifs());
+
+    }
+
 }

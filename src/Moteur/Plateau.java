@@ -226,7 +226,19 @@ public class Plateau {
     }
 
 
+    public Moteur.Jardinier getJardinier() {
+        return Jardinier;
+    }
 
+    public void setJardinier(Moteur.Jardinier jardinier) {
+        Jardinier = jardinier;
+    }
 
+    public Moteur.Panda getPanda() {
+        return Panda;
+    }
 
+    public void setPanda(Moteur.Panda panda) {
+        Panda = panda;
+    }
 }
