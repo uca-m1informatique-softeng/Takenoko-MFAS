@@ -283,8 +283,35 @@ public class PlateauTest {
 
         ArrayList<Point3D> list2 = pla.DestinationsPossiblesJardinier();
         for(int i = 0;i<list2.size();i++){
-            assertEquals(list.get(i),list.get(i));
+            assertEquals(list.get(i),list2.get(i));
         }
+    }
+
+    @Test
+    public void DestinationsPossiblesJardinier2(){
+         /* Création plateau */
+        pla.poser(par1,new Point3D(1,0,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+        pla.poser(par1,new Point3D(2,-1,1));
+        pla.poser(par1,new Point3D(2,-2,0));
+        pla.poser(par1,new Point3D(3,-2,-1));
+        pla.poser(par1,new Point3D(3,-3,0));
+
+        pla.poser(par1,new Point3D(0,1,-1));
+
+        pla.DeplacerJardinier(new Point3D(3,-3,0));
+
+        ArrayList<Point3D> list3 = new ArrayList<>();
+        list3.add(new Point3D(3.0,-2.0,-1.0));
+        list3.add(new Point3D(2.0,-2.0,0.0));
+        list3.add(new Point3D(1.0,-1.0,0.0));
+        list3.add(new Point3D(0.0,0.0,0.0));
+
+        ArrayList<Point3D> list4 = pla.DestinationsPossiblesJardinier();
+        for(int i = 0;i<list4.size();i++){
+            assertEquals(list4.get(i),list3.get(i));
+        }
+
     }
 
 
