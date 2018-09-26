@@ -244,4 +244,49 @@ public class PlateauTest {
         }
     }
 
+    @Test
+    public void DeplacerJardinier(){
+
+        assertEquals(pla.getJardinier().getCoord(),new Point3D(0,0,0));
+
+        pla.poser(par1,new Point3D(1,0,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+        pla.poser(par1,new Point3D(2,-1,1));
+        pla.poser(par1,new Point3D(2,-2,0));
+        pla.poser(par1,new Point3D(3,-2,-1));
+        pla.poser(par1,new Point3D(4,-4,0));
+
+        pla.DeplacerJardinier(new Point3D(1,0,-1));
+
+        assertEquals(pla.getJardinier().getCoord(),new Point3D(1,0,-1));
+
+    }
+    @Test
+    public void DestinationsPossiblesJardinier(){
+        /* Création plateau */
+        pla.poser(par1,new Point3D(1,0,-1));
+        pla.poser(par1,new Point3D(1,-1,0));
+        pla.poser(par1,new Point3D(2,-1,1));
+        pla.poser(par1,new Point3D(2,-2,0));
+        pla.poser(par1,new Point3D(3,-2,-1));
+        pla.poser(par1,new Point3D(3,-3,0));
+
+        pla.poser(par1,new Point3D(0,1,-1));
+
+
+        ArrayList<Point3D> list = new ArrayList<>();// liste attendu
+        list.add(new Point3D(0.0,1.0,-1.0));
+        list.add(new Point3D(1.0,0.0,-1.0));
+        list.add(new Point3D(1.0,-1.0,0.0));
+        list.add(new Point3D(2.0,-2.0,0.0));
+        list.add(new Point3D(3.0,-3.0,0.0));
+
+        ArrayList<Point3D> list2 = pla.DestinationsPossiblesJardinier();
+        for(int i = 0;i<list2.size();i++){
+            assertEquals(list.get(i),list.get(i));
+        }
+    }
+
+
+
 }
