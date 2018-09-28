@@ -1,8 +1,6 @@
 package Joueur;
 
-import Moteur.Parcelle;
-import Moteur.Plateau;
-import Moteur.TypeParcelle;
+import Moteur.*;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
@@ -47,15 +45,15 @@ public class Bot {
 
     /**
      * Le déroulement des actions du bot
-     * @param plateau
+     * @param partie
      */
-    public void play(Plateau plateau){ // tester plus tard que coord correspond bien à une parcelle
+    public void play(Partie partie){ // tester plus tard que coord correspond bien à une parcelle
 
-
+        Plateau plateau=partie.getPlateau();
         verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
         joueurPose(plateau);
 
-        joueurDeplaceJardinier(plateau);
+        joueurDeplaceJardinier(partie.getJardinier());
 
         verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
 
@@ -89,11 +87,12 @@ public class Bot {
         }
     }
 
-    public void joueurDeplaceJardinier(Plateau plateau){
-        ArrayList<Point3D> listdeplacementJardinier=plateau.DestinationsPossiblesJardinier();
+    public void joueurDeplaceJardinier(Jardinier jardinier){
+        Plateau plateau=jardinier.getPlateau();
+        ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
         if(listdeplacementJardinier.size() > 0){
             Point3D pointJaridnier = listdeplacementJardinier.get(0);
-            plateau.DeplacerJardinier(pointJaridnier);
+            jardinier.Deplacer(pointJaridnier);
             System.out.println("le joueur " + couleur + " a deplacé le jardinier en (" + pointJaridnier.getX() + ", " + pointJaridnier.getY() + ", " + pointJaridnier.getZ() + ")");
             System.out.println("Il y a " + plateau.getParcelle(pointJaridnier).getNbBambou() + " bambou.");
         }

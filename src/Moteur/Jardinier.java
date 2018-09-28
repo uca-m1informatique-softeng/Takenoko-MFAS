@@ -2,19 +2,21 @@ package Moteur;
 
 import javafx.geometry.Point3D;
 
+import java.util.ArrayList;
+
 /**
  * C'est la classe du jardinier
  */
 public class Jardinier extends Personnage {
 
-    private Point3D coord;
-
-    public Jardinier(Point3D coord){
-        super(coord);
-    }
-
-    public Jardinier()
+    public Jardinier(Plateau p)
     {
-        super();
+        super(p);
     }
+
+    public void PousserOuMangerBambou(Point3D p)
+    {
+        this.getPlateau().getParcelle(p).pousserBambou();
+    }
+
 }

@@ -12,8 +12,6 @@ public class Plateau {
 
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
-    private Jardinier Jardinier;
-    private Panda Panda;
 
 
     /**
@@ -27,8 +25,6 @@ public class Plateau {
         keylist.add(p);
         map = new HashMap<>();
         map.put(p,par);
-        this.Jardinier=new Jardinier();
-        this.Panda = new Panda();
 
     }
 
@@ -162,83 +158,5 @@ public class Plateau {
     public void poser(Parcelle p, Point3D coord){
         keylist.add(coord);
         map.put(coord,p);
-    }
-
-    /**
-     * Renvoyer la liste des deplacement possibles pour le jardinier (seul les voisins  pour le moment)
-     * @return
-     */
-    //
-    public ArrayList<Point3D> DestinationsPossiblesJardinier() {
-        ArrayList<Point3D> listvoisin = getParcelleVoisine(new Point3D(0,0,0));
-        ArrayList<Point3D> resultat=new ArrayList<>();
-
-        for (int i=0;i<6;i++) {
-            Point3D direction=listvoisin.get(i);
-            Point3D jardinier=this.Jardinier.getCoord();
-            Point3D temp= new Point3D(jardinier.getX()+direction.getX(),jardinier.getY()+direction.getY(),jardinier.getZ()+direction.getZ());
-            while(isParcelleOccupee(temp)){
-                resultat.add(temp);
-                double tempX=temp.getX();
-                double tempY=temp.getY();
-                double tempZ=temp.getZ();
-                temp= new Point3D(tempX+direction.getX(),tempY+direction.getY(),tempZ+direction.getZ());
-            }
-        }
-        return resultat;
-    }
-
-
-    /**
-     * La méthode qui permet de déplacer le jardinier sur le plateau et de lui faire pousser le bambou
-     * @param p
-     */
-    //pour le deplacement (pas de verification)
-    public void DeplacerJardinier(Point3D p){
-        Jardinier.setCoord(p);
-        this.getParcelle(p).pousserBambou();
-    }
-
-
-
-    public ArrayList<Point3D> DestinationsPossiblesPanda(){
-        ArrayList<Point3D> listvoisin = getParcelleVoisine(new Point3D(0,0,0));
-        ArrayList<Point3D> resultat=new ArrayList<>();
-
-        for (int i=0;i<6;i++) {
-            Point3D direction=listvoisin.get(i);
-            Point3D panda=this.Panda.getCoord();
-            Point3D temp= new Point3D(panda.getX()+direction.getX(),panda.getY()+direction.getY(),panda.getZ()+direction.getZ());
-            while(isParcelleOccupee(temp)){
-                resultat.add(temp);
-                double tempX=temp.getX();
-                double tempY=temp.getY();
-                double tempZ=temp.getZ();
-                temp= new Point3D(tempX+direction.getX(),tempY+direction.getY(),tempZ+direction.getZ());
-            }
-        }
-        return resultat;
-    }
-
-    public void DeplacerPanda(Point3D p){
-        Panda.setCoord(p);
-        this.getParcelle(p).mangerBambou();
-    }
-
-
-    public Moteur.Jardinier getJardinier() {
-        return Jardinier;
-    }
-
-    public void setJardinier(Moteur.Jardinier jardinier) {
-        Jardinier = jardinier;
-    }
-
-    public Moteur.Panda getPanda() {
-        return Panda;
-    }
-
-    public void setPanda(Moteur.Panda panda) {
-        Panda = panda;
     }
 }

@@ -2,6 +2,7 @@ package Joueur;
 
 import Joueur.Bot;
 import Moteur.Parcelle;
+import Moteur.Partie;
 import Moteur.Plateau;
 import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
@@ -10,7 +11,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BotTest {
-    Plateau pla = new Plateau();
+    Partie partie=new Partie();
+    Plateau pla =partie.getPlateau();
     Point3D p1 = new Point3D(1,0,-1);
     Parcelle par1 = new Parcelle(TypeParcelle.etang);
     Bot j = new Bot("rouge");
@@ -31,7 +33,7 @@ public class BotTest {
         assertFalse(pla.getMap().containsKey(p2));
 
 
-        j.play(pla);
+        j.play(partie);
 
         /*Maintenant on regarde si la parcelle a été posée au bon endroit*/
         assertEquals(par1.toString(),pla.getParcelle(p2).toString());

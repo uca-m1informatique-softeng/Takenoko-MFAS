@@ -7,12 +7,12 @@ import javafx.geometry.Point3D;
  */
 public class Panda extends Personnage {
 
-
-    public Panda(Point3D coord) {
-        super(coord);
+    public Panda(Plateau p){
+        super(p);
     }
 
-    public Panda(){
-        super();
+    public void PousserOuMangerBambou(Point3D p)
+    {
+        this.getPlateau().getParcelle(p).mangerBambou();
     }
 }
