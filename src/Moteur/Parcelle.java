@@ -34,7 +34,7 @@ public class Parcelle {
      */
     public void pousserBambou(){
         if(listBambou.size() < 4){
-            listBambou.add(new Bambou());
+            listBambou.add(new Bambou(this.type));
         }
     }
 

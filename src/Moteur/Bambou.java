@@ -5,5 +5,17 @@ package Moteur;
  */
 public class Bambou {
 
-    public Bambou(){}
+    private TypeParcelle couleur;
+
+    public TypeParcelle getCouleur() {
+        return couleur;
+    }
+
+    public void setCouleur(TypeParcelle couleur) {
+        this.couleur = couleur;
+    }
+
+    public Bambou(TypeParcelle couleur){
+        this.couleur=couleur;
+    }
 }
