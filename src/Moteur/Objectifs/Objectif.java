@@ -1,17 +1,23 @@
 package Moteur.Objectifs;
 
-import java.util.Random;
-
 public class Objectif {
-    int nbBambouObjectif;
+    private int valeur;
+    private boolean valide = false;
 
-    public Objectif(){
-        Random random = new Random();
-        nbBambouObjectif = random.nextInt(4) + 1;
+    public Objectif(int valeur){
+        this.valeur = valeur;
     }
 
-    public int getNbBambouObjectif() {
-        return nbBambouObjectif;
+    public int getValeur() {
+        return valeur;
     }
 
+    public boolean isValide() {
+        return valide;
+    }
+
+    public void setValide(boolean valide) {
+        this.valide = valide;
+    }
 }
+
