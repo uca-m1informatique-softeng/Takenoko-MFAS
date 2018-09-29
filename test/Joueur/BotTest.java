@@ -39,10 +39,10 @@ public class BotTest {
         assertEquals(par1.toString(),pla.getParcelle(p2).toString());
         assertTrue(pla.getMap().containsKey(p2));
     }
-
+/*
     @Test
     public void verifierMonObjectif(){
-        /*on crée notre plateau*/
+        //on crée notre plateau
         Parcelle par2 = new Parcelle(TypeParcelle.etang);
         pla.poser(par2,p1);
 
@@ -63,5 +63,5 @@ public class BotTest {
         assertEquals(1,b.getNombreObjectifs());
 
     }
-
+*/
 }

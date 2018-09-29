@@ -1,15 +1,21 @@
 package Moteur;
 
+import Joueur.Bot;
+
+import java.util.Random;
+
 public class Partie {
 
     private Plateau plateau;
     private Jardinier jardinier;
     private Panda panda;
+    private Deck deck;
 
     public Partie() {
         plateau=new Plateau();
         jardinier=new Jardinier(plateau);
         panda=new Panda(plateau);
+        deck = new Deck();
     }
 
     public Plateau getPlateau() {
@@ -36,6 +42,12 @@ public class Partie {
         this.panda = panda;
     }
 
+    public Deck getDeck() { return deck; }
 
+    public void setDeck(Deck deck) { this.deck = deck; }
 
+    public void piocheObjectifJardinier(Bot bot){
+        Random random = new Random();
+        bot.setObjectif(deck.getDeckObjectifsJardinier()[random.nextInt(3)]);
+    }
 }

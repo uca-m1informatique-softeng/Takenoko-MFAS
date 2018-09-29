@@ -2,10 +2,12 @@ package Joueur;
 
 import Moteur.*;
 import Moteur.Objectifs.Objectif;
+import Moteur.Objectifs.ObjectifJardinier;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 /**
  *C'est la classe des bots
@@ -14,7 +16,7 @@ public class Bot {
 
     private String couleur;
     private int nombreObjectifs = 0;
-    private Objectif objectif = new Objectif();
+    private ObjectifJardinier objectif;
 
     /**
      * Le constructeur
@@ -32,11 +34,11 @@ public class Bot {
         this.couleur = couleur;
     }
 
-    public Objectif getObjectif() {
+    public ObjectifJardinier getObjectif() {
         return objectif;
     }
 
-    public void setObjectif(Objectif objectif) {
+    public void setObjectif(ObjectifJardinier objectif) {
         this.objectif = objectif;
     }
 
@@ -51,29 +53,24 @@ public class Bot {
     public void play(Partie partie){ // tester plus tard que coord correspond bien à une parcelle
 
         Plateau plateau=partie.getPlateau();
-        verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
+        verifierMonObjectif(objectif, partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
         joueurPose(plateau);
 
         joueurDeplaceJardinier(partie.getJardinier());
 
-        verifierMonObjectif(plateau.getMap(),plateau.getKeylist());
+        verifierMonObjectif(objectif, partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
 
 
     }
 
     /**
      * La méthode qui vérifie l'objectif du bot
-     * @param map
-     * @param keylist
+     * @param objectif
      */
-    public void verifierMonObjectif(HashMap<Point3D,Parcelle> map, ArrayList<Point3D> keylist){
-        for(int i = 0; i < map.size(); i++){
-            int ob = objectif.getNbBambouObjectif();
-            if( map.get( keylist.get(i) ).getNbBambou() == ob ){
-                System.out.println("Le joueur "+ couleur +" réalise son objectif de faire pousser "+ ob + " bambous");
-                nombreObjectifs++;
-                break;
-            }
+    public void verifierMonObjectif(ObjectifJardinier objectif,HashMap<Point3D, Parcelle> map, ArrayList<Point3D> keyList) {
+        if (objectif.validation(map,keyList)) {
+            System.out.println("Le joueur "+ couleur +" réalise son objectif de faire pousser "+ objectif.getTailleBambou() + " bambous " + objectif.getCouleur());
+            nombreObjectifs++;
         }
     }
 
@@ -108,4 +105,6 @@ public class Bot {
     public void setNombreObjectifs(int nombreObjectifs) {
         this.nombreObjectifs = nombreObjectifs;
     }
+
+
 }
