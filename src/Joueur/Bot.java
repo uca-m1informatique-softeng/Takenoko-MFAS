@@ -1,6 +1,7 @@
 package Joueur;
 
 import Moteur.*;
+import Moteur.Objectifs.Objectif;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;

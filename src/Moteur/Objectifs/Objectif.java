@@ -1,4 +1,4 @@
-package Joueur;
+package Moteur.Objectifs;
 
 import java.util.Random;
 
