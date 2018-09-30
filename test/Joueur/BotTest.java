@@ -1,6 +1,7 @@
 package Joueur;
 
 import Joueur.Bot;
+import Moteur.Objectifs.ObjectifJardinier;
 import Moteur.Parcelle;
 import Moteur.Partie;
 import Moteur.Plateau;
@@ -13,55 +14,73 @@ import static org.junit.Assert.*;
 public class BotTest {
     Partie partie=new Partie();
     Plateau pla =partie.getPlateau();
-    Point3D p1 = new Point3D(1,0,-1);
-    Parcelle par1 = new Parcelle(TypeParcelle.etang);
+    Parcelle par = new Parcelle(TypeParcelle.etang);
     Bot j = new Bot("rouge");
 
-    @Test
-    public void play() throws Exception {
 
-        /*on crée notre plateau*/
-        pla.poser(par1,p1);
-        pla.poser(par1,new Point3D(0,0,0));
-        pla.poser(par1,new Point3D(1,-1,0));
-        pla.poser(par1,new Point3D(2,-1,-1));
-        pla.poser(par1,new Point3D(2,0,-2));
-
-        Point3D p2 = new Point3D(0,1,-1);// coordonnée de l'emplacement où le joueur va poser sa parcelle
-
-        /*On test d'abord s'il y a une parcelle au point p2 */
-        assertFalse(pla.getMap().containsKey(p2));
-
-
-        j.play(partie);
-
-        /*Maintenant on regarde si la parcelle a été posée au bon endroit*/
-        assertEquals(par1.toString(),pla.getParcelle(p2).toString());
-        assertTrue(pla.getMap().containsKey(p2));
-    }
-/*
     @Test
     public void verifierMonObjectif(){
-        //on crée notre plateau
-        Parcelle par2 = new Parcelle(TypeParcelle.etang);
-        pla.poser(par2,p1);
+        ObjectifJardinier ob = new ObjectifJardinier(6,TypeParcelle.Jaune,4);
 
-        pla.poser(par1,new Point3D(0,0,0));
-        pla.poser(par1,new Point3D(1,-1,0));
+        /*On crée notre plateau composé que de parcelles jaunes*/
 
-        Bot b= new Bot("Bleu");
-        b.verifierMonObjectif(pla.getMap(),pla.getKeylist());
-        assertEquals(0,b.getNombreObjectifs());
+        pla.poser(par,new Point3D(0,1,-1));
+        pla.poser(par,new Point3D(1,0,-1));
+        pla.poser(par,new Point3D(1,-1,0));
+        pla.poser(par,new Point3D(0,-1,1));
+
+        /*On donne u objectif au jardinier */
+        j.setObjectif(ob);
+
+        /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
+        for(int i = 0 ; i <3 ; i++){
+            pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
+        }
+
+        j.verifierMonObjectif(ob,partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+
+        assertEquals(0,j.getNombreObjectifs());
 
         ///// Test 2 /////
 
-        int ob = b.getObjectif().getNbBambouObjectif(); //objectif expected
-        for(int i = 0; i < ob; i++){
-            par2.pousserBambou();
-        }
-        b.verifierMonObjectif(pla.getMap(),pla.getKeylist());
-        assertEquals(1,b.getNombreObjectifs());
+        /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
+        pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
+        j.verifierMonObjectif(ob,partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+        assertEquals(1,j.getNombreObjectifs());
+    }
+
+    @Test
+
+    public void joueurPose(){
+        assertEquals(6,partie.getPlateau().emplacementsAutorise().size());
+        assertEquals(1,partie.getPlateau().getKeylist().size());
+
+        j.joueurPose(partie.getPlateau());
+
+        assertEquals(5,partie.getPlateau().emplacementsAutorise().size());
+        assertEquals(2,partie.getPlateau().getKeylist().size());
 
     }
-*/
+
+
+    @Test
+    public void joueurDeplaceJardinier(){
+        /*On crée notre plateau composé que de parcelles jaunes*/
+
+        pla.poser(par,new Point3D(0,1,-1));
+        pla.poser(par,new Point3D(1,0,-1));
+
+        j.joueurDeplaceJardinier(partie.getJardinier());
+
+        assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
+    }
+
+    @Test
+    public void play(){
+        partie.piocheObjectifJardinier(j);
+        j.play(partie);
+        assertEquals(new Point3D(0,1,-1),partie.getPlateau().getKeylist().get(1));//on vérifie si le joueur a posé
+        assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());//on vérifie si le joueur a deplacé le jardinier
+        assertEquals(0,j.getNombreObjectifs());
+    }
 }
