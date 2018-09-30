@@ -25,4 +25,8 @@ Dans l'introduction du panda nous avons crÃ©e le panda et ensuite ses mouvements
 Pour la stratÃ©gie du bot, nous avons implÃ©mentÃ© une stratÃ©gie diffÃ¨rentes pour le bot et nous avons
 rajouter l'objectif du jardinier
 
+Sep30: Les objctifs des pandas et la couleur des parcelles
+Cette milestone contient deux slices, introduction de parcelles colorées et les objectifs du panda.
+Dans l'introduction de parcelles colorées nous avons ajouté des parcelles et des bambous colorés.
+Pour les objectifs du panda nous avons ajouté differents objectifs de type panda ainsi que des pioches pour tous les objectifs.
 
