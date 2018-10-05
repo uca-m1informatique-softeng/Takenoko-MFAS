@@ -30,23 +30,29 @@ public class Parcelle {
         return listBambou.size();
     }
 
+    public TypeParcelle getType() { return type; }
+
     /**
      * La methode qui permet de faire pousser le bambou
      */
-    public void pousserBambou(){
+    public boolean pousserBambou(){
         if(listBambou.size() < 4){
             listBambou.add(new Bambou(this.type));
+            return true;
         }
+        return false;
     }
 
     /**
      * La methode qui permet d'enlever du bambou
      */
-    public void mangerBambou(){
+    public boolean mangerBambou(){
         int i = listBambou.size();
         if(i > 0){
             listBambou.remove(0);
+            return true;
         }
+        return false;
     }
 
     @Override

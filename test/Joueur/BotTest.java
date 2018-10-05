@@ -37,7 +37,7 @@ public class BotTest {
             pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         }
 
-        j.verifierMonObjectif(ob,partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+        j.verifierMonObjectif(partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
 
         assertEquals(0,j.getNombreObjectifs());
 
@@ -45,7 +45,7 @@ public class BotTest {
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
-        j.verifierMonObjectif(ob,partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+        j.verifierMonObjectif(partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
         assertEquals(1,j.getNombreObjectifs());
     }
 

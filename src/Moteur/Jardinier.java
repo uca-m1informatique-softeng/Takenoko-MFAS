@@ -14,9 +14,9 @@ public class Jardinier extends Personnage {
         super(p);
     }
 
-    public void PousserOuMangerBambou(Point3D p)
+    public boolean PousserOuMangerBambou(Point3D p)
     {
-        this.getPlateau().getParcelle(p).pousserBambou();
+        return this.getPlateau().getParcelle(p).pousserBambou();
     }
 
 }

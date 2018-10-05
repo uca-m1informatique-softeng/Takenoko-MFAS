@@ -11,7 +11,7 @@ public class Panda extends Personnage {
         super(p);
     }
 
-    public void PousserOuMangerBambou(Point3D p) {
-        this.getPlateau().getParcelle(p).mangerBambou();
+    public boolean PousserOuMangerBambou(Point3D p) {
+        return this.getPlateau().getParcelle(p).mangerBambou();
     }
 }

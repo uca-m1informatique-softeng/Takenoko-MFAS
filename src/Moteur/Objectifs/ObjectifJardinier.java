@@ -28,11 +28,12 @@ public class ObjectifJardinier extends Objectif{
 
     public boolean validation(HashMap<Point3D, Parcelle> map, ArrayList<Point3D> keyList){
         for(int i = 0; i < map.size(); i++){
-            if( map.get( keyList.get(i) ).getNbBambou() == tailleBambou ){
+            if( map.get( keyList.get(i) ).getNbBambou() == tailleBambou && map.get( keyList.get(i) ).getType() == couleur){
                 setValide(true);
                 return true;
             }
         }
+        setValide(false);
         return false;
     }
 }

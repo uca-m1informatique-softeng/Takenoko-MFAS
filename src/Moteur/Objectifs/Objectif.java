@@ -19,5 +19,9 @@ public class Objectif {
     public void setValide(boolean valide) {
         this.valide = valide;
     }
+
+    public boolean validation(){
+        return valide;
+    }
 }
 

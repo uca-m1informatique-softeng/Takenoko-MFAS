@@ -69,13 +69,13 @@ public class Personnage {
      * @param p
      */
     //pour le deplacement (pas de verification)
-    public void Deplacer(Point3D p){
+    public boolean Deplacer(Point3D p){
         this.setCoord(p);
-        PousserOuMangerBambou(p);
+        return PousserOuMangerBambou(p);
     }
 
-    public void PousserOuMangerBambou(Point3D p)
-    {
+    public boolean PousserOuMangerBambou(Point3D p) {
         //a modidifier dans les fils
+        return false;
     }
 }

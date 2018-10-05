@@ -20,6 +20,8 @@ public class Bot {
     private ObjectifJardinier objectif;
     private ObjectifPanda objectif2;
     private Partie partie;
+    private ArrayList<Bambou> listBambou;
+    int score = 0;
 
     /**
      * Le constructeur
@@ -56,6 +58,14 @@ public class Bot {
         this.partie = partie;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     /**
      * Le déroulement des actions du bot
      * @param partie
@@ -64,24 +74,31 @@ public class Bot {
 
         this.setPartie(partie);
         Plateau plateau=partie.getPlateau();
-        verifierMonObjectif(objectif, partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
+        verifierMonObjectif(partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
         joueurPose(plateau);
 
         joueurDeplaceJardinier(partie.getJardinier());
 
-        verifierMonObjectif(objectif, partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
+        verifierMonObjectif(partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
 
 
     }
 
     /**
      * La méthode qui vérifie l'objectif du bot
-     * @param objectif
+
      */
-    public void verifierMonObjectif(ObjectifJardinier objectif,HashMap<Point3D, Parcelle> map, ArrayList<Point3D> keyList) {
-        if (objectif.validation(map,keyList)) {
+    public void verifierMonObjectif(HashMap<Point3D, Parcelle> map, ArrayList<Point3D> keyList) {
+        if (objectif != null && objectif.validation(map,keyList) && nombreObjectifs < 1) {
             System.out.println("Le joueur "+ couleur +" réalise son objectif de faire pousser "+ objectif.getTailleBambou() + " bambous " + objectif.getCouleur());
             nombreObjectifs++;
+            score += objectif.getValeur();
+
+        }
+        if (objectif2!=null && objectif2.validation(listBambou) && nombreObjectifs < 1) {
+            System.out.println("Le joueur "+ couleur +" réalise son objectif de manger "+ objectif2.getNombreBambou() + " bambous " + objectif2.getCouleur());
+            nombreObjectifs++;
+            score += objectif2.getValeur();
         }
     }
 
@@ -106,6 +123,20 @@ public class Bot {
             System.out.println("Il y a " + plateau.getParcelle(pointJaridnier).getNbBambou() + " bambou.");
         }
     }
+
+    public void joueurDeplacePanda(Panda panda){
+        Plateau plateau=panda.getPlateau();
+        ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();
+        if(listdeplacementPanda.size() > 0){
+            Point3D pointPanda = listdeplacementPanda.get(0);
+            if(panda.Deplacer(pointPanda)){
+                listBambou.add(new Bambou(plateau.getMap().get(pointPanda).getType()));
+            }
+            System.out.println("le joueur " + couleur + " a deplacé le panda en (" + pointPanda.getX() + ", " + pointPanda.getY() + ", " + pointPanda.getZ() + ")");
+            System.out.println("Il y a " + plateau.getParcelle(pointPanda).getNbBambou() + " bambou.");
+        }
+    }
+
 
 
     public int getNombreObjectifs() {

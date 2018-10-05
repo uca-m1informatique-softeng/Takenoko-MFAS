@@ -71,27 +71,33 @@ public class Deck {
 
     public Parcelle piocherParcelle(){
         Deck d = this.partie.getDeck();
-        Parcelle [] deck = d.getDeckParcelle();
-        int n = d.getNb();
-        int r = new Random().nextInt(n);
-        d.setNb(n - 1);
-        Parcelle par = deck[r];
-        deck[r]= deck[d.getNb()];
-        deck[d.getNb()] = par;
-        return par;
+        Parcelle[] deck = d.getDeckParcelle();
+        if(nb > 0) {
+            int r = new Random().nextInt(nb);
+            nb--;
+            Parcelle par = deck[r];
+            deck[r] = deck[d.getNb()];
+            deck[d.getNb()] = par;
+            return par;
+        }
+        if(nb == 0){
+            return deck[0];
+        }
+        return new Parcelle(TypeParcelle.etang);
     }
 
 
     public void piocheObjectifJardinier(Bot bot){
         Deck d = this.partie.getDeck();
         ObjectifJardinier[] j = d.getDeckObjectifsJardinier();
-        int n = d.getNboj();
-        int r = new Random().nextInt(n);
-        d.setNboj(n - 1);
+        int r = new Random().nextInt(nboj);
+        nboj--;
+
         ObjectifJardinier tmp = j[r];
         j[r] = j[d.getNboj()];
         j[d.getNboj()] = tmp;
-        bot.setObjectif(getDeckObjectifsJardinier()[r]);
+
+        bot.setObjectif(tmp);
     }
 
     public void piocheObjectifPanda(Bot bot){

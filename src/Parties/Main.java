@@ -21,6 +21,25 @@ public class Main {
             //bot2.play(pla);
             botRandom.play(partie);
         }
+        if(bot1.getNombreObjectifs() > 0 && botRandom.getNombreObjectifs() == 0){
+            System.out.println("Le joueur "+ bot1.getCouleur() + " gagne avec "+ bot1.getScore() + " points.");
+        }
+
+        if(bot1.getNombreObjectifs() == 0 && botRandom.getNombreObjectifs() > 0){
+            System.out.println("Le joueur "+ botRandom.getCouleur() + " gagne avec "+ botRandom.getScore() + " points.");
+        }
+
+        if(bot1.getNombreObjectifs() > 0 && botRandom.getNombreObjectifs() > 0){
+            if(bot1.getScore() > botRandom.getScore()){
+                System.out.println("Le joueur "+ bot1.getCouleur() + " gagne avec "+ bot1.getScore() + " points.");
+            }
+            if(bot1.getScore() < botRandom.getScore()){
+                System.out.println("Le joueur " + botRandom.getCouleur() + " gagne avec " + botRandom.getScore() + " points.");
+            }
+            if(bot1.getScore() == botRandom.getScore()) {
+                System.out.println("it's a tie");
+            }
+        }
 
     }
 }
