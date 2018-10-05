@@ -16,12 +16,13 @@ public class Parcelle {
      */
     public Parcelle(TypeParcelle type){
         this.type = type;
-        if(this.type  == TypeParcelle.etang ){
+        this.irriguee = true;
+        /*if(this.type  == TypeParcelle.etang ){
             this.irriguee = true;
         }
         else{
             this.irriguee = false;
-        }
+        }*/
     }
 
 

@@ -17,6 +17,7 @@ public class Bot {
     private String couleur;
     private int nombreObjectifs = 0;
     private ObjectifJardinier objectif;
+    private Partie partie;
 
     /**
      * Le constructeur
@@ -43,7 +44,23 @@ public class Bot {
     }
 
     protected Parcelle piocherParcelle(){
-        return new Parcelle(TypeParcelle.etang);
+        Deck d = this.partie.getDeck();
+        Parcelle [] deck = d.getDeckParcelle();
+        int n = d.getNb();
+        int r = new Random().nextInt(n);
+        d.setNb(n - 1);
+        Parcelle par = deck[r];
+        deck[r]= deck[d.getNb()];
+        deck[d.getNb()] = par;
+        return par;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
     }
 
     /**
@@ -52,6 +69,7 @@ public class Bot {
      */
     public void play(Partie partie){ // tester plus tard que coord correspond bien à une parcelle
 
+        this.setPartie(partie);
         Plateau plateau=partie.getPlateau();
         verifierMonObjectif(objectif, partie.getPlateau().getMap(),partie.getPlateau().getKeylist());
         joueurPose(plateau);
