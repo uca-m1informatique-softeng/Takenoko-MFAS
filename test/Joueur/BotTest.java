@@ -77,7 +77,7 @@ public class BotTest {
 
     @Test
     public void play(){
-        partie.piocheObjectifJardinier(j);
+        partie.getDeck().piocheObjectifJardinier(j);
         j.play(partie);
         assertEquals(new Point3D(0,1,-1),partie.getPlateau().getKeylist().get(1));//on vérifie si le joueur a posé
         assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());//on vérifie si le joueur a deplacé le jardinier

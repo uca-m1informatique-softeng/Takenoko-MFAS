@@ -7,7 +7,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class DeckTest {
+    /*
     Deck d = new Deck();
+
 
     @Test
     public void initialiserObjectifsJardinier() throws Exception {
@@ -35,6 +37,6 @@ public class DeckTest {
             assertEquals(d.getDeckObjectifsPanda()[i].getCouleur(),deckpan[i].getCouleur());
             assertEquals(d.getDeckObjectifsPanda()[i].getNombreBambou(),deckpan[i].getNombreBambou());
         }
-    }
+    }*/
 
 }

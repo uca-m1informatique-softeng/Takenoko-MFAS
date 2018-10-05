@@ -13,10 +13,10 @@ public class Main {
         Bot bot1 = new Bot("Bleu");
         Bot bot2 = new Bot("Rouge");
         BotRandom botRandom = new BotRandom("Vert");
-        partie.piocheObjectifJardinier(bot1);
-        partie.piocheObjectifJardinier(botRandom);
+        partie.getDeck().piocheObjectifJardinier(bot1);
+        partie.getDeck().piocheObjectifJardinier(botRandom);
 
-        while (bot1.getNombreObjectifs() == 0 && botRandom.getNombreObjectifs() == 0){
+        while (bot1.getNombreObjectifs() == 0 && botRandom.getNombreObjectifs() == 0 && partie.getDeck().getNb()>=0){
             bot1.play(partie);
             //bot2.play(pla);
             botRandom.play(partie);

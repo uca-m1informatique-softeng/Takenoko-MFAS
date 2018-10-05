@@ -3,6 +3,7 @@ package Joueur;
 import Moteur.*;
 import Moteur.Objectifs.Objectif;
 import Moteur.Objectifs.ObjectifJardinier;
+import Moteur.Objectifs.ObjectifPanda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ public class Bot {
     private String couleur;
     private int nombreObjectifs = 0;
     private ObjectifJardinier objectif;
+    private ObjectifPanda objectif2;
     private Partie partie;
 
     /**
@@ -42,17 +44,8 @@ public class Bot {
     public void setObjectif(ObjectifJardinier objectif) {
         this.objectif = objectif;
     }
-
-    protected Parcelle piocherParcelle(){
-        Deck d = this.partie.getDeck();
-        Parcelle [] deck = d.getDeckParcelle();
-        int n = d.getNb();
-        int r = new Random().nextInt(n);
-        d.setNb(n - 1);
-        Parcelle par = deck[r];
-        deck[r]= deck[d.getNb()];
-        deck[d.getNb()] = par;
-        return par;
+    public void setObjectif2(ObjectifPanda objectif) {
+        this.objectif2 = objectif;
     }
 
     public Partie getPartie() {
@@ -94,7 +87,7 @@ public class Bot {
 
     public void joueurPose(Plateau plateau){
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle p = piocherParcelle();
+        Parcelle p = partie.getDeck().piocherParcelle();
         if(list.size() > 0){
             Point3D point = list.get(0);
             plateau.poser(p, point);

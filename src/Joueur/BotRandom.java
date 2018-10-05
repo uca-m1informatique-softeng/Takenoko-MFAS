@@ -22,7 +22,7 @@ public class BotRandom extends Bot{
     public void joueurPose(Partie partie){
         Plateau plateau=partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle p = piocherParcelle();
+        Parcelle p = partie.getDeck().piocherParcelle();
         int tailleListe = list.size();
         if(tailleListe > 0){
             Random random = new Random();

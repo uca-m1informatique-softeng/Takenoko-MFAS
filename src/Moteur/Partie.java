@@ -15,7 +15,7 @@ public class Partie {
         plateau=new Plateau();
         jardinier=new Jardinier(plateau);
         panda=new Panda(plateau);
-        deck = new Deck();
+        deck = new Deck(this);
     }
 
     public Plateau getPlateau() {
@@ -46,8 +46,4 @@ public class Partie {
 
     public void setDeck(Deck deck) { this.deck = deck; }
 
-    public void piocheObjectifJardinier(Bot bot){
-        Random random = new Random();
-        bot.setObjectif(deck.getDeckObjectifsJardinier()[random.nextInt(3)]);
-    }
 }
