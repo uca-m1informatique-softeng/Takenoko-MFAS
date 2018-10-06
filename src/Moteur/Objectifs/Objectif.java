@@ -1,11 +1,15 @@
 package Moteur.Objectifs;
 
-public class Objectif {
+import Moteur.Partie;
+import Moteur.Joueur;
+
+public abstract class  Objectif {
     private int valeur;
-    private boolean valide = false;
+    private boolean valide;
 
     public Objectif(int valeur){
         this.valeur = valeur;
+        this.valide = false;
     }
 
     public int getValeur() {
@@ -20,7 +24,7 @@ public class Objectif {
         this.valide = valide;
     }
 
-    public boolean validation(){
+    public boolean validation(Partie P,Joueur J){
         return valide;
     }
 }

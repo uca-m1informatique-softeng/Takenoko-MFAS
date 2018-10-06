@@ -1,7 +1,9 @@
 package Moteur.Objectifs;
 
 import Moteur.Parcelle;
+import Moteur.Partie;
 import Moteur.TypeParcelle;
+import Moteur.Joueur;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
@@ -26,15 +28,20 @@ public class ObjectifJardinier extends Objectif{
         return tailleBambou;
     }
 
-    public boolean validation(HashMap<Point3D, Parcelle> map, ArrayList<Point3D> keyList){
-        for(int i = 0; i < map.size(); i++){
-            if( map.get( keyList.get(i) ).getNbBambou() == tailleBambou && map.get( keyList.get(i) ).getType() == couleur){
+    public boolean validation(Partie P,Joueur J){
+        ArrayList<Parcelle> ParcellesPlateau=P.getPlateau().getAllParcelle();
+        for(int i = 0; i < ParcellesPlateau.size(); i++){
+            Parcelle parcelleCourante=ParcellesPlateau.get(i);
+            if( parcelleCourante.getNbBambou() == tailleBambou && parcelleCourante.getType() == couleur){
                 setValide(true);
                 return true;
             }
         }
-        setValide(false);
         return false;
+    }
+
+    public String toString() {
+        return "faire pousser "+tailleBambou+" bambou(s) "+couleur;
     }
 }
 

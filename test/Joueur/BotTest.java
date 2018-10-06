@@ -1,11 +1,8 @@
 package Joueur;
 
 import Joueur.Bot;
+import Moteur.*;
 import Moteur.Objectifs.ObjectifJardinier;
-import Moteur.Parcelle;
-import Moteur.Partie;
-import Moteur.Plateau;
-import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
@@ -15,7 +12,7 @@ public class BotTest {
     Partie partie=new Partie();
     Plateau pla =partie.getPlateau();
     Parcelle par = new Parcelle(TypeParcelle.etang);
-    Bot j = new Bot("rouge");
+    Bot j = new Bot(CouleurBot.Rouge);
 
 
     @Test
@@ -29,15 +26,15 @@ public class BotTest {
         pla.poser(par,new Point3D(1,-1,0));
         pla.poser(par,new Point3D(0,-1,1));
 
-        /*On donne u objectif au jardinier */
-        j.setObjectif(ob);
+        /*On donne un objectif au jardinier */
+        j.AddObjectif(ob);
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         for(int i = 0 ; i <3 ; i++){
             pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         }
 
-        j.verifierMonObjectif(partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+        j.verifierMesObjectif(partie);
 
         assertEquals(0,j.getNombreObjectifs());
 
@@ -45,7 +42,7 @@ public class BotTest {
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
-        j.verifierMonObjectif(partie.getPlateau().getMap(), partie.getPlateau().getKeylist());
+        j.verifierMesObjectif(partie);
         assertEquals(1,j.getNombreObjectifs());
     }
 
@@ -55,7 +52,7 @@ public class BotTest {
         assertEquals(6,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(1,partie.getPlateau().getKeylist().size());
 
-        j.joueurPose(partie.getPlateau());
+        j.joueurPose(partie);
 
         assertEquals(5,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(2,partie.getPlateau().getKeylist().size());
@@ -75,6 +72,8 @@ public class BotTest {
         assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
     }
 
+    //Ca existe plus
+    /*
     @Test
     public void play(){
         partie.getDeck().piocheObjectifJardinier(j);
@@ -82,5 +81,5 @@ public class BotTest {
         assertEquals(new Point3D(0,1,-1),partie.getPlateau().getKeylist().get(1));//on vérifie si le joueur a posé
         assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());//on vérifie si le joueur a deplacé le jardinier
         assertEquals(0,j.getNombreObjectifs());
-    }
+    }*/
 }

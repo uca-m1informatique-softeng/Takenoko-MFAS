@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * C'est la classe du panda
  */
-public class Personnage {
+public abstract class Personnage {
     private Point3D coord;
     private Plateau plateau;
 

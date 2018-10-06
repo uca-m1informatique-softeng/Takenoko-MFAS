@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class JardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();
-    Parcelle par = new Parcelle(TypeParcelle.Vert);
+    Parcelle par = new Parcelle(TypeParcelle.Verte);
 
     @Test
     public void pousserOuMangerBambou() throws Exception {

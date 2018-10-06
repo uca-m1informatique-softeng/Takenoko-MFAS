@@ -2,7 +2,9 @@ package Moteur.Objectifs;
 
 import Joueur.Bot;
 import Moteur.Bambou;
+import Moteur.Partie;
 import Moteur.TypeParcelle;
+import Moteur.Joueur;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,8 @@ public class ObjectifPanda extends Objectif{
         return nombreBambou;
     }
 
-    public boolean validation(ArrayList<Bambou> listeBambou){
+    public boolean validation(Partie P,Joueur J){
+        ArrayList<Bambou> listeBambou=J.getListBambou();
         int cmt = 0;
         for(int i = 0; i < listeBambou.size(); i++){
             if(listeBambou.get(i).getCouleur() == couleur){
@@ -32,11 +35,14 @@ public class ObjectifPanda extends Objectif{
             }
         }
         if(cmt >= nombreBambou){
+            //il faudra suppr les bambous
             setValide(true);
             return true;
         }
-        setValide(false);
         return false;
     }
 
+    public String toString() {
+        return "manger "+nombreBambou+" bambou(s) "+couleur;
+    }
 }

@@ -16,6 +16,7 @@ public class Jardinier extends Personnage {
 
     public boolean PousserOuMangerBambou(Point3D p)
     {
+        System.out.println("Jardinier en " + getCoord().getX() + ", " + getCoord().getY() + ", " + getCoord().getZ()+ " (Parcelle "+getPlateau().getParcelle((p)).getType()+")");
         return this.getPlateau().getParcelle(p).pousserBambou();
     }
 

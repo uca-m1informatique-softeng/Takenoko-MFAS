@@ -27,7 +27,7 @@ public class Deck {
 
     public void initialiserDeckParcelle() {
         for (int i = 0;i < 11;i++){
-            DP [i] = new Parcelle(TypeParcelle.Vert);
+            DP [i] = new Parcelle(TypeParcelle.Verte);
         }
         for (int i = 11;i < 18;i++){
             DP [i] = new Parcelle(TypeParcelle.Rose);
@@ -46,7 +46,7 @@ public class Deck {
             deckObjectifsJardinier[i] = new ObjectifJardinier(7,TypeParcelle.Rose,4);
         }
         for (int i = 8;i<12;i++){
-            deckObjectifsJardinier[i] = new ObjectifJardinier(5,TypeParcelle.Vert,4);
+            deckObjectifsJardinier[i] = new ObjectifJardinier(5,TypeParcelle.Verte,4);
         }
 
 
@@ -60,7 +60,7 @@ public class Deck {
             deckObjectifsPanda[i] = new ObjectifPanda(5,TypeParcelle.Rose,2);
         }
         for (int i = 6;i<9;i++){
-            deckObjectifsPanda[i] = new ObjectifPanda(3,TypeParcelle.Vert,2);
+            deckObjectifsPanda[i] = new ObjectifPanda(3,TypeParcelle.Verte,2);
         }
     }
 
@@ -87,7 +87,7 @@ public class Deck {
     }
 
 
-    public void piocheObjectifJardinier(Bot bot){
+    public void piocheObjectifJardinier(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifJardinier[] j = d.getDeckObjectifsJardinier();
         int r = new Random().nextInt(nboj);
@@ -96,11 +96,10 @@ public class Deck {
         ObjectifJardinier tmp = j[r];
         j[r] = j[d.getNboj()];
         j[d.getNboj()] = tmp;
-
-        bot.setObjectif(tmp);
+        bot.AddObjectif(tmp);
     }
 
-    public void piocheObjectifPanda(Bot bot){
+    public void piocheObjectifPanda(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifPanda[] p = d.getDeckObjectifsPanda();
         int n = d.getNbop();
@@ -109,7 +108,7 @@ public class Deck {
         ObjectifPanda tmp = p[r];
         p[r] = p[d.getNbop()];
         p[d.getNbop()] = tmp;
-        bot.setObjectif2(getDeckObjectifsPanda()[r]);
+        bot.AddObjectif(getDeckObjectifsPanda()[r]);
     }
 
     public ObjectifPanda[] getDeckObjectifsPanda() {

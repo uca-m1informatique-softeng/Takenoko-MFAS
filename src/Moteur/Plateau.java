@@ -51,6 +51,16 @@ public class Plateau {
         return map.get(p2);
     }
 
+    public ArrayList<Parcelle> getAllParcelle()
+    {
+        ArrayList result=new ArrayList<Parcelle>();
+        for (int i=0;i<this.map.size();i++)
+        {
+            result.add(map.get(keylist.get(i)));
+        }
+        return result;
+    }
+
     /**
      * La méthode qui donne un point et renvois les 6 voisins
      * @param p
@@ -158,5 +168,6 @@ public class Plateau {
     public void poser(Parcelle p, Point3D coord){
         keylist.add(coord);
         map.put(coord,p);
+        System.out.println("Parcelle "+p.getType()+" posée en " + coord.getX() + ", " + coord.getY() + ", " + coord.getZ());
     }
 }

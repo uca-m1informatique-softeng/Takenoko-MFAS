@@ -1,10 +1,7 @@
 package Moteur.Objectifs;
 
 import Joueur.Bot;
-import Moteur.Parcelle;
-import Moteur.Partie;
-import Moteur.Plateau;
-import Moteur.TypeParcelle;
+import Moteur.*;
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
@@ -13,7 +10,7 @@ import static org.junit.Assert.*;
 public class ObjectifJardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();
-    Bot j = new Bot("rouge");
+    Bot j = new Bot(CouleurBot.Rouge);
     Parcelle par = new Parcelle(TypeParcelle.Jaune);
 
 
@@ -30,19 +27,19 @@ public class ObjectifJardinierTest {
 
         /*On donne un objectif au jardinier */
 
-        j.setObjectif(ob);
+        j.AddObjectif(ob);
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         for(int i = 0 ; i < 3 ; i++){
             pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         }
 
-        assertFalse(ob.validation(pla.getMap(),pla.getKeylist()));
+        assertFalse(ob.validation(partie,j));
 
         /*on fait pousser du bambou de taille 4 sur la meme parcelle (objectif réalisé)*/
 
         pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
-        assertTrue(ob.validation(pla.getMap(),pla.getKeylist()));
+        assertTrue(ob.validation(partie,j));
 
 
     }
