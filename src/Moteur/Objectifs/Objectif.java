@@ -1,11 +1,12 @@
 package Moteur.Objectifs;
 
 import Moteur.Partie;
-import Moteur.Joueur;
+import Joueur.Joueur;
 
 public abstract class  Objectif {
     private int valeur;
     private boolean valide;
+
 
     public Objectif(int valeur){
         this.valeur = valeur;

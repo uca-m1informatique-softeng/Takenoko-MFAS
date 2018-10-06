@@ -1,11 +1,9 @@
 package Moteur;
 
-import Joueur.Bot;
-import Moteur.Objectifs.Objectif;
+import Joueur.Joueur;
 import Moteur.Objectifs.ObjectifJardinier;
 import Moteur.Objectifs.ObjectifPanda;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Deck {
@@ -108,7 +106,7 @@ public class Deck {
         ObjectifPanda tmp = p[r];
         p[r] = p[d.getNbop()];
         p[d.getNbop()] = tmp;
-        bot.AddObjectif(getDeckObjectifsPanda()[r]);
+        bot.AddObjectif(tmp);
     }
 
     public ObjectifPanda[] getDeckObjectifsPanda() {

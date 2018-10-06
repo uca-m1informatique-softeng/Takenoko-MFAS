@@ -1,14 +1,6 @@
 package Joueur;
 
 import Moteur.*;
-import Moteur.Objectifs.Objectif;
-import Moteur.Objectifs.ObjectifJardinier;
-import Moteur.Objectifs.ObjectifPanda;
-import javafx.geometry.Point3D;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Random;
 
 /**
  *C'est la classe des bots

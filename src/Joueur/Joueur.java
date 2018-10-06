@@ -1,5 +1,6 @@
-package Moteur;
+package Joueur;
 
+import Moteur.*;
 import Moteur.Objectifs.Objectif;
 import Moteur.Objectifs.ObjectifJardinier;
 import Moteur.Objectifs.ObjectifPanda;
@@ -29,6 +30,7 @@ public class Joueur {
         this.couleur = couleur;
         this.nombreObjectifsRemplis=0;
         this.ListObjectifs=new ArrayList<Objectif>();
+        this.listBambou=new ArrayList<Bambou>();
     }
 
     public CouleurBot getCouleur() {

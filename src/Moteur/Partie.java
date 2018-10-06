@@ -1,9 +1,8 @@
 package Moteur;
 
-import Joueur.Bot;
+import Joueur.Joueur;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Partie {
 
@@ -54,6 +53,7 @@ public class Partie {
         //initialisation de la Partie
         for (Joueur J: ListJoueurs) {
             this.getDeck().piocheObjectifJardinier(J);
+            this.getDeck().piocheObjectifPanda(J);
         }
 
         //coeur du jeu
@@ -71,7 +71,7 @@ public class Partie {
                     FinDuTour=J.choixAction(0,this);
                     //verifier objectif
                     J.verifierMesObjectif(this);
-                    if(J.getNombreObjectifs()>0)
+                    if(J.getNombreObjectifs()>0)//nombre d'objectifs à réaliser pour terminer le jeu
                     {
                         FinDePartie=true;
                     }

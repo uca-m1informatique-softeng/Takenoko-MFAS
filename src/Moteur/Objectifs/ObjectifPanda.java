@@ -1,10 +1,9 @@
 package Moteur.Objectifs;
 
-import Joueur.Bot;
 import Moteur.Bambou;
 import Moteur.Partie;
 import Moteur.TypeParcelle;
-import Moteur.Joueur;
+import Joueur.Joueur;
 
 import java.util.ArrayList;
 

@@ -3,11 +3,9 @@ package Moteur.Objectifs;
 import Moteur.Parcelle;
 import Moteur.Partie;
 import Moteur.TypeParcelle;
-import Moteur.Joueur;
-import javafx.geometry.Point3D;
+import Joueur.Joueur;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class ObjectifJardinier extends Objectif{
 
