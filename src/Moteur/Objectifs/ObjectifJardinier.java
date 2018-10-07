@@ -2,9 +2,8 @@ package Moteur.Objectifs;
 
 import Moteur.Parcelle;
 import Moteur.Partie;
-import Moteur.TypeParcelle;
 import Joueur.Joueur;
-
+import Moteur.Enums.TypeParcelle;
 import java.util.ArrayList;
 
 public class ObjectifJardinier extends Objectif{

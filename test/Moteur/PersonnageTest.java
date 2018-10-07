@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-
+import Moteur.Enums.TypeParcelle;
 public class PersonnageTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

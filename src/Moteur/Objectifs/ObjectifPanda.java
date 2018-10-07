@@ -2,10 +2,10 @@ package Moteur.Objectifs;
 
 import Moteur.Bambou;
 import Moteur.Partie;
-import Moteur.TypeParcelle;
 import Joueur.Joueur;
 
 import java.util.ArrayList;
+import Moteur.Enums.TypeParcelle;
 
 public class ObjectifPanda extends Objectif{
     TypeParcelle couleur;

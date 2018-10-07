@@ -4,7 +4,7 @@ import javafx.geometry.Point3D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+import Moteur.Enums.TypeParcelle;
 public class JardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

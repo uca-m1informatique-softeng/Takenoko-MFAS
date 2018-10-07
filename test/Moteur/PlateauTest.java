@@ -1,14 +1,11 @@
 package Moteur;
 
-import Moteur.Parcelle;
-import Moteur.Plateau;
-import Moteur.TypeParcelle;
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-
+import Moteur.Enums.TypeParcelle;
 public class PlateauTest {
 
     Partie partie=new Partie();

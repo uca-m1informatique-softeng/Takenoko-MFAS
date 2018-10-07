@@ -3,7 +3,7 @@ package Moteur;
 import Joueur.Joueur;
 import Moteur.Objectifs.ObjectifJardinier;
 import Moteur.Objectifs.ObjectifPanda;
-
+import Moteur.Enums.TypeParcelle;
 import java.util.Random;
 
 public class Deck {

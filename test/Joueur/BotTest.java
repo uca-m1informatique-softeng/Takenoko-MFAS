@@ -7,6 +7,7 @@ import javafx.geometry.Point3D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
+import Moteur.Enums.*;
 
 public class BotTest {
     Partie partie=new Partie();

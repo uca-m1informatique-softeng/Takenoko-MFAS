@@ -8,7 +8,7 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
+import Moteur.Enums.CouleurBot;
 public class Joueur {
     private CouleurBot couleur;
     private int nombreObjectifsRemplis;

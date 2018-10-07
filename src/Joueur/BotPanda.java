@@ -7,6 +7,7 @@ import Moteur.Personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
+import Moteur.Enums.CouleurBot;
 
 public class BotPanda extends Bot {
 

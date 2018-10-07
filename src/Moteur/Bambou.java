@@ -1,5 +1,6 @@
 package Moteur;
 
+import Moteur.Enums.TypeParcelle;
 /**
  * C'est la classe bambou
  */

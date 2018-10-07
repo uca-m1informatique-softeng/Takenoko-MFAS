@@ -4,7 +4,7 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import Moteur.Enums.TypeParcelle;
 /**
  *C'est la classe du plateau
  */

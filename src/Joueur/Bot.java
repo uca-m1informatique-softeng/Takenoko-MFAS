@@ -1,6 +1,7 @@
 package Joueur;
 
 import Moteur.*;
+import Moteur.Enums.CouleurBot;
 
 /**
  *C'est la classe des bots

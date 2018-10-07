@@ -1,9 +1,8 @@
 package Parties;
 
-import Moteur.CouleurBot;
 import Moteur.Partie;
 import Joueur.*;
-
+import Moteur.Enums.CouleurBot;
 import java.util.ArrayList;
 
 public class Main {

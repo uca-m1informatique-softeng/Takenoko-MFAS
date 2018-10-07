@@ -5,7 +5,7 @@ import Moteur.Partie;
 import Moteur.Personnages.Jardinier;
 import Moteur.Plateau;
 import javafx.geometry.Point3D;
-import Moteur.CouleurBot;
+import Moteur.Enums.CouleurBot;
 
 import java.util.ArrayList;
 
