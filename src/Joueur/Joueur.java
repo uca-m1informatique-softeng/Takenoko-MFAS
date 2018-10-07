@@ -104,7 +104,6 @@ public class Joueur {
         if(listdeplacementJardinier.size() > 0){
             Point3D pointJaridnier = listdeplacementJardinier.get(0);
             jardinier.Deplacer(pointJaridnier);
-            System.out.println("Il y a " + plateau.getParcelle(pointJaridnier).getNbBambou() + " bambou sur cette case");
         }
     }
 

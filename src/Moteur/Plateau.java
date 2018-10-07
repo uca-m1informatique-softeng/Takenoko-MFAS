@@ -115,6 +115,23 @@ public class Plateau {
 
     }
 
+    /**
+     * La méthode qui donne un point et renvois les voisins de même couleur
+     * @param p
+     * @return
+     */
+    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D p){
+        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+
+        for (int i = list.size()-1; i >=0; i--) {
+            if(!keylist.contains(list.get(i)) || getParcelle(list.get(i)).getType() != getParcelle(p).getType()) {
+                list.remove(i);
+            }
+        }
+        return list;
+
+    }
+
     public boolean isParcelleOccupee (Point3D p){
         return keylist.contains(p);
     }
