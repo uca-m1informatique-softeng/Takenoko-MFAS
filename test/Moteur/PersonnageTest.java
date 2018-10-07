@@ -1,5 +1,6 @@
 package Moteur;
 
+import Moteur.Personnages.Jardinier;
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 

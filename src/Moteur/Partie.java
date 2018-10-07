@@ -1,6 +1,8 @@
 package Moteur;
 
 import Joueur.Joueur;
+import Moteur.Personnages.Jardinier;
+import Moteur.Personnages.Panda;
 
 import java.util.ArrayList;
 

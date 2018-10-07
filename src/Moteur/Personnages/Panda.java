@@ -1,5 +1,7 @@
-package Moteur;
+package Moteur.Personnages;
 
+import Moteur.Personnages.Personnage;
+import Moteur.Plateau;
 import javafx.geometry.Point3D;
 
 /**

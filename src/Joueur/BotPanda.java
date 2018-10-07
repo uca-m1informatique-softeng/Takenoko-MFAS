@@ -1,12 +1,12 @@
 package Joueur;
 
 import Moteur.*;
-import Moteur.Objectifs.ObjectifJardinier;
 import Moteur.Objectifs.ObjectifPanda;
+import Moteur.Personnages.Jardinier;
+import Moteur.Personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class BotPanda extends Bot {
 
