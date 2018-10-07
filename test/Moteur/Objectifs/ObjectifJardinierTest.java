@@ -19,7 +19,7 @@ public class ObjectifJardinierTest {
     public void validation() throws Exception {
         ObjectifJardinier ob = new ObjectifJardinier(6,TypeParcelle.Jaune,4);
 
-        /*On crée notre plateau est composé que de parcelles jaunes*/
+        /*On crée notre plateau composé que de parcelles jaunes*/
 
         pla.poser(par,new Point3D(0,1,-1));
         pla.poser(par,new Point3D(1,0,-1));
@@ -44,5 +44,4 @@ public class ObjectifJardinierTest {
 
 
     }
-
 }

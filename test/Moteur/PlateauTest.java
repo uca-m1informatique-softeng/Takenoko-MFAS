@@ -242,4 +242,25 @@ public class PlateauTest {
         }
     }
 
+    @Test
+    public void getParcelleVoisineMemeCouleur(){
+        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,0.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(0.0,1.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,1.0,-2.0));
+        pla.poser(new Parcelle(TypeParcelle.Rose),new Point3D(2.0,0.0,-2.0));
+        pla.poser(new Parcelle(TypeParcelle.Verte),new Point3D(2.0,-1.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,-1.0,0.0));
+
+        ArrayList<Point3D> exp = pla.getParcelleVoisineMemeCouleur(new Point3D(1.0,0.0,-1.0));
+
+        assertEquals(exp.size(),3);
+
+
+        assertTrue(exp.contains(new Point3D(0.0,1.0,-1.0)));
+        assertTrue(exp.contains(new Point3D(1.0,1.0,-2.0)));
+        assertTrue(exp.contains(new Point3D(1.0,-1.0,0.0)));
+
+
+    }
+
 }
