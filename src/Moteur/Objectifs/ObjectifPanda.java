@@ -7,10 +7,19 @@ import Joueur.Joueur;
 import java.util.ArrayList;
 import Moteur.Enums.TypeParcelle;
 
+/**
+ * La classe des objectifs du panda
+ */
 public class ObjectifPanda extends Objectif{
     TypeParcelle couleur;
     int nombreBambou;
 
+    /**
+     * Le constructeur
+     * @param valeur
+     * @param couleur
+     * @param nombreBambou
+     */
     public ObjectifPanda(int valeur, TypeParcelle couleur, int nombreBambou) {
         super(valeur);
         this.couleur = couleur;
@@ -25,6 +34,11 @@ public class ObjectifPanda extends Objectif{
         return nombreBambou;
     }
 
+    /**
+     * @param P
+     * @param J
+     * @return
+     */
     public boolean validation(Partie P,Joueur J){
         ArrayList<Bambou> listeBambou=J.getListBambou();
         int cmt = 0;

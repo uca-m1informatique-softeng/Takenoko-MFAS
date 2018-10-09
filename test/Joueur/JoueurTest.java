@@ -10,6 +10,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Le classe test du joueur
+ */
 public class JoueurTest {
 
     Partie partie=new Partie();

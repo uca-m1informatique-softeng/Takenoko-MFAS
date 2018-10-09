@@ -8,6 +8,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import Moteur.Enums.TypeParcelle;
+
+
+/**
+ * La classe test des personnages
+ */
 public class PersonnageTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

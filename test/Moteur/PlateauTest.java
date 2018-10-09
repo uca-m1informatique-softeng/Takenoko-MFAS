@@ -6,6 +6,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import Moteur.Enums.TypeParcelle;
+
+
+/**
+ * La classe test du plateau
+ */
 public class PlateauTest {
 
     Partie partie=new Partie();

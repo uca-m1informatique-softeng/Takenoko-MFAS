@@ -11,6 +11,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des objectifs panda
+ */
 public class ObjectifPandaTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

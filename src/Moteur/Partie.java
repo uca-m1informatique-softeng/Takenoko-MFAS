@@ -6,6 +6,9 @@ import Moteur.Personnages.Panda;
 
 import java.util.ArrayList;
 
+/**
+ * La classe partie
+ */
 public class Partie {
 
     private Plateau plateau;
@@ -14,6 +17,9 @@ public class Partie {
     private Deck deck;
     private boolean FinDePartie;
 
+    /**
+     * Le constructeur
+     */
     public Partie() {
         plateau=new Plateau();
         jardinier=new Jardinier(plateau);
@@ -50,6 +56,10 @@ public class Partie {
 
     public void setDeck(Deck deck) { this.deck = deck; }
 
+    /**
+     * Le déroulement de la partie
+     * @param ListJoueurs
+     */
     public void Jouer(ArrayList<Joueur> ListJoueurs){
 
         //initialisation de la Partie
@@ -59,22 +69,19 @@ public class Partie {
         }
 
         //coeur du jeu
-        while (!FinDePartie)
-        {
+        while (!FinDePartie) {
             for (Joueur J: ListJoueurs) {
                 System.out.println("C'est au tour du Joueur "+J.toString());
                 int action=0;
                 boolean FinDuTour=false;
                 System.out.print(J.DebutChatcouleur());
-                while (!FinDuTour)
-                {
+                while (!FinDuTour) {
 
                     //verifier objectif
                     FinDuTour=J.choixAction(0,this);
                     //verifier objectif
                     J.verifierMesObjectif(this);
-                    if(J.getNombreObjectifs()>0)//nombre d'objectifs à réaliser pour terminer le jeu
-                    {
+                    if(J.getNombreObjectifs()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
                         FinDePartie=true;
                     }
                 }
@@ -83,7 +90,6 @@ public class Partie {
             }
 
         }
-
         //fin de partie
         Joueur Vainqueur=ListJoueurs.get(0);
         boolean egalite=false;
@@ -98,7 +104,6 @@ public class Partie {
                 egalite = true;
             }}
         }
-
         if (egalite){
             System.out.println("C'est une egalité");
         }

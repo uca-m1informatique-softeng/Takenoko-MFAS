@@ -8,6 +8,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import Moteur.Enums.*;
 
+/**
+ * La classe test des objectifs jardinier
+ */
 public class ObjectifJardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

@@ -1,5 +1,8 @@
 package Moteur;
 
+/**
+ * La classe qui regroupe tout nos enumérations
+ */
 public class Enums {
 
     /**

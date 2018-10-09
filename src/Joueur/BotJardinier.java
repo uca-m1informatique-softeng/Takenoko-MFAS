@@ -9,18 +9,34 @@ import Moteur.Enums.CouleurBot;
 
 import java.util.ArrayList;
 
+/**
+ * La classe du bot Jardinier
+ */
 public class BotJardinier extends Bot{
 
+    /**
+     * Le constructeur
+     * @param s
+     */
     public BotJardinier(CouleurBot s) {
         super(s);
     }
 
+    /**
+     * Une méthode qui renvois un boolean pour le choix d'action du bot
+     * @param numeroActionDansLeTour
+     * @param P
+     * @return
+     */
     public boolean choixAction(int numeroActionDansLeTour, Partie P){
         joueurPose(P);
         joueurDeplaceJardinier(P.getJardinier());
         return true;
     }
 
+    /**
+     * @param jardinier
+     */
     public void joueurDeplaceJardinier(Jardinier jardinier){
         Plateau plateau=jardinier.getPlateau();
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();

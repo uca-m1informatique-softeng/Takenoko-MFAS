@@ -9,6 +9,11 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import Moteur.Enums.CouleurBot;
+
+
+/**
+ * La classe du Joueur
+ */
 public class Joueur {
     private CouleurBot couleur;
     private int nombreObjectifsRemplis;
@@ -25,6 +30,10 @@ public class Joueur {
     private ArrayList<Bambou> listBambou;
     private int score = 0;
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public Joueur(CouleurBot couleur){
         this.couleur = couleur;
         this.nombreObjectifsRemplis=0;
@@ -48,6 +57,7 @@ public class Joueur {
         this.score = score;
     }
 
+
     public ArrayList<Objectif> getListObjectifs() {
         return ListObjectifs;
     }
@@ -56,6 +66,9 @@ public class Joueur {
         ListObjectifs = listObjectifs;
     }
 
+    /**
+     * @param O
+     */
     public void AddObjectif(Objectif O){
         this.ListObjectifs.add(O);
 
@@ -69,6 +82,10 @@ public class Joueur {
         this.nombreObjectifsRemplis = nombreObjectifsRemplis;
     }
 
+    /**
+     * La méthode qui vérifie que le bot a bien réaliser son objectif
+     * @param P
+     */
     public void verifierMesObjectif(Partie P) {
         Iterator<Objectif> i = ListObjectifs.iterator();
         while (i.hasNext()) {
@@ -82,12 +99,20 @@ public class Joueur {
         }
     }
 
+    /**
+     * @param numeroActionDansLeTour
+     * @param P
+     * @return
+     */
     public boolean choixAction(int numeroActionDansLeTour,Partie P){
         joueurPose(P);
         joueurDeplaceJardinier(P.getJardinier());
         return true;
     }
 
+    /**
+     * @param Partie
+     */
     public void joueurPose(Partie Partie){
         Plateau plateau=Partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
@@ -98,6 +123,9 @@ public class Joueur {
         }
     }
 
+    /**
+     * @param jardinier
+     */
     public void joueurDeplaceJardinier(Jardinier jardinier){
         Plateau plateau=jardinier.getPlateau();
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
@@ -107,6 +135,9 @@ public class Joueur {
         }
     }
 
+    /**
+     * @param panda
+     */
     public void joueurDeplacePanda(Panda panda){
         Plateau plateau=panda.getPlateau();
         ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();
@@ -135,6 +166,10 @@ public class Joueur {
         return this.couleur.toString();
     }
 
+    /**
+     * Pour avoir le déroulement de la partie en couleur
+     * @return
+     */
     public String DebutChatcouleur(){
         switch(couleur){
             case Bleu :

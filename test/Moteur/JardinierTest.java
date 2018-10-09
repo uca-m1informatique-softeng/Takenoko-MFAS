@@ -8,6 +8,9 @@ import Moteur.Enums.TypeParcelle;
 
 import java.util.ArrayList;
 
+/**
+ * La classe test du jardinier
+ */
 public class JardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();

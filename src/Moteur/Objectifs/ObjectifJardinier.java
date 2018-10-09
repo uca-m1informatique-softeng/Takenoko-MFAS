@@ -6,11 +6,20 @@ import Joueur.Joueur;
 import Moteur.Enums.TypeParcelle;
 import java.util.ArrayList;
 
+/**
+ * La classe des objectifs du jardinier
+ */
 public class ObjectifJardinier extends Objectif{
 
     TypeParcelle couleur;
     int tailleBambou;
 
+    /**
+     * Le constructeur
+     * @param valeur
+     * @param couleur
+     * @param tailleBambou
+     */
     public ObjectifJardinier(int valeur, TypeParcelle couleur, int tailleBambou) {
         super(valeur);
         this.couleur = couleur;
@@ -25,6 +34,11 @@ public class ObjectifJardinier extends Objectif{
         return tailleBambou;
     }
 
+    /**
+     * @param P
+     * @param J
+     * @return
+     */
     public boolean validation(Partie P,Joueur J){
         ArrayList<Parcelle> ParcellesPlateau=P.getPlateau().getAllParcelle();
         for(int i = 0; i < ParcellesPlateau.size(); i++){

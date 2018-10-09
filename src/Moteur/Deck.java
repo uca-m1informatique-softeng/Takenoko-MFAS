@@ -6,6 +6,9 @@ import Moteur.Objectifs.ObjectifPanda;
 import Moteur.Enums.TypeParcelle;
 import java.util.Random;
 
+/**
+ * La classe des decks
+ */
 public class Deck {
 
     private ObjectifJardinier[] deckObjectifsJardinier = new ObjectifJardinier[12];
@@ -16,6 +19,10 @@ public class Deck {
     private int nboj = 12;
     private Partie partie;
 
+    /**
+     * Le constructeur
+     * @param p
+     */
     public Deck(Partie p) {
         partie=p;
         initialiserObjectifsJardinier();
@@ -23,6 +30,9 @@ public class Deck {
         initialiserDeckParcelle();
     }
 
+    /**
+     * Le deck des parcelles
+     */
     public void initialiserDeckParcelle() {
         for (int i = 0;i < 11;i++){
             DP [i] = new Parcelle(TypeParcelle.Verte);
@@ -36,6 +46,9 @@ public class Deck {
 
     }
 
+    /**
+     * Le deck des objectifs jardinier
+     */
     public void initialiserObjectifsJardinier(){
         for (int i = 0;i<4;i++){
             deckObjectifsJardinier[i] = new ObjectifJardinier(6,TypeParcelle.Jaune,4);
@@ -50,6 +63,10 @@ public class Deck {
 
 
     }
+
+    /**
+     * Le deck des objectifs panda
+     */
     public void initialiserObjectifsPanda(){
         for (int i = 0;i<3;i++){
             deckObjectifsPanda[i] = new ObjectifPanda(4,TypeParcelle.Jaune,2);
@@ -67,6 +84,10 @@ public class Deck {
     }
 
 
+    /**
+     * La pioche des parcelles
+     * @return
+     */
     public Parcelle piocherParcelle(){
         Deck d = this.partie.getDeck();
         Parcelle[] deck = d.getDeckParcelle();
@@ -85,6 +106,10 @@ public class Deck {
     }
 
 
+    /**
+     * La pioche des objectifs jardinier
+     * @param bot
+     */
     public void piocheObjectifJardinier(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifJardinier[] j = d.getDeckObjectifsJardinier();
@@ -97,6 +122,10 @@ public class Deck {
         bot.AddObjectif(tmp);
     }
 
+    /**
+     * La pioche des objectifs panda
+     * @param bot
+     */
     public void piocheObjectifPanda(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifPanda[] p = d.getDeckObjectifsPanda();

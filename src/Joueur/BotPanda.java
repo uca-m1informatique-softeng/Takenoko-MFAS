@@ -9,18 +9,34 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 import Moteur.Enums.CouleurBot;
 
+/**
+ * La classe du bot Panda
+ */
 public class BotPanda extends Bot {
 
+    /**
+     * Le constructeur
+     * @param s
+     */
     public BotPanda (CouleurBot s){
         super(s);
     }
 
+    /**
+     * Une méthode qui renvois un boolean pour le choix d'action du bot
+     * @param numeroActionDansLeTour
+     * @param P
+     * @return
+     */
     public boolean choixAction(int numeroActionDansLeTour, Partie P){
         joueurDeplaceJardinier(P.getJardinier());
         joueurDeplacePanda(P.getPanda());
         return true;
     }
 
+    /**
+     * @param jardinier
+     */
     public void joueurDeplaceJardinier(Jardinier jardinier){
         Plateau plateau=jardinier.getPlateau();
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
@@ -41,6 +57,9 @@ public class BotPanda extends Bot {
         }
     }
 
+    /**
+     * @param panda
+     */
     public void joueurDeplacePanda(Panda panda){
         Plateau plateau=panda.getPlateau();
         ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();

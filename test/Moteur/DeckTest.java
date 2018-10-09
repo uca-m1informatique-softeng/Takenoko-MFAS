@@ -6,6 +6,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des decks
+ */
 public class DeckTest {
     Partie partie = new Partie();
     Deck d = new Deck(partie);

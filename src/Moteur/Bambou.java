@@ -16,6 +16,10 @@ public class Bambou {
         this.couleur = couleur;
     }
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public Bambou(TypeParcelle couleur){
         this.couleur=couleur;
     }
