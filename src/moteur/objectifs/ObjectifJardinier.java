@@ -1,9 +1,9 @@
-package Moteur.Objectifs;
+package moteur.objectifs;
 
-import Moteur.Parcelle;
-import Moteur.Partie;
-import Joueur.Joueur;
-import Moteur.Enums.TypeParcelle;
+import moteur.Parcelle;
+import moteur.Partie;
+import joueur.Joueur;
+import moteur.Enums.TypeParcelle;
 import java.util.ArrayList;
 
 /**
@@ -35,14 +35,14 @@ public class ObjectifJardinier extends Objectif{
     }
 
     /**
-     * @param P
-     * @param J
+     * @param partie
+     * @param joueur
      * @return
      */
-    public boolean validation(Partie P,Joueur J){
-        ArrayList<Parcelle> ParcellesPlateau=P.getPlateau().getAllParcelle();
-        for(int i = 0; i < ParcellesPlateau.size(); i++){
-            Parcelle parcelleCourante=ParcellesPlateau.get(i);
+    public boolean validation(Partie partie,Joueur joueur){
+        ArrayList<Parcelle> parcellesPlateau=partie.getPlateau().getAllParcelle();
+        for(int i = 0; i < parcellesPlateau.size(); i++){
+            Parcelle parcelleCourante=parcellesPlateau.get(i);
             if( parcelleCourante.getNbBambou() == tailleBambou && parcelleCourante.getType() == couleur){
                 setValide(true);
                 return true;

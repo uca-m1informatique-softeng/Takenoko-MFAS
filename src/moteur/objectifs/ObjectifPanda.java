@@ -1,11 +1,11 @@
-package Moteur.Objectifs;
+package moteur.objectifs;
 
-import Moteur.Bambou;
-import Moteur.Partie;
-import Joueur.Joueur;
+import moteur.Bambou;
+import moteur.Partie;
+import joueur.Joueur;
 
 import java.util.ArrayList;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 /**
  * La classe des objectifs du panda
@@ -35,12 +35,12 @@ public class ObjectifPanda extends Objectif{
     }
 
     /**
-     * @param P
-     * @param J
+     * @param partie
+     * @param joueur
      * @return
      */
-    public boolean validation(Partie P,Joueur J){
-        ArrayList<Bambou> listeBambou=J.getListBambou();
+    public boolean validation(Partie partie,Joueur joueur){
+        ArrayList<Bambou> listeBambou=joueur.getListBambou();
         int cmt = 0;
         for(int i = 0; i < listeBambou.size(); i++){
             if(listeBambou.get(i).getCouleur() == couleur){

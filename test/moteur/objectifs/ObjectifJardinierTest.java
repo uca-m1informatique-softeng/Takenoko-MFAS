@@ -1,12 +1,12 @@
-package Moteur.Objectifs;
+package moteur.objectifs;
 
-import Joueur.Bot;
-import Moteur.*;
+import joueur.Bot;
+import moteur.*;
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import Moteur.Enums.*;
+import moteur.Enums.*;
 
 /**
  * La classe test des objectifs jardinier
@@ -14,13 +14,13 @@ import Moteur.Enums.*;
 public class ObjectifJardinierTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();
-    Bot j = new Bot(CouleurBot.Rouge);
-    Parcelle par = new Parcelle(TypeParcelle.Jaune);
+    Bot j = new Bot(CouleurBot.ROUGE);
+    Parcelle par = new Parcelle(TypeParcelle.JAUNE);
 
 
     @Test
     public void validation() throws Exception {
-        ObjectifJardinier ob = new ObjectifJardinier(6,TypeParcelle.Jaune,4);
+        ObjectifJardinier ob = new ObjectifJardinier(6,TypeParcelle.JAUNE,4);
 
         /*On crée notre plateau composé que de parcelles jaunes*/
 
@@ -31,7 +31,7 @@ public class ObjectifJardinierTest {
 
         /*On donne un objectif au jardinier */
 
-        j.AddObjectif(ob);
+        j.addObjectif(ob);
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         for(int i = 0 ; i < 3 ; i++){

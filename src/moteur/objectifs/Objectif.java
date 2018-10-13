@@ -1,10 +1,10 @@
-package Moteur.Objectifs;
+package moteur.objectifs;
 
-import Moteur.Partie;
-import Joueur.Joueur;
+import moteur.Partie;
+import joueur.Joueur;
 
 /**
- * La classe des Objectifs
+ * La classe des objectifs
  */
 public abstract class  Objectif {
     private int valeur;
@@ -32,7 +32,7 @@ public abstract class  Objectif {
         this.valide = valide;
     }
 
-    public boolean validation(Partie P,Joueur J){
+    public boolean validation(Partie partie,Joueur joueur){
         return valide;
     }
 }

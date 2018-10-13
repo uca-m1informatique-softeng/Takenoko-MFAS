@@ -67,7 +67,7 @@ public class BotPanda extends Bot {
         Point3D pointPanda = new Point3D(0,0,0);
         if(!listdeplacementPanda.isEmpty()){
             ObjectifPanda objPanda=(ObjectifPanda)getListObjectifs().get(1);
-            for (Point3D p : listdeplacementPanda){
+            for (Point3D coordonnee : listdeplacementPanda){
                 if(plateau.getParcelle(p).getType() == objPanda.getCouleur()){
                     pointPanda = p;
                     pasDeplacer = false;
