@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  */
 public class DeckTest {
     Partie partie = new Partie();
-    Deck d = new Deck(partie);
+    Deck deck = new Deck(partie);
 
 
     @Test
@@ -27,7 +27,7 @@ public class DeckTest {
             dp[i] = new Parcelle(Enums.TypeParcelle.JAUNE);
         }
         for (int i =0 ; i<27;i++){
-            assertEquals(d.getDeckParcelle()[i].getType().toString(),dp[i].getType().toString());
+            assertEquals(deck.getDeckParcelle()[i].getType().toString(),dp[i].getType().toString());
         }
 
     }
@@ -53,9 +53,9 @@ public class DeckTest {
 
 
         for (int i =0 ; i<12;i++){
-            assertEquals(d.getDeckObjectifsJardinier()[i].getValeur(),deckjar[i].getValeur());
-            assertEquals(d.getDeckObjectifsJardinier()[i].getCouleur(),deckjar[i].getCouleur());
-            assertEquals(d.getDeckObjectifsJardinier()[i].getTailleBambou(),deckjar[i].getTailleBambou());
+            assertEquals(deck.getDeckObjectifsJardinier()[i].getValeur(),deckjar[i].getValeur());
+            assertEquals(deck.getDeckObjectifsJardinier()[i].getCouleur(),deckjar[i].getCouleur());
+            assertEquals(deck.getDeckObjectifsJardinier()[i].getTailleBambou(),deckjar[i].getTailleBambou());
         }
     }
 
@@ -73,9 +73,9 @@ public class DeckTest {
         deckpan[8] = new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2);
 
         for (int i =0 ; i<9;i++){
-            assertEquals(d.getDeckObjectifsPanda()[i].getValeur(),deckpan[i].getValeur());
-            assertEquals(d.getDeckObjectifsPanda()[i].getCouleur(),deckpan[i].getCouleur());
-            assertEquals(d.getDeckObjectifsPanda()[i].getNombreBambou(),deckpan[i].getNombreBambou());
+            assertEquals(deck.getDeckObjectifsPanda()[i].getValeur(),deckpan[i].getValeur());
+            assertEquals(deck.getDeckObjectifsPanda()[i].getCouleur(),deckpan[i].getCouleur());
+            assertEquals(deck.getDeckObjectifsPanda()[i].getNombreBambou(),deckpan[i].getNombreBambou());
         }
     }
 }

@@ -15,10 +15,8 @@ import moteur.Enums.TypeParcelle;
  */
 public class PersonnageTest {
     Partie partie=new Partie();
-    Plateau pla = partie.getPlateau();
-    Point3D p = new Point3D(0,0,0);
-    Point3D p1 = new Point3D(1,0,-1);
-    Parcelle par1 = new Parcelle(TypeParcelle.ETANG);
+    Plateau plateau = partie.getPlateau();
+    Parcelle parcelleEtang = new Parcelle(TypeParcelle.ETANG);
     Jardinier jardinier=partie.getJardinier();
 
 
@@ -28,12 +26,12 @@ public class PersonnageTest {
 
         assertEquals(partie.getJardinier().getCoord(),new Point3D(0,0,0));
 
-        pla.poser(par1,new Point3D(1,0,-1));
-        pla.poser(par1,new Point3D(1,-1,0));
-        pla.poser(par1,new Point3D(2,-1,1));
-        pla.poser(par1,new Point3D(2,-2,0));
-        pla.poser(par1,new Point3D(3,-2,-1));
-        pla.poser(par1,new Point3D(4,-4,0));
+        plateau.poser(parcelleEtang,new Point3D(1,0,-1));
+        plateau.poser(parcelleEtang,new Point3D(1,-1,0));
+        plateau.poser(parcelleEtang,new Point3D(2,-1,1));
+        plateau.poser(parcelleEtang,new Point3D(2,-2,0));
+        plateau.poser(parcelleEtang,new Point3D(3,-2,-1));
+        plateau.poser(parcelleEtang,new Point3D(4,-4,0));
 
         jardinier.Deplacer(new Point3D(1,0,-1));
 
@@ -43,14 +41,14 @@ public class PersonnageTest {
     @Test
     public void DestinationsPossiblesJardinier(){
         /* Création plateau */
-        pla.poser(par1,new Point3D(1,0,-1));
-        pla.poser(par1,new Point3D(1,-1,0));
-        pla.poser(par1,new Point3D(2,-1,1));
-        pla.poser(par1,new Point3D(2,-2,0));
-        pla.poser(par1,new Point3D(3,-2,-1));
-        pla.poser(par1,new Point3D(3,-3,0));
+        plateau.poser(parcelleEtang,new Point3D(1,0,-1));
+        plateau.poser(parcelleEtang,new Point3D(1,-1,0));
+        plateau.poser(parcelleEtang,new Point3D(2,-1,1));
+        plateau.poser(parcelleEtang,new Point3D(2,-2,0));
+        plateau.poser(parcelleEtang,new Point3D(3,-2,-1));
+        plateau.poser(parcelleEtang,new Point3D(3,-3,0));
 
-        pla.poser(par1,new Point3D(0,1,-1));
+        plateau.poser(parcelleEtang,new Point3D(0,1,-1));
 
 
         ArrayList<Point3D> list = new ArrayList<>();// liste attendu
@@ -69,14 +67,14 @@ public class PersonnageTest {
     @Test
     public void DestinationsPossiblesJardinier2(){
         /* Création plateau */
-        pla.poser(par1,new Point3D(1,0,-1));
-        pla.poser(par1,new Point3D(1,-1,0));
-        pla.poser(par1,new Point3D(2,-1,1));
-        pla.poser(par1,new Point3D(2,-2,0));
-        pla.poser(par1,new Point3D(3,-2,-1));
-        pla.poser(par1,new Point3D(3,-3,0));
+        plateau.poser(parcelleEtang,new Point3D(1,0,-1));
+        plateau.poser(parcelleEtang,new Point3D(1,-1,0));
+        plateau.poser(parcelleEtang,new Point3D(2,-1,1));
+        plateau.poser(parcelleEtang,new Point3D(2,-2,0));
+        plateau.poser(parcelleEtang,new Point3D(3,-2,-1));
+        plateau.poser(parcelleEtang,new Point3D(3,-3,0));
 
-        pla.poser(par1,new Point3D(0,1,-1));
+        plateau.poser(parcelleEtang,new Point3D(0,1,-1));
 
         jardinier.Deplacer(new Point3D(3,-3,0));
 

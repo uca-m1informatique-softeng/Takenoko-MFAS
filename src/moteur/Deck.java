@@ -14,17 +14,17 @@ public class Deck {
     private ObjectifJardinier[] deckObjectifsJardinier = new ObjectifJardinier[12];
     private ObjectifPanda[] deckObjectifsPanda = new ObjectifPanda[9];
     private Parcelle [] deckParcelles = new Parcelle[28];
-    private int nb = 27;
-    private int nbop = 9;
-    private int nboj = 12;
+    private int nombreParcelle = 27;
+    private int nombreObjectifPanda = 9;
+    private int nombreObjectifJardinier = 12;
     private Partie partie;
 
     /**
      * Le constructeur
-     * @param p
+     * @param partie
      */
-    public Deck(Partie p) {
-        partie=p;
+    public Deck(Partie partie) {
+        this.partie=partie;
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
@@ -91,15 +91,15 @@ public class Deck {
     public Parcelle piocherParcelle(){
         Deck d = this.partie.getDeck();
         Parcelle[] deck = d.getDeckParcelle();
-        if(nb > 0) {
-            int r = new Random().nextInt(nb);
-            nb--;
-            Parcelle par = deck[r];
-            deck[r] = deck[d.getNb()];
-            deck[d.getNb()] = par;
-            return par;
+        if(nombreParcelle > 0) {
+            int nbaleatoire = new Random().nextInt(nombreParcelle);
+            nombreParcelle--;
+            Parcelle parcelle = deck[nbaleatoire];
+            deck[nbaleatoire] = deck[d.getNombreParcelle()];
+            deck[d.getNombreParcelle()] = parcelle;
+            return parcelle;
         }
-        if(nb == 0){
+        if(nombreParcelle == 0){
             return deck[0];
         }
         return new Parcelle(TypeParcelle.ETANG);
@@ -113,12 +113,12 @@ public class Deck {
     public void piocheObjectifJardinier(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifJardinier[] j = d.getDeckObjectifsJardinier();
-        int r = new Random().nextInt(nboj);
-        nboj--;
+        int nbaleatoire = new Random().nextInt(nombreObjectifPanda);
+        nombreObjectifPanda--;
 
-        ObjectifJardinier tmp = j[r];
-        j[r] = j[d.getNboj()];
-        j[d.getNboj()] = tmp;
+        ObjectifJardinier tmp = j[nbaleatoire];
+        j[nbaleatoire] = j[d.getNombreObjectifJardinier()];
+        j[d.getNombreObjectifJardinier()] = tmp;
         bot.addObjectif(tmp);
     }
 
@@ -129,12 +129,12 @@ public class Deck {
     public void piocheObjectifPanda(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifPanda[] p = d.getDeckObjectifsPanda();
-        int n = d.getNbop();
+        int n = d.getNombreObjectifJardinier();
         int r = new Random().nextInt(n);
-        d.setNbop(n - 1);
+        d.setNombreObjectifJardinier(n - 1);
         ObjectifPanda tmp = p[r];
-        p[r] = p[d.getNbop()];
-        p[d.getNbop()] = tmp;
+        p[r] = p[d.getNombreObjectifJardinier()];
+        p[d.getNombreObjectifPanda()] = tmp;
         bot.addObjectif(tmp);
     }
 
@@ -146,27 +146,27 @@ public class Deck {
     }
 
 
-    public int getNb() {
-        return nb;
+    public int getNombreParcelle() {
+        return nombreParcelle;
     }
 
-    public void setNb(int num){
-        nb = num;
+    public void setNombreParcelle(int num){
+        nombreParcelle = num;
     }
 
-    public int getNbop() {
-        return nbop;
+    public int getNombreObjectifPanda() {
+        return nombreObjectifPanda;
     }
 
-    public void setNbop(int nbop) {
-        this.nbop = nbop;
+    public void setNombreObjectifPanda(int nbop) {
+        this.nombreObjectifPanda = nbop;
     }
 
-    public int getNboj() {
-        return nboj;
+    public int getNombreObjectifJardinier() {
+        return nombreObjectifJardinier;
     }
 
-    public void setNboj(int nboj) {
-        this.nboj = nboj;
+    public void setNombreObjectifJardinier(int nboj) {
+        this.nombreObjectifJardinier = nboj;
     }
 }

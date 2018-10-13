@@ -48,8 +48,8 @@ public class Parcelle {
      * La methode qui permet d'enlever du bambou
      */
     public boolean mangerBambou(){
-        int i = listBambou.size();
-        if(i > 0){
+        int nombreBambou = listBambou.size();
+        if(nombreBambou > 0){
             listBambou.remove(0);
             return true;
         }

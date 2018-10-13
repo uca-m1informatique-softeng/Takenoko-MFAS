@@ -16,10 +16,10 @@ public class BotJardinier extends Bot{
 
     /**
      * Le constructeur
-     * @param s
+     * @param couleur
      */
-    public BotJardinier(CouleurBot s) {
-        super(s);
+    public BotJardinier(CouleurBot couleur) {
+        super(couleur);
     }
 
     /**
@@ -44,9 +44,9 @@ public class BotJardinier extends Bot{
         Point3D pointJaridnier = new Point3D(0,0,0);
         if(!listdeplacementJardinier.isEmpty()){
             ObjectifJardinier objJard = (ObjectifJardinier) getListObjectifs().get(0);
-            for (Point3D coordonnee : listdeplacementJardinier){
-                if(plateau.getParcelle(coordonnee).getType() == objJard.getCouleur()){
-                    pointJaridnier = coordonnee;
+            for (Point3D coordonne : listdeplacementJardinier){
+                if(plateau.getParcelle(coordonne).getType() == objJard.getCouleur()){
+                    pointJaridnier = coordonne;
                     pasDeplacer = false;
                     break;
                 }

@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
 public class JoueurTest {
 
     Partie partie=new Partie();
-    Plateau pla =partie.getPlateau();
-    Parcelle par = new Parcelle(Enums.TypeParcelle.JAUNE);
-    Bot j = new Bot(Enums.CouleurBot.ROUGE);
+    Plateau plateau =partie.getPlateau();
+    Parcelle parcelleJaune = new Parcelle(Enums.TypeParcelle.JAUNE);
+    Bot joueur = new Bot(Enums.CouleurBot.ROUGE);
 
 
     @Test
@@ -27,30 +27,30 @@ public class JoueurTest {
 
         /*On crée notre plateau composé que de parcelles jaunes*/
 
-        pla.poser(par,new Point3D(0,1,-1));
-        pla.poser(par,new Point3D(1,0,-1));
-        pla.poser(par,new Point3D(1,-1,0));
-        pla.poser(par,new Point3D(0,-1,1));
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,-1,0));
+        plateau.poser(parcelleJaune,new Point3D(0,-1,1));
 
         /*On donne un objectif au jardinier */
-        j.addObjectif(ob);
-        System.out.println("score "+j.getScore());
+        joueur.addObjectif(ob);
+        System.out.println("score "+joueur.getScore());
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         for(int i = 0 ; i <3 ; i++){
-            pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
+            plateau.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         }
 
-        j.verifierMesObjectif(partie);
-        assertEquals(0,j.getNombreObjectifsRemplis());
+        joueur.verifierMesObjectif(partie);
+        assertEquals(0,joueur.getNombreObjectifsRemplis());
 
         ///// Test 2 /////
 
         /*on fait pousser du bambou de taille 4 sur une parcelle (objectif réalisé)*/
-        pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
-        j.verifierMesObjectif(partie);
+        plateau.getParcelle(new Point3D(0,-1,1)).pousserBambou();
+        joueur.verifierMesObjectif(partie);
 
-        assertEquals(1,j.getNombreObjectifsRemplis());
+        assertEquals(1,joueur.getNombreObjectifsRemplis());
     }
 
     @Test
@@ -59,7 +59,7 @@ public class JoueurTest {
         assertEquals(6,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(1,partie.getPlateau().getKeylist().size());
 
-        j.joueurPose(partie);
+        joueur.joueurPose(partie);
 
         assertEquals(5,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(2,partie.getPlateau().getKeylist().size());
@@ -71,10 +71,10 @@ public class JoueurTest {
     public void joueurDeplaceJardinier(){
         /*On crée notre plateau composé que de parcelles jaunes*/
 
-        pla.poser(par,new Point3D(0,1,-1));
-        pla.poser(par,new Point3D(1,0,-1));
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
 
-        j.joueurDeplaceJardinier(partie.getJardinier());
+        joueur.joueurDeplaceJardinier(partie.getJardinier());
 
         assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
     }
@@ -82,10 +82,10 @@ public class JoueurTest {
 
     @Test
     public void joueurDeplacePanda(){
-        pla.poser(par,new Point3D(0,1,-1));
-        pla.poser(par,new Point3D(1,0,-1));
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
 
-        j.joueurDeplacePanda(partie.getPanda());
+        joueur.joueurDeplacePanda(partie.getPanda());
 
         assertEquals(new Point3D(0,1,-1),partie.getPanda().getCoord());
     }

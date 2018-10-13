@@ -11,27 +11,27 @@ import moteur.Enums.TypeParcelle;
  */
 public class PandaTest {
     Partie partie=new Partie();
-    Plateau pla = partie.getPlateau();
-    Parcelle par = new Parcelle(TypeParcelle.VERTE);
+    Plateau plateau = partie.getPlateau();
+    Parcelle parcelleVerte = new Parcelle(TypeParcelle.VERTE);
 
     @Test
     public void pousserOuMangerBambou() throws Exception {
         /*On crée notre plateau composé que de parcelles vertes*/
 
-        pla.poser(par,new Point3D(0,1,-1));
-        pla.poser(par,new Point3D(1,0,-1));
-        pla.poser(par,new Point3D(1,-1,0));
+        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,0,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,-1,0));
 
         /* On fait pousser 2 bambou*/
-        pla.getParcelle(new Point3D(0,1,-1)).pousserBambou();
-        pla.getParcelle(new Point3D(0,1,-1)).pousserBambou();
+        plateau.getParcelle(new Point3D(0,1,-1)).pousserBambou();
+        plateau.getParcelle(new Point3D(0,1,-1)).pousserBambou();
 
         /* on verifie le nombre de bambou sur la parcelle avant le passage du panda*/
-        assertEquals(2,pla.getParcelle(new Point3D(0,1,-1)).getNbBambou());
+        assertEquals(2,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
 
         /* on verifie le nombre de bambou sur la parcelle apres le passage du panda*/
         partie.getPanda().PousserOuMangerBambou(new Point3D(0,1,-1));
-        assertEquals(1,pla.getParcelle(new Point3D(0,1,-1)).getNbBambou());
+        assertEquals(1,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
     }
 
 }

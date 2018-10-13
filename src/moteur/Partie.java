@@ -63,30 +63,30 @@ public class Partie {
     public void jouer(ArrayList<Joueur> listJoueurs){
 
         //initialisation de la Partie
-        for (Joueur J: listJoueurs) {
-            this.getDeck().piocheObjectifJardinier(J);
-            this.getDeck().piocheObjectifPanda(J);
+        for (Joueur JoueurCourant: listJoueurs) {
+            this.getDeck().piocheObjectifJardinier(JoueurCourant);
+            this.getDeck().piocheObjectifPanda(JoueurCourant);
         }
 
         //coeur du jeu
         while (!finDePartie) {
-            for (Joueur J: listJoueurs) {
-                System.out.println("C'est au tour du joueur "+J.toString());
+            for (Joueur JoueurCourant: listJoueurs) {
+                System.out.println("C'est au tour du joueur "+JoueurCourant.toString());
                 int action=0;
                 boolean finDuTour=false;
-                System.out.print(J.debutChatcouleur());
+                System.out.print(JoueurCourant.debutChatcouleur());
                 while (!finDuTour) {
 
                     //verifier objectif
-                    finDuTour=J.choixAction(0,this);
+                    finDuTour=JoueurCourant.choixAction(0,this);
                     //verifier objectif
-                    J.verifierMesObjectif(this);
-                    if(J.getNombreObjectifsRemplis()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
+                    JoueurCourant.verifierMesObjectif(this);
+                    if(JoueurCourant.getNombreObjectifsRemplis()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
                         finDePartie=true;
                     }
                 }
-                System.out.println("C'est la fin du tour du joueur "+J.toString());
-                System.out.print(J.finChatcouleur());
+                System.out.println("C'est la fin du tour du joueur "+JoueurCourant.toString());
+                System.out.print(JoueurCourant.finChatcouleur());
             }
 
         }

@@ -16,10 +16,10 @@ public class BotPanda extends Bot {
 
     /**
      * Le constructeur
-     * @param s
+     * @param couleur
      */
-    public BotPanda (CouleurBot s){
-        super(s);
+    public BotPanda (CouleurBot couleur){
+        super(couleur);
     }
 
     /**
@@ -44,9 +44,9 @@ public class BotPanda extends Bot {
         Point3D pointJaridnier = new Point3D(0,0,0);
         if(!listdeplacementJardinier.isEmpty()){
             ObjectifPanda objPanda=(ObjectifPanda)getListObjectifs().get(1);
-            for (Point3D p : listdeplacementJardinier){
-                if(plateau.getParcelle(p).getType() == objPanda.getCouleur()){
-                    pointJaridnier = p;
+            for (Point3D coordonne : listdeplacementJardinier){
+                if(plateau.getParcelle(coordonne).getType() == objPanda.getCouleur()){
+                    pointJaridnier = coordonne;
                     pasDeplacer = false;
                     break;
                 }
@@ -67,9 +67,9 @@ public class BotPanda extends Bot {
         Point3D pointPanda = new Point3D(0,0,0);
         if(!listdeplacementPanda.isEmpty()){
             ObjectifPanda objPanda=(ObjectifPanda)getListObjectifs().get(1);
-            for (Point3D coordonnee : listdeplacementPanda){
-                if(plateau.getParcelle(p).getType() == objPanda.getCouleur()){
-                    pointPanda = p;
+            for (Point3D coordonne : listdeplacementPanda){
+                if(plateau.getParcelle(coordonne).getType() == objPanda.getCouleur()){
+                    pointPanda = coordonne;
                     pasDeplacer = false;
                     break;
                 }

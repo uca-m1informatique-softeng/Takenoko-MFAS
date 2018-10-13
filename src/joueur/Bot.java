@@ -10,10 +10,10 @@ public class Bot extends Joueur {
 
     /**
      * Le constructeur
-     * @param s
+     * @param couleur
      */
-    public Bot(CouleurBot s){
-        super(s);
+    public Bot(CouleurBot couleur){
+        super(couleur);
     }
 
     /**

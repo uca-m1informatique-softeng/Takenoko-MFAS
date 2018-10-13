@@ -19,12 +19,12 @@ public class Plateau {
      */
     public Plateau(){
 
-        Point3D p = new Point3D(0,0,0);
-        Parcelle par = new Parcelle(TypeParcelle.ETANG);
+        Point3D coordonne = new Point3D(0,0,0);
+        Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
         keylist = new ArrayList<Point3D>();
-        keylist.add(p);
+        keylist.add(coordonne);
         map = new HashMap<>();
-        map.put(p,par);
+        map.put(coordonne,parcelle);
 
     }
 
@@ -63,13 +63,13 @@ public class Plateau {
 
     /**
      * La méthode qui donne un point et renvois les 6 voisins
-     * @param p
+     * @param coordonne
      * @return
      */
-    public ArrayList<Point3D> getParcelleVoisine(Point3D p){
-        double x=p.getX();
-        double y=p.getY();
-        double z=p.getZ();
+    public ArrayList<Point3D> getParcelleVoisine(Point3D coordonne){
+        double x=coordonne.getX();
+        double y=coordonne.getY();
+        double z=coordonne.getZ();
 
         ArrayList<Point3D> list = new ArrayList<Point3D>();
         list.add(new Point3D(x+0,y+1,z-1));
@@ -83,11 +83,11 @@ public class Plateau {
 
     /**
      * La méthode qui donne un point et renvois les voisins libres
-     * @param p
+     * @param coordonne
      * @return
      */
-    public ArrayList<Point3D> getParcelleVoisineLibre(Point3D p){
-        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+    public ArrayList<Point3D> getParcelleVoisineLibre(Point3D coordonne){
+        ArrayList<Point3D> list=this.getParcelleVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
             if(keylist.contains(list.get(i)))
@@ -100,11 +100,11 @@ public class Plateau {
 
     /**
      * La méthode qui donne un point et renvois les voisins occupés
-     * @param p
+     * @param coordonne
      * @return
      */
-    public ArrayList<Point3D> getParcelleVoisineOccupe(Point3D p){
-        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+    public ArrayList<Point3D> getParcelleVoisineOccupe(Point3D coordonne){
+        ArrayList<Point3D> list=this.getParcelleVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
             if(!keylist.contains(list.get(i))) {
@@ -117,14 +117,14 @@ public class Plateau {
 
     /**
      * La méthode qui donne un point et renvois les voisins de même couleur
-     * @param p
+     * @param coordonne
      * @return
      */
-    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D p){
-        ArrayList<Point3D> list=this.getParcelleVoisine(p);
+    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D coordonne){
+        ArrayList<Point3D> list=this.getParcelleVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
-            if(!keylist.contains(list.get(i)) || getParcelle(list.get(i)).getType() != getParcelle(p).getType()) {
+            if(!keylist.contains(list.get(i)) || getParcelle(list.get(i)).getType() != getParcelle(coordonne).getType()) {
                 list.remove(i);
             }
         }
@@ -132,17 +132,17 @@ public class Plateau {
 
     }
 
-    public boolean isParcelleOccupee (Point3D p){
-        return keylist.contains(p);
+    public boolean isParcelleOccupee (Point3D coordonne){
+        return keylist.contains(coordonne);
     }
 
     /**
      * La méthode qui rentre un point et confirme si on peut poser une parcelle
-     * @param p
+     * @param coordonne
      * @return
      */
-    public boolean isEmplacementAutorise(Point3D p){
-        ArrayList<Point3D> list=this.getParcelleVoisineOccupe(p);
+    public boolean isEmplacementAutorise(Point3D coordonne){
+        ArrayList<Point3D> list=this.getParcelleVoisineOccupe(coordonne);
         return (list.size() > 1 || list.contains(new Point3D(0,0,0)) );
     }
 
@@ -177,11 +177,11 @@ public class Plateau {
     /**
      * La méthode qui permet de poser une parcelle sur le plateau
      * @param p
-     * @param coord
+     * @param coordonne
      */
-    public void poser(Parcelle p, Point3D coord){
-        keylist.add(coord);
-        map.put(coord,p);
-        System.out.println("Parcelle "+p.getType()+" posée en " + coord.getX() + ", " + coord.getY() + ", " + coord.getZ());
+    public void poser(Parcelle parcelle, Point3D coordonne){
+        keylist.add(coordonne);
+        map.put(coordonne,parcelle);
+        System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
 }
