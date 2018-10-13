@@ -4,6 +4,8 @@ import joueur.Joueur;
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
 import moteur.Enums.TypeParcelle;
+import moteur.objectifs.ObjectifParcelle;
+
 import java.util.Random;
 
 /**
@@ -13,10 +15,15 @@ public class Deck {
 
     private ObjectifJardinier[] deckObjectifsJardinier = new ObjectifJardinier[12];
     private ObjectifPanda[] deckObjectifsPanda = new ObjectifPanda[9];
+    private ObjectifParcelle[] deckObjectifParcelle = new ObjectifParcelle[12];
     private Parcelle [] deckParcelles = new Parcelle[28];
     private int nombreParcelle = 27;
     private int nombreObjectifPanda = 9;
     private int nombreObjectifJardinier = 12;
+
+
+
+    private int nombreObjectifParcelle = 12;
     private Partie partie;
 
     /**
@@ -28,6 +35,27 @@ public class Deck {
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
+        initialiserDeckPMotif();
+    }
+
+
+    /**
+     * Le deck des objectifs parcelles
+     */
+    private void initialiserDeckPMotif() {
+        deckObjectifParcelle[0] = new ObjectifParcelle(3,TypeParcelle.JAUNE,0);
+        deckObjectifParcelle[1] = new ObjectifParcelle(3,TypeParcelle.JAUNE,1);
+        deckObjectifParcelle[2] = new ObjectifParcelle(3,TypeParcelle.JAUNE,2);
+        deckObjectifParcelle[3] = new ObjectifParcelle(4,TypeParcelle.JAUNE,3);
+        deckObjectifParcelle[4] = new ObjectifParcelle(2,TypeParcelle.VERTE,0);
+        deckObjectifParcelle[5] = new ObjectifParcelle(2,TypeParcelle.VERTE,1);
+        deckObjectifParcelle[6] = new ObjectifParcelle(2,TypeParcelle.VERTE,2);
+        deckObjectifParcelle[7] = new ObjectifParcelle(3,TypeParcelle.VERTE,3);
+        deckObjectifParcelle[8] = new ObjectifParcelle(4,TypeParcelle.ROSE,0);
+        deckObjectifParcelle[9] = new ObjectifParcelle(4,TypeParcelle.ROSE,1);
+        deckObjectifParcelle[10] = new ObjectifParcelle(4,TypeParcelle.ROSE,2);
+        deckObjectifParcelle[11] = new ObjectifParcelle(5,TypeParcelle.ROSE,3);
+
     }
 
     /**
@@ -138,11 +166,30 @@ public class Deck {
         bot.addObjectif(tmp);
     }
 
+    /**
+     * La pioche des objectifs parcelles
+     * @param bot
+     */
+    public void piocheObjectifParcelle(Joueur bot){
+        Deck deck = this.partie.getDeck();
+        ObjectifParcelle[] objectifparcelles = deck.getDeckObjectifsParcelles();
+        int n = deck.getNombreObjectifParcelle();
+        int r = new Random().nextInt(n);
+        deck.setNombreObjectifParcelle(n - 1);
+        ObjectifParcelle tmp = objectifparcelles[r];
+        objectifparcelles[r] = objectifparcelles[deck.getNombreObjectifParcelle()];
+        objectifparcelles[deck.getNombreObjectifParcelle()] = tmp;
+        bot.addObjectif(tmp);
+    }
+
     public ObjectifPanda[] getDeckObjectifsPanda() {
         return deckObjectifsPanda;
     }
     public Parcelle [] getDeckParcelle() {
         return deckParcelles;
+    }
+    public ObjectifParcelle[] getDeckObjectifsParcelles() {
+        return deckObjectifParcelle;
     }
 
 
@@ -168,5 +215,13 @@ public class Deck {
 
     public void setNombreObjectifJardinier(int nboj) {
         this.nombreObjectifJardinier = nboj;
+    }
+
+    public int getNombreObjectifParcelle() {
+        return nombreObjectifParcelle;
+    }
+
+    public void setNombreObjectifParcelle(int nombreObjectifParcelle) {
+        this.nombreObjectifParcelle = nombreObjectifParcelle;
     }
 }
