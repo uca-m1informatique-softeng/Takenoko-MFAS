@@ -1,11 +1,11 @@
-package Moteur;
+package moteur;
 
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 
 /**
@@ -17,7 +17,7 @@ public class PlateauTest {
     Plateau pla = partie.getPlateau();
     Point3D p = new Point3D(0,0,0);
     Point3D p1 = new Point3D(1,0,-1);
-    Parcelle par1 = new Parcelle(TypeParcelle.etang);
+    Parcelle par1 = new Parcelle(TypeParcelle.ETANG);
 
 
     @Test
@@ -122,26 +122,26 @@ public class PlateauTest {
 
         /*Recuperer la liste des emplacements voisins occupees*/
         ArrayList<Point3D> list = pla.getParcelleVoisineOccupe(p1);
-        assertEquals(list.size(),0);
+        assertEquals(0,list.size());
 
 
         /*Creer la liste des emplacements voisins occupees*/
         pla.poser(par1,new Point3D(0,1,-1));
         list = pla.getParcelleVoisineOccupe(p1);
-        assertEquals(list.size(),1);
+        assertEquals(1,list.size());
 
         /*On ajoute des parcelles adjacentes*/
         pla.poser(par1,new Point3D(1,0,-1));
         pla.poser(par1,new Point3D(1,-1,0));
         list = pla.getParcelleVoisineOccupe(p1);
-        assertEquals(list.size(),3);
+        assertEquals(3,list.size());
 
         /*On ajoute des parcelles adjacentes*/
         pla.poser(par1,new Point3D(0,-1,1));
         pla.poser(par1,new Point3D(-1,0,1));
         pla.poser(par1,new Point3D(-1,1,0));
         list = pla.getParcelleVoisineOccupe(p1);
-        assertEquals(list.size(),6);
+        assertEquals(6,list.size());
 
         ArrayList<Point3D> list2 = new ArrayList<>();
         list2.add(new Point3D(0.0,1.0,-1.0));
@@ -190,7 +190,7 @@ public class PlateauTest {
     public void emplacementAutorise(){
 
         ArrayList<Point3D> list = pla.emplacementsAutorise();
-        assertEquals(list.size(),6);
+        assertEquals(6,list.size());
 
         ArrayList<Point3D> list2 = new ArrayList<>();
         list2.add(new Point3D(0.0,1.0,-1.0));
@@ -218,7 +218,7 @@ public class PlateauTest {
 
         list = pla.emplacementsAutorise();
 
-        assertEquals(list.size(),5);
+        assertEquals(5,list.size());
 
         for (int i = 0 ; i < list.size(); i++){
             assertEquals(list.get(i),list2.get(i));
@@ -240,7 +240,7 @@ public class PlateauTest {
 
         ArrayList<Point3D> list = pla.emplacementsAutorise();
 
-        assertEquals(list.size(),4);
+        assertEquals(4,list.size());
 
         for (int i = 0 ; i < list.size(); i++){
             assertEquals(list.get(i),list2.get(i));
@@ -249,16 +249,16 @@ public class PlateauTest {
 
     @Test
     public void getParcelleVoisineMemeCouleur(){
-        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,0.0,-1.0));
-        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(0.0,1.0,-1.0));
-        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,1.0,-2.0));
-        pla.poser(new Parcelle(TypeParcelle.Rose),new Point3D(2.0,0.0,-2.0));
-        pla.poser(new Parcelle(TypeParcelle.Verte),new Point3D(2.0,-1.0,-1.0));
-        pla.poser(new Parcelle(TypeParcelle.Jaune),new Point3D(1.0,-1.0,0.0));
+        pla.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,0.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,1.0,-2.0));
+        pla.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(2.0,0.0,-2.0));
+        pla.poser(new Parcelle(TypeParcelle.VERTE),new Point3D(2.0,-1.0,-1.0));
+        pla.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,-1.0,0.0));
 
         ArrayList<Point3D> exp = pla.getParcelleVoisineMemeCouleur(new Point3D(1.0,0.0,-1.0));
 
-        assertEquals(exp.size(),3);
+        assertEquals(3,exp.size());
 
 
         assertTrue(exp.contains(new Point3D(0.0,1.0,-1.0)));

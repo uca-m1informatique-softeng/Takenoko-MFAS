@@ -1,10 +1,10 @@
-package Joueur;
+package joueur;
 
-import Moteur.Enums;
-import Moteur.Objectifs.ObjectifJardinier;
-import Moteur.Parcelle;
-import Moteur.Partie;
-import Moteur.Plateau;
+import moteur.Enums;
+import moteur.objectifs.ObjectifJardinier;
+import moteur.Parcelle;
+import moteur.Partie;
+import moteur.Plateau;
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
@@ -17,13 +17,13 @@ public class JoueurTest {
 
     Partie partie=new Partie();
     Plateau pla =partie.getPlateau();
-    Parcelle par = new Parcelle(Enums.TypeParcelle.Jaune);
-    Bot j = new Bot(Enums.CouleurBot.Rouge);
+    Parcelle par = new Parcelle(Enums.TypeParcelle.JAUNE);
+    Bot j = new Bot(Enums.CouleurBot.ROUGE);
 
 
     @Test
     public void verifierMesObjectifs(){
-        ObjectifJardinier ob = new ObjectifJardinier(6, Enums.TypeParcelle.Jaune,4);
+        ObjectifJardinier ob = new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4);
 
         /*On crée notre plateau composé que de parcelles jaunes*/
 
@@ -33,7 +33,7 @@ public class JoueurTest {
         pla.poser(par,new Point3D(0,-1,1));
 
         /*On donne un objectif au jardinier */
-        j.AddObjectif(ob);
+        j.addObjectif(ob);
         System.out.println("score "+j.getScore());
 
         /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
@@ -42,7 +42,7 @@ public class JoueurTest {
         }
 
         j.verifierMesObjectif(partie);
-        assertEquals(0,j.getNombreObjectifs());
+        assertEquals(0,j.getNombreObjectifsRemplis());
 
         ///// Test 2 /////
 
@@ -50,7 +50,7 @@ public class JoueurTest {
         pla.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         j.verifierMesObjectif(partie);
 
-        assertEquals(1,j.getNombreObjectifs());
+        assertEquals(1,j.getNombreObjectifsRemplis());
     }
 
     @Test

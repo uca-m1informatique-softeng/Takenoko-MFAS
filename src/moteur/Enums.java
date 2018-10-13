@@ -1,4 +1,4 @@
-package Moteur;
+package moteur;
 
 /**
  * La classe qui regroupe tout nos enumérations
@@ -9,15 +9,15 @@ public class Enums {
      *C'est l'énumeration des differentes types de parcelle
      */
     public enum TypeParcelle {
-        etang,Rose,Jaune,Verte;
+        ETANG,ROSE,JAUNE,VERTE;
     }
 
     public enum Action {
-        PiocherParcelle,PiocherObjectifPanda,PiocherObjectifJardinier,DeplacerJardinier,DeplacerPanda;
+        PIOCHERPARCELLE,PIOCHEROBJECTIFPANDA,PIOCHEROBJECTIFJARDINIER,DEPLACERJARDINIER,DEPLACERPANDA;
     }
 
     public enum CouleurBot {
-        Rouge,Bleu,Vert;
+        ROUGE,BLEU,VERT;
     }
 
 }

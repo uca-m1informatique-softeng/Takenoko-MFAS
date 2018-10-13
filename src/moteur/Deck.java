@@ -1,9 +1,9 @@
-package Moteur;
+package moteur;
 
-import Joueur.Joueur;
-import Moteur.Objectifs.ObjectifJardinier;
-import Moteur.Objectifs.ObjectifPanda;
-import Moteur.Enums.TypeParcelle;
+import joueur.Joueur;
+import moteur.objectifs.ObjectifJardinier;
+import moteur.objectifs.ObjectifPanda;
+import moteur.Enums.TypeParcelle;
 import java.util.Random;
 
 /**
@@ -13,7 +13,7 @@ public class Deck {
 
     private ObjectifJardinier[] deckObjectifsJardinier = new ObjectifJardinier[12];
     private ObjectifPanda[] deckObjectifsPanda = new ObjectifPanda[9];
-    private Parcelle [] DP = new Parcelle[28];
+    private Parcelle [] deckParcelles = new Parcelle[28];
     private int nb = 27;
     private int nbop = 9;
     private int nboj = 12;
@@ -35,13 +35,13 @@ public class Deck {
      */
     public void initialiserDeckParcelle() {
         for (int i = 0;i < 11;i++){
-            DP [i] = new Parcelle(TypeParcelle.Verte);
+            deckParcelles [i] = new Parcelle(TypeParcelle.VERTE);
         }
         for (int i = 11;i < 18;i++){
-            DP [i] = new Parcelle(TypeParcelle.Rose);
+            deckParcelles [i] = new Parcelle(TypeParcelle.ROSE);
         }
         for (int i = 18;i < 27;i++){
-            DP [i] = new Parcelle(TypeParcelle.Jaune);
+            deckParcelles [i] = new Parcelle(TypeParcelle.JAUNE);
         }
 
     }
@@ -51,13 +51,13 @@ public class Deck {
      */
     public void initialiserObjectifsJardinier(){
         for (int i = 0;i<4;i++){
-            deckObjectifsJardinier[i] = new ObjectifJardinier(6,TypeParcelle.Jaune,4);
+            deckObjectifsJardinier[i] = new ObjectifJardinier(6,TypeParcelle.JAUNE,4);
         }
         for (int i = 4;i<8;i++){
-            deckObjectifsJardinier[i] = new ObjectifJardinier(7,TypeParcelle.Rose,4);
+            deckObjectifsJardinier[i] = new ObjectifJardinier(7,TypeParcelle.ROSE,4);
         }
         for (int i = 8;i<12;i++){
-            deckObjectifsJardinier[i] = new ObjectifJardinier(5,TypeParcelle.Verte,4);
+            deckObjectifsJardinier[i] = new ObjectifJardinier(5,TypeParcelle.VERTE,4);
         }
 
 
@@ -69,13 +69,13 @@ public class Deck {
      */
     public void initialiserObjectifsPanda(){
         for (int i = 0;i<3;i++){
-            deckObjectifsPanda[i] = new ObjectifPanda(4,TypeParcelle.Jaune,2);
+            deckObjectifsPanda[i] = new ObjectifPanda(4,TypeParcelle.JAUNE,2);
         }
         for (int i = 3;i<6;i++){
-            deckObjectifsPanda[i] = new ObjectifPanda(5,TypeParcelle.Rose,2);
+            deckObjectifsPanda[i] = new ObjectifPanda(5,TypeParcelle.ROSE,2);
         }
         for (int i = 6;i<9;i++){
-            deckObjectifsPanda[i] = new ObjectifPanda(3,TypeParcelle.Verte,2);
+            deckObjectifsPanda[i] = new ObjectifPanda(3,TypeParcelle.VERTE,2);
         }
     }
 
@@ -102,7 +102,7 @@ public class Deck {
         if(nb == 0){
             return deck[0];
         }
-        return new Parcelle(TypeParcelle.etang);
+        return new Parcelle(TypeParcelle.ETANG);
     }
 
 
@@ -119,7 +119,7 @@ public class Deck {
         ObjectifJardinier tmp = j[r];
         j[r] = j[d.getNboj()];
         j[d.getNboj()] = tmp;
-        bot.AddObjectif(tmp);
+        bot.addObjectif(tmp);
     }
 
     /**
@@ -135,14 +135,14 @@ public class Deck {
         ObjectifPanda tmp = p[r];
         p[r] = p[d.getNbop()];
         p[d.getNbop()] = tmp;
-        bot.AddObjectif(tmp);
+        bot.addObjectif(tmp);
     }
 
     public ObjectifPanda[] getDeckObjectifsPanda() {
         return deckObjectifsPanda;
     }
     public Parcelle [] getDeckParcelle() {
-        return DP;
+        return deckParcelles;
     }
 
 

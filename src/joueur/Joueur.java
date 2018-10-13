@@ -1,23 +1,23 @@
-package Joueur;
+package joueur;
 
-import Moteur.*;
-import Moteur.Objectifs.Objectif;
-import Moteur.Personnages.Jardinier;
-import Moteur.Personnages.Panda;
+import moteur.*;
+import moteur.objectifs.Objectif;
+import moteur.personnages.Jardinier;
+import moteur.personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import Moteur.Enums.CouleurBot;
+import moteur.Enums.CouleurBot;
 
 
 /**
- * La classe du Joueur
+ * La classe du joueur
  */
 public class Joueur {
     private CouleurBot couleur;
     private int nombreObjectifsRemplis;
-    private ArrayList<Objectif> ListObjectifs;
+    private ArrayList<Objectif> listObjectifs;
 
     public ArrayList<Bambou> getListBambou() {
         return listBambou;
@@ -37,7 +37,7 @@ public class Joueur {
     public Joueur(CouleurBot couleur){
         this.couleur = couleur;
         this.nombreObjectifsRemplis=0;
-        this.ListObjectifs=new ArrayList<Objectif>();
+        this.listObjectifs=new ArrayList<Objectif>();
         this.listBambou=new ArrayList<Bambou>();
     }
 
@@ -59,18 +59,18 @@ public class Joueur {
 
 
     public ArrayList<Objectif> getListObjectifs() {
-        return ListObjectifs;
+        return listObjectifs;
     }
 
-    public void setListObjectifs(ArrayList<Objectif> listObjectifs) {
-        ListObjectifs = listObjectifs;
+    public void setListObjectifs(ArrayList<Objectif> listObjectifs2) {
+        listObjectifs = listObjectifs2;
     }
 
     /**
-     * @param O
+     * @param objectif
      */
-    public void AddObjectif(Objectif O){
-        this.ListObjectifs.add(O);
+    public void addObjectif(Objectif objectif){
+        this.listObjectifs.add(objectif);
 
     }
 
@@ -84,16 +84,16 @@ public class Joueur {
 
     /**
      * La méthode qui vérifie que le bot a bien réaliser son objectif
-     * @param P
+     * @param partie
      */
-    public void verifierMesObjectif(Partie P) {
-        Iterator<Objectif> i = ListObjectifs.iterator();
+    public void verifierMesObjectif(Partie partie) {
+        Iterator<Objectif> i = listObjectifs.iterator();
         while (i.hasNext()) {
-            Objectif O=i.next();
-            if (O.validation(P,this) && nombreObjectifsRemplis < 1) {
-                System.out.println("Le joueur "+ couleur +" réalise son objectif "+O.toString());
+            Objectif objectif = i.next();
+            if (objectif.validation(partie,this) && nombreObjectifsRemplis < 1) {
+                System.out.println("Le joueur "+ couleur +" réalise son objectif "+objectif.toString());
                 nombreObjectifsRemplis++;
-                score += O.getValeur();
+                score += objectif.getValeur();
                 i.remove();
             }
         }
@@ -101,23 +101,23 @@ public class Joueur {
 
     /**
      * @param numeroActionDansLeTour
-     * @param P
+     * @param partie
      * @return
      */
-    public boolean choixAction(int numeroActionDansLeTour,Partie P){
-        joueurPose(P);
-        joueurDeplaceJardinier(P.getJardinier());
+    public boolean choixAction(int numeroActionDansLeTour,Partie partie){
+        joueurPose(partie);
+        joueurDeplaceJardinier(partie.getJardinier());
         return true;
     }
 
     /**
-     * @param Partie
+     * @param partie
      */
-    public void joueurPose(Partie Partie){
-        Plateau plateau=Partie.getPlateau();
+    public void joueurPose(Partie partie){
+        Plateau plateau = partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle parcelle = Partie.getDeck().piocherParcelle();
-        if(list.size() > 0){
+        Parcelle parcelle = partie.getDeck().piocherParcelle();
+        if(!list.isEmpty()){
             Point3D point = list.get(0);
             plateau.poser(parcelle, point);
         }
@@ -127,9 +127,8 @@ public class Joueur {
      * @param jardinier
      */
     public void joueurDeplaceJardinier(Jardinier jardinier){
-        Plateau plateau=jardinier.getPlateau();
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
-        if(listdeplacementJardinier.size() > 0){
+        if(!listdeplacementJardinier.isEmpty()){
             Point3D pointJaridnier = listdeplacementJardinier.get(0);
             jardinier.Deplacer(pointJaridnier);
         }
@@ -141,7 +140,7 @@ public class Joueur {
     public void joueurDeplacePanda(Panda panda){
         Plateau plateau=panda.getPlateau();
         ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();
-        if(listdeplacementPanda.size() > 0){
+        if(!listdeplacementPanda.isEmpty()){
             Point3D pointPanda = listdeplacementPanda.get(0);
             if(panda.Deplacer(pointPanda)){
                 listBambou.add(new Bambou(plateau.getMap().get(pointPanda).getType()));
@@ -151,10 +150,6 @@ public class Joueur {
     }
 
 
-
-    public int getNombreObjectifs() {
-        return nombreObjectifsRemplis;
-    }
 
 
     public void setNombreObjectifs(int nombreObjectifs) {
@@ -170,19 +165,20 @@ public class Joueur {
      * Pour avoir le déroulement de la partie en couleur
      * @return
      */
-    public String DebutChatcouleur(){
+    public String debutChatcouleur(){
         switch(couleur){
-            case Bleu :
+            case BLEU :
                 return "\u001B[34m";
-            case Rouge :
+            case ROUGE :
                 return "\u001B[31m";
-            case Vert :
+            case VERT :
                 return "\u001B[32m";
+            default:
+                return "\u001B[0m";
         }
-        return "\u001B[0m";
     }
 
-    public String FinChatcouleur(){
+    public String finChatcouleur(){
         return "\u001B[0m";
     }
 }

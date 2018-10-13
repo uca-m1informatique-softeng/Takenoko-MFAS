@@ -1,11 +1,11 @@
-package Joueur;
+package joueur;
 
-import Moteur.Objectifs.ObjectifJardinier;
-import Moteur.Partie;
-import Moteur.Personnages.Jardinier;
-import Moteur.Plateau;
+import moteur.objectifs.ObjectifJardinier;
+import moteur.Partie;
+import moteur.personnages.Jardinier;
+import moteur.Plateau;
 import javafx.geometry.Point3D;
-import Moteur.Enums.CouleurBot;
+import moteur.Enums.CouleurBot;
 
 import java.util.ArrayList;
 
@@ -25,12 +25,12 @@ public class BotJardinier extends Bot{
     /**
      * Une méthode qui renvois un boolean pour le choix d'action du bot
      * @param numeroActionDansLeTour
-     * @param P
+     * @param partie
      * @return
      */
-    public boolean choixAction(int numeroActionDansLeTour, Partie P){
-        joueurPose(P);
-        joueurDeplaceJardinier(P.getJardinier());
+    public boolean choixAction(int numeroActionDansLeTour, Partie partie){
+        joueurPose(partie);
+        joueurDeplaceJardinier(partie.getJardinier());
         return true;
     }
 
@@ -42,7 +42,7 @@ public class BotJardinier extends Bot{
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
         boolean pasDeplacer = true;
         Point3D pointJaridnier = new Point3D(0,0,0);
-        if(listdeplacementJardinier.size() > 0){
+        if(!listdeplacementJardinier.isEmpty()){
             ObjectifJardinier objJard = (ObjectifJardinier) getListObjectifs().get(0);
             for (Point3D p : listdeplacementJardinier){
                 if(plateau.getParcelle(p).getType() == objJard.getCouleur()){

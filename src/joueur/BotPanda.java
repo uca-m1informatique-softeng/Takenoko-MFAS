@@ -1,13 +1,13 @@
-package Joueur;
+package joueur;
 
-import Moteur.*;
-import Moteur.Objectifs.ObjectifPanda;
-import Moteur.Personnages.Jardinier;
-import Moteur.Personnages.Panda;
+import moteur.*;
+import moteur.objectifs.ObjectifPanda;
+import moteur.personnages.Jardinier;
+import moteur.personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
-import Moteur.Enums.CouleurBot;
+import moteur.Enums.CouleurBot;
 
 /**
  * La classe du bot Panda
@@ -25,12 +25,12 @@ public class BotPanda extends Bot {
     /**
      * Une méthode qui renvois un boolean pour le choix d'action du bot
      * @param numeroActionDansLeTour
-     * @param P
+     * @param partie
      * @return
      */
-    public boolean choixAction(int numeroActionDansLeTour, Partie P){
-        joueurDeplaceJardinier(P.getJardinier());
-        joueurDeplacePanda(P.getPanda());
+    public boolean choixAction(int numeroActionDansLeTour, Partie partie){
+        joueurDeplaceJardinier(partie.getJardinier());
+        joueurDeplacePanda(partie.getPanda());
         return true;
     }
 
@@ -42,7 +42,7 @@ public class BotPanda extends Bot {
         ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
         boolean pasDeplacer = true;
         Point3D pointJaridnier = new Point3D(0,0,0);
-        if(listdeplacementJardinier.size() > 0){
+        if(!listdeplacementJardinier.isEmpty()){
             ObjectifPanda objPanda=(ObjectifPanda)getListObjectifs().get(1);
             for (Point3D p : listdeplacementJardinier){
                 if(plateau.getParcelle(p).getType() == objPanda.getCouleur()){
@@ -65,7 +65,7 @@ public class BotPanda extends Bot {
         ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();
         boolean pasDeplacer = true;
         Point3D pointPanda = new Point3D(0,0,0);
-        if(listdeplacementPanda.size() > 0){
+        if(!listdeplacementPanda.isEmpty()){
             ObjectifPanda objPanda=(ObjectifPanda)getListObjectifs().get(1);
             for (Point3D p : listdeplacementPanda){
                 if(plateau.getParcelle(p).getType() == objPanda.getCouleur()){

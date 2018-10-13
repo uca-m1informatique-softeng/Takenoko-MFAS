@@ -1,7 +1,7 @@
-package Moteur;
+package moteur;
 
 import java.util.ArrayList;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 /**
  *C'est la classe de la parcelle

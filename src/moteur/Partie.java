@@ -1,8 +1,8 @@
-package Moteur;
+package moteur;
 
-import Joueur.Joueur;
-import Moteur.Personnages.Jardinier;
-import Moteur.Personnages.Panda;
+import joueur.Joueur;
+import moteur.personnages.Jardinier;
+import moteur.personnages.Panda;
 
 import java.util.ArrayList;
 
@@ -15,7 +15,7 @@ public class Partie {
     private Jardinier jardinier;
     private Panda panda;
     private Deck deck;
-    private boolean FinDePartie;
+    private boolean finDePartie;
 
     /**
      * Le constructeur
@@ -25,7 +25,7 @@ public class Partie {
         jardinier=new Jardinier(plateau);
         panda=new Panda(plateau);
         deck = new Deck(this);
-        FinDePartie=false;
+        finDePartie=false;
     }
 
     public Plateau getPlateau() {
@@ -58,49 +58,49 @@ public class Partie {
 
     /**
      * Le déroulement de la partie
-     * @param ListJoueurs
+     * @param listJoueurs
      */
-    public void Jouer(ArrayList<Joueur> ListJoueurs){
+    public void jouer(ArrayList<Joueur> listJoueurs){
 
         //initialisation de la Partie
-        for (Joueur J: ListJoueurs) {
+        for (Joueur J: listJoueurs) {
             this.getDeck().piocheObjectifJardinier(J);
             this.getDeck().piocheObjectifPanda(J);
         }
 
         //coeur du jeu
-        while (!FinDePartie) {
-            for (Joueur J: ListJoueurs) {
-                System.out.println("C'est au tour du Joueur "+J.toString());
+        while (!finDePartie) {
+            for (Joueur J: listJoueurs) {
+                System.out.println("C'est au tour du joueur "+J.toString());
                 int action=0;
-                boolean FinDuTour=false;
-                System.out.print(J.DebutChatcouleur());
-                while (!FinDuTour) {
+                boolean finDuTour=false;
+                System.out.print(J.debutChatcouleur());
+                while (!finDuTour) {
 
                     //verifier objectif
-                    FinDuTour=J.choixAction(0,this);
+                    finDuTour=J.choixAction(0,this);
                     //verifier objectif
                     J.verifierMesObjectif(this);
-                    if(J.getNombreObjectifs()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
-                        FinDePartie=true;
+                    if(J.getNombreObjectifsRemplis()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
+                        finDePartie=true;
                     }
                 }
-                System.out.println("C'est la fin du tour du Joueur "+J.toString());
-                System.out.print(J.FinChatcouleur());
+                System.out.println("C'est la fin du tour du joueur "+J.toString());
+                System.out.print(J.finChatcouleur());
             }
 
         }
         //fin de partie
-        Joueur Vainqueur=ListJoueurs.get(0);
+        Joueur vainqueur=listJoueurs.get(0);
         boolean egalite=false;
         //recup vainqueur
-        for (int i=1;i<ListJoueurs.size();i++) {
-            Joueur J=ListJoueurs.get(i);
-            if (J.getScore()>Vainqueur.getScore()) {
-                Vainqueur = J;
+        for (int i=1;i<listJoueurs.size();i++) {
+            Joueur joueur=listJoueurs.get(i);
+            if (joueur.getScore()>vainqueur.getScore()) {
+                vainqueur = joueur;
                 egalite = false;
             }
-            else{if (J.getScore()==Vainqueur.getScore()) {
+            else{if (joueur.getScore()==vainqueur.getScore()) {
                 egalite = true;
             }}
         }
@@ -108,7 +108,7 @@ public class Partie {
             System.out.println("C'est une egalité");
         }
         else {
-            System.out.println(Vainqueur.toString()+" gagne avec " + Vainqueur.getScore() + " points.");
+            System.out.println(vainqueur.toString()+" gagne avec " + vainqueur.getScore() + " points.");
         }
 
     }

@@ -1,10 +1,10 @@
-package Moteur;
+package moteur;
 
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 /**
  *C'est la classe du plateau
  */
@@ -20,7 +20,7 @@ public class Plateau {
     public Plateau(){
 
         Point3D p = new Point3D(0,0,0);
-        Parcelle par = new Parcelle(TypeParcelle.etang);
+        Parcelle par = new Parcelle(TypeParcelle.ETANG);
         keylist = new ArrayList<Point3D>();
         keylist.add(p);
         map = new HashMap<>();
@@ -143,10 +143,7 @@ public class Plateau {
      */
     public boolean isEmplacementAutorise(Point3D p){
         ArrayList<Point3D> list=this.getParcelleVoisineOccupe(p);
-        if(list.size() > 1 || list.contains(new Point3D(0,0,0)) ){
-            return true;
-        }
-        return false;
+        return (list.size() > 1 || list.contains(new Point3D(0,0,0)) );
     }
 
     /**
@@ -164,7 +161,7 @@ public class Plateau {
             point = keylist.get(i);
 
             listTemp = getParcelleVoisineLibre(point);
-            if(listTemp.size() > 0){
+            if(!listTemp.isEmpty()){
                 for(int j = 0; j < listTemp.size(); j++){
                     pointVoisin = listTemp.get(j);
                     if(isEmplacementAutorise(pointVoisin) && !maListe.contains(pointVoisin) ){

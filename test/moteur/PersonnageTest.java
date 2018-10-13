@@ -1,13 +1,13 @@
-package Moteur;
+package moteur;
 
-import Moteur.Personnages.Jardinier;
+import moteur.personnages.Jardinier;
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 
 /**
@@ -18,7 +18,7 @@ public class PersonnageTest {
     Plateau pla = partie.getPlateau();
     Point3D p = new Point3D(0,0,0);
     Point3D p1 = new Point3D(1,0,-1);
-    Parcelle par1 = new Parcelle(TypeParcelle.etang);
+    Parcelle par1 = new Parcelle(TypeParcelle.ETANG);
     Jardinier jardinier=partie.getJardinier();
 
 

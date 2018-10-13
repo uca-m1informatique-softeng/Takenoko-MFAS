@@ -1,17 +1,16 @@
-package Moteur;
+package moteur;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 /**
  * La classe test des parcelles
  */
 public class ParcelleTest {
 
-    Parcelle parcelle = new Parcelle(TypeParcelle.etang);
+    Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
 
     @Test
     public void pousserBambou(){

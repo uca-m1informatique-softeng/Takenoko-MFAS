@@ -1,10 +1,10 @@
-package Moteur;
+package moteur;
 
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import Moteur.Enums.TypeParcelle;
+import moteur.Enums.TypeParcelle;
 
 /**
  * La classe test du panda
@@ -12,7 +12,7 @@ import Moteur.Enums.TypeParcelle;
 public class PandaTest {
     Partie partie=new Partie();
     Plateau pla = partie.getPlateau();
-    Parcelle par = new Parcelle(TypeParcelle.Verte);
+    Parcelle par = new Parcelle(TypeParcelle.VERTE);
 
     @Test
     public void pousserOuMangerBambou() throws Exception {
