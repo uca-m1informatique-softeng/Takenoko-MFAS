@@ -66,6 +66,7 @@ public class Partie {
         for (Joueur JoueurCourant: listJoueurs) {
             this.getDeck().piocheObjectifJardinier(JoueurCourant);
             this.getDeck().piocheObjectifPanda(JoueurCourant);
+            this.getDeck().piocheObjectifParcelle(JoueurCourant);
         }
 
         //coeur du jeu

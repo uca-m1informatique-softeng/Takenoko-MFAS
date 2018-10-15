@@ -194,5 +194,48 @@ public class Plateau {
         return false;
     }
 
+    public boolean chercheMotifParcelle (Point3D pointCourant, TypeParcelle couleurObjectif, int type){
+
+        if(map.get(pointCourant).getType() == couleurObjectif) { //on vérifie si la parcelle correspond à la couleur de l'objectif
+            ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
+
+            for (int j = 0; j < 6; j++) {//on cherche si le motif est complet
+                Point3D secondPoint = pointsVoisin.get(j);
+
+                switch (type){
+                    case 0:
+                        if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(secondPoint,couleurObjectif,j)){
+                            return true;
+                        }
+                    case 1:
+                        if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(secondPoint,couleurObjectif,(j+1)%6)){
+                            return true;
+                        }
+                    case 2:
+                        if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+1)%6)){
+                            return true;
+                        }
+                    case 3:
+                        if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+1)%6) &&
+                                parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+2)%6)){
+                            return true;
+                        }
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean parcelleSuivanteMotif(Point3D pointCourant, TypeParcelle couleurObjectif,int i){
+        ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
+        ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
+        if(pointsVoisinOccupe.contains(pointsVoisin.get(i)) && getParcelle(pointsVoisin.get(i)).getType() == couleurObjectif) {
+            return true;
+        }
+        return false;
+    }
+
+
+
 
 }

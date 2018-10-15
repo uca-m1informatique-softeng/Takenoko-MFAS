@@ -1,5 +1,6 @@
 package moteur.objectifs;
 
+import joueur.Joueur;
 import moteur.Enums;
 import moteur.Parcelle;
 import moteur.Partie;
@@ -9,6 +10,7 @@ import javafx.geometry.Point3D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ObjectifParcelle extends Objectif {
 
@@ -40,15 +42,34 @@ public class ObjectifParcelle extends Objectif {
     public String toString() {
         switch (type) {
             case 0:
-                return "3 parcelles alignées";
+                return "3 parcelles alignées " + couleur;
             case 1:
-                return "3 parcelles courbées";
+                return "3 parcelles courbées " + couleur;
             case 2:
-                return "3 parcelles en triangle";
+                return "3 parcelles en triangle " + couleur;
             case 3:
-                return "4 parcelles";
+                return "4 parcelles " + couleur;
             default:
                 return "motif incorrect";
         }
+    }
+
+    /**
+     * @param partie
+     * @param J
+     * @return
+     */
+    public boolean validation(Partie partie, Joueur J){
+        Plateau plateau = partie.getPlateau();
+        ArrayList<Point3D> pointsPlateau = plateau.getKeylist();
+
+        for(int i = 0; i < pointsPlateau.size(); i++) { //on parcours la map
+            Point3D pointCourant = pointsPlateau.get(i);
+
+            if(plateau.chercheMotifParcelle(pointCourant, couleur, type)){
+                return true;
+            }
+        }
+        return false;
     }
 }

@@ -22,9 +22,9 @@ public class Main {
         listeDesJoueurs.add(botPanda);
         listeDesJoueurs.add(botParcelle);
 
+
         Partie partie = new Partie();
         partie.jouer(listeDesJoueurs);
-
 
 
     }
