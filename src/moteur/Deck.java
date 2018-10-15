@@ -140,13 +140,13 @@ public class Deck {
      */
     public void piocheObjectifJardinier(Joueur bot){
         Deck d = this.partie.getDeck();
-        ObjectifJardinier[] j = d.getDeckObjectifsJardinier();
-        int nbaleatoire = new Random().nextInt(nombreObjectifPanda);
-        nombreObjectifPanda--;
-
-        ObjectifJardinier tmp = j[nbaleatoire];
-        j[nbaleatoire] = j[d.getNombreObjectifJardinier()];
-        j[d.getNombreObjectifJardinier()] = tmp;
+        ObjectifJardinier[] p = d.getDeckObjectifsJardinier();
+        int n = d.getNombreObjectifJardinier();
+        int r = new Random().nextInt(n);
+        d.setNombreObjectifJardinier(n - 1);
+        ObjectifJardinier tmp = p[r];
+        p[r] = p[d.getNombreObjectifJardinier()];
+        p[d.getNombreObjectifJardinier()] = tmp;
         bot.addObjectif(tmp);
     }
 
@@ -157,11 +157,11 @@ public class Deck {
     public void piocheObjectifPanda(Joueur bot){
         Deck d = this.partie.getDeck();
         ObjectifPanda[] p = d.getDeckObjectifsPanda();
-        int n = d.getNombreObjectifJardinier();
+        int n = d.getNombreObjectifPanda();
         int r = new Random().nextInt(n);
-        d.setNombreObjectifJardinier(n - 1);
+        d.setNombreObjectifPanda(n - 1);
         ObjectifPanda tmp = p[r];
-        p[r] = p[d.getNombreObjectifJardinier()];
+        p[r] = p[d.getNombreObjectifPanda()];
         p[d.getNombreObjectifPanda()] = tmp;
         bot.addObjectif(tmp);
     }

@@ -16,9 +16,11 @@ public class Main {
         //joueur bot2 = new joueur(CouleurBot.Rouge);
         BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
         BotPanda botPanda = new BotPanda(CouleurBot.BLEU);
+        BotParcelle botParcelle = new BotParcelle(CouleurBot.ROUGE);
 
         listeDesJoueurs.add(botJardinier);
         listeDesJoueurs.add(botPanda);
+        listeDesJoueurs.add(botParcelle);
 
         Partie partie = new Partie();
         partie.jouer(listeDesJoueurs);

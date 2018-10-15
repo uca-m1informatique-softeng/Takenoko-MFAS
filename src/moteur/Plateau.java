@@ -176,7 +176,7 @@ public class Plateau {
 
     /**
      * La méthode qui permet de poser une parcelle sur le plateau
-     * @param p
+     * @param parcelle
      * @param coordonne
      */
     public void poser(Parcelle parcelle, Point3D coordonne){
@@ -184,4 +184,15 @@ public class Plateau {
         map.put(coordonne,parcelle);
         System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
+
+    public boolean parcelleSuivanteLibre(Point3D pointCourant, int i){
+        ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
+        ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
+        if(!(pointsVoisinOccupe.contains(pointsVoisin.get(i)))){
+            return true;
+        }
+        return false;
+    }
+
+
 }
