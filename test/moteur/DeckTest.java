@@ -2,6 +2,7 @@ package moteur;
 
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
+import moteur.objectifs.ObjectifParcelle;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
 public class DeckTest {
     Partie partie = new Partie();
     Deck deck = new Deck(partie);
+
 
 
     @Test
@@ -28,6 +30,30 @@ public class DeckTest {
         }
         for (int i =0 ; i<27;i++){
             assertEquals(deck.getDeckParcelle()[i].getType().toString(),dp[i].getType().toString());
+        }
+
+    }
+
+
+    @Test
+    public void initialiserDeckMotif() throws Exception{
+        ObjectifParcelle [] deckObjectifParcelle = new ObjectifParcelle[12];
+        deckObjectifParcelle[0] = new ObjectifParcelle(3, Enums.TypeParcelle.JAUNE,0);
+        deckObjectifParcelle[1] = new ObjectifParcelle(3, Enums.TypeParcelle.JAUNE,1);
+        deckObjectifParcelle[2] = new ObjectifParcelle(3, Enums.TypeParcelle.JAUNE,2);
+        deckObjectifParcelle[3] = new ObjectifParcelle(4, Enums.TypeParcelle.JAUNE,3);
+        deckObjectifParcelle[4] = new ObjectifParcelle(2, Enums.TypeParcelle.VERTE,0);
+        deckObjectifParcelle[5] = new ObjectifParcelle(2, Enums.TypeParcelle.VERTE,1);
+        deckObjectifParcelle[6] = new ObjectifParcelle(2, Enums.TypeParcelle.VERTE,2);
+        deckObjectifParcelle[7] = new ObjectifParcelle(3, Enums.TypeParcelle.VERTE,3);
+        deckObjectifParcelle[8] = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,0);
+        deckObjectifParcelle[9] = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,1);
+        deckObjectifParcelle[10] = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,2);
+        deckObjectifParcelle[11] = new ObjectifParcelle(5, Enums.TypeParcelle.ROSE,3);
+        for (int i =0 ; i<12;i++){
+            assertEquals(deck.getDeckObjectifsParcelles()[i].getValeur(),deckObjectifParcelle[i].getValeur());
+            assertEquals(deck.getDeckObjectifsParcelles()[i].getCouleur(),deckObjectifParcelle[i].getCouleur());
+            assertEquals(deck.getDeckObjectifsParcelles()[i].getType(),deckObjectifParcelle[i].getType());
         }
 
     }
@@ -78,4 +104,6 @@ public class DeckTest {
             assertEquals(deck.getDeckObjectifsPanda()[i].getNombreBambou(),deckpan[i].getNombreBambou());
         }
     }
+
+
 }

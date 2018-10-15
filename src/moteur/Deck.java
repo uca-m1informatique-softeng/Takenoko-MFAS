@@ -35,14 +35,14 @@ public class Deck {
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
-        initialiserDeckPMotif();
+        initialiserDeckParcelleMotif();
     }
 
 
     /**
      * Le deck des objectifs parcelles
      */
-    private void initialiserDeckPMotif() {
+    public void initialiserDeckParcelleMotif() {
         deckObjectifParcelle[0] = new ObjectifParcelle(3,TypeParcelle.JAUNE,0);
         deckObjectifParcelle[1] = new ObjectifParcelle(3,TypeParcelle.JAUNE,1);
         deckObjectifParcelle[2] = new ObjectifParcelle(3,TypeParcelle.JAUNE,2);
