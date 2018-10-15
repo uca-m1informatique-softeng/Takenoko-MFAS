@@ -264,8 +264,68 @@ public class PlateauTest {
         assertTrue(exp.contains(new Point3D(0.0,1.0,-1.0)));
         assertTrue(exp.contains(new Point3D(1.0,1.0,-2.0)));
         assertTrue(exp.contains(new Point3D(1.0,-1.0,0.0)));
+    }
 
+    @Test
+    public void ParcelleSuivantMotif(){
+        Point3D pointCourant = new Point3D(1.0,0.0,-1.0);
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),pointCourant);
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+
+        assertTrue(plateau.parcelleSuivanteMotif(pointCourant,TypeParcelle.JAUNE,5));
+
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(1.0,-1.0,0.0));
+        assertFalse(plateau.parcelleSuivanteMotif(pointCourant,TypeParcelle.JAUNE,3));
+    }
+
+    @Test
+    public void chercheMotifParcelle(){
+
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,0.0,-1.0));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+
+        assertFalse(plateau.chercheMotifParcelle(new Point3D(0.0,1.0,-1.0),TypeParcelle.JAUNE,0));
+
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(2,-1.0,-1.0));
+
+        assertTrue(plateau.chercheMotifParcelle(new Point3D(0.0,1.0,-1.0),TypeParcelle.JAUNE,0));
+    }
+
+    @Test
+    public void chercheMotifParcelle2(){
+
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(-1.0,1.0,0.0));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+
+        assertFalse(plateau.chercheMotifParcelle(new Point3D(-1.0,1.0,0.0),TypeParcelle.JAUNE,1));
+
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,0.0,-1.0));
+
+        assertTrue(plateau.chercheMotifParcelle(new Point3D(-1.0,1.0,0.0),TypeParcelle.JAUNE,1));
+    }
+
+    @Test
+    public void chercheMotifParcelle3(){
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,0.0,-1.0));
+        assertFalse(plateau.chercheMotifParcelle(new Point3D(0.0,1.0,-1.0),TypeParcelle.JAUNE,2));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,1.0,-2.0));
+        assertTrue(plateau.chercheMotifParcelle(new Point3D(0.0,1.0,-1.0),TypeParcelle.JAUNE,2));
 
     }
+    @Test
+    public void chercheMotifParcelle4(){
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(0.0,1.0,-1.0));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,0.0,-1.0));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(1.0,1.0,-2.0));
+        assertFalse(plateau.chercheMotifParcelle(new Point3D(1.0,0.0,-1.0),TypeParcelle.JAUNE,3));
+        plateau.poser(new Parcelle(TypeParcelle.JAUNE),new Point3D(2.0,0.0,-2.0));
+        assertTrue(plateau.chercheMotifParcelle(new Point3D(1.0,0.0,-1.0),TypeParcelle.JAUNE,3));
+
+    }
+
+
+
+
 
 }
