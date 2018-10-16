@@ -14,10 +14,10 @@ import moteur.Enums.TypeParcelle;
  * La classe test des personnages
  */
 public class PersonnageTest {
-    Partie partie=new Partie();
+    Partie partie = new Partie();
     Plateau plateau = partie.getPlateau();
     Parcelle parcelleEtang = new Parcelle(TypeParcelle.ETANG);
-    Jardinier jardinier=partie.getJardinier();
+    Jardinier jardinier = partie.getJardinier();
 
 
     @Test

@@ -17,13 +17,13 @@ import static org.junit.Assert.*;
 public class ObjectifPandaTest {
     Partie partie=new Partie();
     Plateau plateau = partie.getPlateau();
-    Bot joueur = new Bot(Enums.CouleurBot.ROUGE);
+    Bot bot = new Bot(Enums.CouleurBot.ROUGE);
     Parcelle parcelleRose = new Parcelle(Enums.TypeParcelle.ROSE);
     Panda panda = new Panda(plateau);
 
     @Test
     public void validation() throws Exception {
-        ObjectifPanda ob = new ObjectifPanda(5, Enums.TypeParcelle.ROSE,2);
+        ObjectifPanda objectifpanda = new ObjectifPanda(5, Enums.TypeParcelle.ROSE,2);
 
         /*On crée notre plateau composé que de parcelles roses*/
 
@@ -33,7 +33,7 @@ public class ObjectifPandaTest {
         plateau.poser(parcelleRose,new Point3D(0,-1,1));
 
         /*On donne un objectif au panda */
-        joueur.addObjectif(ob);
+        bot.addObjectif(objectifpanda);
 
         /*on fait pousser du bambou de taille 3 sur les parcelle */
         for(int i = 0 ; i < 3 ; i++){
@@ -44,13 +44,13 @@ public class ObjectifPandaTest {
         }
 
         /*Deplacer le panda sur une case ce qui augmentera le nombre de bambou que le joueur possède (pas assez pour réaliser l'objectif)*/
-        joueur.joueurDeplacePanda(panda);
+        bot.joueurDeplacePanda(panda);
 
-        assertFalse(ob.validation(partie,joueur));
+        assertFalse(objectifpanda.validation(partie,bot));
         /*objectif réalisé*/
-        joueur.joueurDeplacePanda(panda);
+        bot.joueurDeplacePanda(panda);
 
-        assertTrue(ob.validation(partie,joueur));
+        assertTrue(objectifpanda.validation(partie,bot));
 
     }
 

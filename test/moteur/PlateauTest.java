@@ -13,7 +13,7 @@ import moteur.Enums.TypeParcelle;
  */
 public class PlateauTest {
 
-    Partie partie=new Partie();
+    Partie partie = new Partie();
     Plateau plateau = partie.getPlateau();
     Point3D coordonneCentre = new Point3D(0,0,0);
     Point3D coordonneVoisin = new Point3D(1,0,-1);

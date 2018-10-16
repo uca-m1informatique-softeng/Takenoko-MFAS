@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 public class ObjectifParcelleTest {
     Partie partie=new Partie();
     Plateau plateau = partie.getPlateau();
-    Bot joueur = new Bot(Enums.CouleurBot.ROUGE);
+    Bot bot = new Bot(Enums.CouleurBot.ROUGE);
     Parcelle parcelleRose = new Parcelle(Enums.TypeParcelle.ROSE);
 
     @Test
@@ -22,17 +22,17 @@ public class ObjectifParcelleTest {
 
         //////////  Objectif Motif Courbé
 
-        ObjectifParcelle ob = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,1);
-        joueur.addObjectif(ob);
+        ObjectifParcelle objectifparcelle = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,1);
+        bot.addObjectif(objectifparcelle);
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(0,1,-1));
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,0,-1));
 
-        assertFalse(ob.validation(partie,joueur));
+        assertFalse(objectifparcelle.validation(partie,bot));
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,-1,0));
 
-        assertTrue(ob.validation(partie,joueur));
+        assertTrue(objectifparcelle.validation(partie,bot));
 
     }
 
@@ -41,17 +41,17 @@ public class ObjectifParcelleTest {
         ///////////  Objectif Motif Droit
 
         ObjectifParcelle ob2 = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,0);
-        joueur.addObjectif(ob2);
+        bot.addObjectif(ob2);
 
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(-1,1,0));
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(0,1,-1));
 
-        assertFalse(ob2.validation(partie,joueur));
+        assertFalse(ob2.validation(partie,bot));
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,1,-2));
 
-        assertTrue(ob2.validation(partie,joueur));
+        assertTrue(ob2.validation(partie,bot));
 
 
     }
@@ -62,16 +62,16 @@ public class ObjectifParcelleTest {
         ////////// Objectif Motif Triangle
 
         ObjectifParcelle ob3 = new ObjectifParcelle(4, Enums.TypeParcelle.ROSE,2);
-        joueur.addObjectif(ob3);
+        bot.addObjectif(ob3);
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(0,1,-1));
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,0,-1));
 
-        assertFalse(ob3.validation(partie,joueur));
+        assertFalse(ob3.validation(partie,bot));
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,1,-2));
 
-        assertTrue(ob3.validation(partie,joueur));
+        assertTrue(ob3.validation(partie,bot));
 
 
     }
@@ -81,17 +81,17 @@ public class ObjectifParcelleTest {
         /////// Quatre
 
         ObjectifParcelle ob4 = new ObjectifParcelle(5, Enums.TypeParcelle.ROSE,3);
-        joueur.addObjectif(ob4);
+        bot.addObjectif(ob4);
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(0,1,-1));
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,0,-1));
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(1,1,-2));
 
-        assertFalse(ob4.validation(partie,joueur));
+        assertFalse(ob4.validation(partie,bot));
 
         plateau.poser(new Parcelle(Enums.TypeParcelle.ROSE),new Point3D(0,2,-2));
 
-        assertTrue(ob4.validation(partie,joueur));
+        assertTrue(ob4.validation(partie,bot));
 
     }
 
