@@ -35,6 +35,7 @@ public class BotJardinier extends Bot{
     }
 
     /**
+     * C'est la méthode qui permet au BotJardinier de déplacer le jardinier
      * @param jardinier
      */
     public void joueurDeplaceJardinier(Jardinier jardinier){

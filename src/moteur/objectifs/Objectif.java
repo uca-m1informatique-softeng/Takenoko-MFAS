@@ -32,6 +32,12 @@ public abstract class  Objectif {
         this.valide = valide;
     }
 
+    /**
+     * C'est la méthode qui renvois un True quand l'objectif est réalisé.
+     * @param partie
+     * @param joueur
+     * @return
+     */
     public boolean validation(Partie partie,Joueur joueur){
         return valide;
     }

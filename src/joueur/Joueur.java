@@ -67,6 +67,7 @@ public class Joueur {
     }
 
     /**
+     * C'est la méthode qui permet d'ajouter un objectif à la liste du joueur
      * @param objectif
      */
     public void addObjectif(Objectif objectif){
@@ -83,7 +84,7 @@ public class Joueur {
     }
 
     /**
-     * La méthode qui vérifie que le bot a bien réaliser son objectif
+     * La méthode qui vérifie que le bot a bien réaliser son objectif.
      * @param partie
      */
     public void verifierMesObjectif(Partie partie) {
@@ -100,6 +101,7 @@ public class Joueur {
     }
 
     /**
+     * C'est la méthode qui permet de réunir les actions du bot.
      * @param numeroActionDansLeTour
      * @param partie
      * @return
@@ -111,6 +113,7 @@ public class Joueur {
     }
 
     /**
+     * C'est la méthode pour que le joueur pose une parcelle
      * @param partie
      */
     public void joueurPose(Partie partie){
@@ -124,6 +127,7 @@ public class Joueur {
     }
 
     /**
+     * C'est la méthode qui permet au Joueur de déplacer le jardinier
      * @param jardinier
      */
     public void joueurDeplaceJardinier(Jardinier jardinier){
@@ -135,6 +139,7 @@ public class Joueur {
     }
 
     /**
+     * C'est la méthode qui permet au Joueur de déplacer le panda
      * @param panda
      */
     public void joueurDeplacePanda(Panda panda){

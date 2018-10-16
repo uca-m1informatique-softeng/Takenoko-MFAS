@@ -185,6 +185,12 @@ public class Plateau {
         System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
 
+    /**
+     * C'est une méthode qui retourne True si la parcelle est libre.
+     * @param pointCourant
+     * @param i
+     * @return
+     */
     public boolean parcelleSuivanteLibre(Point3D pointCourant, int i){
         ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
         ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
@@ -194,6 +200,13 @@ public class Plateau {
         return false;
     }
 
+    /**
+     * C'est une méthode qui retourne True si le motif est bien reconnu.
+     * @param pointCourant
+     * @param couleurObjectif
+     * @param type
+     * @return
+     */
     public boolean chercheMotifParcelle (Point3D pointCourant, TypeParcelle couleurObjectif, int type){
 
         if(map.get(pointCourant).getType() == couleurObjectif) { //on vérifie si la parcelle correspond à la couleur de l'objectif
@@ -207,25 +220,35 @@ public class Plateau {
                         if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(secondPoint,couleurObjectif,j)){
                             return true;
                         }
+                        break;
                     case 1:
                         if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(secondPoint,couleurObjectif,(j+1)%6)){
                             return true;
                         }
+                        break;
                     case 2:
                         if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+1)%6)){
                             return true;
                         }
+                        break;
                     case 3:
                         if(parcelleSuivanteMotif(pointCourant,couleurObjectif,j) && parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+1)%6) &&
                                 parcelleSuivanteMotif(pointCourant,couleurObjectif,(j+2)%6)){
                             return true;
                         }
+                        break;
                 }
             }
         }
         return false;
     }
 
+    /**
+     * @param pointCourant
+     * @param couleurObjectif
+     * @param i
+     * @return
+     */
     public boolean parcelleSuivanteMotif(Point3D pointCourant, TypeParcelle couleurObjectif,int i){
         ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
         ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);

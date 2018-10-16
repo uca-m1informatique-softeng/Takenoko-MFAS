@@ -20,9 +20,6 @@ public class Deck {
     private int nombreParcelle = 27;
     private int nombreObjectifPanda = 9;
     private int nombreObjectifJardinier = 12;
-
-
-
     private int nombreObjectifParcelle = 12;
     private Partie partie;
 

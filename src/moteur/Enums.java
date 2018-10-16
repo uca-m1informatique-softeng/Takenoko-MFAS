@@ -12,10 +12,16 @@ public class Enums {
         ETANG,ROSE,JAUNE,VERTE;
     }
 
+    /**
+     * C'est l'énumération des differentes types d'action.
+     */
     public enum Action {
         PIOCHERPARCELLE,PIOCHEROBJECTIFPANDA,PIOCHEROBJECTIFJARDINIER,DEPLACERJARDINIER,DEPLACERPANDA;
     }
 
+    /**
+     * La couleur des differents bots
+     */
     public enum CouleurBot {
         ROUGE,BLEU,VERT;
     }

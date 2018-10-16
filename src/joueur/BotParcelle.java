@@ -40,8 +40,12 @@ public class BotParcelle extends Bot{
         finirObjectif(partie);
     }
 
+    /**
+     * Une méthode qui renvois un boolean pour savoir si l'objectif est finit.
+     * @param partie
+     * @return
+     */
     public boolean finirObjectif(Partie partie){
-
         Plateau plateau=partie.getPlateau();
         ArrayList<Point3D> emplacementslibres=plateau.emplacementsAutorise();
 

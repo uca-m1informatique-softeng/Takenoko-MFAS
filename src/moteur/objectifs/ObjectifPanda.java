@@ -35,6 +35,7 @@ public class ObjectifPanda extends Objectif{
     }
 
     /**
+     * C'est la méthode qui renvois un True quand l'objectif est réalisé.
      * @param partie
      * @param joueur
      * @return

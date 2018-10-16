@@ -12,6 +12,9 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * La classe des objectifs parcelle
+ */
 public class ObjectifParcelle extends Objectif {
 
     private final Enums.TypeParcelle couleur;
@@ -20,7 +23,6 @@ public class ObjectifParcelle extends Objectif {
 
     /**
      * Le constructeur
-     *
      * @param valeur
      * @param couleur
      * @param type
@@ -55,6 +57,7 @@ public class ObjectifParcelle extends Objectif {
     }
 
     /**
+     * C'est la méthode qui renvois un True quand l'objectif est réalisé.
      * @param partie
      * @param J
      * @return
