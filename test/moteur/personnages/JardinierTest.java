@@ -1,6 +1,9 @@
-package moteur;
+package moteur.personnages;
 
 import javafx.geometry.Point3D;
+import moteur.Parcelle;
+import moteur.Partie;
+import moteur.Plateau;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

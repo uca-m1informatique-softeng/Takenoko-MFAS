@@ -24,19 +24,12 @@ public class JoueurTest {
     @Test
     public void verifierMesObjectifs(){
         ObjectifJardinier ob = new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4);
-
-        /*On crée notre plateau composé que de parcelles jaunes*/
+        bot.addObjectif(ob);
 
         plateau.poser(parcelleJaune,new Point3D(0,1,-1));
         plateau.poser(parcelleJaune,new Point3D(1,0,-1));
         plateau.poser(parcelleJaune,new Point3D(1,-1,0));
         plateau.poser(parcelleJaune,new Point3D(0,-1,1));
-
-        /*On donne un objectif au jardinier */
-        bot.addObjectif(ob);
-        System.out.println("score "+bot.getScore());
-
-        /*on fait pousser du bambou de taille 3 sur une parcelle (objectif pas réalisé)*/
         for(int i = 0 ; i <3 ; i++){
             plateau.getParcelle(new Point3D(0,-1,1)).pousserBambou();
         }
@@ -44,18 +37,14 @@ public class JoueurTest {
         bot.verifierMesObjectif(partie);
         assertEquals(0,bot.getNombreObjectifsRemplis());
 
-        ///// Test 2 /////
-
-        /*on fait pousser du bambou de taille 4 sur une parcelle (objectif réalisé)*/
         plateau.getParcelle(new Point3D(0,-1,1)).pousserBambou();
-        bot.verifierMesObjectif(partie);
 
+        bot.verifierMesObjectif(partie);
         assertEquals(1,bot.getNombreObjectifsRemplis());
     }
 
     @Test
-
-    public void joueurPose(){
+    public void joueurPoseUneParcelle(){
         assertEquals(6,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(1,partie.getPlateau().getKeylist().size());
 
@@ -63,14 +52,22 @@ public class JoueurTest {
 
         assertEquals(5,partie.getPlateau().emplacementsAutorise().size());
         assertEquals(2,partie.getPlateau().getKeylist().size());
-
+        assertEquals(partie.getPlateau().getKeylist().get(1),new Point3D(0,1,-1));
     }
 
 
     @Test
-    public void joueurDeplaceJardinier(){
-        /*On crée notre plateau composé que de parcelles jaunes*/
+    public void joueurPoseDeuxParcelle(){
+        bot.joueurPose(partie);
+        bot.joueurPose(partie);
+        assertEquals(partie.getPlateau().getKeylist().get(1),new Point3D(0,1,-1));
+        assertEquals(partie.getPlateau().getKeylist().get(2),new Point3D(1,0,-1));
+    }
 
+
+
+    @Test
+    public void joueurDeplaceJardinier(){
         plateau.poser(parcelleJaune,new Point3D(0,1,-1));
         plateau.poser(parcelleJaune,new Point3D(1,0,-1));
 

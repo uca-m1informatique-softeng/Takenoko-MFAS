@@ -1,5 +1,8 @@
-package moteur;
+package moteur.personnages;
 
+import moteur.Parcelle;
+import moteur.Partie;
+import moteur.Plateau;
 import moteur.personnages.Jardinier;
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
