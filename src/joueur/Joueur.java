@@ -30,6 +30,8 @@ public class Joueur {
     private ArrayList<Bambou> listBambou;
     private int score = 0;
 
+    private ArrayList<Irrigation> listIrrigation;
+
     /**
      * Le constructeur
      * @param couleur
@@ -39,6 +41,7 @@ public class Joueur {
         this.nombreObjectifsRemplis=0;
         this.listObjectifs=new ArrayList<Objectif>();
         this.listBambou=new ArrayList<Bambou>();
+        this.listIrrigation=new ArrayList<Irrigation>();
     }
 
     public CouleurBot getCouleur() {
@@ -55,6 +58,10 @@ public class Joueur {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public void addIrrigation (Irrigation irrigation){
+        listIrrigation.add(irrigation);
     }
 
 
@@ -154,6 +161,15 @@ public class Joueur {
         }
     }
 
+    public void joueurPoseIrrigation(Partie partie){
+        Plateau plateau = partie.getPlateau();
+        ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
+        Irrigation Irrig = new Irrigation();
+        if(!list.isEmpty()){
+            Point3D point = list.get(0);
+            plateau.poserIrrigation(Irrig, point);
+        }
+    }
 
 
 

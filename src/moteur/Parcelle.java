@@ -11,6 +11,14 @@ public class Parcelle {
     private boolean irriguee;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 
+    public boolean isIrriguee() {
+        return irriguee;
+    }
+
+    public void setIrriguee(boolean irriguee) {
+        this.irriguee = irriguee;
+    }
+
     /**
      * Le constructeur
      * @param type
@@ -18,6 +26,7 @@ public class Parcelle {
     public Parcelle(TypeParcelle type){
         this.type = type;
         this.irriguee = true;
+
         /*if(this.type  == TypeParcelle.etang ){
             this.irriguee = true;
         }

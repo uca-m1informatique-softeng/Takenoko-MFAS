@@ -179,6 +179,10 @@ public class Deck {
         bot.addObjectif(tmp);
     }
 
+    public void piocheIrrigation(Joueur bot){
+        bot.addIrrigation(new Irrigation());
+    }
+
     public ObjectifPanda[] getDeckObjectifsPanda() {
         return deckObjectifsPanda;
     }
