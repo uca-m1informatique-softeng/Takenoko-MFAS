@@ -12,6 +12,8 @@ public class Plateau {
 
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
+    private HashMap<Point3D, Irrigation> mapIrrigation;
+    private ArrayList<Point3D> keylistIrrigation;
 
 
     /**
@@ -26,6 +28,40 @@ public class Plateau {
         map = new HashMap<>();
         map.put(coordonne,parcelle);
 
+        //6 premiers irrigations autour de l'etang
+        Point3D [] tabCoordIrrigation = new Point3D[6];
+        tabCoordIrrigation[0]=new Point3D(0.5,0,-0.5);
+        tabCoordIrrigation[1]=new Point3D(0.5,-0.5,0);
+        tabCoordIrrigation[2]=new Point3D(0,-0.5,0.5);
+        tabCoordIrrigation[3]=new Point3D(-0.5,0,0.5);
+        tabCoordIrrigation[4]=new Point3D(-0.5,0.5,0);
+        tabCoordIrrigation[5]=new Point3D(0,0.5,-0.5);
+
+        mapIrrigation=new HashMap<>();
+        keylistIrrigation = new ArrayList<Point3D>();
+        for(int i=0;i<6;i++)
+        {
+            keylistIrrigation.add(tabCoordIrrigation[i]);
+            mapIrrigation.put(tabCoordIrrigation[i],new Irrigation());
+        }
+
+
+    }
+
+    public HashMap<Point3D, Irrigation> getMapIrrigation() {
+        return mapIrrigation;
+    }
+
+    public void setMapIrrigation(HashMap<Point3D, Irrigation> mapIrrigation) {
+        this.mapIrrigation = mapIrrigation;
+    }
+
+    public ArrayList<Point3D> getKeylistIrrigation() {
+        return keylistIrrigation;
+    }
+
+    public void setKeylistIrrigation(ArrayList<Point3D> keylistIrrigation) {
+        this.keylistIrrigation = keylistIrrigation;
     }
 
     public HashMap<Point3D, Parcelle> getMap() {
@@ -51,12 +87,29 @@ public class Plateau {
         return map.get(p2);
     }
 
+    public Irrigation getIrrigation(Point3D p){
+        int index=keylistIrrigation.indexOf(p);
+        Point3D p2=keylistIrrigation.get(index);
+
+        return mapIrrigation.get(p2);
+    }
+
     public ArrayList<Parcelle> getAllParcelle()
     {
         ArrayList result=new ArrayList<Parcelle>();
         for (int i=0;i<this.map.size();i++)
         {
             result.add(map.get(keylist.get(i)));
+        }
+        return result;
+    }
+
+    public ArrayList<Parcelle> getAllIrrigation()
+    {
+        ArrayList result=new ArrayList<Irrigation>();
+        for (int i=0;i<this.mapIrrigation.size();i++)
+        {
+            result.add(mapIrrigation.get(keylistIrrigation.get(i)));
         }
         return result;
     }
@@ -81,6 +134,86 @@ public class Plateau {
         return list;
     }
 
+    public int sensIrrigation (Point3D coordonne){
+        double x=coordonne.getX();
+        double y=coordonne.getY();
+        double z=coordonne.getZ();
+
+        /* 3 CAS POUR 3 SENS D'IRRIGATION
+         *  \ <- 1
+         *  | <- 2
+         *  / <- 3
+         *
+         *  Dans le cas 1 (\) on renvoie
+         *  1 ->  |
+         *  2 -> / \ / <- 3
+         *          | <- 4
+         *
+         *  Dans le cas 2 (|) on renvoie
+         *  1 -> \ / <- 2
+         *        |
+         *  3 -> / \ <- 4
+         *
+         * Dans le cas 3 (/) on renvoie
+         *         |  <- 1
+         * 3 -> \ / \ <- 2
+         * 4 ->  |
+         * */
+        if(Math.floor(x)==0){
+            return 3;
+        }
+        if(Math.floor(y)==0){
+            return 1;
+        }
+        if(Math.floor(z)==0){
+            return 2;
+        }
+        //erreur
+        return 0;
+    }
+
+    public ArrayList<Point3D> getIrrigationVoisine(Point3D coordonne){
+        int sens=sensIrrigation(coordonne);
+        double x=coordonne.getX();
+        double y=coordonne.getY();
+        double z=coordonne.getZ();
+
+        ArrayList<Point3D> listVoisin = new ArrayList<Point3D>();
+        if(sens==3){ //cas 3
+            //1
+            listVoisin.add(new Point3D(x+0.5,y+0,z-0.5));
+            //2
+            listVoisin.add(new Point3D(x+0.5,y-0.5,z+0));
+            //3
+            listVoisin.add(new Point3D(x-0.5,y+0.5,z+0));
+            //4
+            listVoisin.add(new Point3D(x-0.5,y+0,z+0.5));
+        }
+        if(sens==1){ //cas 1
+            //1
+            listVoisin.add(new Point3D(x+0,y+0.5,z-0.5));
+            //2
+            listVoisin.add(new Point3D(x-0.5,y+0.5,z+0));
+            //3
+            listVoisin.add(new Point3D(x+0.5,y-0.5,z+0));
+            //4
+            listVoisin.add(new Point3D(x+0,y-0.5,z+0.5));
+        }
+        if(sens==2)
+        {
+            //1
+            listVoisin.add(new Point3D(x+0,y+0.5,z-0.5));
+            //2
+            listVoisin.add(new Point3D(x+0.5,y+0,z-0.5));
+            //3
+            listVoisin.add(new Point3D(x-0.5,y+0,z+0.5));
+            //4
+            listVoisin.add(new Point3D(x+0,y-0.5,z+0.5));
+        }
+
+        return listVoisin;
+    }
+
     /**
      * La méthode qui donne un point et renvois les voisins libres
      * @param coordonne
@@ -98,6 +231,18 @@ public class Plateau {
         return list;
     }
 
+    public ArrayList<Point3D> getIrrigationVoisineLibre(Point3D coordonne){
+        ArrayList<Point3D> list=this.getIrrigationVoisine(coordonne);
+
+        for (int i = list.size()-1; i >=0; i--) {
+            if(keylistIrrigation.contains(list.get(i)))
+            {
+                list.remove(i);
+            }
+        }
+        return list;
+    }
+
     /**
      * La méthode qui donne un point et renvois les voisins occupés
      * @param coordonne
@@ -108,6 +253,18 @@ public class Plateau {
 
         for (int i = list.size()-1; i >=0; i--) {
             if(!keylist.contains(list.get(i))) {
+                list.remove(i);
+            }
+        }
+        return list;
+
+    }
+
+    public ArrayList<Point3D> getIrrigationVoisineOccupe(Point3D coordonne){
+        ArrayList<Point3D> list=this.getIrrigationVoisine(coordonne);
+
+        for (int i = list.size()-1; i >=0; i--) {
+            if(!keylistIrrigation.contains(list.get(i))) {
                 list.remove(i);
             }
         }
@@ -136,6 +293,43 @@ public class Plateau {
         return keylist.contains(coordonne);
     }
 
+    public boolean isIrrigationOccupee (Point3D coordonne){
+        return keylistIrrigation.contains(coordonne);
+    }
+
+    public ArrayList<Point3D> getcoordonneParcelleAdjacenteIrrigation (Point3D coordonne){
+        double x=coordonne.getX();
+        double y=coordonne.getY();
+        double z=coordonne.getZ();
+
+        int sens=sensIrrigation(coordonne);
+        ArrayList<Point3D> result=new ArrayList<>();
+        Point3D p1;
+        Point3D p2;
+        if(sens==1){
+            p1=new Point3D(x-0.5,y+0,z+0.5);
+            p2=new Point3D(x+0.5,y+0,z-0.5);
+
+            result.add(p1);
+            result.add(p2);
+        }
+        if(sens==2){
+            p1=new Point3D(x-0.5,y+0.5,z+0);
+            p2=new Point3D(x+0.5,y-0.5,z+0);
+
+            result.add(p1);
+            result.add(p2);
+        }
+        if(sens==3){
+            p1=new Point3D(x+0,y+0.5,z-0.5);
+            p2=new Point3D(x+0,y-0.5,z+0.5);
+
+            result.add(p1);
+            result.add(p2);
+        }
+        return result;
+
+    }
     /**
      * La méthode qui rentre un point et confirme si on peut poser une parcelle
      * @param coordonne
@@ -145,6 +339,13 @@ public class Plateau {
         ArrayList<Point3D> list=this.getParcelleVoisineOccupe(coordonne);
         return (list.size() > 1 || list.contains(new Point3D(0,0,0)) );
     }
+
+    public boolean isEmplacementIrrigationAutorise(Point3D coordonne){
+        ArrayList<Point3D> list=this.getIrrigationVoisineOccupe(coordonne);
+
+        return (!list.isEmpty() && !getcoordonneParcelleAdjacenteIrrigation(coordonne).isEmpty());
+    }
+
 
     /**
      * La méthode qui renvois la liste des endroits où on peut poser une parcelle sur le plateau
@@ -173,6 +374,29 @@ public class Plateau {
         return maListe;
     }
 
+    public ArrayList<Point3D> emplacementsAutoriseIrrigation(){
+        ArrayList<Point3D> maListe = new ArrayList<>();
+        ArrayList<Point3D> listTemp;
+        Point3D point;
+        Point3D pointVoisin;
+
+        for(int i = 0; i < keylist.size(); i++){
+
+            point = keylist.get(i);
+
+            listTemp = getIrrigationVoisineLibre(point);
+            if(!listTemp.isEmpty()){
+                for(int j = 0; j < listTemp.size(); j++){
+                    pointVoisin = listTemp.get(j);
+                    if(isEmplacementIrrigationAutorise(pointVoisin) && !maListe.contains(pointVoisin) ){
+                        maListe.add(pointVoisin);
+                    }
+                }
+            }
+        }
+        return maListe;
+    }
+
 
     /**
      * La méthode qui permet de poser une parcelle sur le plateau
@@ -183,6 +407,15 @@ public class Plateau {
         keylist.add(coordonne);
         map.put(coordonne,parcelle);
         System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
+    }
+
+    public void poserIrrigation(Irrigation irrigation, Point3D coordonne){
+        keylistIrrigation.add(coordonne);
+        mapIrrigation.put(coordonne,irrigation);
+        for(Point3D point: getcoordonneParcelleAdjacenteIrrigation(coordonne)){
+            getParcelle(point).setIrriguee(true);
+        }
+        System.out.println("Irrigation posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
 
     /**
