@@ -34,11 +34,12 @@ public class Jardinier extends Personnage {
 
         ArrayList<Point3D> listParcelle = getPlateau().getParcelleVoisineMemeCouleur(point3D);
         ArrayList<Point3D> listMemeCouleur = new ArrayList<>();
-        listMemeCouleur.add(point3D);
+        if(getPlateau().getParcelle(point3D).isIrriguee()){
+            listMemeCouleur.add(point3D);}
 
         while(listParcelle.size() > 0){
             Point3D newPoint =  listParcelle.get(0);
-            if(!listMemeCouleur.contains(newPoint)){
+            if(!listMemeCouleur.contains(newPoint) && getPlateau().getParcelle(newPoint).isIrriguee()){
                 listMemeCouleur.add(newPoint);
                 ArrayList<Point3D> newList =  getPlateau().getParcelleVoisineMemeCouleur(newPoint);
                 for(Point3D pt : newList){

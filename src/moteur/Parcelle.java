@@ -25,14 +25,13 @@ public class Parcelle {
      */
     public Parcelle(TypeParcelle type){
         this.type = type;
-        this.irriguee = true;
 
-        /*if(this.type  == TypeParcelle.etang ){
+        if(this.type  == TypeParcelle.ETANG ){
             this.irriguee = true;
         }
         else{
             this.irriguee = false;
-        }*/
+        }
     }
 
 
@@ -46,7 +45,7 @@ public class Parcelle {
      * La methode qui permet de faire pousser le bambou
      */
     public boolean pousserBambou(){
-        if(listBambou.size() < 4){
+        if(listBambou.size() < 4 && isIrriguee()){
             listBambou.add(new Bambou(this.type));
             return true;
         }
