@@ -29,6 +29,7 @@ public class BotParcelle extends Bot{
      */
     public boolean choixAction(int numeroActionDansLeTour, Partie partie){
         joueurPose(partie);
+        joueurPoseIrrigation(partie);
         joueurDeplaceJardinier(partie.getJardinier());
         return true;
     }

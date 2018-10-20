@@ -29,6 +29,7 @@ public class BotPanda extends Bot {
      * @return
      */
     public boolean choixAction(int numeroActionDansLeTour, Partie partie){
+        joueurPose(partie);
         joueurDeplaceJardinier(partie.getJardinier());
         joueurDeplacePanda(partie.getPanda());
         return true;
