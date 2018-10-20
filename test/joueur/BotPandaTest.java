@@ -7,8 +7,9 @@ import moteur.Partie;
 import moteur.Plateau;
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BotPandaTest {
@@ -92,8 +93,17 @@ public class BotPandaTest {
         botPanda.joueurDeplacePanda(partie.getPanda());
 
         assertEquals(partie.getPanda().getCoord(),new Point3D(0,1,-1));
-
     }
 
-
+    @Test
+    public void choixAction(){
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        assertEquals(new Point3D(0,0,0),partie.getJardinier().getCoord());
+        assertEquals(new Point3D(0,0,0),partie.getPanda().getCoord());
+        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
+        botPanda.choixAction(1,partie);
+        assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
+        assertEquals(new Point3D(0,1,-1),partie.getPanda().getCoord());
+    }
 }

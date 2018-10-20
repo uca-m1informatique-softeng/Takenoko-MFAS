@@ -6,8 +6,9 @@ import moteur.Parcelle;
 import moteur.Partie;
 import moteur.Plateau;
 import moteur.objectifs.ObjectifJardinier;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BotJardinierTest {
@@ -49,6 +50,16 @@ public class BotJardinierTest {
 
         assertEquals(partie.getJardinier().getCoord(),new Point3D(1,0,-1));
 
+    }
+
+    @Test
+    public void choixAction(){
+        assertEquals(1,plateau.getKeylist().size());
+        assertEquals(new Point3D(0,0,0),partie.getJardinier().getCoord());
+        botJardinier.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        botJardinier.choixAction(1,partie);
+        assertEquals(2,plateau.getKeylist().size());
+        assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
     }
 
 
