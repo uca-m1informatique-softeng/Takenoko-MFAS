@@ -82,9 +82,12 @@ public class Plateau {
 
     public Parcelle getParcelle(Point3D p){
         int index=keylist.indexOf(p);
-        Point3D p2=keylist.get(index);
-
-        return map.get(p2);
+        if (index != -1)
+        {
+            Point3D p2=keylist.get(index);
+            return map.get(p2);
+        }
+        return null;
     }
 
     public Irrigation getIrrigation(Point3D p){
@@ -112,6 +115,21 @@ public class Plateau {
             result.add(mapIrrigation.get(keylistIrrigation.get(i)));
         }
         return result;
+    }
+
+    public ArrayList<Point3D> getIrrigationVoisineDeParcelle(Point3D coordonne){
+        double x=coordonne.getX();
+        double y=coordonne.getY();
+        double z=coordonne.getZ();
+
+        ArrayList<Point3D> list = new ArrayList<Point3D>();
+        list.add(new Point3D(x+0.5,y+0,z-0.5));
+        list.add(new Point3D(x+0.5,y-0.5,z+0));
+        list.add(new Point3D(x+0,y-0.5,z+0.5));
+        list.add(new Point3D(x-0.5,y+0,z+0.5));
+        list.add(new Point3D(x-0.5,y+0.5,z+0));
+        list.add(new Point3D(x+0,y+0.5,z-0.5));
+        return list;
     }
 
     /**
@@ -406,6 +424,16 @@ public class Plateau {
     public void poser(Parcelle parcelle, Point3D coordonne){
         keylist.add(coordonne);
         map.put(coordonne,parcelle);
+
+        ArrayList<Point3D> listCoordIrrigationVoisine=getIrrigationVoisineDeParcelle(coordonne);
+        for(Point3D coord:listCoordIrrigationVoisine)
+        {
+            if (keylistIrrigation.contains(coord)){
+                parcelle.setIrriguee(true);
+                break;
+            }
+        }
+
         System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
 
@@ -413,7 +441,9 @@ public class Plateau {
         keylistIrrigation.add(coordonne);
         mapIrrigation.put(coordonne,irrigation);
         for(Point3D point: getcoordonneParcelleAdjacenteIrrigation(coordonne)){
-            getParcelle(point).setIrriguee(true);
+            Parcelle parcelleVoisineIrrigation=getParcelle(point);
+            if(parcelleVoisineIrrigation!=null)
+            {parcelleVoisineIrrigation.setIrriguee(true);}
         }
         System.out.println("Irrigation posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
     }
@@ -442,7 +472,7 @@ public class Plateau {
      */
     public boolean chercheMotifParcelle (Point3D pointCourant, TypeParcelle couleurObjectif, int type){
 
-        if(map.get(pointCourant).getType() == couleurObjectif) { //on vérifie si la parcelle correspond à la couleur de l'objectif
+        if(map.get(pointCourant).getType() == couleurObjectif && map.get(pointCourant).isIrriguee()) { //on vérifie si la parcelle correspond à la couleur de l'objectif
             ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
 
             for (int j = 0; j < 6; j++) {//on cherche si le motif est complet
@@ -485,7 +515,8 @@ public class Plateau {
     public boolean parcelleSuivanteMotif(Point3D pointCourant, TypeParcelle couleurObjectif,int i){
         ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
         ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
-        if(pointsVoisinOccupe.contains(pointsVoisin.get(i)) && getParcelle(pointsVoisin.get(i)).getType() == couleurObjectif) {
+        if(pointsVoisinOccupe.contains(pointsVoisin.get(i)) && getParcelle(pointsVoisin.get(i)).getType() == couleurObjectif
+                && getParcelle(pointsVoisin.get(i)).isIrriguee()) {
             return true;
         }
         return false;

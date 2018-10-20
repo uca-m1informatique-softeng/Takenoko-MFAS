@@ -44,7 +44,12 @@ public class ObjectifParcelleTest {
 
         assertFalse(objectifparcelledroit.validation(partie,bot));
 
-        plateau.poser(parcelleRose,new Point3D(1,1,-2));
+        Parcelle deuxiemeParcelleRose = new Parcelle( Enums.TypeParcelle.ROSE);
+        plateau.poser(deuxiemeParcelleRose,new Point3D(1,1,-2));
+
+        assertFalse(objectifparcelledroit.validation(partie,bot));
+
+        deuxiemeParcelleRose.setIrriguee(true);
 
         assertTrue(objectifparcelledroit.validation(partie,bot));
 
