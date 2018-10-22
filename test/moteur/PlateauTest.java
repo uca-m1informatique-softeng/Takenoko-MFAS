@@ -323,4 +323,120 @@ public class PlateauTest {
         assertTrue(plateau.chercheMotifParcelle(new Point3D(1.0,0.0,-1.0),TypeParcelle.JAUNE,3));
     }
 
+    /*irrigation*/
+
+    @Test
+    public void getIrrigationVoisineDeParcelle(){
+        plateau.poser(parcelleJaune,new Point3D(0.0,1.0,-1.0));
+        ArrayList<Point3D> irrigationArrayList = new ArrayList<Point3D>();
+        ArrayList<Point3D> listAttendue = plateau.getIrrigationVoisineDeParcelle(new Point3D(0.0,1.0,-1.0));
+
+        irrigationArrayList.add(new Point3D(0.5,1.0,-1.5));
+        irrigationArrayList.add(new Point3D(0.5,0.5,-1.0));
+        irrigationArrayList.add(new Point3D(0.0,0.5,-0.5));
+        irrigationArrayList.add(new Point3D(-0.5,1.0,-0.5));
+        irrigationArrayList.add(new Point3D(-0.5,1.5,-1.0));
+        irrigationArrayList.add(new Point3D(0.0,1.5,-1.5));
+
+        assertEquals(listAttendue,irrigationArrayList);
+    }
+    @Test
+    public void sensIrrigation (){
+        int num = 1;
+        int val = plateau.sensIrrigation(new Point3D(0.5,1.0,-1.5));
+        assertEquals(num,val);
+        val=plateau.sensIrrigation(new Point3D(0.0,1.5,-1.5));
+        num = 3;
+        assertEquals(num,val);
+    }
+
+    @Test
+    public void getIrrigationVoisine(){
+        ArrayList<Point3D> listAttendue = plateau.getIrrigationVoisine(new Point3D(0.5,1.0,-1.5));
+        ArrayList<Point3D> irrigationArrayList = new ArrayList<Point3D>();
+
+        irrigationArrayList.add(new Point3D(0.5,1.5,-2.0));
+        irrigationArrayList.add(new Point3D(0.0,1.5,-1.5));
+        irrigationArrayList.add(new Point3D(1.0,0.5,-1.5));
+        irrigationArrayList.add(new Point3D(0.5,0.5,-1.0));
+
+        assertEquals(listAttendue,irrigationArrayList);
+
+        ArrayList<Point3D> listAttendue2 = plateau.getIrrigationVoisine(new Point3D(0.5,1.0,-1.5));
+        ArrayList<Point3D> irrigationArrayList2 = new ArrayList<Point3D>();
+
+        irrigationArrayList2.add(new Point3D(0.5,1.5,-2.0));
+        irrigationArrayList2.add(new Point3D(0.0,1.5,-1.5));
+        irrigationArrayList2.add(new Point3D(1.0,0.5,-1.5));
+        irrigationArrayList2.add(new Point3D(0.5,0.5,-1.0));
+
+        assertEquals(listAttendue2,irrigationArrayList2);
+
+
+    }
+
+    @Test
+    public void getIrrigationVoisineLibre() {
+        ArrayList<Point3D> listAttendue = plateau.getIrrigationVoisineLibre(new Point3D(0.5, 1.0, -1.5));
+        ArrayList<Point3D> irrigationArrayList = new ArrayList<Point3D>();
+
+        irrigationArrayList.add(new Point3D(0.5,1.5,-2.0));
+        irrigationArrayList.add(new Point3D(0.0,1.5,-1.5));
+        irrigationArrayList.add(new Point3D(1.0,0.5,-1.5));
+        irrigationArrayList.add(new Point3D(0.5,0.5,-1.0));
+
+        assertEquals(listAttendue,irrigationArrayList);
+
+        plateau.poserIrrigation(new Irrigation(),new Point3D(0.0,1.5,-1.5));
+        ArrayList<Point3D> listAttendue2 = plateau.getIrrigationVoisineLibre(new Point3D(0.5, 1.0, -1.5));
+        ArrayList<Point3D> irrigationArrayList2 = new ArrayList<Point3D>();
+
+        irrigationArrayList2.add(new Point3D(0.5,1.5,-2.0));
+        irrigationArrayList2.add(new Point3D(1.0,0.5,-1.5));
+        irrigationArrayList2.add(new Point3D(0.5,0.5,-1.0));
+
+        assertEquals(listAttendue2,irrigationArrayList2);
+
+    }
+
+    @Test
+    public void getIrrigationVoisineOccupe() {
+        ArrayList<Point3D> listAttendue = plateau.getIrrigationVoisineOccupe(new Point3D(0.5, 1.0, -1.5));
+        ArrayList<Point3D> irrigationArrayList = new ArrayList<Point3D>();
+
+        assertEquals(listAttendue,irrigationArrayList);
+
+        plateau.poserIrrigation(new Irrigation(),new Point3D(0.0,1.5,-1.5));
+        ArrayList<Point3D> listAttendue2 = plateau.getIrrigationVoisineOccupe(new Point3D(0.5, 1.0, -1.5));
+        ArrayList<Point3D> irrigationArrayList2 = new ArrayList<Point3D>();
+
+        irrigationArrayList2.add(new Point3D(0.0,1.5,-1.5));
+
+        assertEquals(listAttendue2,irrigationArrayList2);
+
+    }
+
+    @Test
+    public void getcoordonneParcelleAdjacenteIrrigation(){
+        ArrayList<Point3D> listAttendue = plateau.getcoordonneParcelleAdjacenteIrrigation(new Point3D(0.5, 1.0, -1.5));
+        ArrayList<Point3D> parcelleArrayList = new ArrayList<Point3D>();
+
+        parcelleArrayList.add(new Point3D(0.0,1.0,-1.0));
+        parcelleArrayList.add(new Point3D(1.0,1.0,-2.0));
+
+        assertEquals(listAttendue,parcelleArrayList);
+
+        ArrayList<Point3D> listAttendue2 = plateau.getcoordonneParcelleAdjacenteIrrigation(new Point3D(0.5,0.0,-0.5));
+        ArrayList<Point3D> parcelleArrayList2 = new ArrayList<Point3D>();
+
+        parcelleArrayList2.add(new Point3D(0,0,0));
+        parcelleArrayList2.add(new Point3D(1,0,-1));
+
+        assertEquals(listAttendue2,parcelleArrayList2);
+
+    }
+
+    
+
+
 }
