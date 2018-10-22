@@ -435,8 +435,58 @@ public class PlateauTest {
         assertEquals(listAttendue2,parcelleArrayList2);
 
     }
+    @Test
+    public void isEmplacementIrrigationAutorise (){
+        ArrayList<Point3D> irrigationArrayList = plateau.getIrrigationVoisineDeParcelle(new Point3D(1,0.0,-1));
 
-    
+        assertEquals(false,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(0)));
+        assertEquals(false,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(1)));
+        assertEquals(true,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(2)));
+        assertEquals(true,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(3)));
+        assertEquals(true,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(4)));
+        assertEquals(false,plateau.isEmplacementIrrigationAutorise(irrigationArrayList.get(5)));
+    }
+
+    @Test
+    public void emplacementsAutoriseIrrigation (){
+        ArrayList<Point3D> listAttendue=plateau.emplacementsAutoriseIrrigation ();
+        ArrayList<Point3D> irrigationArrayList = new ArrayList<Point3D>();
+
+        irrigationArrayList.add(new Point3D(0.5,0.5,-1.0));
+        irrigationArrayList.add(new Point3D(1.0,-0.5,-0.5));
+        irrigationArrayList.add(new Point3D(0.5,-1.0,0.5));
+        irrigationArrayList.add(new Point3D(-0.5,-0.5,1.0));
+        irrigationArrayList.add(new Point3D(-1.0,0.5,0.5));
+        irrigationArrayList.add(new Point3D(-0.5,1.0,-0.5));
+
+        assertEquals(listAttendue,irrigationArrayList);
+
+        plateau.poserIrrigation(new Irrigation(),new Point3D(0.5,0.5,-1.0));
+        ArrayList<Point3D> listAttendue2=plateau.emplacementsAutoriseIrrigation ();
+        ArrayList<Point3D> irrigationArrayList2 = new ArrayList<Point3D>();
+
+        irrigationArrayList2.add(new Point3D(1.0,-0.5,-0.5));
+        irrigationArrayList2.add(new Point3D(0.5,-1.0,0.5));
+        irrigationArrayList2.add(new Point3D(-0.5,-0.5,1.0));
+        irrigationArrayList2.add(new Point3D(-1.0,0.5,0.5));
+        irrigationArrayList2.add(new Point3D(-0.5,1.0,-0.5));
+        irrigationArrayList2.add(new Point3D(0.5,1.0,-1.5));
+        irrigationArrayList2.add(new Point3D(1.0,0.5,-1.5));
+
+        assertEquals(listAttendue2,irrigationArrayList2);
+
+    }
+
+    @Test
+    public void poserIrrigation(){
+        plateau.poserIrrigation(new Irrigation(),new Point3D(0.5,0.5,-1.0));
+        assertEquals(plateau.getKeylistIrrigation().get(6),new Point3D(0.5,0.5,-1.0));
+
+        plateau.poserIrrigation(new Irrigation(),new Point3D(1.0,0.5,-1.5));
+        assertEquals(plateau.getKeylistIrrigation().get(7),new Point3D(1.0,0.5,-1.5));
+    }
+
+
 
 
 }
