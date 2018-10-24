@@ -18,18 +18,8 @@ public class Joueur {
     private CouleurBot couleur;
     private int nombreObjectifsRemplis;
     private ArrayList<Objectif> listObjectifs;
-
-    public ArrayList<Bambou> getListBambou() {
-        return listBambou;
-    }
-
-    public void setListBambou(ArrayList<Bambou> listBambou) {
-        this.listBambou = listBambou;
-    }
-
     private ArrayList<Bambou> listBambou;
     private int score = 0;
-
     private ArrayList<Irrigation> listIrrigation;
 
     /**
@@ -43,6 +33,8 @@ public class Joueur {
         this.listBambou=new ArrayList<Bambou>();
         this.listIrrigation=new ArrayList<Irrigation>();
     }
+
+    //////////////////////////////GETTER et SETTER//////////////////////////////
 
     public CouleurBot getCouleur() {
         return couleur;
@@ -60,8 +52,20 @@ public class Joueur {
         this.score = score;
     }
 
-    public void addIrrigation (Irrigation irrigation){
-        listIrrigation.add(irrigation);
+    public int getNombreObjectifsRemplis() {
+        return nombreObjectifsRemplis;
+    }
+
+    public void setNombreObjectifsRemplis(int nombreObjectifsRemplis) {
+        this.nombreObjectifsRemplis = nombreObjectifsRemplis;
+    }
+
+    public ArrayList<Bambou> getListBambou() {
+        return listBambou;
+    }
+
+    public void setListBambou(ArrayList<Bambou> listBambou) {
+        this.listBambou = listBambou;
     }
 
 
@@ -73,6 +77,15 @@ public class Joueur {
         listObjectifs = listObjectifs2;
     }
 
+    //////////////////////////////Méthodes//////////////////////////////
+
+    /**
+     * @param irrigation
+     */
+    public void addIrrigation (Irrigation irrigation){
+        listIrrigation.add(irrigation);
+    }
+
     /**
      * C'est la méthode qui permet d'ajouter un objectif à la liste du joueur
      * @param objectif
@@ -80,14 +93,6 @@ public class Joueur {
     public void addObjectif(Objectif objectif){
         this.listObjectifs.add(objectif);
 
-    }
-
-    public int getNombreObjectifsRemplis() {
-        return nombreObjectifsRemplis;
-    }
-
-    public void setNombreObjectifsRemplis(int nombreObjectifsRemplis) {
-        this.nombreObjectifsRemplis = nombreObjectifsRemplis;
     }
 
     /**
@@ -161,6 +166,9 @@ public class Joueur {
         }
     }
 
+    /**
+     * @param partie
+     */
     public void joueurPoseIrrigation(Partie partie){
         Plateau plateau = partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
@@ -169,12 +177,6 @@ public class Joueur {
             Point3D point = list.get(0);
             plateau.poserIrrigation(Irrig, point);
         }
-    }
-
-
-
-    public void setNombreObjectifs(int nombreObjectifs) {
-        this.nombreObjectifsRemplis = nombreObjectifs;
     }
 
     @Override

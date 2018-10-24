@@ -17,6 +17,14 @@ public abstract class Personnage {
         this.coord = coord;
     }
 
+    public Personnage(Plateau plateau){
+        this.coord = new Point3D(0.0,0.0,0.0);
+        this.plateau= plateau;
+
+    }
+
+    //////////////////////////////GETTER et SETTER//////////////////////////////
+
     public Plateau getPlateau() {
         return plateau;
     }
@@ -25,11 +33,7 @@ public abstract class Personnage {
         this.plateau = plateau;
     }
 
-    public Personnage(Plateau plateau){
-        this.coord = new Point3D(0.0,0.0,0.0);
-        this.plateau= plateau;
 
-    }
 
     public Point3D getCoord() {
         return coord;
@@ -39,12 +43,12 @@ public abstract class Personnage {
         this.coord = coord;
     }
 
+    //////////////////////////////Méthodes//////////////////////////////
+
     /**
      * Renvoyer la liste des deplacement possibles pour un personnage
      * @return
      */
-    //
-
     public ArrayList<Point3D> DestinationsPossibles() {
         ArrayList<Point3D> listvoisin = this.getPlateau().getParcelleVoisine(new Point3D(0,0,0));
         ArrayList<Point3D> resultat=new ArrayList<>();
@@ -75,6 +79,10 @@ public abstract class Personnage {
         return PousserOuMangerBambou(p);
     }
 
+    /**
+     * @param p
+     * @return
+     */
     public boolean PousserOuMangerBambou(Point3D p) {
         //a modidifier dans les fils
         return false;

@@ -33,6 +33,8 @@ public class ObjectifParcelle extends Objectif {
         this.type = type;
     }
 
+    //////////////////////////////GETTER et SETTER//////////////////////////////
+
     public Enums.TypeParcelle getCouleur() {
         return couleur;
     }
@@ -55,6 +57,8 @@ public class ObjectifParcelle extends Objectif {
                 return "motif incorrect";
         }
     }
+
+    //////////////////////////////Méthodes//////////////////////////////
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.

@@ -26,6 +26,8 @@ public class ObjectifJardinier extends Objectif{
         this.tailleBambou = tailleBambou;
     }
 
+    //////////////////////////////GETTER ET SETTER//////////////////////////////
+
     public TypeParcelle getCouleur() {
         return couleur;
     }
@@ -33,6 +35,8 @@ public class ObjectifJardinier extends Objectif{
     public int getTailleBambou() {
         return tailleBambou;
     }
+
+    //////////////////////////////Méthodes//////////////////////////////
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.

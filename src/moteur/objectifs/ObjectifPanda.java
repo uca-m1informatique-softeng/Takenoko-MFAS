@@ -25,6 +25,7 @@ public class ObjectifPanda extends Objectif{
         this.couleur = couleur;
         this.nombreBambou = nombreBambou;
     }
+    //////////////////////////////GETTER et SETTER//////////////////////////////
 
     public TypeParcelle getCouleur() {
         return couleur;
@@ -33,6 +34,8 @@ public class ObjectifPanda extends Objectif{
     public int getNombreBambou() {
         return nombreBambou;
     }
+
+    //////////////////////////////Méthodes//////////////////////////////
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.

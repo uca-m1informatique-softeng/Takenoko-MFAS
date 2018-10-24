@@ -34,6 +34,8 @@ public class Deck {
         initialiserDeckParcelleMotif();
     }
 
+    //////////////////////////////GETTER et SETTER//////////////////////////////
+
     public ArrayList<ObjectifJardinier> getDeckObjectifsJardinier() {
         return deckObjectifsJardinier;
     }
@@ -65,6 +67,8 @@ public class Deck {
     public void setDeckParcelles(ArrayList<Parcelle> deckParcelles) {
         this.deckParcelles = deckParcelles;
     }
+
+    //////////////////////////////Méthodes//////////////////////////////
 
 
     /**

@@ -22,6 +22,9 @@ public class BotPanda extends Bot {
         super(couleur);
     }
 
+
+    //////////////////////////////Méthodes//////////////////////////////
+
     /**
      * Une méthode qui renvois un boolean pour le choix d'action du bot
      * @param numeroActionDansLeTour

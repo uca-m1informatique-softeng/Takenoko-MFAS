@@ -1,7 +1,7 @@
 package moteur;
 
 import javafx.geometry.Point3D;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;

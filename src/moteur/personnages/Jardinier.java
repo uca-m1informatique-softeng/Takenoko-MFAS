@@ -15,6 +15,12 @@ public class Jardinier extends Personnage {
         super(p);
     }
 
+    //////////////////////////////Méthodes//////////////////////////////
+
+    /**
+     * @param point3D
+     * @return
+     */
     public boolean PousserOuMangerBambou(Point3D point3D) {
         boolean reponse = false;
         System.out.println("Jardinier en " + getCoord().getX() + ", " + getCoord().getY() + ", " + getCoord().getZ()+ " (Parcelle "+getPlateau().getParcelle((point3D)).getType()+")");
@@ -30,13 +36,17 @@ public class Jardinier extends Personnage {
         return reponse;
     }
 
+    /**
+     * @param point3D
+     * @return
+     */
     public ArrayList<Point3D> ouPousserBambou(Point3D point3D) {
 
         ArrayList<Point3D> listParcelle = getPlateau().getParcelleVoisineMemeCouleur(point3D);
         ArrayList<Point3D> listMemeCouleur = new ArrayList<>();
         if(getPlateau().getParcelle(point3D).isIrriguee()){
-            listMemeCouleur.add(point3D);}
-
+            listMemeCouleur.add(point3D);
+        }
         while(listParcelle.size() > 0){
             Point3D newPoint =  listParcelle.get(0);
             if(!listMemeCouleur.contains(newPoint) && getPlateau().getParcelle(newPoint).isIrriguee()){

@@ -16,6 +16,8 @@ public class BotRandom extends Bot{
         super(couleur);
     }
 
+    //////////////////////////////Méthodes//////////////////////////////
+
     /**
      * @param numeroActionDansLeTour
      * @param partie

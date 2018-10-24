@@ -11,14 +11,6 @@ public class Parcelle {
     private boolean irriguee;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 
-    public boolean isIrriguee() {
-        return irriguee;
-    }
-
-    public void setIrriguee(boolean irriguee) {
-        this.irriguee = irriguee;
-    }
-
     /**
      * Le constructeur
      * @param type
@@ -34,12 +26,37 @@ public class Parcelle {
         }
     }
 
+    //////////////////////////////GETTER et SETTER//////////////////////////////
+
+
+    /**
+     * @return
+     */
+    public boolean isIrriguee() {
+        return irriguee;
+    }
+
+    public void setIrriguee(boolean irriguee) {
+        this.irriguee = irriguee;
+    }
 
     public int getNbBambou(){
         return listBambou.size();
     }
 
     public TypeParcelle getType() { return type; }
+
+
+    public ArrayList<Bambou> getListBambou() {
+        return listBambou;
+    }
+
+    public void setListBambou(ArrayList<Bambou> listBambou) {
+        this.listBambou = listBambou;
+    }
+
+    //////////////////////////////Méthodes//////////////////////////////
+
 
     /**
      * La methode qui permet de faire pousser le bambou
@@ -69,11 +86,5 @@ public class Parcelle {
         return "parcelle ok";
     }
 
-    public ArrayList<Bambou> getListBambou() {
-        return listBambou;
-    }
 
-    public void setListBambou(ArrayList<Bambou> listBambou) {
-        this.listBambou = listBambou;
-    }
 }
