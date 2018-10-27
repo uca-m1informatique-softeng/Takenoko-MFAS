@@ -57,7 +57,7 @@ public class BotParcelle extends Bot{
         Plateau plateau = partie.getPlateau();
         HashMap<Point3D,Parcelle> map = plateau.getMap();
         ArrayList<Point3D> emplacementslibres = plateau.emplacementsAutorise();
-        Parcelle parcelle = partie.getDeck().piocherParcelle();
+        Parcelle parcelle = choixParcellePioche(partie);
         ObjectifParcelle objectifParcelle = null;
         Point3D pointTemporaire = null;
         Point3D pointObjectif = null;

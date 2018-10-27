@@ -11,7 +11,6 @@ import moteur.Enums.TypeParcelle;
  * La classe des objectifs du panda
  */
 public class ObjectifPanda extends Objectif{
-    TypeParcelle couleur;
     int nombreBambou;
 
     /**
@@ -21,15 +20,10 @@ public class ObjectifPanda extends Objectif{
      * @param nombreBambou
      */
     public ObjectifPanda(int valeur, TypeParcelle couleur, int nombreBambou) {
-        super(valeur);
-        this.couleur = couleur;
+        super(valeur,couleur);
         this.nombreBambou = nombreBambou;
     }
     //////////////////////////////GETTER et SETTER//////////////////////////////
-
-    public TypeParcelle getCouleur() {
-        return couleur;
-    }
 
     public int getNombreBambou() {
         return nombreBambou;

@@ -8,7 +8,7 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import moteur.Enums.CouleurBot;
+import moteur.Enums.*;
 
 
 /**
@@ -162,6 +162,37 @@ public class Joueur {
         return true;
     }
 
+    public Parcelle recuperationParcelle(ArrayList<Parcelle> listParcelles, TypeParcelle couleur){
+
+        for(int i = 0; i < listParcelles.size() ;i++){
+            if(listParcelles.get(i).getType() == couleur){
+                return listParcelles.remove(i);
+            }
+        }
+        return null;
+
+    }
+
+    /**
+     * @param partie
+     * @return
+     */
+    public Parcelle choixParcellePioche(Partie partie){
+
+        ArrayList<Parcelle> listParcelles = partie.getDeck().piocherParcelle();
+        Parcelle parcellePioche;
+        parcellePioche =  recuperationParcelle(listParcelles, TypeParcelle.ROSE);
+        if(parcellePioche == null){
+            parcellePioche = recuperationParcelle(listParcelles, TypeParcelle.JAUNE);
+        }
+        if(parcellePioche == null){
+            parcellePioche = recuperationParcelle(listParcelles, TypeParcelle.VERTE);
+        }
+        partie.getDeck().remettreParcellesDansDeck(listParcelles);
+
+        return parcellePioche;
+    }
+
     /**
      * C'est la méthode pour que le joueur pose une parcelle
      * @param partie
@@ -169,7 +200,7 @@ public class Joueur {
     public void joueurPose(Partie partie){
         Plateau plateau = partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle parcelle = partie.getDeck().piocherParcelle();
+        Parcelle parcelle = choixParcellePioche(partie);
         if(!list.isEmpty()){
             Point3D point = list.get(0);
             plateau.poser(parcelle, point);

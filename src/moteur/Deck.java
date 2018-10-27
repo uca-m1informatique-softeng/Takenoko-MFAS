@@ -144,14 +144,31 @@ public class Deck {
      * La pioche des parcelles
      * @return
      */
-    public Parcelle piocherParcelle(){
-        if(!deckParcelles.isEmpty()){
-            int random = new Random().nextInt(deckParcelles.size());
-            Parcelle parcelleTemporaire =  deckParcelles.get(random);
-            deckParcelles.remove(random);
-            return parcelleTemporaire;
+    public ArrayList<Parcelle> piocherParcelle(){
+        ArrayList<Parcelle> listeParcelleTemporaire = new ArrayList<>();
+        if(deckParcelles.size() > 3){
+            for (int i = 0; i < 2; i++) {
+                int random = new Random().nextInt(deckParcelles.size());
+                listeParcelleTemporaire.add(deckParcelles.remove(random));
+            }
         }
-        return new Parcelle(TypeParcelle.ETANG);
+        else if(deckParcelles.size() > 0){
+            return deckParcelles;
+
+        }
+        else if(deckParcelles.size() == 0) {
+            return null;
+        }
+        return listeParcelleTemporaire;
+    }
+
+
+    /**
+     * La méthode qui remet les deux parcelles dans le deck
+     * @param listParcelle
+     */
+    public void remettreParcellesDansDeck(ArrayList<Parcelle> listParcelle){
+        deckParcelles.addAll(listParcelle);
     }
 
     /**

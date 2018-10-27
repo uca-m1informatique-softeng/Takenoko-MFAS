@@ -17,7 +17,6 @@ import java.util.HashMap;
  */
 public class ObjectifParcelle extends Objectif {
 
-    private final Enums.TypeParcelle couleur;
     private int tailleBambou;
     private int type; //0 pour droit ; 1 pour courbé //2 pour triangle //3 pour 4 parcelles
 
@@ -28,16 +27,11 @@ public class ObjectifParcelle extends Objectif {
      * @param type
      */
     public ObjectifParcelle(int valeur, Enums.TypeParcelle couleur, int type) {
-        super(valeur);
-        this.couleur = couleur;
+        super(valeur,couleur);
         this.type = type;
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
-
-    public Enums.TypeParcelle getCouleur() {
-        return couleur;
-    }
 
     public int getType() {
         return type;

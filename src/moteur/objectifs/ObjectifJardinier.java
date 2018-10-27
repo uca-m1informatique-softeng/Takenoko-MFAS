@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class ObjectifJardinier extends Objectif{
 
-    TypeParcelle couleur;
+
     int tailleBambou;
 
     /**
@@ -21,16 +21,11 @@ public class ObjectifJardinier extends Objectif{
      * @param tailleBambou
      */
     public ObjectifJardinier(int valeur, TypeParcelle couleur, int tailleBambou) {
-        super(valeur);
-        this.couleur = couleur;
+        super(valeur,couleur);
         this.tailleBambou = tailleBambou;
     }
 
     //////////////////////////////GETTER ET SETTER//////////////////////////////
-
-    public TypeParcelle getCouleur() {
-        return couleur;
-    }
 
     public int getTailleBambou() {
         return tailleBambou;
