@@ -58,7 +58,7 @@ public class BotPanda extends Bot {
             }
             if(pasDeplacer){ pointJaridnier = listdeplacementJardinier.get(0);}
             jardinier.Deplacer(pointJaridnier);
-            System.out.println("Il y a " + plateau.getParcelle(pointJaridnier).getNbBambou() + " bambou sur cette case");
+            //Affichage.affichageNombreBambou(plateau,pointJaridnier);
         }
     }
 
@@ -84,7 +84,7 @@ public class BotPanda extends Bot {
             if(panda.Deplacer(pointPanda)){
                 getListBambou().add(new Bambou(plateau.getMap().get(pointPanda).getType()));
             }
-            System.out.println("Il y a " + plateau.getParcelle(pointPanda).getNbBambou() + " bambou sur cette case");
+            //Affichage.affichageNombreBambou(plateau,pointPanda);
         }
     }
 }

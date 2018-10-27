@@ -27,7 +27,7 @@ public class JardinierTest {
 
         assertEquals(0,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
 
-        partie.getJardinier().PousserOuMangerBambou(new Point3D(0,1,-1));
+        partie.getJardinier().faireActionBambou(new Point3D(0,1,-1));
 
         assertEquals(1,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
     }

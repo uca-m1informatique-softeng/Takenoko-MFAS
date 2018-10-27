@@ -48,7 +48,7 @@ public class ObjectifJardinier extends Objectif{
         ArrayList<Parcelle> parcellesPlateau=partie.getPlateau().getAllParcelle();
         for(int i = 0; i < parcellesPlateau.size(); i++){
             Parcelle parcelleCourante=parcellesPlateau.get(i);
-            if( parcelleCourante.getNbBambou() == tailleBambou && parcelleCourante.getType() == couleur){
+            if( parcelleCourante.getNbBambou() >= tailleBambou && parcelleCourante.getType() == couleur){
                 setValide(true);
                 return true;
             }

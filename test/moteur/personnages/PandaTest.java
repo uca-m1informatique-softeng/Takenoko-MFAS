@@ -31,7 +31,7 @@ public class PandaTest {
 
         assertEquals(2,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
 
-        partie.getPanda().PousserOuMangerBambou(new Point3D(0,1,-1));
+        partie.getPanda().faireActionBambou(new Point3D(0,1,-1));
         assertEquals(1,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
     }
 

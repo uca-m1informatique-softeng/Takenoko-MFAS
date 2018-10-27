@@ -81,10 +81,4 @@ public class Parcelle {
         return false;
     }
 
-    @Override
-    public String toString() {
-        return "parcelle ok";
-    }
-
-
 }

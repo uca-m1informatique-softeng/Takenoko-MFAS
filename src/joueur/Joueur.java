@@ -19,8 +19,18 @@ public class Joueur {
     private int nombreObjectifsRemplis;
     private ArrayList<Objectif> listObjectifs;
     private ArrayList<Bambou> listBambou;
-    private int score = 0;
+    private int score;
     private ArrayList<Irrigation> listIrrigation;
+    private int nbVictoire;
+    private int nbEgalite;
+
+    public int getNbVictoire() {
+        return nbVictoire;
+    }
+
+    public void setNbVictoire(int victoire) {
+        nbVictoire = victoire;
+    }
 
     /**
      * Le constructeur
@@ -29,9 +39,13 @@ public class Joueur {
     public Joueur(CouleurBot couleur){
         this.couleur = couleur;
         this.nombreObjectifsRemplis=0;
-        this.listObjectifs=new ArrayList<Objectif>();
-        this.listBambou=new ArrayList<Bambou>();
-        this.listIrrigation=new ArrayList<Irrigation>();
+        this.listObjectifs=new ArrayList<>();
+        this.listBambou=new ArrayList<>();
+        this.listIrrigation=new ArrayList<>();
+        this.score=0;
+        this.nbVictoire=0;
+        this.nbEgalite=0;
+
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
@@ -77,7 +91,31 @@ public class Joueur {
         listObjectifs = listObjectifs2;
     }
 
+    public ArrayList<Irrigation> getListIrrigation() {
+        return listIrrigation;
+    }
+
+    public void setListIrrigation(ArrayList<Irrigation> listIrrigation) {
+        this.listIrrigation = listIrrigation;
+    }
+
+    public int getNbEgalite() {
+        return nbEgalite;
+    }
+
+    public void setNbEgalite(int egalite) {
+        nbEgalite = egalite;
+    }
+
     //////////////////////////////Méthodes//////////////////////////////
+
+    public void resetJoueur(){
+        setNombreObjectifsRemplis(0);
+        setListObjectifs(new ArrayList<Objectif>());
+        setListBambou(new ArrayList<Bambou>());
+        setListIrrigation(new ArrayList<Irrigation>());
+        setScore(0);
+    }
 
     /**
      * @param irrigation
@@ -104,7 +142,7 @@ public class Joueur {
         while (i.hasNext()) {
             Objectif objectif = i.next();
             if (objectif.validation(partie,this) && nombreObjectifsRemplis < 1) {
-                System.out.println("Le joueur "+ couleur +" réalise son objectif "+objectif.toString());
+                Affichage.affichageObjectifReussi(this,objectif);
                 nombreObjectifsRemplis++;
                 score += objectif.getValeur();
                 i.remove();
@@ -162,7 +200,6 @@ public class Joueur {
             if(panda.Deplacer(pointPanda)){
                 listBambou.add(new Bambou(plateau.getMap().get(pointPanda).getType()));
             }
-            System.out.println("Il y a " + plateau.getParcelle(pointPanda).getNbBambou() + " bambou sur cette case");
         }
     }
 
@@ -172,36 +209,14 @@ public class Joueur {
     public void joueurPoseIrrigation(Partie partie){
         Plateau plateau = partie.getPlateau();
         ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
-        Irrigation Irrig = new Irrigation();
+        Irrigation irrig = new Irrigation();
         if(!list.isEmpty()){
             Point3D point = list.get(0);
-            plateau.poserIrrigation(Irrig, point);
+            plateau.poserIrrigation(irrig, point);
         }
     }
 
-    @Override
-    public String toString() {
-        return this.couleur.toString();
-    }
+    public void addVictoire(){nbVictoire++;}
+    public void addEgalite(){nbEgalite++;}
 
-    /**
-     * Pour avoir le déroulement de la partie en couleur
-     * @return
-     */
-    public String debutChatcouleur(){
-        switch(couleur){
-            case BLEU :
-                return "\u001B[34m";
-            case ROUGE :
-                return "\u001B[31m";
-            case VERT :
-                return "\u001B[32m";
-            default:
-                return "\u001B[0m";
-        }
-    }
-
-    public String finChatcouleur(){
-        return "\u001B[0m";
-    }
 }

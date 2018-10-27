@@ -1,5 +1,6 @@
 package moteur.personnages;
 
+import moteur.Affichage;
 import moteur.Plateau;
 import javafx.geometry.Point3D;
 
@@ -21,18 +22,16 @@ public class Jardinier extends Personnage {
      * @param point3D
      * @return
      */
-    public boolean PousserOuMangerBambou(Point3D point3D) {
+    public boolean faireActionBambou(Point3D point3D) {
         boolean reponse = false;
-        System.out.println("Jardinier en " + getCoord().getX() + ", " + getCoord().getY() + ", " + getCoord().getZ()+ " (Parcelle "+getPlateau().getParcelle((point3D)).getType()+")");
+        Affichage.affichageJardinier(point3D,getPlateau());
         ArrayList<Point3D> pointOuPousser =  ouPousserBambou(point3D);
-        System.out.print("Du bambou a poussé en : ");
         for(Point3D pt : pointOuPousser){
             if(getPlateau().getParcelle(pt).pousserBambou()){
-                System.out.print("( " + pt.getX()+", " + pt.getY() + ", " + pt.getZ() + " )");
+                Affichage.affichageNombreBambou(getPlateau(),pt);
                 reponse = true;
             }
         }
-        System.out.println("");
         return reponse;
     }
 
@@ -47,18 +46,10 @@ public class Jardinier extends Personnage {
         if(getPlateau().getParcelle(point3D).isIrriguee()){
             listMemeCouleur.add(point3D);
         }
-        while(listParcelle.size() > 0){
-            Point3D newPoint =  listParcelle.get(0);
-            if(!listMemeCouleur.contains(newPoint) && getPlateau().getParcelle(newPoint).isIrriguee()){
-                listMemeCouleur.add(newPoint);
-                ArrayList<Point3D> newList =  getPlateau().getParcelleVoisineMemeCouleur(newPoint);
-                for(Point3D pt : newList){
-                    if(!listParcelle.contains(pt)){
-                        listParcelle.add(pt);
-                    }
-                }
+        for(Point3D pointMemeCouleur : listParcelle){
+            if(getPlateau().getParcelle(pointMemeCouleur).isIrriguee()){
+                listMemeCouleur.add(pointMemeCouleur);
             }
-            listParcelle.remove(0);
         }
         return listMemeCouleur;
     }

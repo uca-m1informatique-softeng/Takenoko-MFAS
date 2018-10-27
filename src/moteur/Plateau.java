@@ -429,12 +429,16 @@ public class Plateau {
         for(Point3D coord:listCoordIrrigationVoisine)
         {
             if (keylistIrrigation.contains(coord)){
-                parcelle.setIrriguee(true);
+                if(!parcelle.isIrriguee()) {
+                    parcelle.setIrriguee(true);
+                    parcelle.pousserBambou();
+                }
                 break;
             }
         }
 
-        System.out.println("Parcelle "+parcelle.getType()+" posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
+        Affichage.affichagePoseParcelle(parcelle,coordonne);
+        Affichage.affichageNombreBambou(this,coordonne);
     }
 
     /**
@@ -447,9 +451,15 @@ public class Plateau {
         for(Point3D point: getcoordonneParcelleAdjacenteIrrigation(coordonne)){
             Parcelle parcelleVoisineIrrigation=getParcelle(point);
             if(parcelleVoisineIrrigation!=null)
-            {parcelleVoisineIrrigation.setIrriguee(true);}
+            {
+                if(!parcelleVoisineIrrigation.isIrriguee()){
+                parcelleVoisineIrrigation.setIrriguee(true);
+                parcelleVoisineIrrigation.pousserBambou();
+                }
+            }
         }
-        System.out.println("Irrigation posée en " + coordonne.getX() + ", " + coordonne.getY() + ", " + coordonne.getZ());
+
+        Affichage.affichagePoseIrrigation(coordonne);
     }
 
     /**

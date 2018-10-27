@@ -70,6 +70,7 @@ public class Partie {
 
         //initialisation de la Partie
         for (Joueur JoueurCourant: listJoueurs) {
+            JoueurCourant.resetJoueur();
             this.getDeck().piocheObjectifJardinier(JoueurCourant);
             this.getDeck().piocheObjectifPanda(JoueurCourant);
             this.getDeck().piocheObjectifParcelle(JoueurCourant);
@@ -78,10 +79,9 @@ public class Partie {
         //coeur du jeu
         while (!finDePartie) {
             for (Joueur JoueurCourant: listJoueurs) {
-                System.out.println("C'est au tour du joueur "+JoueurCourant.toString());
+                Affichage.affichageDebutTour(JoueurCourant);
                 int action=0;
                 boolean finDuTour=false;
-                System.out.print(JoueurCourant.debutChatcouleur());
                 while (!finDuTour) {
 
                     //verifier objectif
@@ -92,32 +92,43 @@ public class Partie {
                         finDePartie=true;
                     }
                 }
-                System.out.println("C'est la fin du tour du joueur "+JoueurCourant.toString());
-                System.out.print(JoueurCourant.finChatcouleur());
+                Affichage.affichageFinTour(JoueurCourant);
             }
 
         }
         //fin de partie
-        Joueur vainqueur=listJoueurs.get(0);
-        boolean egalite=false;
+        calculVainqueur(listJoueurs);
+    }
+
+    private void calculVainqueur(ArrayList <Joueur> listJoueurs){
+        ArrayList<Joueur> vainqueur=new ArrayList<>();
+        vainqueur.add(listJoueurs.get(0));
         //recup vainqueur
         for (int i=1;i<listJoueurs.size();i++) {
             Joueur joueur=listJoueurs.get(i);
-            if (joueur.getScore()>vainqueur.getScore()) {
-                vainqueur = joueur;
-                egalite = false;
+            Joueur vainqueurCourant=vainqueur.get(0);
+            if (joueur.getScore()>vainqueurCourant.getScore()) {
+                vainqueur.clear();
+                vainqueur.add(joueur);
             }
-            else{if (joueur.getScore()==vainqueur.getScore()) {
-                egalite = true;
-            }}
+            else{
+                if (joueur.getScore()==vainqueurCourant.getScore()) { vainqueur.add(joueur);}
+            }
         }
-        if (egalite){
-            System.out.println("C'est une egalité");
+        if(isEgalite(vainqueur))
+        {
+            for (Joueur joueur:vainqueur){
+                joueur.addEgalite();
+            }
         }
         else {
-            System.out.println(vainqueur.toString()+" gagne avec " + vainqueur.getScore() + " points.");
+            vainqueur.get(0).addVictoire();
         }
+        Affichage.affichageFinPartie(vainqueur);
+    }
 
+    private boolean isEgalite(ArrayList <Joueur> vainqueur){
+        return vainqueur.size()>1;
     }
 
 }

@@ -1,5 +1,6 @@
 package parties;
 
+import moteur.Affichage;
 import moteur.Partie;
 import joueur.*;
 import moteur.Enums.CouleurBot;
@@ -22,9 +23,15 @@ public class Main {
         listeDesJoueurs.add(botPanda);
         listeDesJoueurs.add(botParcelle);
 
+        Affichage.setVerbose(false);
 
-        Partie partie = new Partie();
-        partie.jouer(listeDesJoueurs);
+        for (int i=0;i<1000;i++)
+        {
+            Partie partie = new Partie();
+            partie.jouer(listeDesJoueurs);
+        }
+
+        Affichage.affichageResultatsPartie(listeDesJoueurs);
 
 
     }

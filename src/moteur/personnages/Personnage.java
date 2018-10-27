@@ -76,14 +76,14 @@ public abstract class Personnage {
     //pour le deplacement (pas de verification)
     public boolean Deplacer(Point3D p){
         this.setCoord(p);
-        return PousserOuMangerBambou(p);
+        return faireActionBambou(p);
     }
 
     /**
      * @param p
      * @return
      */
-    public boolean PousserOuMangerBambou(Point3D p) {
+    public boolean faireActionBambou(Point3D p) {
         //a modidifier dans les fils
         return false;
     }
