@@ -1,6 +1,7 @@
 package moteur.personnages;
 
 import moteur.Affichage;
+import moteur.Deck;
 import moteur.Plateau;
 import javafx.geometry.Point3D;
 
@@ -11,24 +12,34 @@ import java.util.ArrayList;
  */
 public class Jardinier extends Personnage {
 
-    public Jardinier(Plateau p)
+    private static Jardinier instance=null;
+
+    public Jardinier()
     {
-        super(p);
+        super();
     }
 
     //////////////////////////////Méthodes//////////////////////////////
+
+    public final static Jardinier getInstance() {
+        if (Jardinier.instance == null) {
+            Jardinier.instance = new Jardinier();
+        }
+        return Jardinier.instance;
+    }
 
     /**
      * @param point3D
      * @return
      */
     public boolean faireActionBambou(Point3D point3D) {
+        Plateau plateau=Plateau.getInstance();
         boolean reponse = false;
-        Affichage.affichageJardinier(point3D,getPlateau());
+        Affichage.affichageJardinier(point3D,plateau);
         ArrayList<Point3D> pointOuPousser =  ouPousserBambou(point3D);
         for(Point3D pt : pointOuPousser){
-            if(getPlateau().getParcelle(pt).pousserBambou()){
-                Affichage.affichageNombreBambou(getPlateau(),pt);
+            if(plateau.getParcelle(pt).pousserBambou()){
+                Affichage.affichageNombreBambou(plateau,pt);
                 reponse = true;
             }
         }
@@ -40,14 +51,14 @@ public class Jardinier extends Personnage {
      * @return
      */
     public ArrayList<Point3D> ouPousserBambou(Point3D point3D) {
-
-        ArrayList<Point3D> listParcelle = getPlateau().getParcelleVoisineMemeCouleur(point3D);
+        Plateau plateau=Plateau.getInstance();
+        ArrayList<Point3D> listParcelle = plateau.getParcelleVoisineMemeCouleur(point3D);
         ArrayList<Point3D> listMemeCouleur = new ArrayList<>();
-        if(getPlateau().getParcelle(point3D).isIrriguee()){
+        if(plateau.getParcelle(point3D).isIrriguee()){
             listMemeCouleur.add(point3D);
         }
         for(Point3D pointMemeCouleur : listParcelle){
-            if(getPlateau().getParcelle(pointMemeCouleur).isIrriguee()){
+            if(plateau.getParcelle(pointMemeCouleur).isIrriguee()){
                 listMemeCouleur.add(pointMemeCouleur);
             }
         }

@@ -1,6 +1,7 @@
 package moteur;
 
 import joueur.Joueur;
+import moteur.objectifs.Objectif;
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
 import moteur.Enums.TypeParcelle;
@@ -13,21 +14,24 @@ import java.util.Random;
  */
 public class Deck {
 
-    private ArrayList<ObjectifJardinier> deckObjectifsJardinier = new ArrayList<>();
-    private ArrayList<ObjectifPanda> deckObjectifsPanda = new ArrayList<>();
-    private ArrayList<ObjectifParcelle> deckObjectifsParcelle = new ArrayList<>();
-    private ArrayList<Parcelle> deckParcelles = new ArrayList<>();
+    private static Deck instance=null;
 
-    private Partie partie;
-
+    private ArrayList<ObjectifJardinier> deckObjectifsJardinier;
+    private ArrayList<ObjectifPanda> deckObjectifsPanda;
+    private ArrayList<ObjectifParcelle> deckObjectifsParcelle;
+    private ArrayList<Parcelle> deckParcelles;
 
 
     /**
      * Le constructeur
-     * @param partie
      */
-    public Deck(Partie partie) {
-        this.partie=partie;
+    public Deck() {
+
+        deckObjectifsJardinier = new ArrayList<>();
+        deckObjectifsPanda = new ArrayList<>();
+        deckObjectifsParcelle = new ArrayList<>();
+        deckParcelles = new ArrayList<>();
+
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
@@ -68,13 +72,27 @@ public class Deck {
         this.deckParcelles = deckParcelles;
     }
 
+    public final static Deck getInstance() {
+        if (Deck.instance == null) {
+            Deck.instance = new Deck();
+        }
+        return Deck.instance;
+    }
+
     //////////////////////////////Méthodes//////////////////////////////
 
+    public void resetDeck(){
+        initialiserObjectifsJardinier();
+        initialiserObjectifsPanda();
+        initialiserDeckParcelle();
+        initialiserDeckParcelleMotif();
+    }
 
     /**
      * Le deck des objectifs parcelles
      */
     public void initialiserDeckParcelleMotif() {
+        deckObjectifsParcelle.clear();
         deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,0));
         deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,1));
         deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,2));
@@ -87,13 +105,13 @@ public class Deck {
         deckObjectifsParcelle.add(new ObjectifParcelle(4,TypeParcelle.ROSE,1));
         deckObjectifsParcelle.add(new ObjectifParcelle(4,TypeParcelle.ROSE,2));
         deckObjectifsParcelle.add(new ObjectifParcelle(5,TypeParcelle.ROSE,3));
-
     }
 
     /**
      * Le deck des parcelles
      */
     public void initialiserDeckParcelle() {
+        deckParcelles.clear();
         for (int i = 0;i < 11;i++){
             deckParcelles.add(new Parcelle(TypeParcelle.VERTE));
         }
@@ -110,6 +128,7 @@ public class Deck {
      * Le deck des objectifs jardinier
      */
     public void initialiserObjectifsJardinier(){
+        deckObjectifsJardinier.clear();
         for (int i = 0;i<4;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(6,TypeParcelle.JAUNE,4));
         }
@@ -128,13 +147,14 @@ public class Deck {
      * Le deck des objectifs panda
      */
     public void initialiserObjectifsPanda(){
+        deckObjectifsPanda.clear();
         for (int i = 0;i<3;i++){
             deckObjectifsPanda.add(new ObjectifPanda(4,TypeParcelle.JAUNE,2));
         }
         for (int i = 3;i<6;i++){
             deckObjectifsPanda.add(new ObjectifPanda(5,TypeParcelle.ROSE,2));
         }
-        for (int i = 6;i<9;i++){
+        for (int i = 6;i<90;i++){
             deckObjectifsPanda.add(new ObjectifPanda(3,TypeParcelle.VERTE,2));
         }
     }
@@ -149,20 +169,19 @@ public class Deck {
         if(deckParcelles.size() > 3){
             for (int i = 0; i < 2; i++) {
                 int random = new Random().nextInt(deckParcelles.size());
-                listeParcelleTemporaire.add(deckParcelles.remove(random));
+                listeParcelleTemporaire.add(deckParcelles.get(random));
+                deckParcelles.remove(random);
             }
         }
+
         else if(deckParcelles.size() > 0){
             return deckParcelles;
-
         }
         else if(deckParcelles.size() == 0) {
             return null;
         }
         return listeParcelleTemporaire;
     }
-
-
     /**
      * La méthode qui remet les deux parcelles dans le deck
      * @param listParcelle
@@ -173,53 +192,58 @@ public class Deck {
 
     /**
      * La pioche des objectifs parcelles
-     * @param bot
      */
-    public void piocheObjectifParcelle(Joueur bot) {
-        if (!deckObjectifsParcelle.isEmpty()) {
-            int random = new Random().nextInt(deckObjectifsParcelle.size());
-            ObjectifParcelle objectifTemporaireParcelle = deckObjectifsParcelle.get(random);
-            deckObjectifsParcelle.remove(random);
-            bot.addObjectif(objectifTemporaireParcelle);
-        }
+    public ObjectifParcelle piocheObjectifParcelle(){
+        return (ObjectifParcelle)piocheobjectif(deckObjectifsParcelle);
     }
 
 
     /**
      * La pioche des objectifs jardinier
-     * @param bot
      */
-    public void piocheObjectifJardinier(Joueur bot) {
-        if (!deckObjectifsJardinier.isEmpty()) {
-            int random = new Random().nextInt(deckObjectifsJardinier.size());
-            ObjectifJardinier objectifTemporaireJardinier = deckObjectifsJardinier.get(random);
-            deckObjectifsJardinier.remove(random);
-            bot.addObjectif(objectifTemporaireJardinier);
-
-        }
+    public ObjectifJardinier piocheObjectifJardinier() {
+        return (ObjectifJardinier)piocheobjectif(deckObjectifsJardinier);
     }
 
     /**
      * La pioche des objectifs panda
-     * @param bot
      */
-    public void piocheObjectifPanda(Joueur bot) {
-        if (!deckObjectifsPanda.isEmpty()) {
-            int random = new Random().nextInt(deckObjectifsPanda.size());
-            ObjectifPanda objectifTemporairePanda = deckObjectifsPanda.get(random);
-            deckObjectifsPanda.remove(random);
-            bot.addObjectif(objectifTemporairePanda);
+    public ObjectifPanda piocheObjectifPanda() {
+        return (ObjectifPanda)piocheobjectif(deckObjectifsPanda);
+    }
+
+    private Object piocheobjectif(ArrayList<?> list){
+        if (!list.isEmpty()) {
+            int random = new Random().nextInt(list.size());
+            Object objtemp = list.get(random);
+            list.remove(random);
+            Affichage.affichagePiocheObjectif((Objectif)objtemp);
+            return objtemp;
 
         }
+        return null;
     }
 
 
 
-    public void piocheIrrigation(Joueur bot){
-        bot.addIrrigation(new Irrigation());
+    public Irrigation piocheIrrigation(){
+        return new Irrigation();
     }
 
+    public boolean isDeckParcelleVide(){
+        return deckParcelles.isEmpty();
+    }
 
+    public boolean isDeckObjectifPandaVide(){
+        return deckObjectifsPanda.isEmpty();
+    }
 
+    public boolean isDeckObjectifJardinierVide(){
+        return deckObjectifsJardinier.isEmpty();
+    }
+
+    public boolean isDeckObjectifParcelleVide(){
+        return deckObjectifsParcelle.isEmpty();
+    }
 
 }

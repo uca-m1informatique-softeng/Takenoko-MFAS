@@ -4,13 +4,14 @@ import moteur.Parcelle;
 import moteur.Partie;
 import joueur.Joueur;
 import moteur.Enums.TypeParcelle;
+import moteur.Plateau;
+
 import java.util.ArrayList;
 
 /**
  * La classe des objectifs du jardinier
  */
 public class ObjectifJardinier extends Objectif{
-
 
     int tailleBambou;
 
@@ -35,15 +36,16 @@ public class ObjectifJardinier extends Objectif{
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.
-     * @param partie
      * @param joueur
      * @return
      */
-    public boolean validation(Partie partie,Joueur joueur){
-        ArrayList<Parcelle> parcellesPlateau=partie.getPlateau().getAllParcelle();
+    @Override
+    public boolean validation(Joueur joueur){
+        Plateau plateau=Plateau.getInstance();
+        ArrayList<Parcelle> parcellesPlateau=plateau.getAllParcelle();
         for(int i = 0; i < parcellesPlateau.size(); i++){
             Parcelle parcelleCourante=parcellesPlateau.get(i);
-            if( parcelleCourante.getNbBambou() >= tailleBambou && parcelleCourante.getType() == couleur){
+            if( parcelleCourante.getNbBambou() >= tailleBambou && parcelleCourante.getType() == this.getCouleur()){
                 setValide(true);
                 return true;
             }
@@ -52,7 +54,7 @@ public class ObjectifJardinier extends Objectif{
     }
 
     public String toString() {
-        return "faire pousser "+tailleBambou+" bambou(s) "+couleur;
+        return "faire pousser "+tailleBambou+" bambou(s) "+this.getCouleur();
     }
 }
 

@@ -9,18 +9,28 @@ import javafx.geometry.Point3D;
  */
 public class Panda extends Personnage {
 
-    public Panda(Plateau p){
-        super(p);
+    private static Panda instance=null;
+
+    public Panda(){
+        super();
     }
 
     //////////////////////////////Méthodes//////////////////////////////
+
+    public final static Panda getInstance() {
+        if (Panda.instance == null) {
+            Panda.instance = new Panda();
+        }
+        return Panda.instance;
+    }
 
     /**
      * @param p
      * @return
      */
     public boolean faireActionBambou(Point3D p) {
-        Affichage.affichagePanda(p,getPlateau());
-        return this.getPlateau().getParcelle(p).mangerBambou();
+        Plateau plateau=Plateau.getInstance();
+        Affichage.affichagePanda(p,plateau);
+        return plateau.getParcelle(p).mangerBambou();
     }
 }

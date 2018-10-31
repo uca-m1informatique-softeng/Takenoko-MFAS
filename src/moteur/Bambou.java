@@ -17,7 +17,7 @@ public class Bambou {
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
-    
+
 
     public TypeParcelle getCouleur() {
         return couleur;

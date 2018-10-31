@@ -1,6 +1,6 @@
 package moteur.objectifs;
 
-import moteur.Enums.TypeParcelle;
+import moteur.Enums;
 import moteur.Partie;
 import joueur.Joueur;
 
@@ -8,19 +8,19 @@ import joueur.Joueur;
  * La classe des objectifs
  */
 public abstract class  Objectif {
+    private final Enums.TypeParcelle couleur;
     private int valeur;
     private boolean valide;
-    TypeParcelle couleur;
 
 
     /**
      * Le constructeur
      * @param valeur
      */
-    public Objectif(int valeur, TypeParcelle couleur){
+    public Objectif(int valeur,Enums.TypeParcelle couleur){
         this.valeur = valeur;
-        this.couleur = couleur;
         this.valide = false;
+        this.couleur= couleur;
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
@@ -33,7 +33,9 @@ public abstract class  Objectif {
         this.valide = valide;
     }
 
-    public TypeParcelle getCouleur() { return couleur; }
+    public Enums.TypeParcelle getCouleur() {
+        return couleur;
+    }
 
     //////////////////////////////Méthodes//////////////////////////////
 
@@ -44,11 +46,10 @@ public abstract class  Objectif {
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.
-     * @param partie
      * @param joueur
      * @return
      */
-    public boolean validation(Partie partie,Joueur joueur){
+    public boolean validation(Joueur joueur){
         return valide;
     }
 }

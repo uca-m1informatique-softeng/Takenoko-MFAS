@@ -8,13 +8,14 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import moteur.Enums.*;
+import moteur.Enums.CouleurBot;
 
 
 /**
  * La classe du joueur
  */
-public class Joueur {
+public class Joueur implements IA {
+    private ArrayList<Enums.Action> listAction;
     private CouleurBot couleur;
     private int nombreObjectifsRemplis;
     private ArrayList<Objectif> listObjectifs;
@@ -24,13 +25,7 @@ public class Joueur {
     private int nbVictoire;
     private int nbEgalite;
 
-    public int getNbVictoire() {
-        return nbVictoire;
-    }
 
-    public void setNbVictoire(int victoire) {
-        nbVictoire = victoire;
-    }
 
     /**
      * Le constructeur
@@ -42,6 +37,7 @@ public class Joueur {
         this.listObjectifs=new ArrayList<>();
         this.listBambou=new ArrayList<>();
         this.listIrrigation=new ArrayList<>();
+        this.listAction=new ArrayList<>();
         this.score=0;
         this.nbVictoire=0;
         this.nbEgalite=0;
@@ -49,6 +45,23 @@ public class Joueur {
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
+
+
+    public ArrayList<Enums.Action> getListAction() {
+        return listAction;
+    }
+
+    public void setListAction(ArrayList<Enums.Action> listAction) {
+        this.listAction = listAction;
+    }
+
+    public int getNbVictoire() {
+        return nbVictoire;
+    }
+
+    public void setNbVictoire(int victoire) {
+        nbVictoire = victoire;
+    }
 
     public CouleurBot getCouleur() {
         return couleur;
@@ -109,12 +122,34 @@ public class Joueur {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    public void supprBambou(Enums.TypeParcelle couleur,int nb) {
+        for(int i=0;i<nb;i++){
+            int j=0;
+            while(listBambou.get(j).getCouleur()!=couleur) {
+                j++;
+            }
+            listBambou.remove(j);
+        }
+    }
+
+    public void resetListAction(){
+        setListAction(new ArrayList<Enums.Action>());
+    }
+
+    public void addListAction(Enums.Action action){
+        listAction.add(action);
+    }
+
     public void resetJoueur(){
         setNombreObjectifsRemplis(0);
         setListObjectifs(new ArrayList<Objectif>());
         setListBambou(new ArrayList<Bambou>());
         setListIrrigation(new ArrayList<Irrigation>());
+        setListAction(new ArrayList<>());
         setScore(0);
+        actionPiocheObjectifJardinier();
+        actionPiocheObjectifPanda();
+        actionPiocheObjectifParcelle();
     }
 
     /**
@@ -135,119 +170,238 @@ public class Joueur {
 
     /**
      * La méthode qui vérifie que le bot a bien réaliser son objectif.
-     * @param partie
      */
-    public void verifierMesObjectif(Partie partie) {
+    public final void verifierMesObjectif() {
+        for(int i=listObjectifs.size()-1;i>=0;i--){
+            Objectif objectif = listObjectifs.get(i);
+            if (objectif.validation(this)){
+                Affichage.affichageObjectifReussi(this,objectif);
+                nombreObjectifsRemplis++;
+                score += objectif.getValeur();
+                listObjectifs.remove(i);
+            }
+        }
+        /*
         Iterator<Objectif> i = listObjectifs.iterator();
         while (i.hasNext()) {
             Objectif objectif = i.next();
-            if (objectif.validation(partie,this) && nombreObjectifsRemplis < 1) {
+            if (objectif.validation(this) && nombreObjectifsRemplis < 1) {
                 Affichage.affichageObjectifReussi(this,objectif);
                 nombreObjectifsRemplis++;
                 score += objectif.getValeur();
                 i.remove();
             }
+        }*/
+    }
+
+    public final ArrayList<Enums.Action> listActionRestantePossible(){
+        ArrayList<Enums.Action> result=new ArrayList<>();
+        for (Enums.Action action : Enums.Action.values()){
+            result.add(action);
         }
+        for (int i=result.size()-1;i>=0;i--){
+            Enums.Action action=result.get(i);
+            if(action==Enums.Action.PIOCHEROBJECTIFJARDINIER || action==Enums.Action.PIOCHEROBJECTIFPANDA || action==Enums.Action.PIOCHEROBJECTIFPARCELLE){
+                if((!verifActionPossible(action)) ||listAction.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)||listAction.contains(Enums.Action.PIOCHEROBJECTIFPANDA)||listAction.contains(Enums.Action.PIOCHEROBJECTIFPARCELLE)){
+                    result.remove(action);
+                }
+            }
+            else{
+                if(listAction.contains(action) || (!verifActionPossible(action))){
+                    result.remove(action);
+                }
+            }
+        }
+        return result;
+    }
+
+    private final boolean verifActionPossible(Enums.Action action){
+        switch (action){
+            case DEPLACERPANDA:return verifActionDeplacerPanda();
+            case PIOCHERPARCELLE:return verifActionPoserParcelle();
+            case POSERIRRIGATION:return verifActionPoserIrrigation();
+            case DEPLACERJARDINIER:return verifActionDeplacerJardinier();
+            case PIOCHEROBJECTIFPANDA:return verifActionPiocherObjPanda();
+            case PIOCHEROBJECTIFPARCELLE:return verifActionPiocherObjParcelle();
+            case PIOCHEROBJECTIFJARDINIER:return verifActionPiocherObjJardinier();
+        }
+        return false;
+    }
+
+    private final boolean verifActionDeplacerPanda(){
+        return (Plateau.getInstance().getKeylist().size()>1);
+    }
+
+    private final boolean verifActionDeplacerJardinier(){
+        return (Plateau.getInstance().getKeylist().size()>1);
+    }
+
+    private final boolean verifActionPoserParcelle(){
+        return (!Deck.getInstance().isDeckParcelleVide());
+    }
+
+    private final boolean verifActionPiocherObjPanda(){
+        return (!Deck.getInstance().isDeckObjectifPandaVide() && this.getListObjectifs().size()<5);
+    }
+
+    private final boolean verifActionPiocherObjJardinier(){
+        return (!Deck.getInstance().isDeckObjectifJardinierVide() && this.getListObjectifs().size()<5);
+    }
+
+    private final boolean verifActionPiocherObjParcelle(){
+        return (!Deck.getInstance().isDeckObjectifParcelleVide() && this.getListObjectifs().size()<5);
+    }
+
+    private final boolean verifActionPoserIrrigation(){
+        return (!Plateau.getInstance().emplacementsAutoriseIrrigation().isEmpty());
     }
 
     /**
      * C'est la méthode qui permet de réunir les actions du bot.
-     * @param numeroActionDansLeTour
-     * @param partie
      * @return
      */
-    public boolean choixAction(int numeroActionDansLeTour,Partie partie){
-        joueurPose(partie);
-        joueurDeplaceJardinier(partie.getJardinier());
-        return true;
+    public final boolean choixAction(){
+        Enums.Action action=choixTypeAction(listActionRestantePossible());
+        switch (action){
+            case DEPLACERPANDA:
+                actionDeplacePanda();
+                addListAction(action);
+                return true;
+            case PIOCHERPARCELLE:
+                actionPose();
+                addListAction(action);
+                return true;
+            case DEPLACERJARDINIER:
+                actionDeplaceJardinier();
+                addListAction(action);
+                return true;
+            case POSERIRRIGATION:
+                actionPoseIrrigation();
+                addListAction(action);
+                return true;
+            case PIOCHEROBJECTIFJARDINIER:
+                actionPiocheObjectifJardinier();
+                addListAction(action);
+                return true;
+            case PIOCHEROBJECTIFPANDA:
+                actionPiocheObjectifPanda();
+                addListAction(action);
+                return true;
+            case PIOCHEROBJECTIFPARCELLE:
+                actionPiocheObjectifParcelle();
+                addListAction(action);
+                return true;
+        }
+        return false;
     }
 
-    public Parcelle recuperationParcelle(ArrayList<Parcelle> listParcelles, TypeParcelle couleur){
-
-        for(int i = 0; i < listParcelles.size() ;i++){
-            if(listParcelles.get(i).getType() == couleur){
-                return listParcelles.remove(i);
-            }
-        }
-        return null;
-
+    public final Parcelle piocheUneParcelle(){
+        ArrayList<Parcelle> possibilites=Deck.getInstance().piocherParcelle();
+        Parcelle parcelleChoisie=choixParcellePioche(possibilites);
+        possibilites.remove(parcelleChoisie);
+        Deck.getInstance().remettreParcellesDansDeck(possibilites);
+        return parcelleChoisie;
     }
 
-    /**
-     * @param partie
-     * @return
-     */
-    public Parcelle choixParcellePioche(Partie partie){
-
-        ArrayList<Parcelle> listParcelles = partie.getDeck().piocherParcelle();
-        Parcelle parcellePioche;
-        parcellePioche =  recuperationParcelle(listParcelles, TypeParcelle.ROSE);
-        if(parcellePioche == null){
-            parcellePioche = recuperationParcelle(listParcelles, TypeParcelle.JAUNE);
-        }
-        if(parcellePioche == null){
-            parcellePioche = recuperationParcelle(listParcelles, TypeParcelle.VERTE);
-        }
-        partie.getDeck().remettreParcellesDansDeck(listParcelles);
-
-        return parcellePioche;
-    }
-
-    /**
-     * C'est la méthode pour que le joueur pose une parcelle
-     * @param partie
-     */
-    public void joueurPose(Partie partie){
-        Plateau plateau = partie.getPlateau();
+    public final void actionPose(){
+        Plateau plateau = Plateau.getInstance();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
-        Parcelle parcelle = choixParcellePioche(partie);
-        if(!list.isEmpty()){
-            Point3D point = list.get(0);
-            plateau.poser(parcelle, point);
-        }
+        Parcelle parcelle=piocheUneParcelle();
+        Point3D choixPose=choixCoordonnePoseParcelle(list,parcelle); //choix dans fils
+        joueurPose(plateau,parcelle,choixPose);
+    }
+
+    public final void joueurPose(Plateau plateau, Parcelle parcelle, Point3D coord){
+        plateau.poser(parcelle, coord);
     }
 
     /**
      * C'est la méthode qui permet au Joueur de déplacer le jardinier
-     * @param jardinier
      */
-    public void joueurDeplaceJardinier(Jardinier jardinier){
-        ArrayList<Point3D> listdeplacementJardinier=jardinier.DestinationsPossibles();
-        if(!listdeplacementJardinier.isEmpty()){
-            Point3D pointJaridnier = listdeplacementJardinier.get(0);
-            jardinier.Deplacer(pointJaridnier);
-        }
+    public final void actionDeplaceJardinier(){
+        Jardinier jardinier=Jardinier.getInstance();
+        ArrayList<Point3D> listdeplacementJardinier=jardinier.destinationsPossibles();
+        Point3D choixDeplacementJardinier=choixDeplacementJardinier(listdeplacementJardinier);
+        joueurDeplaceJardinier(jardinier,choixDeplacementJardinier);
+    }
+
+    public final void joueurDeplaceJardinier(Jardinier jardinier, Point3D coord){
+        jardinier.deplacer(coord);
     }
 
     /**
      * C'est la méthode qui permet au Joueur de déplacer le panda
-     * @param panda
      */
-    public void joueurDeplacePanda(Panda panda){
-        Plateau plateau=panda.getPlateau();
-        ArrayList<Point3D> listdeplacementPanda = panda.DestinationsPossibles();
-        if(!listdeplacementPanda.isEmpty()){
-            Point3D pointPanda = listdeplacementPanda.get(0);
-            if(panda.Deplacer(pointPanda)){
-                listBambou.add(new Bambou(plateau.getMap().get(pointPanda).getType()));
-            }
+    public final void actionDeplacePanda(){
+        Panda panda=Panda.getInstance();
+        ArrayList<Point3D> listdeplacementPanda=panda.destinationsPossibles();
+        Point3D choixDeplacementPanda=choixDeplacementPanda(listdeplacementPanda);
+        joueurDeplacePanda(panda,choixDeplacementPanda);
+    }
+
+    public final void joueurDeplacePanda(Panda panda, Point3D coord){
+        if(panda.deplacer(coord)){
+            listBambou.add(new Bambou(Plateau.getInstance().getMap().get(coord).getType()));
         }
     }
 
-    /**
-     * @param partie
-     */
-    public void joueurPoseIrrigation(Partie partie){
-        Plateau plateau = partie.getPlateau();
+    public final Irrigation piocheUneIrrigation(){
+        return Deck.getInstance().piocheIrrigation();
+    }
+
+    public final void actionPoseIrrigation(){
+        Plateau plateau = Plateau.getInstance();
         ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
-        Irrigation irrig = new Irrigation();
-        if(!list.isEmpty()){
-            Point3D point = list.get(0);
-            plateau.poserIrrigation(irrig, point);
-        }
+        Irrigation irrigation = piocheUneIrrigation();
+        Point3D choixPose=choixCoordonnePoseIrrigation(list); //choix dans fils
+        joueurPoseIrrigation(plateau,irrigation,choixPose);
     }
 
-    public void addVictoire(){nbVictoire++;}
-    public void addEgalite(){nbEgalite++;}
+    public final void joueurPoseIrrigation(Plateau plateau, Irrigation irrigation, Point3D coord){
+        plateau.poserIrrigation(irrigation, coord);
+    }
+
+    public final void actionPiocheObjectifJardinier(){
+        addObjectif(Deck.getInstance().piocheObjectifJardinier());
+    }
+
+    public final void actionPiocheObjectifPanda(){
+        addObjectif(Deck.getInstance().piocheObjectifPanda());
+    }
+
+    public final void actionPiocheObjectifParcelle(){
+        addObjectif(Deck.getInstance().piocheObjectifParcelle());
+    }
+
+
+
+    public void addVictoire(){
+        nbVictoire++;
+    }
+    public void addEgalite(){
+        nbEgalite++;
+    }
+
+    public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle) {
+        return null;
+    }
+    public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
+        return null;
+    }
+    public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites) {
+        return null;
+    }
+    public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites) {
+        return null;
+    }
+    public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
+        return null;
+    }
+    public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
+        return null;
+    }
+    public Objectif choixObjectifPrioritaire() {
+        return null;
+    }
 
 }

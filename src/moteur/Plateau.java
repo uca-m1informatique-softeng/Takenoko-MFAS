@@ -10,6 +10,8 @@ import moteur.Enums.TypeParcelle;
  */
 public class Plateau {
 
+    private static Plateau instance=null;
+
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
     private HashMap<Point3D, Irrigation> mapIrrigation;
@@ -20,31 +22,18 @@ public class Plateau {
      *Le constructeur
      */
     public Plateau(){
-        Point3D coordonne = new Point3D(0,0,0);
-        Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
-        keylist = new ArrayList<Point3D>();
-        keylist.add(coordonne);
-        map = new HashMap<>();
-        map.put(coordonne,parcelle);
-
-        //6 premiers irrigations autour de l'etang
-        Point3D [] tabCoordIrrigation = new Point3D[6];
-        tabCoordIrrigation[0]=new Point3D(0.5,0,-0.5);
-        tabCoordIrrigation[1]=new Point3D(0.5,-0.5,0);
-        tabCoordIrrigation[2]=new Point3D(0,-0.5,0.5);
-        tabCoordIrrigation[3]=new Point3D(-0.5,0,0.5);
-        tabCoordIrrigation[4]=new Point3D(-0.5,0.5,0);
-        tabCoordIrrigation[5]=new Point3D(0,0.5,-0.5);
-
-        mapIrrigation=new HashMap<>();
-        keylistIrrigation = new ArrayList<Point3D>();
-        for(int i=0;i<6;i++) {
-            keylistIrrigation.add(tabCoordIrrigation[i]);
-            mapIrrigation.put(tabCoordIrrigation[i],new Irrigation());
-        }
-
-
+        resetPlateau();
     }
+
+    public final static Plateau getInstance() {
+        if (Plateau.instance == null) {
+            Plateau.instance = new Plateau();
+        }
+        return Plateau.instance;
+    }
+
+    //////////////////////////////GETTER et SETTER//////////////////////////////
+
 
     public HashMap<Point3D, Irrigation> getMapIrrigation() {
         return mapIrrigation;
@@ -76,6 +65,33 @@ public class Plateau {
 
     public void setKeylist(ArrayList<Point3D> keylist) {
         this.keylist = keylist;
+    }
+
+    //////////////////////////////Méthodes//////////////////////////////
+
+    public void resetPlateau(){
+        Point3D coordonne = new Point3D(0,0,0);
+        Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
+        keylist = new ArrayList<Point3D>();
+        keylist.add(coordonne);
+        map = new HashMap<>();
+        map.put(coordonne,parcelle);
+
+        //6 premiers irrigations autour de l'etang
+        Point3D [] tabCoordIrrigation = new Point3D[6];
+        tabCoordIrrigation[0]=new Point3D(0.5,0,-0.5);
+        tabCoordIrrigation[1]=new Point3D(0.5,-0.5,0);
+        tabCoordIrrigation[2]=new Point3D(0,-0.5,0.5);
+        tabCoordIrrigation[3]=new Point3D(-0.5,0,0.5);
+        tabCoordIrrigation[4]=new Point3D(-0.5,0.5,0);
+        tabCoordIrrigation[5]=new Point3D(0,0.5,-0.5);
+
+        mapIrrigation=new HashMap<>();
+        keylistIrrigation = new ArrayList<Point3D>();
+        for(int i=0;i<6;i++) {
+            keylistIrrigation.add(tabCoordIrrigation[i]);
+            mapIrrigation.put(tabCoordIrrigation[i],new Irrigation());
+        }
     }
 
     public Parcelle getParcelle(Point3D p){
@@ -209,8 +225,7 @@ public class Plateau {
             //4
             listVoisin.add(new Point3D(x+0,y-0.5,z+0.5));
         }
-        if(sens==2)
-        {
+        if(sens==2){ //cas 2
             //1
             listVoisin.add(new Point3D(x+0,y+0.5,z-0.5));
             //2
@@ -233,8 +248,7 @@ public class Plateau {
         ArrayList<Point3D> list=this.getParcelleVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
-            if(keylist.contains(list.get(i)))
-            {
+            if(keylist.contains(list.get(i))){
                 list.remove(i);
             }
         }
@@ -245,8 +259,7 @@ public class Plateau {
         ArrayList<Point3D> list=this.getIrrigationVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
-            if(keylistIrrigation.contains(list.get(i)))
-            {
+            if(keylistIrrigation.contains(list.get(i))){
                 list.remove(i);
             }
         }
@@ -287,16 +300,25 @@ public class Plateau {
      * @param coordonne
      * @return
      */
-    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D coordonne){
+    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D coordonne,Parcelle parcelle){
         ArrayList<Point3D> list=this.getParcelleVoisine(coordonne);
 
         for (int i = list.size()-1; i >=0; i--) {
-            if(!keylist.contains(list.get(i)) || getParcelle(list.get(i)).getType() != getParcelle(coordonne).getType()) {
+            if(!keylist.contains(list.get(i))) {
                 list.remove(i);
+            }
+            else{
+                if(getParcelle(list.get(i)).getType() != parcelle.getType()) {
+                    list.remove(i);
+                }
             }
         }
         return list;
 
+    }
+
+    public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D coordonne){
+        return getParcelleVoisineMemeCouleur(coordonne,getParcelle(coordonne));
     }
 
     public boolean isParcelleOccupee (Point3D coordonne){
@@ -426,8 +448,7 @@ public class Plateau {
         map.put(coordonne,parcelle);
 
         ArrayList<Point3D> listCoordIrrigationVoisine=getIrrigationVoisineDeParcelle(coordonne);
-        for(Point3D coord:listCoordIrrigationVoisine)
-        {
+        for(Point3D coord:listCoordIrrigationVoisine){
             if (keylistIrrigation.contains(coord)){
                 if(!parcelle.isIrriguee()) {
                     parcelle.setIrriguee(true);
@@ -450,11 +471,10 @@ public class Plateau {
         mapIrrigation.put(coordonne,irrigation);
         for(Point3D point: getcoordonneParcelleAdjacenteIrrigation(coordonne)){
             Parcelle parcelleVoisineIrrigation=getParcelle(point);
-            if(parcelleVoisineIrrigation!=null)
-            {
+            if(parcelleVoisineIrrigation!=null){
                 if(!parcelleVoisineIrrigation.isIrriguee()){
-                parcelleVoisineIrrigation.setIrriguee(true);
-                parcelleVoisineIrrigation.pousserBambou();
+                    parcelleVoisineIrrigation.setIrriguee(true);
+                    parcelleVoisineIrrigation.pousserBambou();
                 }
             }
         }

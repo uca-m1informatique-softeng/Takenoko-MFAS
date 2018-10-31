@@ -3,6 +3,7 @@ package moteur;
 import java.util.ArrayList;
 import moteur.Enums.TypeParcelle;
 
+
 /**
  *C'est la classe de la parcelle
  */
@@ -18,7 +19,7 @@ public class Parcelle {
     public Parcelle(TypeParcelle type){
         this.type = type;
 
-        if(this.type  == TypeParcelle.ETANG ){
+        if(this.type  == Enums.TypeParcelle.ETANG ){
             this.irriguee = true;
         }
         else{
@@ -62,7 +63,7 @@ public class Parcelle {
      * La methode qui permet de faire pousser le bambou
      */
     public boolean pousserBambou(){
-        if(listBambou.size() < 4 && isIrriguee()){
+        if(listBambou.size() < 4 && isIrriguee() && type!=Enums.TypeParcelle.ETANG){
             listBambou.add(new Bambou(this.type));
             return true;
         }

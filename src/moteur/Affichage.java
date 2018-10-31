@@ -10,7 +10,9 @@ public final class Affichage {
 
     public static boolean  verbose=true;
 
-    private Affichage(){}
+    private Affichage(){
+
+    }
 
     public static void setVerbose(boolean v) {
         verbose = v;
@@ -19,6 +21,11 @@ public final class Affichage {
     public static void affichagePoseParcelle(Parcelle parcelle, Point3D coordonne){
         if (!verbose) return;
         System.out.println("Parcelle "+parcelle.getType()+" posée en "+stringCoordonne(coordonne));
+    }
+
+    public static void affichagePiocheObjectif(Objectif objectif){
+        if (!verbose) return;
+        System.out.println("Objectif "+objectif.toString()+" pioché");
     }
 
     public static void affichagePoseIrrigation(Point3D coordonne) {
@@ -37,7 +44,9 @@ public final class Affichage {
     }
 
     public static void affichageFinPartie(ArrayList<Joueur> vainqueur){
-        if (!verbose) return;
+        if (!verbose){
+            return;
+        }
         if (vainqueur.size()>1){
             System.out.println("\nC'est une egalité");
             for(Joueur joueur:vainqueur){
@@ -53,22 +62,30 @@ public final class Affichage {
     }
 
     public static void affichageObjectifReussi(Joueur joueurcourant, Objectif objectif) {
-        if (!verbose) return;
+        if (!verbose) {
+            return;
+        }
         System.out.println("Le joueur " + joueurcourant.getCouleur() + " réalise son objectif " + objectif.toString());
     }
 
     public static void affichageNombreBambou(Plateau plateau, Point3D pointBambou) {
-        if (!verbose) return;
+        if (!verbose) {
+            return;
+        }
         System.out.println("Il y a " + plateau.getParcelle(pointBambou).getNbBambou() + " bambou en "+stringCoordonne(pointBambou));
     }
 
     public static void affichageJardinier(Point3D coord, Plateau plateau) {
-        if (!verbose) return;
+        if (!verbose) {
+            return;
+        }
         System.out.println("Jardinier en "+stringCoordonne(coord)+" (Parcelle " + plateau.getParcelle((coord)).getType() + ")");
     }
 
     public static void affichagePanda(Point3D coord, Plateau plateau) {
-        if (!verbose) return;
+        if (!verbose){
+            return;
+        }
         System.out.println("Panda en "+stringCoordonne(coord)+" (Parcelle " + plateau.getParcelle((coord)).getType() + ")");
     }
 

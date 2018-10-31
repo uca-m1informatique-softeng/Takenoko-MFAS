@@ -17,7 +17,6 @@ import java.util.HashMap;
  */
 public class ObjectifParcelle extends Objectif {
 
-    private int tailleBambou;
     private int type; //0 pour droit ; 1 pour courbé //2 pour triangle //3 pour 4 parcelles
 
     /**
@@ -40,13 +39,13 @@ public class ObjectifParcelle extends Objectif {
     public String toString() {
         switch (type) {
             case 0:
-                return "3 parcelles alignées " + couleur;
+                return "3 parcelles alignées " + getCouleur();
             case 1:
-                return "3 parcelles courbées " + couleur;
+                return "3 parcelles courbées " + getCouleur();
             case 2:
-                return "3 parcelles en triangle " + couleur;
+                return "3 parcelles en triangle " + getCouleur();
             case 3:
-                return "4 parcelles " + couleur;
+                return "4 parcelles " + getCouleur();
             default:
                 return "motif incorrect";
         }
@@ -56,18 +55,18 @@ public class ObjectifParcelle extends Objectif {
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.
-     * @param partie
-     * @param J
+     * @param joueur
      * @return
      */
-    public boolean validation(Partie partie, Joueur J){
-        Plateau plateau = partie.getPlateau();
+    @Override
+    public boolean validation(Joueur joueur){
+        Plateau plateau=Plateau.getInstance();
         ArrayList<Point3D> pointsPlateau = plateau.getKeylist();
 
         for(int i = 0; i < pointsPlateau.size(); i++) { //on parcours la map
             Point3D pointCourant = pointsPlateau.get(i);
 
-            if(plateau.chercheMotifParcelle(pointCourant, couleur, type)){
+            if(plateau.chercheMotifParcelle(pointCourant, getCouleur(), type)){
                 return true;
             }
         }

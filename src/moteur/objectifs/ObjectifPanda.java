@@ -33,20 +33,20 @@ public class ObjectifPanda extends Objectif{
 
     /**
      * C'est la méthode qui renvois un True quand l'objectif est réalisé.
-     * @param partie
      * @param joueur
      * @return
      */
-    public boolean validation(Partie partie,Joueur joueur){
+    @Override
+    public boolean validation(Joueur joueur){
         ArrayList<Bambou> listeBambou=joueur.getListBambou();
         int cmt = 0;
         for(int i = 0; i < listeBambou.size(); i++){
-            if(listeBambou.get(i).getCouleur() == couleur){
+            if(listeBambou.get(i).getCouleur() == this.getCouleur()){
                 cmt++;
             }
         }
         if(cmt >= nombreBambou){
-            //il faudra suppr les bambous
+            joueur.supprBambou(this.getCouleur(),nombreBambou);
             setValide(true);
             return true;
         }
@@ -54,6 +54,6 @@ public class ObjectifPanda extends Objectif{
     }
 
     public String toString() {
-        return "manger "+nombreBambou+" bambou(s) "+couleur;
+        return "manger "+nombreBambou+" bambou(s) "+this.getCouleur();
     }
 }

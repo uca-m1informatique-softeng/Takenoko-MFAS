@@ -21,10 +21,10 @@ public class Partie {
      * Le constructeur
      */
     public Partie() {
-        plateau=new Plateau();
-        jardinier=new Jardinier(plateau);
-        panda=new Panda(plateau);
-        deck = new Deck(this);
+        plateau=Plateau.getInstance();
+        jardinier=Jardinier.getInstance();
+        panda=Panda.getInstance();
+        deck = Deck.getInstance();
         finDePartie=false;
     }
 
@@ -61,6 +61,17 @@ public class Partie {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    public void resetPartie(ArrayList<Joueur> listJoueurs){
+
+        plateau.resetPlateau();
+        jardinier.resetPersonnage();
+        panda.resetPersonnage();
+        deck.resetDeck();
+
+        for (Joueur JoueurCourant: listJoueurs) {
+            JoueurCourant.resetJoueur();
+        }
+    }
 
     /**
      * Le déroulement de la partie
@@ -69,30 +80,27 @@ public class Partie {
     public void jouer(ArrayList<Joueur> listJoueurs){
 
         //initialisation de la Partie
-        for (Joueur JoueurCourant: listJoueurs) {
-            JoueurCourant.resetJoueur();
-            this.getDeck().piocheObjectifJardinier(JoueurCourant);
-            this.getDeck().piocheObjectifPanda(JoueurCourant);
-            this.getDeck().piocheObjectifParcelle(JoueurCourant);
-        }
+        resetPartie(listJoueurs);
 
+        Joueur premierTermine=null;
         //coeur du jeu
         while (!finDePartie) {
             for (Joueur JoueurCourant: listJoueurs) {
                 Affichage.affichageDebutTour(JoueurCourant);
-                int action=0;
-                boolean finDuTour=false;
-                while (!finDuTour) {
 
-                    //verifier objectif
-                    finDuTour=JoueurCourant.choixAction(0,this);
-                    //verifier objectif
-                    JoueurCourant.verifierMesObjectif(this);
-                    if(JoueurCourant.getNombreObjectifsRemplis()>0){ //nombre d'objectifs à réaliser pour terminer le jeu
-                        finDePartie=true;
-                    }
+                //premiere action
+                JoueurCourant.choixAction();
+                //deuxieme action
+                JoueurCourant.choixAction();
+
+                //verifier objectif
+                JoueurCourant.verifierMesObjectif();
+                if(JoueurCourant.getNombreObjectifsRemplis()>8){ //nombre d'objectifs à réaliser pour terminer le jeu
+                    finDePartie=true;
+                    JoueurCourant.setScore(JoueurCourant.getScore()+2);
                 }
                 Affichage.affichageFinTour(JoueurCourant);
+                JoueurCourant.resetListAction();
             }
 
         }
@@ -115,8 +123,7 @@ public class Partie {
                 if (joueur.getScore()==vainqueurCourant.getScore()) { vainqueur.add(joueur);}
             }
         }
-        if(isEgalite(vainqueur))
-        {
+        if(isEgalite(vainqueur)){
             for (Joueur joueur:vainqueur){
                 joueur.addEgalite();
             }

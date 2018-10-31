@@ -10,30 +10,17 @@ import java.util.ArrayList;
  */
 public abstract class Personnage {
     private Point3D coord;
-    private Plateau plateau;
 
 
     public Personnage(Point3D coord) {
         this.coord = coord;
     }
 
-    public Personnage(Plateau plateau){
+    public Personnage(){
         this.coord = new Point3D(0.0,0.0,0.0);
-        this.plateau= plateau;
-
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
-
-    public Plateau getPlateau() {
-        return plateau;
-    }
-
-    public void setPlateau(Plateau plateau) {
-        this.plateau = plateau;
-    }
-
-
 
     public Point3D getCoord() {
         return coord;
@@ -45,19 +32,24 @@ public abstract class Personnage {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    public void resetPersonnage(){
+        this.coord = new Point3D(0.0,0.0,0.0);
+    }
+
     /**
      * Renvoyer la liste des deplacement possibles pour un personnage
      * @return
      */
-    public ArrayList<Point3D> DestinationsPossibles() {
-        ArrayList<Point3D> listvoisin = this.getPlateau().getParcelleVoisine(new Point3D(0,0,0));
+    public ArrayList<Point3D> destinationsPossibles() {
+        Plateau plateau=Plateau.getInstance();
+        ArrayList<Point3D> listvoisin = plateau.getParcelleVoisine(new Point3D(0,0,0));
         ArrayList<Point3D> resultat=new ArrayList<>();
 
         for (int i=0;i<6;i++) {
             Point3D direction=listvoisin.get(i);
             Point3D jardinier=this.getCoord();
             Point3D temp= new Point3D(jardinier.getX()+direction.getX(),jardinier.getY()+direction.getY(),jardinier.getZ()+direction.getZ());
-            while(this.getPlateau().isParcelleOccupee(temp)){
+            while(plateau.isParcelleOccupee(temp)){
                 resultat.add(temp);
                 double tempX=temp.getX();
                 double tempY=temp.getY();
@@ -74,7 +66,7 @@ public abstract class Personnage {
      * @param p
      */
     //pour le deplacement (pas de verification)
-    public boolean Deplacer(Point3D p){
+    public boolean deplacer(Point3D p){
         this.setCoord(p);
         return faireActionBambou(p);
     }

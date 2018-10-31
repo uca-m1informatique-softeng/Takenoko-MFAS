@@ -1,5 +1,6 @@
 package joueur;
 
+import moteur.Enums;
 import moteur.Enums.TypeParcelle;
 import moteur.Parcelle;
 import moteur.Partie;
@@ -7,6 +8,7 @@ import moteur.Plateau;
 import javafx.geometry.Point3D;
 import moteur.Enums.CouleurBot;
 import moteur.objectifs.Objectif;
+import moteur.objectifs.ObjectifPanda;
 import moteur.objectifs.ObjectifParcelle;
 
 import java.util.ArrayList;
@@ -17,47 +19,118 @@ import java.util.HashMap;
  */
 public class BotParcelle extends Bot{
 
+    int choixchange;
     /**
      * Le constructeur
      * @param couleur
      */
-    public BotParcelle(CouleurBot couleur) {
+    public BotParcelle(CouleurBot couleur){
         super(couleur);
+        choixchange=0;
+    }
+
+    private void switchchoix(){
+        choixchange=(choixchange+1)%4;
     }
 
 
     //////////////////////////////Méthodes//////////////////////////////
 
-    /**
-     * Une méthode qui renvois un boolean pour le choix d'action du bot
-     * @param numeroActionDansLeTour
-     * @param partie
-     * @return
-     */
-    public boolean choixAction(int numeroActionDansLeTour, Partie partie){
-        joueurPose(partie);
-        joueurPoseIrrigation(partie);
-        joueurDeplaceJardinier(partie.getJardinier());
-        return true;
+    @Override
+    public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites){
+        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPARCELLE)){
+            return Enums.Action.PIOCHEROBJECTIFPARCELLE;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA)){
+            return Enums.Action.PIOCHEROBJECTIFPANDA;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)){
+            return Enums.Action.PIOCHEROBJECTIFJARDINIER;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
+            return Enums.Action.PIOCHERPARCELLE;
+        }
+        if(possibilites.contains(Enums.Action.POSERIRRIGATION)&& choixchange==0){
+            switchchoix();
+            return Enums.Action.POSERIRRIGATION;
+        }
+        if(possibilites.contains(Enums.Action.DEPLACERPANDA)&& choixchange>0){
+            switchchoix();
+            return Enums.Action.DEPLACERPANDA;
+        }
+        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
+            return Enums.Action.DEPLACERJARDINIER;
+        }
+        return null;
+    }
+
+    @Override
+    public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
+        Plateau plateau=Plateau.getInstance();
+        //Objectif objParcelle=choixObjectifPrioritaire();
+        for(int sizeMax=6;sizeMax>0;sizeMax--){
+            for (Point3D coordonne : possibilites){
+                if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
+                    return coordonne;
+                }
+            }
+        }
+        return super.choixCoordonnePoseParcelle(possibilites,parcelle);
+    }
+
+    @Override
+    public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
+        Plateau plateau=Plateau.getInstance();
+        for (int maxBambou=4;maxBambou>0;maxBambou--){
+            for (Point3D coordonne : possibilites){
+                if(Plateau.getInstance().getParcelle(coordonne).getNbBambou()>=maxBambou){
+                    return coordonne;
+                }
+            }
+        }
+        return super.choixDeplacementPanda(possibilites);
+    }
+
+    public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
+        if(this.getListObjectifs().isEmpty()) return super.choixParcellePioche(possibilites);
+        Objectif objParcelle = choixObjectifPrioritaire();
+        for(Parcelle parcelle:possibilites){
+            if(objParcelle.getCouleur()==parcelle.getType()){
+                return parcelle;
+            }
+        }
+        return super.choixParcellePioche(possibilites);
+    }
+
+    @Override
+    public Objectif choixObjectifPrioritaire() {
+        for(Objectif objectif:getListObjectifs()){
+            if(objectif instanceof ObjectifParcelle){
+                return objectif;
+            }
+        }
+        return super.choixObjectifPrioritaire();
     }
 
     /**
      * @param partie
      */
+    /*
     public void joueurPose(Partie partie){
         finirObjectif(partie);
-    }
+    }*/
+
 
     /**
      * Une méthode qui renvois un boolean pour savoir si l'objectif est finit.
      * @param partie
      * @return
-     */
+     *//*
     public boolean finirObjectif(Partie partie){
         Plateau plateau = partie.getPlateau();
         HashMap<Point3D,Parcelle> map = plateau.getMap();
         ArrayList<Point3D> emplacementslibres = plateau.emplacementsAutorise();
-        Parcelle parcelle = choixParcellePioche(partie);
+        Parcelle parcelle = partie.getDeck().piocherParcelle();
         ObjectifParcelle objectifParcelle = null;
         Point3D pointTemporaire = null;
         Point3D pointObjectif = null;
@@ -139,7 +212,7 @@ public class BotParcelle extends Bot{
         }
         plateau.poser(parcelle, emplacementslibres.get(0));
         return false;
-    }
+    }*/
 
 
     /**
@@ -155,7 +228,7 @@ public class BotParcelle extends Bot{
      * @param pointTemporaire
      * @param pointObjectif
      * @return
-     */
+     *//*
     public boolean completePattern(Point3D pointCourant, TypeParcelle couleurObjectif, int i, Point3D secondPoint, int j, Plateau plateau, ArrayList<Point3D> emplacementslibres, Parcelle parcelle,Point3D pointTemporaire,Point3D pointObjectif){
         if(plateau.parcelleSuivanteMotif(pointCourant,couleurObjectif,i) && plateau.parcelleSuivanteLibre(secondPoint,j)){
             return verifPose(plateau,secondPoint,j,emplacementslibres,parcelle,pointObjectif);
@@ -170,7 +243,7 @@ public class BotParcelle extends Bot{
             }
         }
         return false;
-    }
+    }*/
 
     /**
      * vérifie si l'endroit où on souhaite poser la parcelle est un coup valide
@@ -182,6 +255,7 @@ public class BotParcelle extends Bot{
      * @param pointObjectif
      * @return
      */
+    /*
     public boolean verifPose(Plateau plateau, Point3D point3D,int i, ArrayList<Point3D> emplacementslibres,Parcelle parcelle,Point3D pointObjectif){
         Point3D point = plateau.getParcelleVoisine(point3D).get(i);
         if( emplacementslibres.contains(point) ){
@@ -194,6 +268,6 @@ public class BotParcelle extends Bot{
             }
         }
         return false;
-    }
+    }*/
 
 }
