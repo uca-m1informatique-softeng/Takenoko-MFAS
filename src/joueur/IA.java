@@ -7,6 +7,9 @@ import moteur.objectifs.Objectif;
 
 import java.util.ArrayList;
 
+/**
+ * L'interface de l'IA
+ */
 public interface IA {
     Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle);
     Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites);

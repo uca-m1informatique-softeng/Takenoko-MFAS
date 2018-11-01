@@ -20,6 +20,11 @@ public class BotRandom extends Bot{
     }
 
     //////////////////////////////Méthodes//////////////////////////////
+
+    /**
+     * @param possibilites
+     * @return
+     */
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         int random = new Random().nextInt(2);

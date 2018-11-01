@@ -20,24 +20,63 @@ public class Bot extends Joueur {
         super(couleur);
     }
 
+    /**
+     * La méthode qui retourne les possibilités pour poser une parcelle.
+     * @param possibilites
+     * @param parcelle
+     * @return
+     */
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle) {
         return possibilites.get(0);
     }
+
+    /**
+     * La méthode qui retourne les possibilités pour poser une irrigation.
+     * @param possibilites
+     * @return
+     */
     public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
+
+    /**
+     * La méthode qui retourne les possibilités pour piocher une parcelle
+     * @param possibilites
+     * @return
+     */
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites) {
         return possibilites.get(0);
     }
+
+    /**
+     * La méthode qui retourne les possibilités pour déplacer le jardinier
+     * @param possibilites
+     * @return
+     */
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
+
+    /**
+     * La méthode qui retourne les possibilités pour déplacer le panda
+     * @param possibilites
+     * @return
+     */
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
+
+    /**
+     * @param possibilites
+     * @return
+     */
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         return possibilites.get(0);
     }
+
+    /**
+     * @return
+     */
     public Objectif choixObjectifPrioritaire() {
         return this.getListObjectifs().get(0);
     }

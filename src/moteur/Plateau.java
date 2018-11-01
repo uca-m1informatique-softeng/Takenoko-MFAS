@@ -25,6 +25,9 @@ public class Plateau {
         resetPlateau();
     }
 
+    /**
+     * @return
+     */
     public final static Plateau getInstance() {
         if (Plateau.instance == null) {
             Plateau.instance = new Plateau();
@@ -69,6 +72,9 @@ public class Plateau {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * reinitialise le plateau
+     */
     public void resetPlateau(){
         Point3D coordonne = new Point3D(0,0,0);
         Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
@@ -94,6 +100,11 @@ public class Plateau {
         }
     }
 
+    /**
+     * renvoie une parcelle pour une coordonne
+     * @param p
+     * @return
+     */
     public Parcelle getParcelle(Point3D p){
         int index=keylist.indexOf(p);
         if (index != -1) {
@@ -103,12 +114,21 @@ public class Plateau {
         return null;
     }
 
+    /**
+     * renvoie une irrigation pour une coordonne
+     * @param p
+     * @return
+     */
     public Irrigation getIrrigation(Point3D p){
         int index=keylistIrrigation.indexOf(p);
         Point3D p2=keylistIrrigation.get(index);
         return mapIrrigation.get(p2);
     }
 
+    /**
+     * renvoie toute les parcelles sur le plateau
+     * @return
+     */
     public ArrayList<Parcelle> getAllParcelle() {
         ArrayList result=new ArrayList<Parcelle>();
         for (int i=0;i<this.map.size();i++) {
@@ -117,6 +137,10 @@ public class Plateau {
         return result;
     }
 
+    /**
+     * renvoie toute les irigations sur le plateau
+     * @return
+     */
     public ArrayList<Parcelle> getAllIrrigation() {
         ArrayList result=new ArrayList<Irrigation>();
         for (int i=0;i<this.mapIrrigation.size();i++) {
@@ -125,6 +149,11 @@ public class Plateau {
         return result;
     }
 
+    /**
+     * retourne les coordonnes autour des coordonnes d'une parcelle
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getIrrigationVoisineDeParcelle(Point3D coordonne){
         double x=coordonne.getX();
         double y=coordonne.getY();
@@ -160,6 +189,11 @@ public class Plateau {
         return list;
     }
 
+    /**
+     * renvoie le sens de l'irrigation des coordonne d'une irrigation
+     * @param coordonne
+     * @return
+     */
     public int sensIrrigation (Point3D coordonne){
         double x=coordonne.getX();
         double y=coordonne.getY();
@@ -198,6 +232,11 @@ public class Plateau {
         return 0;
     }
 
+    /**
+     * renvoie les irrigation voisine d'une coordonne d'irrigation
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getIrrigationVoisine(Point3D coordonne){
         int sens=sensIrrigation(coordonne);
         double x=coordonne.getX();
@@ -255,6 +294,11 @@ public class Plateau {
         return list;
     }
 
+    /**
+     * renvoie les irrigations voisine libre a partir d'une coordonne d'irrigation
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getIrrigationVoisineLibre(Point3D coordonne){
         ArrayList<Point3D> list=this.getIrrigationVoisine(coordonne);
 
@@ -283,6 +327,11 @@ public class Plateau {
 
     }
 
+    /**
+     * renvoie les irrigation voisine d'une coordonne d'irrigation
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getIrrigationVoisineOccupe(Point3D coordonne){
         ArrayList<Point3D> list=this.getIrrigationVoisine(coordonne);
 
@@ -317,18 +366,38 @@ public class Plateau {
 
     }
 
+    /**
+     * La méthode qui donne un point et renvois les voisins de même couleur
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getParcelleVoisineMemeCouleur(Point3D coordonne){
         return getParcelleVoisineMemeCouleur(coordonne,getParcelle(coordonne));
     }
 
+    /**
+     * renvoie si une parcelle est occupée a une coordonne donnée
+     * @param coordonne
+     * @return
+     */
     public boolean isParcelleOccupee (Point3D coordonne){
         return keylist.contains(coordonne);
     }
 
+    /**
+     * renvoie si une irrigation est occupée a une coordonne donnée
+     * @param coordonne
+     * @return
+     */
     public boolean isIrrigationOccupee (Point3D coordonne){
         return keylistIrrigation.contains(coordonne);
     }
 
+    /**
+     * renvoie les coordonnes des parcelles adjacentes a une irrigation
+     * @param coordonne
+     * @return
+     */
     public ArrayList<Point3D> getcoordonneParcelleAdjacenteIrrigation (Point3D coordonne){
         double x=coordonne.getX();
         double y=coordonne.getY();
@@ -373,6 +442,7 @@ public class Plateau {
     }
 
     /**
+     * renvoie si il est possible de poser une irrigation a une coordonne
      * @param coordonne
      * @return
      */
@@ -412,6 +482,7 @@ public class Plateau {
     }
 
     /**
+     * renvoie la liste des emplacement ou on peut poser une irrigation
      * @return
      */
     public ArrayList<Point3D> emplacementsAutoriseIrrigation(){
@@ -463,6 +534,7 @@ public class Plateau {
     }
 
     /**
+     * la methode qui parmet de poser une irrigation
      * @param irrigation
      * @param coordonne
      */
@@ -541,6 +613,7 @@ public class Plateau {
     }
 
     /**
+     * renvoie la parcelle suivante permettant de completer un motif donnee
      * @param pointCourant
      * @param couleurObjectif
      * @param i

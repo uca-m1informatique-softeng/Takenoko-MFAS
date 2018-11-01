@@ -61,6 +61,10 @@ public class Partie {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * reinitialise la partie
+     * @param listJoueurs
+     */
     public void resetPartie(ArrayList<Joueur> listJoueurs){
 
         plateau.resetPlateau();
@@ -108,6 +112,10 @@ public class Partie {
         calculVainqueur(listJoueurs);
     }
 
+    /**
+     * calcule le ou les vainqueurs d'une partie
+     * @param listJoueurs
+     */
     private void calculVainqueur(ArrayList <Joueur> listJoueurs){
         ArrayList<Joueur> vainqueur=new ArrayList<>();
         vainqueur.add(listJoueurs.get(0));
@@ -134,6 +142,11 @@ public class Partie {
         Affichage.affichageFinPartie(vainqueur);
     }
 
+    /**
+     * renvoie si oui ou non il y'a une egalite
+     * @param vainqueur
+     * @return
+     */
     private boolean isEgalite(ArrayList <Joueur> vainqueur){
         return vainqueur.size()>1;
     }

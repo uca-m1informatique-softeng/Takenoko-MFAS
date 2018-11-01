@@ -122,6 +122,11 @@ public class Joueur implements IA {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * Supprime nb bambous d'une certaine couleur des bambous possedés par le joueur
+     * @param couleur
+     * @param nb
+     */
     public void supprBambou(Enums.TypeParcelle couleur,int nb) {
         for(int i=0;i<nb;i++){
             int j=0;
@@ -132,14 +137,24 @@ public class Joueur implements IA {
         }
     }
 
+    /**
+     * reinitialise la liste des actions effectuees par le joueur dans un tour
+     */
     public void resetListAction(){
         setListAction(new ArrayList<Enums.Action>());
     }
 
+    /**
+     * ajoute une action dans la liste des actions réalisé par le joueur durant le tour
+     * @param action
+     */
     public void addListAction(Enums.Action action){
         listAction.add(action);
     }
 
+    /**
+     * reinitialise le joueur pour commencer une nouvelle partie
+     */
     public void resetJoueur(){
         setNombreObjectifsRemplis(0);
         setListObjectifs(new ArrayList<Objectif>());
@@ -153,6 +168,7 @@ public class Joueur implements IA {
     }
 
     /**
+     * ajoute une irrigation à la liste des irrigations du joueur
      * @param irrigation
      */
     public void addIrrigation (Irrigation irrigation){
@@ -160,7 +176,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * C'est la méthode qui permet d'ajouter un objectif à la liste du joueur
+     * C'est la méthode qui permet d'ajouter un objectif à la liste des objectifs du joueur
      * @param objectif
      */
     public void addObjectif(Objectif objectif){
@@ -169,7 +185,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * La méthode qui vérifie que le bot a bien réaliser son objectif.
+     * La méthode qui permet de vérifier que le bot a bien réaliser ses objectifs
      */
     public final void verifierMesObjectif() {
         for(int i=listObjectifs.size()-1;i>=0;i--){
@@ -181,19 +197,12 @@ public class Joueur implements IA {
                 listObjectifs.remove(i);
             }
         }
-        /*
-        Iterator<Objectif> i = listObjectifs.iterator();
-        while (i.hasNext()) {
-            Objectif objectif = i.next();
-            if (objectif.validation(this) && nombreObjectifsRemplis < 1) {
-                Affichage.affichageObjectifReussi(this,objectif);
-                nombreObjectifsRemplis++;
-                score += objectif.getValeur();
-                i.remove();
-            }
-        }*/
     }
 
+    /**
+     * Renvoie la liste des actions possibles à effectuer dans le tour du joueur
+     * @return
+     */
     public final ArrayList<Enums.Action> listActionRestantePossible(){
         ArrayList<Enums.Action> result=new ArrayList<>();
         for (Enums.Action action : Enums.Action.values()){
@@ -215,6 +224,11 @@ public class Joueur implements IA {
         return result;
     }
 
+    /**
+     * verifie si une action est possible
+     * @param action
+     * @return
+     */
     private final boolean verifActionPossible(Enums.Action action){
         switch (action){
             case DEPLACERPANDA:return verifActionDeplacerPanda();
@@ -228,36 +242,64 @@ public class Joueur implements IA {
         return false;
     }
 
+    /**
+     * verifie que l'action du deplacement du panda est possible
+     * @return
+     */
     private final boolean verifActionDeplacerPanda(){
         return (Plateau.getInstance().getKeylist().size()>1);
     }
 
+    /**
+     * verifie que l'action du deplacement du jardinier est possible
+     * @return
+     */
     private final boolean verifActionDeplacerJardinier(){
         return (Plateau.getInstance().getKeylist().size()>1);
     }
 
+    /**
+     * verifie que l'action de poser une parcelle est possible
+     * @return
+     */
     private final boolean verifActionPoserParcelle(){
         return (!Deck.getInstance().isDeckParcelleVide());
     }
 
+    /**
+     * verifie que l'action de piocher un objectif panda est possible
+     * @return
+     */
     private final boolean verifActionPiocherObjPanda(){
         return (!Deck.getInstance().isDeckObjectifPandaVide() && this.getListObjectifs().size()<5);
     }
 
+    /**
+     * verifie que l'action de piocher un objectif jardinier est possible
+     * @return
+     */
     private final boolean verifActionPiocherObjJardinier(){
         return (!Deck.getInstance().isDeckObjectifJardinierVide() && this.getListObjectifs().size()<5);
     }
 
+    /**
+     * verifie que l'action de piocher un objectif parcelle est possible
+     * @return
+     */
     private final boolean verifActionPiocherObjParcelle(){
         return (!Deck.getInstance().isDeckObjectifParcelleVide() && this.getListObjectifs().size()<5);
     }
 
+    /**
+     * verifie que l'action de poser une irrigation est possible
+     * @return
+     */
     private final boolean verifActionPoserIrrigation(){
         return (!Plateau.getInstance().emplacementsAutoriseIrrigation().isEmpty());
     }
 
     /**
-     * C'est la méthode qui permet de réunir les actions du bot.
+     * C'est la méthode qui permet de choisir l'action que le bot va effectuer
      * @return
      */
     public final boolean choixAction(){
@@ -295,6 +337,10 @@ public class Joueur implements IA {
         return false;
     }
 
+    /**
+     * Pioche une parcelle dans le deck et la renvoie
+     * @return
+     */
     public final Parcelle piocheUneParcelle(){
         ArrayList<Parcelle> possibilites=Deck.getInstance().piocherParcelle();
         Parcelle parcelleChoisie=choixParcellePioche(possibilites);
@@ -303,6 +349,9 @@ public class Joueur implements IA {
         return parcelleChoisie;
     }
 
+    /**
+     * Pose une parcelle piochee sur le plateau
+     */
     public final void actionPose(){
         Plateau plateau = Plateau.getInstance();
         ArrayList<Point3D> list = plateau.emplacementsAutorise();
@@ -311,6 +360,12 @@ public class Joueur implements IA {
         joueurPose(plateau,parcelle,choixPose);
     }
 
+    /**
+     * pose la parcelle dans le plateau
+     * @param plateau
+     * @param parcelle
+     * @param coord
+     */
     public final void joueurPose(Plateau plateau, Parcelle parcelle, Point3D coord){
         plateau.poser(parcelle, coord);
     }
@@ -325,6 +380,11 @@ public class Joueur implements IA {
         joueurDeplaceJardinier(jardinier,choixDeplacementJardinier);
     }
 
+    /**
+     * deplace le jardinier
+     * @param jardinier
+     * @param coord
+     */
     public final void joueurDeplaceJardinier(Jardinier jardinier, Point3D coord){
         jardinier.deplacer(coord);
     }
@@ -339,16 +399,28 @@ public class Joueur implements IA {
         joueurDeplacePanda(panda,choixDeplacementPanda);
     }
 
+    /**
+     * deplace le panda
+     * @param panda
+     * @param coord
+     */
     public final void joueurDeplacePanda(Panda panda, Point3D coord){
         if(panda.deplacer(coord)){
             listBambou.add(new Bambou(Plateau.getInstance().getMap().get(coord).getType()));
         }
     }
 
+    /**
+     * permet de piohcer une irrigation
+     * @return
+     */
     public final Irrigation piocheUneIrrigation(){
         return Deck.getInstance().piocheIrrigation();
     }
 
+    /**
+     * c'est la methode qui permet de poser une irrigation
+     */
     public final void actionPoseIrrigation(){
         Plateau plateau = Plateau.getInstance();
         ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
@@ -357,49 +429,111 @@ public class Joueur implements IA {
         joueurPoseIrrigation(plateau,irrigation,choixPose);
     }
 
+    /**
+     * C'est la méthode qui permet de poser une irrigation.
+     * @param plateau
+     * @param irrigation
+     * @param coord
+     */
     public final void joueurPoseIrrigation(Plateau plateau, Irrigation irrigation, Point3D coord){
         plateau.poserIrrigation(irrigation, coord);
     }
 
+    /**
+     *C'est la méthode qui permet de piocher un objectif Jardinier.
+     */
     public final void actionPiocheObjectifJardinier(){
         addObjectif(Deck.getInstance().piocheObjectifJardinier());
     }
 
+    /**
+     *C'est la méthode qui permet de piocher un objectif Panda.
+     */
     public final void actionPiocheObjectifPanda(){
         addObjectif(Deck.getInstance().piocheObjectifPanda());
     }
 
+    /**
+     *C'est la méthode qui permet de piocher un objectif Parcelle.
+     */
     public final void actionPiocheObjectifParcelle(){
         addObjectif(Deck.getInstance().piocheObjectifParcelle());
     }
 
 
-
+    /**
+     * ajoute une victoire au joueur
+     */
     public void addVictoire(){
         nbVictoire++;
     }
+
+    /**
+     *
+     */
     public void addEgalite(){
         nbEgalite++;
     }
 
+    /**
+     * renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités
+     * @param possibilites
+     * @param parcelle
+     * @return
+     */
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle) {
         return null;
     }
+
+    /**
+     * renvoie un choix de coordonne pour la pose d'une irrigation parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
     public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
         return null;
     }
+
+    /**
+     * renvoie un choix de parcelle parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites) {
         return null;
     }
+
+    /**
+     * renvoie un choix de coordonne pour le deplacement du jardinier parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites) {
         return null;
     }
+
+    /**
+     * renvoie un choix de coordonne pour le deplacement du panda parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
         return null;
     }
+
+    /**
+     * renvoie un choix d'action parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         return null;
     }
+
+    /**
+     * renvoie un objectif ciblé en priorité par le joueur
+     * @return
+     */
     public Objectif choixObjectifPrioritaire() {
         return null;
     }

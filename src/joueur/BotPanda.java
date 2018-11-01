@@ -34,6 +34,10 @@ public class BotPanda extends Bot {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * @param possibilites
+     * @return
+     */
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA)){
@@ -64,6 +68,10 @@ public class BotPanda extends Bot {
         return null;
     }
 
+    /**
+     * @param possibilites
+     * @return
+     */
     @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
         Objectif objJard = choixObjectifPrioritaire();
@@ -76,6 +84,10 @@ public class BotPanda extends Bot {
         return super.choixDeplacementJardinier(possibilites);
     }
 
+    /**
+     * @param possibilites
+     * @return
+     */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
         Plateau plateau=Plateau.getInstance();
@@ -93,6 +105,10 @@ public class BotPanda extends Bot {
         return super.choixDeplacementPanda(possibilites);
     }
 
+    /**
+     * @param possibilites
+     * @return
+     */
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
         if(this.getListObjectifs().isEmpty()){
             return super.choixParcellePioche(possibilites);
@@ -106,6 +122,9 @@ public class BotPanda extends Bot {
         return super.choixParcellePioche(possibilites);
     }
 
+    /**
+     * @return
+     */
     @Override
     public Objectif choixObjectifPrioritaire() {
         for(Objectif objectif:getListObjectifs()){

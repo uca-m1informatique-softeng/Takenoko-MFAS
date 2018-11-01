@@ -39,6 +39,9 @@ public abstract class  Objectif {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * @return
+     */
     public boolean isValide() {
         return valide;
     }

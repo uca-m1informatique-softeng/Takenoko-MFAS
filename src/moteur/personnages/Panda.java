@@ -17,6 +17,9 @@ public class Panda extends Personnage {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * @return
+     */
     public final static Panda getInstance() {
         if (Panda.instance == null) {
             Panda.instance = new Panda();
@@ -25,6 +28,7 @@ public class Panda extends Personnage {
     }
 
     /**
+     * action du panda lorsque il arrive a une coordonne
      * @param p
      * @return
      */

@@ -24,6 +24,9 @@ public class BotJardinier extends Bot{
         choixchange=0;
     }
 
+    /**
+     *
+     */
     private void switchchoix(){
         choixchange=(choixchange+1)%2;
     }
@@ -32,6 +35,11 @@ public class BotJardinier extends Bot{
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * Les differents choix du Botjardinier.
+     * @param possibilites
+     * @return
+     */
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)){
@@ -60,6 +68,10 @@ public class BotJardinier extends Bot{
         return null;
     }
 
+    /**
+     * @param possibilites
+     * @return
+     */
     @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
         if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
@@ -74,6 +86,10 @@ public class BotJardinier extends Bot{
         return super.choixDeplacementJardinier(possibilites);
     }
 
+    /**
+     * @param possibilites
+     * @return
+     */
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
         if(this.getListObjectifs().isEmpty()){
             return super.choixParcellePioche(possibilites);
@@ -87,6 +103,9 @@ public class BotJardinier extends Bot{
         return super.choixParcellePioche(possibilites);
     }
 
+    /**
+     * @return
+     */
     @Override
     public Objectif choixObjectifPrioritaire() {
         for(Objectif objectif:getListObjectifs()){

@@ -11,11 +11,9 @@ import java.util.ArrayList;
 public abstract class Personnage {
     private Point3D coord;
 
-
-    public Personnage(Point3D coord) {
-        this.coord = coord;
-    }
-
+    /**
+     * Le constructeur
+     */
     public Personnage(){
         this.coord = new Point3D(0.0,0.0,0.0);
     }
@@ -32,6 +30,9 @@ public abstract class Personnage {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * reinitialise le personnage
+     */
     public void resetPersonnage(){
         this.coord = new Point3D(0.0,0.0,0.0);
     }
@@ -72,6 +73,7 @@ public abstract class Personnage {
     }
 
     /**
+     * renvoie ce que doit faire un personnage quand il se deplace a une coordonne
      * @param p
      * @return
      */

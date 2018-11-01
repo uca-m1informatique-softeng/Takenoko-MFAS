@@ -81,6 +81,9 @@ public class Deck {
 
     //////////////////////////////Méthodes//////////////////////////////
 
+    /**
+     * reinitialise le deck
+     */
     public void resetDeck(){
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
@@ -89,7 +92,7 @@ public class Deck {
     }
 
     /**
-     * Le deck des objectifs parcelles
+     * initialise le deck des objectifs parcelles
      */
     public void initialiserDeckParcelleMotif() {
         deckObjectifsParcelle.clear();
@@ -108,7 +111,7 @@ public class Deck {
     }
 
     /**
-     * Le deck des parcelles
+     * initialise le deck des parcelles
      */
     public void initialiserDeckParcelle() {
         deckParcelles.clear();
@@ -125,7 +128,7 @@ public class Deck {
     }
 
     /**
-     * Le deck des objectifs jardinier
+     * initialise le deck des objectifs jardinier
      */
     public void initialiserObjectifsJardinier(){
         deckObjectifsJardinier.clear();
@@ -144,7 +147,7 @@ public class Deck {
     }
 
     /**
-     * Le deck des objectifs panda
+     * initialise le deck des objectifs panda
      */
     public void initialiserObjectifsPanda(){
         deckObjectifsPanda.clear();
@@ -212,6 +215,11 @@ public class Deck {
         return (ObjectifPanda)piocheobjectif(deckObjectifsPanda);
     }
 
+    /**
+     * La pioche des objectifs
+     * @param list
+     * @return
+     */
     private Object piocheobjectif(ArrayList<?> list){
         if (!list.isEmpty()) {
             int random = new Random().nextInt(list.size());
@@ -225,23 +233,42 @@ public class Deck {
     }
 
 
-
+    /**
+     * La pioche de l'irrigation
+     * @return
+     */
     public Irrigation piocheIrrigation(){
         return new Irrigation();
     }
 
+    /**
+     * renvoie si le deck des parcelles est vide
+     * @return
+     */
     public boolean isDeckParcelleVide(){
         return deckParcelles.isEmpty();
     }
 
+    /**
+     * envoie si le deck des objectifs panda est vide
+     * @return
+     */
     public boolean isDeckObjectifPandaVide(){
         return deckObjectifsPanda.isEmpty();
     }
 
+    /**
+     * envoie si le deck des objectifs jardinier est vide
+     * @return
+     */
     public boolean isDeckObjectifJardinierVide(){
         return deckObjectifsJardinier.isEmpty();
     }
 
+    /**
+     * envoie si le deck des objectifs parcelle est vide
+     * @return
+     */
     public boolean isDeckObjectifParcelleVide(){
         return deckObjectifsParcelle.isEmpty();
     }
