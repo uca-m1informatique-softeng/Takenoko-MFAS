@@ -31,16 +31,12 @@
         </executions>
         <configuration>
           <mainClass>parties.Main</mainClass> <!-- CHANGE ME -->
-<!--          <arguments>
-            <argument>argument1</argument>
-          </arguments>
-          <systemProperties>
-            <systemProperty>
-              <key>myproperty</key>
-              <value>myvalue</value>
-            </systemProperty>
-          </systemProperties>
--->
+            <mainClass>parties.Main2</mainClass>
+            <mainClass>parties.Main3</mainClass>
+
+
+
+
         </configuration>
       </plugin>
       

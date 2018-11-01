@@ -8,7 +8,6 @@ import moteur.personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import moteur.Enums.CouleurBot;
 
 

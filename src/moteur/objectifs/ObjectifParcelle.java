@@ -2,15 +2,11 @@ package moteur.objectifs;
 
 import joueur.Joueur;
 import moteur.Enums;
-import moteur.Parcelle;
-import moteur.Partie;
 import moteur.Plateau;
 import javafx.geometry.Point3D;
 
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * La classe des objectifs parcelle

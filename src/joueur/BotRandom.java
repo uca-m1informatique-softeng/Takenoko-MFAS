@@ -43,6 +43,12 @@ public class BotRandom extends Bot{
         if(possibilites.contains(Enums.Action.POSERIRRIGATION)&&random==1){
             return Enums.Action.POSERIRRIGATION;
         }
+        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
+            return Enums.Action.PIOCHERPARCELLE;
+        }
+        if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
+            return Enums.Action.POSERIRRIGATION;
+        }
         if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
             return Enums.Action.DEPLACERJARDINIER;
         }

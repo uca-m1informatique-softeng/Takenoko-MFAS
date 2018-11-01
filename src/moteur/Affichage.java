@@ -95,11 +95,10 @@ public final class Affichage {
      * affiche la fin d'une partie a cause d'un nombre de coup trop élevé
      */
     public static void affichagePartieAnnule(){
-        /*
         if (!verbose){
             return;
-        }*/
-        System.out.println("Nombre de coups trop élevé, la partie a été arrêtée");
+        }
+        System.out.println("Nombre de coups trop élevé, la partie a été interrompue");
     }
 
     /**
@@ -216,7 +215,6 @@ public final class Affichage {
 
 
         for(Point3D coordCourante:plateau.getKeylist()){
-            String type="";
 
             int x3D=(int)coordCourante.getX();
             int z3D=(int)coordCourante.getZ();
@@ -238,12 +236,12 @@ public final class Affichage {
     private static int[] getHauteurLargeurMaxMin(ArrayList<Point3D> keylist){
         int[] result=new int[4];
         for(Point3D coordCourante:keylist){
-            int Z=(int)coordCourante.getZ();
-            int X=(int)coordCourante.getX();
-            if(Z<result[0]){result[0]=Z;}
-            if(Z>result[1]){result[1]=Z;}
-            if(convertX2D(X,Z)>result[2]){result[2]=convertX2D(X,Z);}
-            if(convertX2D(X,Z)<result[3]){result[3]=convertX2D(X,Z);}
+            int z=(int)coordCourante.getZ();
+            int x=(int)coordCourante.getX();
+            if(z<result[0]){result[0]=z;}
+            if(z>result[1]){result[1]=z;}
+            if(convertX2D(x,z)>result[2]){result[2]=convertX2D(x,z);}
+            if(convertX2D(x,z)<result[3]){result[3]=convertX2D(x,z);}
         }
         return result;
     }
@@ -283,15 +281,16 @@ public final class Affichage {
             boolean ligneImpaire=(Math.abs(i-grilleParcelle[0].length/2)%2==1);
             for(int numLigne=0;numLigne<4;numLigne++)
             {
-                if(ligneImpaire)
-                {    result.append("    ");}
-                for (int j=0;j<grilleParcelle.length;j++)
-                {
+                if(ligneImpaire) {
+                    result.append("    ");
+                }
+                for (int j=0;j<grilleParcelle.length;j++) {
                     Parcelle parcellecourante=plateau.getParcelle(grilleParcelle[j][i]);
                     Point3D coord=grilleParcelle[j][i];
                     ArrayList<Point3D> listirrig=null;
-                    if(coord!=null)
-                    {   listirrig=plateau.getIrrigationVoisineDeParcelle(coord);}
+                    if(coord!=null) {
+                        listirrig=plateau.getIrrigationVoisineDeParcelle(coord);
+                    }
                     result.append(ligne(plateau,coord,numLigne));
                 }
                 result.append("\n");}
@@ -369,10 +368,9 @@ public final class Affichage {
                 result.append(resetCouleur());
                 result.append("");
                 return result.toString();
-
-
+            default:
+                return "";
         }
-        return "";
     }
 
     /**

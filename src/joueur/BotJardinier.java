@@ -62,6 +62,14 @@ public class BotJardinier extends Bot{
             switchchoix();
             return Enums.Action.POSERIRRIGATION;
         }
+        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
+            switchchoix();
+            return Enums.Action.PIOCHERPARCELLE;
+        }
+        if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
+            switchchoix();
+            return Enums.Action.POSERIRRIGATION;
+        }
         if(possibilites.contains(Enums.Action.DEPLACERPANDA)){
             return Enums.Action.DEPLACERPANDA;
         }
@@ -90,6 +98,7 @@ public class BotJardinier extends Bot{
      * @param possibilites
      * @return
      */
+    @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
         if(this.getListObjectifs().isEmpty()){
             return super.choixParcellePioche(possibilites);

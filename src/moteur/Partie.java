@@ -72,8 +72,8 @@ public class Partie {
         panda.resetPersonnage();
         deck.resetDeck();
 
-        for (Joueur JoueurCourant: listJoueurs) {
-            JoueurCourant.resetJoueur();
+        for (Joueur joueurCourant: listJoueurs) {
+            joueurCourant.resetJoueur();
         }
     }
 
@@ -93,24 +93,24 @@ public class Partie {
         //coeur du jeu
         while (!finDePartie) {
             for (int i=0;i<listJoueurs.size();i++) {
-                Joueur JoueurCourant=listJoueurs.get(i);
-                Affichage.affichageDebutTour(JoueurCourant);
+                Joueur joueurCourant=listJoueurs.get(i);
+                Affichage.affichageDebutTour(joueurCourant);
 
                 //premiere action
-                JoueurCourant.choixAction();
+                joueurCourant.choixAction();
                 //deuxieme action
-                JoueurCourant.choixAction();
+                joueurCourant.choixAction();
 
                 //verifier objectif
-                JoueurCourant.verifierMesObjectif();
-                if(JoueurCourant.getNombreObjectifsRemplis()>nbObjectifFinDuJeu && finDePartie==false){
+                joueurCourant.verifierMesObjectif();
+                if(joueurCourant.getNombreObjectifsRemplis()>nbObjectifFinDuJeu && !finDePartie){
                     premierTermine=i;
                     finDePartie=true;
-                    JoueurCourant.setScore(JoueurCourant.getScore()+2);
-                    Affichage.affichageEmpereur(JoueurCourant);
+                    joueurCourant.setScore(joueurCourant.getScore()+2);
+                    Affichage.affichageEmpereur(joueurCourant);
                 }
-                Affichage.affichageFinTour(JoueurCourant);
-                JoueurCourant.resetListAction();
+                Affichage.affichageFinTour(joueurCourant);
+                joueurCourant.resetListAction();
             }
             compteurTour++;
             if (compteurTour>100)
@@ -121,16 +121,16 @@ public class Partie {
         }
         // dernier tour
         for (int i=0;i<premierTermine;i++) {
-            Joueur JoueurCourant=listJoueurs.get(i);
-            Affichage.affichageDebutTour(JoueurCourant);
+            Joueur joueurCourant=listJoueurs.get(i);
+            Affichage.affichageDebutTour(joueurCourant);
             //premiere action
-            JoueurCourant.choixAction();
+            joueurCourant.choixAction();
             //deuxieme action
-            JoueurCourant.choixAction();
+            joueurCourant.choixAction();
             //verifier objectif
-            JoueurCourant.verifierMesObjectif();
-            Affichage.affichageFinTour(JoueurCourant);
-            JoueurCourant.resetListAction();
+            joueurCourant.verifierMesObjectif();
+            Affichage.affichageFinTour(joueurCourant);
+            joueurCourant.resetListAction();
         }
 
         //fin de partie

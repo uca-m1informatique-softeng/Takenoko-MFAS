@@ -1,6 +1,5 @@
 package moteur;
 
-import joueur.Joueur;
 import moteur.objectifs.Objectif;
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
@@ -184,7 +183,7 @@ public class Deck {
         }
 
         if(nombreparcelle == 0) {
-            return null;
+            return listeParcelleTemporaire;
         }
 
         for (int i = 0; i < nombreparcelle; i++) {

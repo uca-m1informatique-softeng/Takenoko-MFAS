@@ -7,29 +7,27 @@ import moteur.Enums.CouleurBot;
 import java.util.ArrayList;
 
 /**
- * La classe principal deroulement d'une partie entre tout les joueurs
+ * La classe principal deroulement de mille partie entre les deux meilleurs joueurs(BotJardinier)
  */
-public class Main {
+public class Main3 {
 
     public static void main(String[] args) {
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
         BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
-        BotPanda botPanda = new BotPanda(CouleurBot.BLEU);
-        BotParcelle botParcelle = new BotParcelle(CouleurBot.ROUGE);
+        BotJardinier botJardinier2 = new BotJardinier(CouleurBot.BLEU);
 
         listeDesJoueurs.add(botJardinier);
-        listeDesJoueurs.add(botPanda);
-        listeDesJoueurs.add(botParcelle);
+        listeDesJoueurs.add(botJardinier2);
 
-        Affichage.setVerbose(true);
+        Affichage.setVerbose(false);
 
-        Partie partie = new Partie();
-        partie.jouer(listeDesJoueurs);
+        for (int i=0;i<1000;i++) {
+            Partie partie = new Partie();
+            partie.jouer(listeDesJoueurs);
+        }
 
-        Affichage.affichagePlateau();
         Affichage.affichageResultatsPartie(listeDesJoueurs);
-
 
     }
 }

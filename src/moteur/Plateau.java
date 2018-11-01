@@ -576,10 +576,7 @@ public class Plateau {
     public boolean parcelleSuivanteLibre(Point3D pointCourant, int i){
         ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
         ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
-        if(!(pointsVoisinOccupe.contains(pointsVoisin.get(i)))){
-            return true;
-        }
-        return false;
+        return !(pointsVoisinOccupe.contains(pointsVoisin.get(i)));
     }
 
     /**
@@ -619,11 +616,16 @@ public class Plateau {
                             return true;
                         }
                         break;
+                    default:
+                        return false;
                 }
             }
         }
         return false;
+
     }
+
+
 
     /**
      * renvoie la parcelle suivante permettant de completer un motif donnee

@@ -1,7 +1,6 @@
 package moteur.objectifs;
 
 import moteur.Parcelle;
-import moteur.Partie;
 import joueur.Joueur;
 import moteur.Enums.TypeParcelle;
 import moteur.Plateau;

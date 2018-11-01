@@ -7,9 +7,9 @@ import moteur.Enums.CouleurBot;
 import java.util.ArrayList;
 
 /**
- * La classe principal deroulement d'une partie entre tout les joueurs
+ * La classe principal deroulement de mille partie entre tout les joueurs
  */
-public class Main {
+public class Main2 {
 
     public static void main(String[] args) {
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
@@ -22,14 +22,14 @@ public class Main {
         listeDesJoueurs.add(botPanda);
         listeDesJoueurs.add(botParcelle);
 
-        Affichage.setVerbose(true);
+        Affichage.setVerbose(false);
 
-        Partie partie = new Partie();
-        partie.jouer(listeDesJoueurs);
+        for (int i=0;i<1000;i++) {
+            Partie partie = new Partie();
+            partie.jouer(listeDesJoueurs);
+        }
 
-        Affichage.affichagePlateau();
         Affichage.affichageResultatsPartie(listeDesJoueurs);
-
 
     }
 }

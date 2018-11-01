@@ -26,6 +26,7 @@ public class Bot extends Joueur {
      * @param parcelle
      * @return
      */
+    @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle) {
         return possibilites.get(0);
     }
@@ -35,6 +36,7 @@ public class Bot extends Joueur {
      * @param possibilites
      * @return
      */
+    @Override
     public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
@@ -44,6 +46,7 @@ public class Bot extends Joueur {
      * @param possibilites
      * @return
      */
+    @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites) {
         return possibilites.get(0);
     }
@@ -53,6 +56,7 @@ public class Bot extends Joueur {
      * @param possibilites
      * @return
      */
+    @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
@@ -62,6 +66,7 @@ public class Bot extends Joueur {
      * @param possibilites
      * @return
      */
+    @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
@@ -70,6 +75,7 @@ public class Bot extends Joueur {
      * @param possibilites
      * @return
      */
+    @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
         return possibilites.get(0);
     }
@@ -77,6 +83,7 @@ public class Bot extends Joueur {
     /**
      * @return
      */
+    @Override
     public Objectif choixObjectifPrioritaire() {
         return this.getListObjectifs().get(0);
     }

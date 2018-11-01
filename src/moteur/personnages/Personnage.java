@@ -78,7 +78,6 @@ public abstract class Personnage {
      * @return
      */
     public boolean faireActionBambou(Point3D p) {
-        //a modidifier dans les fils
         return false;
     }
 }

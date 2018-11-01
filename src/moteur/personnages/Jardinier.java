@@ -1,7 +1,6 @@
 package moteur.personnages;
 
 import moteur.Affichage;
-import moteur.Deck;
 import moteur.Plateau;
 import javafx.geometry.Point3D;
 

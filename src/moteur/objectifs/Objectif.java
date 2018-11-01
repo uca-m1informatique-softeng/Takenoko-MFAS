@@ -1,7 +1,6 @@
 package moteur.objectifs;
 
 import moteur.Enums;
-import moteur.Partie;
 import joueur.Joueur;
 
 /**

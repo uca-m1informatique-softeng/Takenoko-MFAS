@@ -1,7 +1,6 @@
 package moteur.objectifs;
 
 import moteur.Bambou;
-import moteur.Partie;
 import joueur.Joueur;
 
 import java.util.ArrayList;

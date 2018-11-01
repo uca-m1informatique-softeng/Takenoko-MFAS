@@ -2,10 +2,7 @@ package joueur;
 
 import moteur.*;
 import moteur.objectifs.Objectif;
-import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
-import moteur.personnages.Jardinier;
-import moteur.personnages.Panda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
@@ -61,6 +58,14 @@ public class BotPanda extends Bot {
             switchchoix();
             return Enums.Action.PIOCHERPARCELLE;
         }
+        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
+            switchchoix();
+            return Enums.Action.DEPLACERJARDINIER;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
+            switchchoix();
+            return Enums.Action.PIOCHERPARCELLE;
+        }
         if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
             switchchoix();
             return Enums.Action.POSERIRRIGATION;
@@ -109,6 +114,7 @@ public class BotPanda extends Bot {
      * @param possibilites
      * @return
      */
+    @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
         if(this.getListObjectifs().isEmpty()){
             return super.choixParcellePioche(possibilites);

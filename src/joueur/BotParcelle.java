@@ -1,18 +1,14 @@
 package joueur;
 
 import moteur.Enums;
-import moteur.Enums.TypeParcelle;
 import moteur.Parcelle;
-import moteur.Partie;
 import moteur.Plateau;
 import javafx.geometry.Point3D;
 import moteur.Enums.CouleurBot;
 import moteur.objectifs.Objectif;
-import moteur.objectifs.ObjectifPanda;
 import moteur.objectifs.ObjectifParcelle;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * La classe du bot Jardinier
@@ -62,6 +58,14 @@ public class BotParcelle extends Bot{
             switchchoix();
             return Enums.Action.DEPLACERPANDA;
         }
+        if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
+            switchchoix();
+            return Enums.Action.POSERIRRIGATION;
+        }
+        if(possibilites.contains(Enums.Action.DEPLACERPANDA)){
+            switchchoix();
+            return Enums.Action.DEPLACERPANDA;
+        }
         if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
             return Enums.Action.DEPLACERJARDINIER;
         }
@@ -76,7 +80,6 @@ public class BotParcelle extends Bot{
     @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
         Plateau plateau=Plateau.getInstance();
-        //Objectif objParcelle=choixObjectifPrioritaire();
         for(int sizeMax=6;sizeMax>0;sizeMax--){
             for (Point3D coordonne : possibilites){
                 if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
@@ -93,7 +96,6 @@ public class BotParcelle extends Bot{
      */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
-        Plateau plateau=Plateau.getInstance();
         for (int maxBambou=4;maxBambou>0;maxBambou--){
             for (Point3D coordonne : possibilites){
                 if(Plateau.getInstance().getParcelle(coordonne).getNbBambou()>=maxBambou){
@@ -108,6 +110,7 @@ public class BotParcelle extends Bot{
      * @param possibilites
      * @return
      */
+    @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
         if(this.getListObjectifs().isEmpty()) return super.choixParcellePioche(possibilites);
         Objectif objParcelle = choixObjectifPrioritaire();
