@@ -121,8 +121,11 @@ public class Plateau {
      */
     public Irrigation getIrrigation(Point3D p){
         int index=keylistIrrigation.indexOf(p);
+        if (index != -1) {
         Point3D p2=keylistIrrigation.get(index);
         return mapIrrigation.get(p2);
+        }
+        return null;
     }
 
     /**
@@ -450,7 +453,17 @@ public class Plateau {
         //verifie pas si irrigation deja occupée
         ArrayList<Point3D> list=this.getIrrigationVoisineOccupe(coordonne);
 
-        return (!list.isEmpty() && !getcoordonneParcelleAdjacenteIrrigation(coordonne).isEmpty());
+        ArrayList<Point3D>listdePoints=getcoordonneParcelleAdjacenteIrrigation(coordonne);
+        boolean parcellePresente=false;
+        for(Point3D coordParcelle:listdePoints){
+            if(getParcelle(coordParcelle)!= null)
+            {
+                parcellePresente=true;
+                break;
+            }
+        }
+
+        return (!list.isEmpty() && parcellePresente);
     }
 
 

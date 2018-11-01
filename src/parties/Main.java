@@ -22,13 +22,14 @@ public class Main {
         listeDesJoueurs.add(botPanda);
         listeDesJoueurs.add(botParcelle);
 
-        Affichage.setVerbose(false);
+        Affichage.setVerbose(true);
 
-        for (int i=0;i<1000;i++) {
+        for (int i=0;i<1;i++) {
             Partie partie = new Partie();
             partie.jouer(listeDesJoueurs);
         }
 
+        Affichage.affichagePlateau();
         Affichage.affichageResultatsPartie(listeDesJoueurs);
 
 

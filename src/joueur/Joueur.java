@@ -2,6 +2,7 @@ package joueur;
 
 import moteur.*;
 import moteur.objectifs.Objectif;
+import moteur.objectifs.ObjectifPanda;
 import moteur.personnages.Jardinier;
 import moteur.personnages.Panda;
 import javafx.geometry.Point3D;
@@ -23,7 +24,7 @@ public class Joueur implements IA {
     private int score;
     private ArrayList<Irrigation> listIrrigation;
     private int nbVictoire;
-    private int nbEgalite;
+    private int nbObjectifPandarealise;
 
 
 
@@ -38,9 +39,9 @@ public class Joueur implements IA {
         this.listBambou=new ArrayList<>();
         this.listIrrigation=new ArrayList<>();
         this.listAction=new ArrayList<>();
+        this.nbObjectifPandarealise=0;
         this.score=0;
         this.nbVictoire=0;
-        this.nbEgalite=0;
 
     }
 
@@ -112,12 +113,12 @@ public class Joueur implements IA {
         this.listIrrigation = listIrrigation;
     }
 
-    public int getNbEgalite() {
-        return nbEgalite;
+    public int getNbObjectifPandarealise() {
+        return nbObjectifPandarealise;
     }
 
-    public void setNbEgalite(int egalite) {
-        nbEgalite = egalite;
+    public void setNbObjectifPandarealise(int nbObjectifPandarealise) {
+        this.nbObjectifPandarealise = nbObjectifPandarealise;
     }
 
     //////////////////////////////Méthodes//////////////////////////////
@@ -152,11 +153,14 @@ public class Joueur implements IA {
         listAction.add(action);
     }
 
+
+
     /**
      * reinitialise le joueur pour commencer une nouvelle partie
      */
     public void resetJoueur(){
         setNombreObjectifsRemplis(0);
+
         setListObjectifs(new ArrayList<Objectif>());
         setListBambou(new ArrayList<Bambou>());
         setListIrrigation(new ArrayList<Irrigation>());
@@ -165,6 +169,7 @@ public class Joueur implements IA {
         actionPiocheObjectifJardinier();
         actionPiocheObjectifPanda();
         actionPiocheObjectifParcelle();
+        setNombreObjectifsRemplis(0);
     }
 
     /**
@@ -193,6 +198,9 @@ public class Joueur implements IA {
             if (objectif.validation(this)){
                 Affichage.affichageObjectifReussi(this,objectif);
                 nombreObjectifsRemplis++;
+                if(objectif instanceof ObjectifPanda){
+                    nbObjectifPandarealise++;
+                }
                 score += objectif.getValeur();
                 listObjectifs.remove(i);
             }
@@ -468,12 +476,6 @@ public class Joueur implements IA {
         nbVictoire++;
     }
 
-    /**
-     *
-     */
-    public void addEgalite(){
-        nbEgalite++;
-    }
 
     /**
      * renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités

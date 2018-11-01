@@ -86,10 +86,14 @@ public class Partie {
         //initialisation de la Partie
         resetPartie(listJoueurs);
 
-        Joueur premierTermine=null;
+        int nbObjectifFinDuJeu=11-listJoueurs.size();
+        int premierTermine=0;
+        int compteurTour=0;
+
         //coeur du jeu
         while (!finDePartie) {
-            for (Joueur JoueurCourant: listJoueurs) {
+            for (int i=0;i<listJoueurs.size();i++) {
+                Joueur JoueurCourant=listJoueurs.get(i);
                 Affichage.affichageDebutTour(JoueurCourant);
 
                 //premiere action
@@ -99,15 +103,36 @@ public class Partie {
 
                 //verifier objectif
                 JoueurCourant.verifierMesObjectif();
-                if(JoueurCourant.getNombreObjectifsRemplis()>8){ //nombre d'objectifs à réaliser pour terminer le jeu
+                if(JoueurCourant.getNombreObjectifsRemplis()>nbObjectifFinDuJeu && finDePartie==false){
+                    premierTermine=i;
                     finDePartie=true;
                     JoueurCourant.setScore(JoueurCourant.getScore()+2);
+                    Affichage.affichageEmpereur(JoueurCourant);
                 }
                 Affichage.affichageFinTour(JoueurCourant);
                 JoueurCourant.resetListAction();
             }
-
+            compteurTour++;
+            if (compteurTour>100)
+            {
+                finDePartie=true;
+                Affichage.affichagePartieAnnule();
+            }
         }
+        // dernier tour
+        for (int i=0;i<premierTermine;i++) {
+            Joueur JoueurCourant=listJoueurs.get(i);
+            Affichage.affichageDebutTour(JoueurCourant);
+            //premiere action
+            JoueurCourant.choixAction();
+            //deuxieme action
+            JoueurCourant.choixAction();
+            //verifier objectif
+            JoueurCourant.verifierMesObjectif();
+            Affichage.affichageFinTour(JoueurCourant);
+            JoueurCourant.resetListAction();
+        }
+
         //fin de partie
         calculVainqueur(listJoueurs);
     }
@@ -128,27 +153,24 @@ public class Partie {
                 vainqueur.add(joueur);
             }
             else{
-                if (joueur.getScore()==vainqueurCourant.getScore()) { vainqueur.add(joueur);}
+                if (joueur.getScore()==vainqueurCourant.getScore())
+                {
+                    if(joueur.getNbObjectifPandarealise()>vainqueurCourant.getNbObjectifPandarealise())
+                    {   vainqueur.clear();
+                        vainqueur.add(joueur);
+                    }
+                    else{
+                        if((joueur.getNbObjectifPandarealise()==vainqueurCourant.getNbObjectifPandarealise()))
+                            vainqueur.add(joueur);
+                    }
+                }
             }
         }
-        if(isEgalite(vainqueur)){
-            for (Joueur joueur:vainqueur){
-                joueur.addEgalite();
-            }
-        }
-        else {
-            vainqueur.get(0).addVictoire();
+
+        for (Joueur joueur:vainqueur){
+            joueur.addVictoire();
         }
         Affichage.affichageFinPartie(vainqueur);
-    }
-
-    /**
-     * renvoie si oui ou non il y'a une egalite
-     * @param vainqueur
-     * @return
-     */
-    private boolean isEgalite(ArrayList <Joueur> vainqueur){
-        return vainqueur.size()>1;
     }
 
 }

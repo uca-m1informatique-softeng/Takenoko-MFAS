@@ -35,7 +35,7 @@ public class Deck {
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
-        initialiserDeckParcelleMotif();
+        initialiserObjectifParcelle();
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
@@ -88,13 +88,13 @@ public class Deck {
         initialiserObjectifsJardinier();
         initialiserObjectifsPanda();
         initialiserDeckParcelle();
-        initialiserDeckParcelleMotif();
+        initialiserObjectifParcelle();
     }
 
     /**
      * initialise le deck des objectifs parcelles
      */
-    public void initialiserDeckParcelleMotif() {
+    public void initialiserObjectifParcelle() {
         deckObjectifsParcelle.clear();
         deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,0));
         deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,1));
@@ -108,6 +108,10 @@ public class Deck {
         deckObjectifsParcelle.add(new ObjectifParcelle(4,TypeParcelle.ROSE,1));
         deckObjectifsParcelle.add(new ObjectifParcelle(4,TypeParcelle.ROSE,2));
         deckObjectifsParcelle.add(new ObjectifParcelle(5,TypeParcelle.ROSE,3));
+
+        deckObjectifsParcelle.add(new ObjectifParcelle(5,TypeParcelle.ROSE,3));
+        deckObjectifsParcelle.add(new ObjectifParcelle(4,TypeParcelle.VERTE,3));
+        deckObjectifsParcelle.add(new ObjectifParcelle(3,TypeParcelle.JAUNE,3));
     }
 
     /**
@@ -132,13 +136,13 @@ public class Deck {
      */
     public void initialiserObjectifsJardinier(){
         deckObjectifsJardinier.clear();
-        for (int i = 0;i<4;i++){
+        for (int i = 0;i<5;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(6,TypeParcelle.JAUNE,4));
         }
-        for (int i = 4;i<8;i++){
+        for (int i = 5;i<10;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(7,TypeParcelle.ROSE,4));
         }
-        for (int i = 8;i<12;i++){
+        for (int i = 10;i<15;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(5,TypeParcelle.VERTE,4));
         }
 
@@ -157,9 +161,12 @@ public class Deck {
         for (int i = 3;i<6;i++){
             deckObjectifsPanda.add(new ObjectifPanda(5,TypeParcelle.ROSE,2));
         }
-        for (int i = 6;i<90;i++){
+        for (int i = 6;i<9;i++){
             deckObjectifsPanda.add(new ObjectifPanda(3,TypeParcelle.VERTE,2));
         }
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.JAUNE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.ROSE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.VERTE,3));
     }
 
 
@@ -169,20 +176,23 @@ public class Deck {
      */
     public ArrayList<Parcelle> piocherParcelle(){
         ArrayList<Parcelle> listeParcelleTemporaire = new ArrayList<>();
-        if(deckParcelles.size() > 3){
-            for (int i = 0; i < 2; i++) {
-                int random = new Random().nextInt(deckParcelles.size());
-                listeParcelleTemporaire.add(deckParcelles.get(random));
-                deckParcelles.remove(random);
-            }
+
+        int nombreparcelle=3;
+        if(deckParcelles.size() < 3){
+
+            nombreparcelle=deckParcelles.size();
         }
 
-        else if(deckParcelles.size() > 0){
-            return deckParcelles;
-        }
-        else if(deckParcelles.size() == 0) {
+        if(nombreparcelle == 0) {
             return null;
         }
+
+        for (int i = 0; i < nombreparcelle; i++) {
+            int random = new Random().nextInt(deckParcelles.size());
+            listeParcelleTemporaire.add(deckParcelles.get(random));
+            deckParcelles.remove(random);
+        }
+
         return listeParcelleTemporaire;
     }
     /**
