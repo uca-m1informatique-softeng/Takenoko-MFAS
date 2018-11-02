@@ -1,59 +1,56 @@
 package moteur;
 
 import org.junit.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import moteur.Enums.TypeParcelle;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 /**
  * La classe test des parcelles
  */
 public class ParcelleTest {
 
-    Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
+    Parcelle parcelleRose = new Parcelle(TypeParcelle.ROSE);
 
     @Test
     public void pousserBambou(){
-        int tailleBambou = parcelle.getListBambou().size();
-
-        //il n'y a pas de bambou à la création de la parcelle
+        assertFalse(parcelleRose.pousserBambou());
+        int tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,0);
 
-        //on fait pousser deux bambous
-        parcelle.pousserBambou();
-        parcelle.pousserBambou();
-        tailleBambou = parcelle.getListBambou().size();
+
+        parcelleRose.setIrriguee(true);
+        assertTrue(parcelleRose.pousserBambou());
+        assertTrue(parcelleRose.pousserBambou());
+        tailleBambou = parcelleRose.getListBambou().size();
         assertEquals(tailleBambou,2);
 
-        //on essai de faire pousser plus de 4 bambous
-        parcelle.pousserBambou();
-        parcelle.pousserBambou();
-        parcelle.pousserBambou();
-        tailleBambou = parcelle.getListBambou().size();
+        assertTrue(parcelleRose.pousserBambou());
+        assertTrue(parcelleRose.pousserBambou());
+        assertFalse(parcelleRose.pousserBambou());
+        tailleBambou = parcelleRose.getListBambou().size();
         assertEquals(tailleBambou,4);
-
 
     }
 
     @Test
     public void mangerBambou(){
+        parcelleRose.setIrriguee(true);
 
-        //on vérifie qu'on ne peut pas manger s'il n'y a pas de bambou
-        parcelle.mangerBambou();
-        int tailleBambou = parcelle.getListBambou().size();
+        assertFalse(parcelleRose.mangerBambou());
+        int tailleBambou = parcelleRose.getListBambou().size();
         assertEquals(tailleBambou,0);
 
-        //on fait pousser du bambou pour les manger plus tard
-        parcelle.pousserBambou();
-        parcelle.pousserBambou();
+        parcelleRose.pousserBambou();
+        parcelleRose.pousserBambou();
 
-        //on vérifie si le nombre de bambou diminu correctement
-        parcelle.mangerBambou();
-        tailleBambou = parcelle.getListBambou().size();
+        assertTrue(parcelleRose.mangerBambou());
+        tailleBambou = parcelleRose.getListBambou().size();
         assertEquals(tailleBambou,1);
 
-        parcelle.mangerBambou();
-        tailleBambou = parcelle.getListBambou().size();
+        assertTrue(parcelleRose.mangerBambou());
+        tailleBambou = parcelleRose.getListBambou().size();
         assertEquals(tailleBambou,0);
     }
 

@@ -8,102 +8,161 @@ import moteur.Plateau;
 import moteur.objectifs.ObjectifJardinier;
 import moteur.objectifs.ObjectifPanda;
 import org.junit.Test;
-
+import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 
 public class BotPandaTest {
 
     Partie partie=new Partie();
     Plateau plateau =partie.getPlateau();
     Parcelle parcelleJaune = new Parcelle(Enums.TypeParcelle.JAUNE);
+    Parcelle parcelleVerte = new Parcelle(Enums.TypeParcelle.VERTE);
     BotPanda botPanda = new BotPanda(Enums.CouleurBot.ROUGE);
+    ObjectifPanda objectifPandaJaune = new ObjectifPanda(4, Enums.TypeParcelle.JAUNE,2);
+
 
     @Test
-    public void joueurDeplaceJardinierZeroParcelleCouleurVoulu() {
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,0,-1));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
+    public void choixDeplacementJardinierZeroParcelleCouleurVoulu() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,0,-1));
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
-        botPanda.joueurDeplaceJardinier(partie.getJardinier());
+        ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(0,1,-1);
 
-        assertEquals(partie.getJardinier().getCoord(),new Point3D(0,1,-1));
+        assertEquals(botPanda.choixDeplacementJardinier(possibilites),pointAttendu);
+
     }
 
     @Test
-    public void joueurDeplaceJardinierUneParcelleCouleurVoulu(){
-        plateau.poser(new Parcelle(Enums.TypeParcelle.JAUNE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,0,-1));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
+    public void choixDeplacementJardinierUneParcelleCouleurVoulu(){
+        plateau.resetPlateau();
+        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
-        botPanda.joueurDeplaceJardinier(partie.getJardinier());
+        ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(1,0,-1);
 
-        assertEquals(partie.getJardinier().getCoord(),new Point3D(1,0,-1));
+        assertEquals(botPanda.choixDeplacementJardinier(possibilites),pointAttendu);
     }
 
     @Test
-    public void joueurDeplaceJardinierDeuxParcellesCouleurVoulu(){
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.JAUNE),new Point3D(1,0,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,-1,0));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
-
-        botPanda.joueurDeplaceJardinier(partie.getJardinier());
-
-        assertEquals(partie.getJardinier().getCoord(),new Point3D(0,1,-1));
-
-    }
-
-
-    @Test
-    public void joueurDeplacePandaZeroParcelleCouleurVoulu() {
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,0,-1));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
-
-        botPanda.joueurDeplacePanda(partie.getPanda());
-
-        assertEquals(partie.getPanda().getCoord(),new Point3D(0,1,-1));
-    }
-
-    @Test
-    public void joueurDeplacePandaUneParcelleCouleurVoulu(){
-        plateau.poser(new Parcelle(Enums.TypeParcelle.JAUNE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,0,-1));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
-
-        botPanda.joueurDeplacePanda(partie.getPanda());
-
-        assertEquals(partie.getPanda().getCoord(),new Point3D(1,0,-1));
-    }
-
-    @Test
-    public void joueurDeplacePandaDeuxParcellesCouleurVoulu(){
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(0,1,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.JAUNE),new Point3D(1,0,-1));
-        plateau.poser(new Parcelle(Enums.TypeParcelle.VERTE),new Point3D(1,-1,0));
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
-
-        botPanda.joueurDeplacePanda(partie.getPanda());
-
-        assertEquals(partie.getPanda().getCoord(),new Point3D(0,1,-1));
-    }
-
-    @Test
-    public void choixAction(){
+    public void choixDeplacementJardinierDeuxParcellesCouleurVoulu(){
+        plateau.resetPlateau();
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
         plateau.poser(parcelleJaune,new Point3D(0,1,-1));
-        assertEquals(new Point3D(0,0,0),partie.getJardinier().getCoord());
-        assertEquals(new Point3D(0,0,0),partie.getPanda().getCoord());
-        botPanda.addObjectif(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
-        botPanda.addObjectif(new ObjectifPanda(4, Enums.TypeParcelle.VERTE,2));
-        botPanda.choixAction(1,partie);
-        assertEquals(new Point3D(0,1,-1),partie.getJardinier().getCoord());
-        assertEquals(new Point3D(0,1,-1),partie.getPanda().getCoord());
+        plateau.poser(parcelleJaune2,new Point3D(1,0,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,-1,0));
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
+
+        ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(0,1,-1);
+
+        assertEquals(botPanda.choixDeplacementJardinier(possibilites),pointAttendu);
+
+        parcelleJaune2.pousserBambou();
+
+        assertEquals(botPanda.choixDeplacementJardinier(possibilites),pointAttendu);
+
+    }
+
+    @Test
+    public void choixDeplacementPandaZeroParcelleCouleurVoulu() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,0,-1));
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
+
+        ArrayList<Point3D> possibilites = partie.getPanda().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(0,1,-1);
+
+        assertEquals(botPanda.choixDeplacementPanda(possibilites),pointAttendu);
+
+    }
+
+    @Test
+    public void choixDeplacementPandaUneParcelleCouleurVoulu(){
+        plateau.resetPlateau();
+        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
+
+        ArrayList<Point3D> possibilites = partie.getPanda().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(1,0,-1);
+
+        assertEquals(botPanda.choixDeplacementPanda(possibilites),pointAttendu);
+    }
+
+    @Test
+    public void choixDeplacementPandaDeuxParcellesCouleurVoulu(){
+        plateau.resetPlateau();
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune2,new Point3D(1,0,-1));
+        plateau.poser(parcelleVerte,new Point3D(1,-1,0));
+        botPanda.addObjectif(objectifPandaJaune);
+
+        ArrayList<Point3D> possibilites = partie.getPanda().destinationsPossibles();
+        Point3D pointAttendu = new Point3D(0,1,-1);
+        System.out.println(parcelleJaune.getNbBambou());
+        assertEquals(botPanda.choixDeplacementPanda(possibilites),pointAttendu);
+
+        parcelleJaune2.pousserBambou();
+
+        pointAttendu = new Point3D(1,0,-1);
+        assertEquals(botPanda.choixDeplacementPanda(possibilites),pointAttendu);
+    }
+
+    @Test
+    public void choixParcellePiocheZeroParcelleVoulu(){
+        botPanda.addObjectif(objectifPandaJaune);
+        ArrayList<Parcelle> possibilites = new ArrayList<>();
+        possibilites.add(parcelleVerte);
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
+        assertEquals(botPanda.choixParcellePioche(possibilites), parcelleVerte);
+    }
+
+    @Test
+    public void choixParcellePiocheUneParcelleVoulu(){
+        botPanda.addObjectif(objectifPandaJaune);
+        ArrayList<Parcelle> possibilites = new ArrayList<>();
+        possibilites.add(parcelleVerte);
+        possibilites.add(parcelleJaune);
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
+        assertEquals(botPanda.choixParcellePioche(possibilites), parcelleJaune);
+
+    }
+
+    @Test
+    public void choixParcellePiocheDeuxParcellesVoulus(){
+        botPanda.addObjectif(objectifPandaJaune);
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
+        ArrayList<Parcelle> possibilites = new ArrayList<>();
+        possibilites.add(parcelleVerte);
+        possibilites.add(parcelleJaune);
+        possibilites.add(parcelleJaune2);
+
+        assertEquals(botPanda.choixParcellePioche(possibilites), parcelleJaune);
+    }
+
+    @Test
+    public void choixObjectifPrioritaire(){
+        ObjectifJardinier objectifJardinier = new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4);
+        botPanda.addObjectif(objectifJardinier);
+
+        assertEquals(botPanda.choixObjectifPrioritaire(),objectifJardinier);
+
+        botPanda.addObjectif(objectifPandaJaune);
+
+        assertEquals(botPanda.choixObjectifPrioritaire(),objectifPandaJaune);
+
+        ObjectifPanda ObjectifPandaRose = new ObjectifPanda(5, Enums.TypeParcelle.ROSE,2);
+        botPanda.addObjectif(ObjectifPandaRose);
+
+        assertEquals(botPanda.choixObjectifPrioritaire(),objectifPandaJaune);
+
     }
 }

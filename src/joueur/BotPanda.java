@@ -102,7 +102,7 @@ public class BotPanda extends Bot {
         Objectif objPanda=choixObjectifPrioritaire();
         for (int maxBambou=4;maxBambou>0;maxBambou--){
             for (Point3D coordonne : possibilites){
-                if(plateau.getParcelle(coordonne).getType() == objPanda.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou()>=maxBambou){
+                if(plateau.getParcelle(coordonne).getType() == objPanda.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
                     return coordonne;
                 }
             }

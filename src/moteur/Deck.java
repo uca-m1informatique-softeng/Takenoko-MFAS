@@ -154,13 +154,13 @@ public class Deck {
      */
     public void initialiserObjectifsPanda(){
         deckObjectifsPanda.clear();
-        for (int i = 0;i<3;i++){
+        for (int i = 0;i<4;i++){
             deckObjectifsPanda.add(new ObjectifPanda(4,TypeParcelle.JAUNE,2));
         }
-        for (int i = 3;i<6;i++){
+        for (int i = 4;i<7;i++){
             deckObjectifsPanda.add(new ObjectifPanda(5,TypeParcelle.ROSE,2));
         }
-        for (int i = 6;i<9;i++){
+        for (int i = 7;i<12;i++){
             deckObjectifsPanda.add(new ObjectifPanda(3,TypeParcelle.VERTE,2));
         }
         deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.JAUNE,3));
@@ -180,10 +180,6 @@ public class Deck {
         if(deckParcelles.size() < 3){
 
             nombreparcelle=deckParcelles.size();
-        }
-
-        if(nombreparcelle == 0) {
-            return listeParcelleTemporaire;
         }
 
         for (int i = 0; i < nombreparcelle; i++) {

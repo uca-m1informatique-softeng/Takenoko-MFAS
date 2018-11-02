@@ -73,7 +73,9 @@ public class Partie {
         deck.resetDeck();
 
         for (Joueur joueurCourant: listJoueurs) {
+            Affichage.affichageDebutTour(joueurCourant);
             joueurCourant.resetJoueur();
+            Affichage.affichageFinTour(joueurCourant);
         }
     }
 

@@ -84,9 +84,9 @@ public class BotJardinier extends Bot{
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
         if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
         Objectif objJard = choixObjectifPrioritaire();
-        for (int maxBambou=4;maxBambou>=0;maxBambou--){
+        for (int maxBambou=3;maxBambou>=0;maxBambou--){
             for (Point3D coordonne : possibilites) {
-                if (Plateau.getInstance().getParcelle(coordonne).getType() == objJard.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou()<maxBambou){
+                if (Plateau.getInstance().getParcelle(coordonne).getType() == objJard.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
                     return coordonne;
                 }
             }
