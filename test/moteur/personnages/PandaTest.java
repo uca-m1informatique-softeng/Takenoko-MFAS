@@ -18,21 +18,19 @@ public class PandaTest {
     Parcelle parcelleVerte = new Parcelle(TypeParcelle.VERTE);
 
     @Test
-    public void pousserOuMangerBambou() throws Exception {
+    public void faireActionBambou() throws Exception {
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(0,1,-1));
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(1,0,-1));
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(1,-1,0));
+        plateau.poser(parcelleVerte,new Point3D(1,1,-2));
 
-        plateau.poser(parcelleVerte,new Point3D(0,1,-1));
-        plateau.poser(parcelleVerte,new Point3D(1,0,-1));
-        plateau.poser(parcelleVerte,new Point3D(1,-1,0));
 
-        assertEquals(0,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
-
-        plateau.getParcelle(new Point3D(0,1,-1)).pousserBambou();
-        plateau.getParcelle(new Point3D(0,1,-1)).pousserBambou();
-
-        assertEquals(2,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
-
-        partie.getPanda().faireActionBambou(new Point3D(0,1,-1));
         assertEquals(1,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
+        assertFalse(partie.getPanda().faireActionBambou(new Point3D(1,1,-2)));
+
+        boolean exp = partie.getPanda().faireActionBambou(new Point3D(0,1,-1));
+        assertEquals(0,plateau.getParcelle(new Point3D(0,1,-1)).getNbBambou());
+        assertTrue(exp);
     }
 
 }
