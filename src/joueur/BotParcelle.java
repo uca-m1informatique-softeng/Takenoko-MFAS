@@ -33,6 +33,7 @@ public class BotParcelle extends Bot{
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du Botparcelle.
      * @param possibilites
      * @return
      */
@@ -73,6 +74,7 @@ public class BotParcelle extends Bot{
     }
 
     /**
+     * Renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités
      * @param possibilites
      * @param parcelle
      * @return
@@ -91,6 +93,7 @@ public class BotParcelle extends Bot{
     }
 
     /**
+     * Renvoie un choix de coordonne pour le deplacement du panda parmis une liste de possibilités.
      * @param possibilites
      * @return
      */
@@ -107,6 +110,7 @@ public class BotParcelle extends Bot{
     }
 
     /**
+     * Renvoie un choix de parcelle parmis une liste de possibilités.
      * @param possibilites
      * @return
      */
@@ -123,6 +127,7 @@ public class BotParcelle extends Bot{
     }
 
     /**
+     * Renvoie un objectif ciblé en priorité par le joueur.
      * @return
      */
     @Override

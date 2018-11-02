@@ -32,6 +32,7 @@ public class BotPanda extends Bot {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du Botpanda.
      * @param possibilites
      * @return
      */
@@ -74,6 +75,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un choix de coordonne pour le deplacement du jardinier parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -90,6 +92,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un choix de coordonne pour le deplacement du panda parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -111,6 +114,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un choix de parcelle parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -129,6 +133,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     @Override

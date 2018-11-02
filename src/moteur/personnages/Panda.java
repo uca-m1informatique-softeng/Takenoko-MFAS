@@ -11,6 +11,9 @@ public class Panda extends Personnage {
 
     private static Panda instance=null;
 
+    /**
+     * Le constructeur.
+     */
     public Panda(){
         super();
     }
@@ -28,7 +31,7 @@ public class Panda extends Personnage {
     }
 
     /**
-     * action du panda lorsque il arrive a une coordonne
+     * Action du panda lorsque il arrive a une coordonne
      * @param p
      * @return
      */

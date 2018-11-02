@@ -31,7 +31,7 @@ public abstract class Personnage {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise le personnage
+     * Reinitialise le personnage
      */
     public void resetPersonnage(){
         this.coord = new Point3D(0.0,0.0,0.0);
@@ -66,14 +66,13 @@ public abstract class Personnage {
      * La méthode qui permet de déplacer le personnage sur le plateau
      * @param p
      */
-    //pour le deplacement (pas de verification)
     public boolean deplacer(Point3D p){
         this.setCoord(p);
         return faireActionBambou(p);
     }
 
     /**
-     * renvoie ce que doit faire un personnage quand il se deplace a une coordonne
+     * Renvoie ce que doit faire un personnage quand il se deplace a une coordonne
      * @param p
      * @return
      */

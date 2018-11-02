@@ -11,6 +11,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
+/**
+ * La classe test du BotPanda
+ */
 public class BotPandaTest {
 
     Partie partie=new Partie();

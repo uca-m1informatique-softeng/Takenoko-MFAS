@@ -135,6 +135,7 @@ public class JoueurTest {
     @Test
     public void listActionRestantePossible(){
         joueur.resetJoueur();
+        plateau.resetPlateau();
         ArrayList<Enums.Action> listActionAttendu = new ArrayList<>();
         listActionAttendu.add(Enums.Action.PIOCHERPARCELLE);
         listActionAttendu.add(Enums.Action.PIOCHEROBJECTIFPANDA);

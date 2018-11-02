@@ -13,8 +13,10 @@ public class Jardinier extends Personnage {
 
     private static Jardinier instance=null;
 
-    public Jardinier()
-    {
+    /**
+     * Le constructeur.
+     */
+    public Jardinier() {
         super();
     }
 
@@ -31,7 +33,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * action du jardinier lorsque il arrive a une coordonne
+     * Action du jardinier lorsque il arrive a une coordonne
      * @param point3D
      * @return
      */
@@ -50,7 +52,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * donne la liste des coordonne ou le bambou doit pousser suite au deplacement du jardinier
+     * Donne la liste des coordonnees où le bambou doit pousser suite au deplacement du jardinier
      * @param point3D
      * @return
      */

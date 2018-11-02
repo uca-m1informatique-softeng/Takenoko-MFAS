@@ -9,6 +9,9 @@ import moteur.Plateau;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des objectifs parcelles.
+ */
 public class ObjectifParcelleTest {
     Partie partie=new Partie();
     Plateau plateau = partie.getPlateau();

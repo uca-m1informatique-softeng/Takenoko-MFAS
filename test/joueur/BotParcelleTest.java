@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 
+/**
+ * La classe test du BotParcelle.
+ */
 public class BotParcelleTest {
 
     Partie partie=new Partie();

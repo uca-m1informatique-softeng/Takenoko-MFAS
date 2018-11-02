@@ -7,6 +7,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des objectifs panda.
+ */
 public class ObjectifPandaTest {
     Bot bot = new Bot(Enums.CouleurBot.ROUGE);
 

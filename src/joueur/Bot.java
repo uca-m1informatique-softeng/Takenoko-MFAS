@@ -20,6 +20,9 @@ public class Bot extends Joueur {
         super(couleur);
     }
 
+
+    //////////////////////////////Méthodes//////////////////////////////
+
     /**
      * La méthode qui retourne les possibilités pour poser une parcelle.
      * @param possibilites
@@ -72,6 +75,7 @@ public class Bot extends Joueur {
     }
 
     /**
+     * renvoie un choix d'action parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -81,6 +85,7 @@ public class Bot extends Joueur {
     }
 
     /**
+     * renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     @Override

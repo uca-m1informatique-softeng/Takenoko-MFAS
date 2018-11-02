@@ -36,14 +36,11 @@ public abstract class  Objectif {
         return couleur;
     }
 
-    //////////////////////////////Méthodes//////////////////////////////
-
-    /**
-     * @return
-     */
     public boolean isValide() {
         return valide;
     }
+
+    //////////////////////////////Méthodes//////////////////////////////
 
 
     /**
