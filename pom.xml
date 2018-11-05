@@ -24,13 +24,23 @@
                 <version>1.6.0</version>
 
                 <executions>
+                <execution>
+                    <id>Main</id>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                    <configuration>
+                        <mainClass>takenoko.Main</mainClass>
+                    </configuration>
+                </execution>
+
                     <execution>
-                        <id>Main</id>
+                        <id>Main2</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
                         <configuration>
-                            <mainClass>takenoko.Main</mainClass>
+                            <mainClass>takenoko.Main2</mainClass>
                         </configuration>
                     </execution>
 

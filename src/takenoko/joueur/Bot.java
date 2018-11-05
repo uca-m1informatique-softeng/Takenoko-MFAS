@@ -16,6 +16,9 @@ import java.util.ArrayList;
 @Scope("prototype")
 public class Bot extends Joueur {
 
+
+    //////////////////////////////Méthodes//////////////////////////////
+
     /**
      * La méthode qui retourne les possibilités pour poser une parcelle.
      * @param possibilites
@@ -68,6 +71,7 @@ public class Bot extends Joueur {
     }
 
     /**
+     * Renvoie un choix d'action parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -77,6 +81,7 @@ public class Bot extends Joueur {
     }
 
     /**
+     * Renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     @Override

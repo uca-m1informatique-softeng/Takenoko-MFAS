@@ -73,6 +73,7 @@ public class BotJardinier extends Bot{
     }
 
     /**
+     * Renvoie un choix d'action parmis une liste de possibilités
      * @param possibilites
      * @return
      */

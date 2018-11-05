@@ -8,7 +8,7 @@ import takenoko.moteur.Enums.TypeParcelle;
  *C'est la classe de la parcelle
  */
 public class Parcelle {
-    private TypeParcelle type; //Pour le moment il y a que etang
+    private TypeParcelle type;
     private boolean irriguee;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 

@@ -199,10 +199,8 @@ public final class Affichage {
         int minLargeur=tabtmp[3];
         Point3D[][] result=new Point3D[ecartMinMax(minLargeur,maxLargeur)+1][ecartMinMax(minHauteur,maxHauteur)+1];
 
-        for (int i=0;i<=ecartMinMax(maxHauteur,minHauteur);i++)
-        {
-            for (int j=0;j<=ecartMinMax(minLargeur,maxLargeur);j++)
-            {
+        for (int i=0;i<=ecartMinMax(maxHauteur,minHauteur);i++) {
+            for (int j=0;j<=ecartMinMax(minLargeur,maxLargeur);j++) {
                 result[j][i]=null;
             }
         }
@@ -232,10 +230,18 @@ public final class Affichage {
         for(Point3D coordCourante:keylist){
             int z=(int)coordCourante.getZ();
             int x=(int)coordCourante.getX();
-            if(z<result[0]){result[0]=z;}
-            if(z>result[1]){result[1]=z;}
-            if(convertX2D(x,z)>result[2]){result[2]=convertX2D(x,z);}
-            if(convertX2D(x,z)<result[3]){result[3]=convertX2D(x,z);}
+            if(z<result[0]){
+                result[0]=z;
+            }
+            if(z>result[1]){
+                result[1]=z;
+            }
+            if(convertX2D(x,z)>result[2]){
+                result[2]=convertX2D(x,z);
+            }
+            if(convertX2D(x,z)<result[3]){
+                result[3]=convertX2D(x,z);
+            }
         }
         return result;
     }
@@ -271,11 +277,9 @@ public final class Affichage {
         Point3D[][] grilleParcelle=grilleParcelleSimple();
         int ligneOrigine=ligneDeLaParcelleEtang();
 
-        for (int i=0;i<grilleParcelle[0].length;i++)
-        {
+        for (int i=0;i<grilleParcelle[0].length;i++) {
             boolean lignePasDecalee=(ligneOrigine%2==i%2);
-            for(int numLigne=0;numLigne<4;numLigne++)
-            {
+            for(int numLigne=0;numLigne<4;numLigne++) {
 
                 if(!lignePasDecalee) {
                     result.append("    ");
@@ -299,8 +303,9 @@ public final class Affichage {
         for (int i=0;i<grilleParcelle[0].length;i++) {
             for (int j=0;j<grilleParcelle.length;j++) {
                 Parcelle parcellecourante = Plateau.getInstance().getParcelle(grilleParcelle[j][i]);
-                if (parcellecourante!=null && parcellecourante.getType() == Enums.TypeParcelle.ETANG)
+                if (parcellecourante!=null && parcellecourante.getType() == Enums.TypeParcelle.ETANG) {
                     return i;
+                }
             }
         }
         return -1;
@@ -317,18 +322,20 @@ public final class Affichage {
         StringBuilder result=new StringBuilder();
         Parcelle parcellecourante=plateau.getParcelle(coord);
         ArrayList<Point3D> listirrig=null;
-        if(coord!=null)
-        {   listirrig=plateau.getIrrigationVoisineDeParcelle(coord);}
+        if(coord!=null) {
+            listirrig=plateau.getIrrigationVoisineDeParcelle(coord);
+        }
         result.append(ligneNb(nbligne,coord,parcellecourante,listirrig,plateau));
 
 
 
-        if(nbligne==3)
-        {result.append(resetCouleur()+" ");}
-        else
-        {
-            if(listirrig!= null && plateau.getIrrigation(listirrig.get(1))!=null)
-            {result.append("\u001B[44m");}
+        if(nbligne==3) {
+            result.append(resetCouleur()+" ");
+        }
+        else {
+            if(listirrig!= null && plateau.getIrrigation(listirrig.get(1))!=null) {
+                result.append("\u001B[44m");
+            }
             result.append(" "+resetCouleur());
         }
         return result.toString();
@@ -346,30 +353,32 @@ public final class Affichage {
     private static String ligneNb(int nbligne, Point3D coord, Parcelle parcellecourante,ArrayList<Point3D>listirrig,Plateau plateau){
         switch (nbligne){
             case 0:
-                if(coord!=null)
-                {
-                    return ""+couleurParcelle(parcellecourante)+"  "+parcellecourante.getNbBambou()+" "+irrigationParcelle(parcellecourante)+"  "+resetCouleur()+"";}
+                if(coord!=null) {
+                    return ""+couleurParcelle(parcellecourante)+"  "+parcellecourante.getNbBambou()+" "+irrigationParcelle(parcellecourante)+"  "+resetCouleur()+"";
+                }
                 return "       ";
             case 1:
-                if(coord!=null)
-                {
-                    return ""+couleurParcelle(parcellecourante)+" "+coordonne(coord.getX())+coordonne(coord.getY())+coordonne(coord.getZ())+""+resetCouleur();}
+                if(coord!=null) {
+                    return ""+couleurParcelle(parcellecourante)+" "+coordonne(coord.getX())+coordonne(coord.getY())+coordonne(coord.getZ())+""+resetCouleur();
+                }
                 return "       ";
             case 2:
-                if(coord!=null)
-                {
-                    return ""+couleurParcelle(parcellecourante)+"       "+resetCouleur()+"";}
+                if(coord!=null) {
+                    return ""+couleurParcelle(parcellecourante)+"       "+resetCouleur()+"";
+                }
                 return "       ";
             case 3:
                 StringBuilder result=new StringBuilder();
                 result.append("");
-                if(listirrig!= null && plateau.getIrrigation(listirrig.get(3))!=null)
-                {result.append("\u001B[44m");}
+                if(listirrig!= null && plateau.getIrrigation(listirrig.get(3))!=null) {
+                    result.append("\u001B[44m");
+                }
                 result.append("   ");
                 result.append(resetCouleur());
                 result.append(" ");
-                if(listirrig!= null && plateau.getIrrigation(listirrig.get(2))!=null)
-                {result.append("\u001B[44m");}
+                if(listirrig!= null && plateau.getIrrigation(listirrig.get(2))!=null) {
+                    result.append("\u001B[44m");
+                }
                 result.append("   ");
                 result.append(resetCouleur());
                 result.append("");
@@ -386,7 +395,9 @@ public final class Affichage {
      */
     private static String couleurParcelle(Parcelle parcellecourante) {
         String type="";
-        if(parcellecourante==null) return type;
+        if(parcellecourante==null){
+            return type;
+        }
         switch (parcellecourante.getType()) {
             case JAUNE:
                 type = "\u001B[30m\u001B[43m";
@@ -413,7 +424,9 @@ public final class Affichage {
     private static String coordonne(double coord){
         String result="";
         int r=(int)coord;
-        if(r>=0){result+="+";}
+        if(r>=0){
+            result+="+";
+        }
         result+=r%10;
         return result;
     }
@@ -424,8 +437,12 @@ public final class Affichage {
      * @return
      */
     private static String irrigationParcelle(Parcelle parcelle){
-        if(parcelle==null) return "";
-        if(parcelle.isIrriguee()) return "~";
+        if(parcelle==null) {
+            return "";
+        }
+        if(parcelle.isIrriguee()) {
+            return "~";
+        }
         return "x";
     }
 

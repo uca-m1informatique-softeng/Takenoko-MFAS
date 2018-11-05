@@ -570,18 +570,6 @@ public class Plateau {
     }
 
     /**
-     * C'est une méthode qui retourne True si la parcelle est libre.
-     * @param pointCourant
-     * @param i
-     * @return
-     */
-    public boolean parcelleSuivanteLibre(Point3D pointCourant, int i){
-        ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
-        ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
-        return !(pointsVoisinOccupe.contains(pointsVoisin.get(i)));
-    }
-
-    /**
      * C'est une méthode qui retourne True si le motif est bien reconnu.
      * @param pointCourant
      * @param couleurObjectif

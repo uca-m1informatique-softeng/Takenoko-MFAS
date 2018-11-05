@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des ObjectifPanda
+ */
 public class ObjectifPandaTest {
     Bot bot ;
     Bambou bambou;

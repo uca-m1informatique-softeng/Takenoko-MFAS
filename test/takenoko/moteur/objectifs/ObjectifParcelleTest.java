@@ -10,6 +10,9 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test des ObjectifParcelle
+ */
 public class ObjectifParcelleTest {
     Partie partie;
     Plateau plateau ;
