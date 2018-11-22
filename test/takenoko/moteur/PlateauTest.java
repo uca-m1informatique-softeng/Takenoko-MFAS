@@ -1,3 +1,4 @@
+/*
 package takenoko.moteur;
 
 import javafx.geometry.Point3D;
@@ -9,9 +10,11 @@ import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
 
 
+*/
 /**
  * La classe test du plateau
- */
+ *//*
+
 
 public class PlateauTest {
     Partie partie ;
@@ -366,7 +369,9 @@ public class PlateauTest {
         assertTrue(plateau.chercheMotifParcelle(new Point3D(1.0,0.0,-1.0),TypeParcelle.JAUNE,3));
     }
 
-    /*irrigation*/
+    */
+/*irrigation*//*
+
 
     @Test
     public void getIrrigationVoisineDeParcelle(){
@@ -555,4 +560,4 @@ public class PlateauTest {
         assertEquals(plateau.getKeylistIrrigation().get(7),new Point3D(1.0,0.5,-1.5));
     }
 
-}
+}*/

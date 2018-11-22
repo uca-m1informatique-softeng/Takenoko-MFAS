@@ -1,3 +1,4 @@
+/*
 package takenoko.moteur;
 
 import org.junit.Test;
@@ -10,9 +11,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+*/
 /**
  * La classe test des parcelles
- */
+ *//*
+
 
 public class ParcelleTest {
 
@@ -67,4 +70,4 @@ public class ParcelleTest {
         assertEquals(tailleBambou,0);
     }
 
-}
+}*/

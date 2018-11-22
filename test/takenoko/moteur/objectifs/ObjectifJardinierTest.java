@@ -1,3 +1,4 @@
+/*
 package takenoko.moteur.objectifs;
 
 import javafx.geometry.Point3D;
@@ -10,9 +11,11 @@ import takenoko.moteur.objectifs.ObjectifJardinier;
 
 import java.util.ArrayList;
 
+*/
 /**
  * La classe test des objectifs jardinier
- */
+ *//*
+
 public class ObjectifJardinierTest {
     Partie partie;
     Plateau plateau ;
@@ -48,4 +51,4 @@ public class ObjectifJardinierTest {
         plateau.getParcelle(new Point3D(0,1,-1)).pousserBambou();
         assertTrue(objectifJardinier.validation(bot));
     }
-}
+}*/

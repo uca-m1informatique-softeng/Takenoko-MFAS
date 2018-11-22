@@ -1,7 +1,5 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Bambou;
 import takenoko.joueur.Joueur;
 
@@ -10,8 +8,6 @@ import java.util.ArrayList;
 /**
  * La classe des objectifs du panda
  */
-@Component
-@Scope("prototype")
 public class ObjectifPanda extends Objectif{
 
     int nombreBambou;
@@ -47,6 +43,7 @@ public class ObjectifPanda extends Objectif{
             setValide(true);
             return true;
         }
+	setValide(false);
         return false;
     }
 

@@ -1,3 +1,4 @@
+/*
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
@@ -14,9 +15,11 @@ import takenoko.moteur.personnages.Panda;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
+*/
 /**
  * La classe test du BotPanda
- */
+ *//*
+
 public class BotPandaTest {
 
     Partie partie;
@@ -212,4 +215,4 @@ public class BotPandaTest {
         assertEquals(botPanda.choixObjectifPrioritaire(),objectifPandaJaune);
 
     }
-}
+}*/

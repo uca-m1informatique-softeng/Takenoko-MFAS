@@ -1,3 +1,4 @@
+/*
 package takenoko.joueur;
 
 
@@ -13,9 +14,11 @@ import takenoko.moteur.personnages.Jardinier;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
+*/
 /**
  * La classe test du BotJardinier
- */
+ *//*
+
 public class BotJardinierTest {
     Partie partie;
     Plateau plateau ;
@@ -168,4 +171,4 @@ public class BotJardinierTest {
 
     }
 
-}
+}*/

@@ -1,7 +1,5 @@
 package takenoko.moteur.personnages;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Affichage;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
@@ -11,8 +9,6 @@ import java.util.ArrayList;
 /**
  * C'est la classe du jardinier
  */
-@Component
-@Scope("singleton")
 public class Jardinier extends Personnage {
 
     private static Jardinier instance=null;
@@ -57,13 +53,8 @@ public class Jardinier extends Personnage {
         Plateau plateau=Plateau.getInstance();
         ArrayList<Point3D> listParcelle = plateau.getParcelleVoisineMemeCouleur(point3D);
         ArrayList<Point3D> listMemeCouleur = new ArrayList<>();
-        if(plateau.getParcelle(point3D).isIrriguee()){
-            listMemeCouleur.add(point3D);
-        }
         for(Point3D pointMemeCouleur : listParcelle){
-            if(plateau.getParcelle(pointMemeCouleur).isIrriguee()){
                 listMemeCouleur.add(pointMemeCouleur);
-            }
         }
         return listMemeCouleur;
     }

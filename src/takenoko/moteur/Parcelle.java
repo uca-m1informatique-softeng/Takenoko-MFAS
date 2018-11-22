@@ -9,7 +9,6 @@ import takenoko.moteur.Enums.TypeParcelle;
  */
 public class Parcelle {
     private TypeParcelle type;
-    private boolean irriguee;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
@@ -18,13 +17,6 @@ public class Parcelle {
     /**
      * @return
      */
-    public boolean isIrriguee() {
-        return irriguee;
-    }
-
-    public void setIrriguee(boolean irriguee) {
-        this.irriguee = irriguee;
-    }
 
     public int getNbBambou(){
         return listBambou.size();
@@ -52,7 +44,7 @@ public class Parcelle {
      * La methode qui permet de faire pousser le bambou
      */
     public boolean pousserBambou(){
-        if(listBambou.size() < 4 && isIrriguee() && type!=Enums.TypeParcelle.ETANG){
+        if(listBambou.size() < 4 && type!=Enums.TypeParcelle.ETANG){
             Bambou bambou = new Bambou();
             bambou.setCouleur(this.type);
             listBambou.add(bambou);

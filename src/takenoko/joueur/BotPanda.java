@@ -5,9 +5,6 @@ import takenoko.moteur.objectifs.ObjectifPanda;
 import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
-
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
@@ -15,9 +12,6 @@ import takenoko.moteur.Plateau;
 /**
  * La classe du bot Panda
  */
-
-@Component
-@Scope("prototype")
 
 public class BotPanda extends Bot {
 
@@ -43,19 +37,8 @@ public class BotPanda extends Bot {
         if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)){
             return Enums.Action.PIOCHEROBJECTIFJARDINIER;
         }
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPARCELLE)){
-            return Enums.Action.PIOCHEROBJECTIFPARCELLE;
-        }
         if(possibilites.contains(Enums.Action.DEPLACERPANDA)){
             return Enums.Action.DEPLACERPANDA;
-        }
-        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)&& choixchange<2){
-            switchchoix();
-            return Enums.Action.DEPLACERJARDINIER;
-        }
-        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)&& choixchange<4){
-            switchchoix();
-            return Enums.Action.PIOCHERPARCELLE;
         }
         if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
             switchchoix();
@@ -64,10 +47,6 @@ public class BotPanda extends Bot {
         if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
             switchchoix();
             return Enums.Action.PIOCHERPARCELLE;
-        }
-        if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
-            switchchoix();
-            return Enums.Action.POSERIRRIGATION;
         }
         return null;
     }
@@ -138,6 +117,11 @@ public class BotPanda extends Bot {
             }
         }
         return super.choixObjectifPrioritaire();
+    }
+
+    @Override
+    public boolean choixValiderUnObjectif(){
+        return super.choixValiderUnObjectif();
     }
 }
 

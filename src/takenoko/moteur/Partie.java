@@ -3,17 +3,12 @@ package takenoko.moteur;
 import takenoko.joueur.Joueur;
 import takenoko.moteur.personnages.Jardinier;
 import takenoko.moteur.personnages.Panda;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 /**
  * La classe partie
  */
-@Component
-@Scope("prototype")
-
 public class Partie {
     private Plateau plateau = Plateau.getInstance();
     private Jardinier jardinier = Jardinier.getInstance();
@@ -70,6 +65,8 @@ public class Partie {
             joueurCourant.resetJoueur();
             Affichage.affichageFinTour(joueurCourant);
         }
+
+        plateau.setListdesjoueurs(listJoueurs);
     }
 
     /**

@@ -1,7 +1,5 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Parcelle;
 import takenoko.joueur.Joueur;
 import takenoko.moteur.Plateau;
@@ -9,10 +7,9 @@ import takenoko.moteur.Plateau;
 import java.util.ArrayList;
 
 /**
- * La classe des objectifs du jardinier
+ *La classe des objectifs du jardinier
  */
-@Component
-@Scope("prototype")
+
 public class ObjectifJardinier extends Objectif{
 
     private int tailleBambou;
@@ -45,6 +42,7 @@ public class ObjectifJardinier extends Objectif{
                 return true;
             }
         }
+	setValide(false);
         return false;
     }
 

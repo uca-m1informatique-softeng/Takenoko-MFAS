@@ -1,15 +1,11 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Enums;
 import takenoko.joueur.Joueur;
 
 /**
  * La classe des objectifs
  */
-@Component
-@Primary
 public abstract class Objectif {
 
     private Enums.TypeParcelle couleur;

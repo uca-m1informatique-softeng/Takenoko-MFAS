@@ -5,17 +5,13 @@ import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
 import takenoko.moteur.objectifs.Objectif;
-import takenoko.moteur.objectifs.ObjectifParcelle;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 /**
  * La classe du bot Jardinier
  */
-@Component
-@Scope("prototype")
+
 public class BotParcelle extends Bot{
 
     int choixchange = 0;
@@ -33,9 +29,6 @@ public class BotParcelle extends Bot{
      */
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites){
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPARCELLE)){
-            return Enums.Action.PIOCHEROBJECTIFPARCELLE;
-        }
         if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA)){
             return Enums.Action.PIOCHEROBJECTIFPANDA;
         }
@@ -44,18 +37,6 @@ public class BotParcelle extends Bot{
         }
         if(possibilites.contains(Enums.Action.PIOCHERPARCELLE)){
             return Enums.Action.PIOCHERPARCELLE;
-        }
-        if(possibilites.contains(Enums.Action.POSERIRRIGATION)&& choixchange==0){
-            switchchoix();
-            return Enums.Action.POSERIRRIGATION;
-        }
-        if(possibilites.contains(Enums.Action.DEPLACERPANDA)&& choixchange>0){
-            switchchoix();
-            return Enums.Action.DEPLACERPANDA;
-        }
-        if(possibilites.contains(Enums.Action.POSERIRRIGATION)){
-            switchchoix();
-            return Enums.Action.POSERIRRIGATION;
         }
         if(possibilites.contains(Enums.Action.DEPLACERPANDA)){
             switchchoix();
@@ -122,12 +103,12 @@ public class BotParcelle extends Bot{
      */
     @Override
     public Objectif choixObjectifPrioritaire() {
-        for(Objectif objectif:getListObjectifs()){
-            if(objectif instanceof ObjectifParcelle){
-                return objectif;
-            }
-        }
         return super.choixObjectifPrioritaire();
+    }
+
+    @Override
+    public boolean choixValiderUnObjectif(){
+        return super.choixValiderUnObjectif();
     }
 
 }

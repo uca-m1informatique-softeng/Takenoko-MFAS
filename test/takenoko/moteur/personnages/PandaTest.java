@@ -1,3 +1,4 @@
+/*
 package takenoko.moteur.personnages;
 
 import javafx.geometry.Point3D;
@@ -9,9 +10,11 @@ import takenoko.moteur.Enums.TypeParcelle;
 
 import java.util.ArrayList;
 
+*/
 /**
  * La classe test du panda
- */
+ *//*
+
 public class PandaTest {
     Partie partie;
     Plateau plateau ;
@@ -49,4 +52,4 @@ public class PandaTest {
         assertTrue(exp);
     }
 
-}
+}*/

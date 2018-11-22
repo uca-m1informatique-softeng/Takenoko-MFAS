@@ -321,23 +321,8 @@ public final class Affichage {
     private static String ligne(Plateau plateau, Point3D coord,int nbligne) {
         StringBuilder result=new StringBuilder();
         Parcelle parcellecourante=plateau.getParcelle(coord);
-        ArrayList<Point3D> listirrig=null;
-        if(coord!=null) {
-            listirrig=plateau.getIrrigationVoisineDeParcelle(coord);
-        }
-        result.append(ligneNb(nbligne,coord,parcellecourante,listirrig,plateau));
+        result.append(ligneNb(nbligne,coord,parcellecourante,plateau));
 
-
-
-        if(nbligne==3) {
-            result.append(resetCouleur()+" ");
-        }
-        else {
-            if(listirrig!= null && plateau.getIrrigation(listirrig.get(1))!=null) {
-                result.append("\u001B[44m");
-            }
-            result.append(" "+resetCouleur());
-        }
         return result.toString();
     }
 
@@ -347,42 +332,25 @@ public final class Affichage {
      * @param nbligne
      * @param coord
      * @param parcellecourante
-     * @param listirrig
      * @param plateau
      */
-    private static String ligneNb(int nbligne, Point3D coord, Parcelle parcellecourante,ArrayList<Point3D>listirrig,Plateau plateau){
+    private static String ligneNb(int nbligne, Point3D coord, Parcelle parcellecourante,Plateau plateau){
         switch (nbligne){
             case 0:
                 if(coord!=null) {
-                    return ""+couleurParcelle(parcellecourante)+"  "+parcellecourante.getNbBambou()+" "+irrigationParcelle(parcellecourante)+"  "+resetCouleur()+"";
+                    return " "+couleurParcelle(parcellecourante)+"  "+parcellecourante.getNbBambou()+"    "+resetCouleur()+" ";
                 }
                 return "       ";
             case 1:
                 if(coord!=null) {
-                    return ""+couleurParcelle(parcellecourante)+" "+coordonne(coord.getX())+coordonne(coord.getY())+coordonne(coord.getZ())+""+resetCouleur();
+                    return " "+couleurParcelle(parcellecourante)+" "+coordonne(coord.getX())+coordonne(coord.getY())+coordonne(coord.getZ())+""+resetCouleur()+" ";
                 }
                 return "       ";
             case 2:
                 if(coord!=null) {
-                    return ""+couleurParcelle(parcellecourante)+"       "+resetCouleur()+"";
+                    return " "+couleurParcelle(parcellecourante)+"       "+resetCouleur()+" ";
                 }
                 return "       ";
-            case 3:
-                StringBuilder result=new StringBuilder();
-                result.append("");
-                if(listirrig!= null && plateau.getIrrigation(listirrig.get(3))!=null) {
-                    result.append("\u001B[44m");
-                }
-                result.append("   ");
-                result.append(resetCouleur());
-                result.append(" ");
-                if(listirrig!= null && plateau.getIrrigation(listirrig.get(2))!=null) {
-                    result.append("\u001B[44m");
-                }
-                result.append("   ");
-                result.append(resetCouleur());
-                result.append("");
-                return result.toString();
             default:
                 return "";
         }
@@ -431,20 +399,6 @@ public final class Affichage {
         return result;
     }
 
-    /**
-     * renvoie une string pour l'irrigation d'une parcelle
-     * @param parcelle
-     * @return
-     */
-    private static String irrigationParcelle(Parcelle parcelle){
-        if(parcelle==null) {
-            return "";
-        }
-        if(parcelle.isIrriguee()) {
-            return "~";
-        }
-        return "x";
-    }
 
     /**
      * renvoie une string pour une coordonne

@@ -1,3 +1,4 @@
+/*
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
@@ -12,9 +13,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * Le classe test du joueur
- */
+ *//*
+
 public class JoueurTest {
 
     Partie partie;
@@ -245,4 +248,4 @@ public class JoueurTest {
     }
 
 
-}
+}*/

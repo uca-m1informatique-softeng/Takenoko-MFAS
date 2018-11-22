@@ -1,3 +1,4 @@
+/*
 package takenoko.moteur.objectifs;
 
 import org.junit.Before;
@@ -10,9 +11,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * La classe test des ObjectifPanda
- */
+ *//*
+
 public class ObjectifPandaTest {
     Bot bot ;
     Bambou bambou;
@@ -47,4 +50,4 @@ public class ObjectifPandaTest {
 
     }
 
-}
+}*/

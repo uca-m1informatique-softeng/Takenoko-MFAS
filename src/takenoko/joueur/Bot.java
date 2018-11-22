@@ -4,16 +4,12 @@ import javafx.geometry.Point3D;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.objectifs.Objectif;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
 /**
  *C'est la classe des bots
  */
-@Component
-@Scope("prototype")
 public class Bot extends Joueur {
 
 
@@ -27,16 +23,6 @@ public class Bot extends Joueur {
      */
     @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites, Parcelle parcelle) {
-        return possibilites.get(0);
-    }
-
-    /**
-     * La méthode qui retourne les possibilités pour poser une irrigation.
-     * @param possibilites
-     * @return
-     */
-    @Override
-    public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
         return possibilites.get(0);
     }
 
@@ -88,4 +74,7 @@ public class Bot extends Joueur {
     public Objectif choixObjectifPrioritaire() {
         return this.getListObjectifs().get(0);
     }
+
+    @Override
+    public boolean choixValiderUnObjectif(){return true;}
 }

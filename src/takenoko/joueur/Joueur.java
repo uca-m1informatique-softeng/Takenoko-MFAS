@@ -9,17 +9,12 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 import takenoko.moteur.Enums.CouleurBot;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 
 /**
  * La classe du joueur
  */
-@Component
-@Scope("prototype")
-@Primary
+
 public class Joueur implements IA {
 
     private ArrayList<Enums.Action> listAction = new ArrayList<>();;
@@ -28,7 +23,6 @@ public class Joueur implements IA {
     private ArrayList<Objectif> listObjectifs = new ArrayList<>();;
     private ArrayList<Bambou> listBambou = new ArrayList<>();;
     private int score = 0;
-    private ArrayList<Irrigation> listIrrigation = new ArrayList<>();;
     private int nbVictoire = 0;
     private int nbObjectifPandarealise = 0;
 
@@ -93,14 +87,6 @@ public class Joueur implements IA {
         listObjectifs = listObjectifs2;
     }
 
-    public ArrayList<Irrigation> getListIrrigation() {
-        return listIrrigation;
-    }
-
-    public void setListIrrigation(ArrayList<Irrigation> listIrrigation) {
-        this.listIrrigation = listIrrigation;
-    }
-
     public int getNbObjectifPandarealise() {
         return nbObjectifPandarealise;
     }
@@ -151,22 +137,13 @@ public class Joueur implements IA {
 
         setListObjectifs(new ArrayList<Objectif>());
         setListBambou(new ArrayList<Bambou>());
-        setListIrrigation(new ArrayList<Irrigation>());
         setListAction(new ArrayList<>());
         setScore(0);
         actionPiocheObjectifJardinier();
         actionPiocheObjectifPanda();
-        actionPiocheObjectifParcelle();
         setNombreObjectifsRemplis(0);
     }
 
-    /**
-     * ajoute une irrigation à la liste des irrigations du joueur
-     * @param irrigation
-     */
-    public void addIrrigation (Irrigation irrigation){
-        listIrrigation.add(irrigation);
-    }
 
     /**
      * C'est la méthode qui permet d'ajouter un objectif à la liste des objectifs du joueur
@@ -184,6 +161,8 @@ public class Joueur implements IA {
         for(int i=listObjectifs.size()-1;i>=0;i--){
             Objectif objectif = listObjectifs.get(i);
             if (objectif.validation(this)){
+                if(!choixValiderUnObjectif())
+                    continue;
                 Affichage.affichageObjectifReussi(this,objectif);
                 nombreObjectifsRemplis++;
                 if(objectif instanceof ObjectifPanda){
@@ -206,8 +185,8 @@ public class Joueur implements IA {
         }
         for (int i=result.size()-1;i>=0;i--){
             Enums.Action action=result.get(i);
-            if(action==Enums.Action.PIOCHEROBJECTIFJARDINIER || action==Enums.Action.PIOCHEROBJECTIFPANDA || action==Enums.Action.PIOCHEROBJECTIFPARCELLE){
-                if((!verifActionPossible(action)) ||listAction.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)||listAction.contains(Enums.Action.PIOCHEROBJECTIFPANDA)||listAction.contains(Enums.Action.PIOCHEROBJECTIFPARCELLE)){
+            if(action==Enums.Action.PIOCHEROBJECTIFJARDINIER || action==Enums.Action.PIOCHEROBJECTIFPANDA){
+                if((!verifActionPossible(action)) ||listAction.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)||listAction.contains(Enums.Action.PIOCHEROBJECTIFPANDA)){
                     result.remove(action);
                 }
             }
@@ -229,10 +208,8 @@ public class Joueur implements IA {
         switch (action){
             case DEPLACERPANDA:return verifActionDeplacerPanda();
             case PIOCHERPARCELLE:return verifActionPoserParcelle();
-            case POSERIRRIGATION:return verifActionPoserIrrigation();
             case DEPLACERJARDINIER:return verifActionDeplacerJardinier();
             case PIOCHEROBJECTIFPANDA:return verifActionPiocherObjPanda();
-            case PIOCHEROBJECTIFPARCELLE:return verifActionPiocherObjParcelle();
             case PIOCHEROBJECTIFJARDINIER:return verifActionPiocherObjJardinier();
         }
         return false;
@@ -279,22 +256,6 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif parcelle est possible
-     * @return
-     */
-    private final boolean verifActionPiocherObjParcelle(){
-        return (!Deck.getInstance().isDeckObjectifParcelleVide() && this.getListObjectifs().size()<5);
-    }
-
-    /**
-     * verifie que l'action de poser une irrigation est possible
-     * @return
-     */
-    private final boolean verifActionPoserIrrigation(){
-        return (!Plateau.getInstance().emplacementsAutoriseIrrigation().isEmpty());
-    }
-
-    /**
      * C'est la méthode qui permet de choisir l'action que le bot va effectuer
      * @return
      */
@@ -313,20 +274,12 @@ public class Joueur implements IA {
                 actionDeplaceJardinier();
                 addListAction(action);
                 return true;
-            case POSERIRRIGATION:
-                actionPoseIrrigation();
-                addListAction(action);
-                return true;
             case PIOCHEROBJECTIFJARDINIER:
                 actionPiocheObjectifJardinier();
                 addListAction(action);
                 return true;
             case PIOCHEROBJECTIFPANDA:
                 actionPiocheObjectifPanda();
-                addListAction(action);
-                return true;
-            case PIOCHEROBJECTIFPARCELLE:
-                actionPiocheObjectifParcelle();
                 addListAction(action);
                 return true;
         }
@@ -408,34 +361,6 @@ public class Joueur implements IA {
         }
     }
 
-    /**
-     * permet de piohcer une irrigation
-     * @return
-     */
-    public final Irrigation piocheUneIrrigation(){
-        return Deck.getInstance().piocheIrrigation();
-    }
-
-    /**
-     * c'est la methode qui permet de poser une irrigation
-     */
-    public final void actionPoseIrrigation(){
-        Plateau plateau = Plateau.getInstance();
-        ArrayList<Point3D> list = plateau.emplacementsAutoriseIrrigation();
-        Irrigation irrigation = piocheUneIrrigation();
-        Point3D choixPose=choixCoordonnePoseIrrigation(list); //choix dans fils
-        joueurPoseIrrigation(plateau,irrigation,choixPose);
-    }
-
-    /**
-     * C'est la méthode qui permet de poser une irrigation.
-     * @param plateau
-     * @param irrigation
-     * @param coord
-     */
-    public final void joueurPoseIrrigation(Plateau plateau, Irrigation irrigation, Point3D coord){
-        plateau.poserIrrigation(irrigation, coord);
-    }
 
     /**
      *C'est la méthode qui permet de piocher un objectif Jardinier.
@@ -449,13 +374,6 @@ public class Joueur implements IA {
      */
     public final void actionPiocheObjectifPanda(){
         addObjectif(Deck.getInstance().piocheObjectifPanda());
-    }
-
-    /**
-     *C'est la méthode qui permet de piocher un objectif Parcelle.
-     */
-    public final void actionPiocheObjectifParcelle(){
-        addObjectif(Deck.getInstance().piocheObjectifParcelle());
     }
 
 
@@ -477,14 +395,6 @@ public class Joueur implements IA {
         return null;
     }
 
-    /**
-     * renvoie un choix de coordonne pour la pose d'une irrigation parmis une liste de possibilités
-     * @param possibilites
-     * @return
-     */
-    public Point3D choixCoordonnePoseIrrigation(ArrayList<Point3D> possibilites) {
-        return null;
-    }
 
     /**
      * renvoie un choix de parcelle parmis une liste de possibilités
@@ -529,5 +439,7 @@ public class Joueur implements IA {
     public Objectif choixObjectifPrioritaire() {
         return null;
     }
+
+    public boolean choixValiderUnObjectif(){return false;}
 
 }

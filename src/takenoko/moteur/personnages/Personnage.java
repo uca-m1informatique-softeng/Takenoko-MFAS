@@ -1,7 +1,5 @@
 package takenoko.moteur.personnages;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
 
@@ -10,8 +8,6 @@ import java.util.ArrayList;
 /**
  * C'est la classe du panda
  */
-@Component
-@Primary
 public abstract class Personnage {
     private Point3D coord = new Point3D(0.0,0.0,0.0);;
 

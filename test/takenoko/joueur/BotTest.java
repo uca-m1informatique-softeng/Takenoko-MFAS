@@ -1,3 +1,4 @@
+/*
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+*/
 /**
  * La classe test du Bot
- */
+ *//*
+
 public class BotTest {
     Partie partie;
     Plateau plateau ;
@@ -116,4 +119,4 @@ public class BotTest {
 
     }
 
-}
+}*/

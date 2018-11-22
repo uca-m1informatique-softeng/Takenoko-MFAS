@@ -1,7 +1,5 @@
 package takenoko.moteur.personnages;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.moteur.Affichage;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
@@ -9,8 +7,6 @@ import javafx.geometry.Point3D;
 /**
  * C'est la classe du panda
  */
-@Component
-@Scope("singleton")
 public class Panda extends Personnage {
 
     private static Panda instance=null;
