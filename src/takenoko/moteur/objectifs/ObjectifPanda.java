@@ -2,6 +2,7 @@ package takenoko.moteur.objectifs;
 
 import takenoko.moteur.Bambou;
 import takenoko.joueur.Joueur;
+import takenoko.moteur.Enums;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,11 @@ import java.util.ArrayList;
 public class ObjectifPanda extends Objectif{
 
     int nombreBambou;
+
+    public ObjectifPanda(int valeur, Enums.TypeParcelle couleur, int nombreBambou) {
+        super(couleur, valeur);
+        this.nombreBambou = nombreBambou;
+    }
 
 
     //////////////////////////////GETTER et SETTER//////////////////////////////

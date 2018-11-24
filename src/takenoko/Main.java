@@ -2,6 +2,7 @@ package takenoko;
 
 import takenoko.joueur.*;
 import takenoko.moteur.Affichage;
+import takenoko.moteur.Enums;
 import takenoko.moteur.Partie;
 import takenoko.moteur.Enums.CouleurBot;
 
@@ -18,14 +19,14 @@ public class Main {
 
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
-        BotJardinier botJardinier = new BotJardinier();
-        BotPanda botPanda = new BotPanda();
-        BotRandom botRandom = new BotRandom();
-        botJardinier.setCouleur(CouleurBot.VERT);
-        botPanda.setCouleur(CouleurBot.BLEU);
+        BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
+        BotPanda botPanda = new BotPanda(CouleurBot.BLEU);
+        BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+
 
         listeDesJoueurs.add(botJardinier);
         listeDesJoueurs.add(botPanda);
+        listeDesJoueurs.add(botRandom);
         Affichage.setVerbose(true);
         Partie partie = new Partie();
         partie.jouer(listeDesJoueurs);

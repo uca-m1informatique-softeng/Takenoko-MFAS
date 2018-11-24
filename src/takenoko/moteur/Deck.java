@@ -18,6 +18,17 @@ public class Deck {
     private ArrayList<ObjectifPanda> deckObjectifsPanda = new ArrayList<>();
     private ArrayList<Parcelle> deckParcelles = new ArrayList<>();
 
+    public Deck() {
+        deckObjectifsJardinier = new ArrayList<>();
+        deckObjectifsPanda = new ArrayList<>();
+        deckParcelles = new ArrayList<>();
+
+        initialiserObjectifsJardinier();
+        initialiserObjectifsPanda();
+        initialiserDeckParcelle();
+    }
+
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
     public ArrayList<ObjectifJardinier> getDeckObjectifsJardinier() {
@@ -73,17 +84,17 @@ public class Deck {
     public void initialiserDeckParcelle() {
         deckParcelles.clear();
         for (int i = 0;i < 11;i++){
-            Parcelle parcelle = new Parcelle();
+            Parcelle parcelle = new Parcelle(TypeParcelle.VERTE);
             parcelle.setType(TypeParcelle.VERTE);
             deckParcelles.add(parcelle);
         }
         for (int i = 11;i < 18;i++){
-            Parcelle parcelle = new Parcelle();
+            Parcelle parcelle = new Parcelle(TypeParcelle.ROSE);
             parcelle.setType(TypeParcelle.ROSE);
             deckParcelles.add(parcelle);
         }
         for (int i = 18;i < 27;i++){
-            Parcelle parcelle = new Parcelle();
+            Parcelle parcelle = new Parcelle(TypeParcelle.JAUNE);
             parcelle.setType(TypeParcelle.JAUNE);
             deckParcelles.add(parcelle);
         }
@@ -97,29 +108,15 @@ public class Deck {
     public void initialiserObjectifsJardinier(){
         deckObjectifsJardinier.clear();
         for (int i = 0;i<5;i++){
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(6);
-            objectifJardinier.setCouleur(TypeParcelle.JAUNE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
+            deckObjectifsJardinier.add(new ObjectifJardinier(6,TypeParcelle.JAUNE,4));
 
         }
 
         for (int i = 5;i<10;i++){
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(7);
-            objectifJardinier.setCouleur(TypeParcelle.ROSE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
+            deckObjectifsJardinier.add(new ObjectifJardinier(7,TypeParcelle.ROSE,4));
         }
         for (int i = 10;i<15;i++){
-
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(5);
-            objectifJardinier.setCouleur(TypeParcelle.VERTE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
-
+            deckObjectifsJardinier.add(new ObjectifJardinier(5,TypeParcelle.VERTE,4));
         }
 
 
@@ -133,49 +130,19 @@ public class Deck {
 
         deckObjectifsPanda.clear();
         for (int i = 0;i<4;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(4);
-            objectifPanda.setCouleur(TypeParcelle.JAUNE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
+            deckObjectifsPanda.add(new ObjectifPanda(4,TypeParcelle.JAUNE,2));
         }
 
         for (int i = 4;i<7;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(5);
-            objectifPanda.setCouleur(TypeParcelle.ROSE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
+            deckObjectifsPanda.add(new ObjectifPanda(5,TypeParcelle.ROSE,2));
         }
         for (int i = 7;i<12;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(3);
-            objectifPanda.setCouleur(TypeParcelle.VERTE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
+            deckObjectifsPanda.add(new ObjectifPanda(3,TypeParcelle.VERTE,2));
         }
 
-        ObjectifPanda objectifPandaJaune = new ObjectifPanda();
-        objectifPandaJaune.setValeur(6);
-        objectifPandaJaune.setCouleur(TypeParcelle.JAUNE);
-        objectifPandaJaune.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaJaune);
-
-        ObjectifPanda objectifPandaVert = new ObjectifPanda();
-        objectifPandaVert.setValeur(6);
-        objectifPandaVert.setCouleur(TypeParcelle.VERTE);
-        objectifPandaVert.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaVert);
-
-
-        ObjectifPanda objectifPandaRose = new ObjectifPanda();
-        objectifPandaRose.setValeur(6);
-        objectifPandaRose.setCouleur(TypeParcelle.ROSE);
-        objectifPandaRose.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaRose);
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.JAUNE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.ROSE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.VERTE,3));
 
 
     }

@@ -8,6 +8,10 @@ public class Bambou {
 
     private TypeParcelle couleur;
 
+    public Bambou(TypeParcelle couleur) {
+        this.couleur = couleur;
+    }
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
 

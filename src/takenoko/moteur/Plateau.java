@@ -17,8 +17,11 @@ public class Plateau {
 
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
-    private ArrayList<Point3D> keylistIrrigation;
     private ArrayList<Joueur> listdesjoueurs;
+
+    public Plateau() {
+        resetPlateau();
+    }
 
     /**
      * @return
@@ -64,7 +67,7 @@ public class Plateau {
      */
     public void resetPlateau(){
         Point3D coordonne = new Point3D(0,0,0);
-        Parcelle parcelle = new Parcelle();
+        Parcelle parcelle = new Parcelle(TypeParcelle.ETANG);
         parcelle.setType(TypeParcelle.ETANG);
         keylist = new ArrayList<Point3D>();
         keylist.add(coordonne);

@@ -11,6 +11,10 @@ import java.util.ArrayList;
  *C'est la classe des bots
  */
 public class Bot extends Joueur {
+    
+    public Bot(Enums.CouleurBot couleur) {
+        super(couleur);
+    }
 
 
     //////////////////////////////Méthodes//////////////////////////////

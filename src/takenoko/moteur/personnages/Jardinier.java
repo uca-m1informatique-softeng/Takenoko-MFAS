@@ -13,6 +13,10 @@ public class Jardinier extends Personnage {
 
     private static Jardinier instance=null;
 
+    public Jardinier() {
+        super();
+    }
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**

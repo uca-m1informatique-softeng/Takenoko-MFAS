@@ -14,13 +14,27 @@ import java.util.ArrayList;
  */
 public class BotJardinier extends Bot{
 
-    int choixchange = 0;
+    int choixchange;
 
-    /**
-     *
-     */
+
+    public BotJardinier(Enums.CouleurBot couleur) {
+        super(couleur);
+        choixchange=0;
+    }
+
+
     private void switchchoix(){
         choixchange=(choixchange+1)%2;
+    }
+
+    //////////////////////////////GETTER ET SETTER//////////////////////////////
+
+    public int getChoixchange() {
+        return choixchange;
+    }
+
+    public void setChoixchange(int choixchange) {
+        this.choixchange = choixchange;
     }
 
 
@@ -107,4 +121,6 @@ public class BotJardinier extends Bot{
     public boolean choixValiderUnObjectif(){
         return super.choixValiderUnObjectif();
     }
+
+
 }

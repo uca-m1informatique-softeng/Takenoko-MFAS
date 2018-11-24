@@ -1,86 +1,32 @@
-/*
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
-
-import org.junit.Before;
-import org.junit.Test;
-import takenoko.joueur.BotPanda;
-import takenoko.moteur.*;
+import takenoko.moteur.Enums;
+import takenoko.moteur.Parcelle;
+import takenoko.moteur.Partie;
+import takenoko.moteur.Plateau;
 import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
-import takenoko.moteur.personnages.Jardinier;
-import takenoko.moteur.personnages.Panda;
-
+import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
-*/
-/**
- * La classe test du BotPanda
- *//*
-
 public class BotPandaTest {
 
-    Partie partie;
-    Plateau plateau ;
-    Parcelle parcelleJaune;
-    Parcelle parcelleJaune2;
-    Parcelle parcelleVerte ;
-    BotPanda botPanda ;
-    ObjectifJardinier objectifJardinier;
-    ObjectifPanda objectifPandaJaune ;
-    ObjectifPanda objectifPandaJaune2;
-    ObjectifPanda objectifPandaRose;
+    Partie partie=new Partie();
+    Plateau plateau =partie.getPlateau();
+    Parcelle parcelleJaune = new Parcelle(Enums.TypeParcelle.JAUNE);
+    Parcelle parcelleVerte = new Parcelle(Enums.TypeParcelle.VERTE);
+    BotPanda botPanda = new BotPanda(Enums.CouleurBot.ROUGE);
+    ObjectifPanda objectifPandaJaune = new ObjectifPanda(4, Enums.TypeParcelle.JAUNE,2);
 
-
-    @Before
-    public void setup(){
-        this.partie = new Partie();
-        this.plateau = Plateau.getInstance();
-        Panda.getInstance().resetPersonnage();
-        Jardinier.getInstance().resetPersonnage();
-        this.parcelleJaune = new Parcelle();
-        this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
-        parcelleVerte.setIrriguee(false);
-        parcelleVerte.setType(Enums.TypeParcelle.VERTE);
-        this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
-        parcelleJaune.setIrriguee(false);
-        parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
-        this.parcelleJaune2 = new Parcelle();
-        parcelleJaune2.setListBambou(new ArrayList<Bambou>());
-        parcelleJaune2.setIrriguee(false);
-        parcelleJaune2.setType(Enums.TypeParcelle.JAUNE);
-        this.botPanda = new BotPanda();
-        botPanda.setCouleur(Enums.CouleurBot.ROUGE);
-        this.objectifPandaJaune = new ObjectifPanda();
-        objectifPandaJaune.setValeur(4);
-        objectifPandaJaune.setCouleur(Enums.TypeParcelle.JAUNE);
-        objectifPandaJaune.setNombreBambou(2);
-        this.objectifPandaJaune2 = new ObjectifPanda();
-        objectifPandaJaune2.setValeur(6);
-        objectifPandaJaune2.setCouleur(Enums.TypeParcelle.JAUNE);
-        objectifPandaJaune2.setNombreBambou(4);
-        this.objectifJardinier = new ObjectifJardinier();
-        objectifJardinier.setCouleur(Enums.TypeParcelle.JAUNE);
-        objectifJardinier.setValeur(6);
-        objectifJardinier.setTailleBambou(4);
-
-         this.objectifPandaRose = new ObjectifPanda();
-         objectifPandaRose.setNombreBambou(2);
-         objectifPandaRose.setCouleur(Enums.TypeParcelle.ROSE);
-         objectifPandaRose.setValeur(5);
-
-    }
 
     @Test
     public void choixDeplacementJardinierZeroParcelleCouleurVoulu() {
         plateau.resetPlateau();
         plateau.poser(parcelleVerte,new Point3D(0,1,-1));
         plateau.poser(parcelleVerte,new Point3D(1,0,-1));
-        botPanda.addObjectif(objectifPandaJaune);
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
         ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
         Point3D pointAttendu = new Point3D(0,1,-1);
@@ -94,7 +40,7 @@ public class BotPandaTest {
         plateau.resetPlateau();
         plateau.poser(parcelleVerte,new Point3D(0,1,-1));
         plateau.poser(parcelleJaune,new Point3D(1,0,-1));
-        botPanda.addObjectif(objectifPandaJaune);
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
         ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
         Point3D pointAttendu = new Point3D(1,0,-1);
@@ -105,10 +51,11 @@ public class BotPandaTest {
     @Test
     public void choixDeplacementJardinierDeuxParcellesCouleurVoulu(){
         plateau.resetPlateau();
-        plateau.poser(parcelleJaune2,new Point3D(0,1,-1));
-        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
+        plateau.poser(parcelleJaune,new Point3D(0,1,-1));
+        plateau.poser(parcelleJaune2,new Point3D(1,0,-1));
         plateau.poser(parcelleVerte,new Point3D(1,-1,0));
-        botPanda.addObjectif(objectifPandaJaune2);
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
         ArrayList<Point3D> possibilites = partie.getJardinier().destinationsPossibles();
         Point3D pointAttendu = new Point3D(0,1,-1);
@@ -126,7 +73,7 @@ public class BotPandaTest {
         plateau.resetPlateau();
         plateau.poser(parcelleVerte,new Point3D(0,1,-1));
         plateau.poser(parcelleVerte,new Point3D(1,0,-1));
-        botPanda.addObjectif(objectifPandaJaune2);
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
         ArrayList<Point3D> possibilites = partie.getPanda().destinationsPossibles();
         Point3D pointAttendu = new Point3D(0,1,-1);
@@ -140,7 +87,7 @@ public class BotPandaTest {
         plateau.resetPlateau();
         plateau.poser(parcelleVerte,new Point3D(0,1,-1));
         plateau.poser(parcelleJaune,new Point3D(1,0,-1));
-        botPanda.addObjectif(objectifPandaJaune2);
+        botPanda.addObjectif(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,4));
 
         ArrayList<Point3D> possibilites = partie.getPanda().destinationsPossibles();
         Point3D pointAttendu = new Point3D(1,0,-1);
@@ -151,6 +98,7 @@ public class BotPandaTest {
     @Test
     public void choixDeplacementPandaDeuxParcellesCouleurVoulu(){
         plateau.resetPlateau();
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
         plateau.poser(parcelleJaune,new Point3D(0,1,-1));
         plateau.poser(parcelleJaune2,new Point3D(1,0,-1));
         plateau.poser(parcelleVerte,new Point3D(1,-1,0));
@@ -172,8 +120,8 @@ public class BotPandaTest {
         botPanda.addObjectif(objectifPandaJaune);
         ArrayList<Parcelle> possibilites = new ArrayList<>();
         possibilites.add(parcelleVerte);
-        possibilites.add(parcelleVerte);
-        possibilites.add(parcelleVerte);
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
         assertEquals(botPanda.choixParcellePioche(possibilites), parcelleVerte);
     }
 
@@ -183,7 +131,7 @@ public class BotPandaTest {
         ArrayList<Parcelle> possibilites = new ArrayList<>();
         possibilites.add(parcelleVerte);
         possibilites.add(parcelleJaune);
-        possibilites.add(parcelleVerte);
+        possibilites.add(new Parcelle(Enums.TypeParcelle.VERTE));
         assertEquals(botPanda.choixParcellePioche(possibilites), parcelleJaune);
 
     }
@@ -191,6 +139,7 @@ public class BotPandaTest {
     @Test
     public void choixParcellePiocheDeuxParcellesVoulus(){
         botPanda.addObjectif(objectifPandaJaune);
+        Parcelle parcelleJaune2 = new Parcelle(Enums.TypeParcelle.JAUNE);
         ArrayList<Parcelle> possibilites = new ArrayList<>();
         possibilites.add(parcelleVerte);
         possibilites.add(parcelleJaune);
@@ -201,7 +150,7 @@ public class BotPandaTest {
 
     @Test
     public void choixObjectifPrioritaire(){
-
+        ObjectifJardinier objectifJardinier = new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4);
         botPanda.addObjectif(objectifJardinier);
 
         assertEquals(botPanda.choixObjectifPrioritaire(),objectifJardinier);
@@ -210,9 +159,10 @@ public class BotPandaTest {
 
         assertEquals(botPanda.choixObjectifPrioritaire(),objectifPandaJaune);
 
-        botPanda.addObjectif(objectifPandaRose);
+        ObjectifPanda ObjectifPandaRose = new ObjectifPanda(5, Enums.TypeParcelle.ROSE,2);
+        botPanda.addObjectif(ObjectifPandaRose);
 
         assertEquals(botPanda.choixObjectifPrioritaire(),objectifPandaJaune);
 
     }
-}*/
+}

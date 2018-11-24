@@ -18,11 +18,9 @@ public class Main3 {
 
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
-        BotJardinier botJardinierVert = new BotJardinier();
-        BotJardinier botJardinierBleu = new BotJardinier();
+        BotJardinier botJardinierVert = new BotJardinier(CouleurBot.VERT);
+        BotJardinier botJardinierBleu = new BotJardinier(CouleurBot.BLEU);
 
-        botJardinierVert.setCouleur(CouleurBot.VERT);
-        botJardinierBleu.setCouleur(CouleurBot.BLEU);
 
         listeDesJoueurs.add(botJardinierVert);
         listeDesJoueurs.add(botJardinierBleu);

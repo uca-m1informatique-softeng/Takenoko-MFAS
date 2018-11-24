@@ -26,6 +26,17 @@ public class Joueur implements IA {
     private int nbVictoire = 0;
     private int nbObjectifPandarealise = 0;
 
+    public Joueur(CouleurBot couleur) {
+        this.couleur = couleur;
+        this.nombreObjectifsRemplis=0;
+        this.listObjectifs=new ArrayList<>();
+        this.listBambou=new ArrayList<>();
+        this.listAction=new ArrayList<>();
+        this.nbObjectifPandarealise=0;
+        this.score=0;
+        this.nbVictoire=0;
+    }
+
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
@@ -355,9 +366,7 @@ public class Joueur implements IA {
      */
     public final void joueurDeplacePanda(Panda panda, Point3D coord){
         if(panda.deplacer(coord)){
-            Bambou bambou = new Bambou();
-            bambou.setCouleur(Plateau.getInstance().getMap().get(coord).getType());
-            listBambou.add(bambou);
+            listBambou.add(new Bambou(Plateau.getInstance().getMap().get(coord).getType()));
         }
     }
 

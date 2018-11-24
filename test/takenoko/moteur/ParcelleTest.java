@@ -2,11 +2,7 @@
 package takenoko.moteur;
 
 import org.junit.Test;
-import org.junit.Before;
 import takenoko.moteur.Enums.TypeParcelle;
-
-import java.util.ArrayList;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -16,19 +12,10 @@ import static org.junit.Assert.assertFalse;
  * La classe test des parcelles
  *//*
 
-
 public class ParcelleTest {
 
-    //Parcelle parcelleRose = new Parcelle(TypeParcelle.ETANG);
-    Parcelle parcelleRose = new Parcelle();
+    Parcelle parcelleRose = new Parcelle(TypeParcelle.ROSE);
 
-    @Before
-    public void setUp() {
-        parcelleRose.setType(TypeParcelle.ROSE);
-        parcelleRose.setIrriguee(false);
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
-
-    }
     @Test
     public void pousserBambou(){
         assertFalse(parcelleRose.pousserBambou());
@@ -36,7 +23,6 @@ public class ParcelleTest {
         assertEquals(tailleBambou,0);
 
 
-        parcelleRose.setIrriguee(true);
         assertTrue(parcelleRose.pousserBambou());
         assertTrue(parcelleRose.pousserBambou());
         tailleBambou = parcelleRose.getListBambou().size();
@@ -52,7 +38,6 @@ public class ParcelleTest {
 
     @Test
     public void mangerBambou(){
-        parcelleRose.setIrriguee(true);
 
         assertFalse(parcelleRose.mangerBambou());
         int tailleBambou = parcelleRose.getListBambou().size();

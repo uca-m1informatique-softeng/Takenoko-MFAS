@@ -1,53 +1,29 @@
-/*
 package takenoko.moteur.objectifs;
 
-import org.junit.Before;
-import org.junit.Test;
 import takenoko.joueur.Bot;
-import takenoko.moteur.Bambou;
-import takenoko.moteur.Enums;
-
+import takenoko.moteur.*;
+import org.junit.Test;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-*/
-/**
- * La classe test des ObjectifPanda
- *//*
-
 public class ObjectifPandaTest {
-    Bot bot ;
-    Bambou bambou;
-    ObjectifPanda objectifPanda;
-
-    @Before
-    public void setup(){
-        this.bot = new Bot();
-        bot.setCouleur(Enums.CouleurBot.ROUGE);
-        this.bambou= new Bambou();
-        bambou.setCouleur(Enums.TypeParcelle.ROSE);
-        this.objectifPanda = new ObjectifPanda();
-        objectifPanda.setValeur(5);
-        objectifPanda.setCouleur(Enums.TypeParcelle.ROSE);
-        objectifPanda.setNombreBambou(2);
-
-    }
+    Bot bot = new Bot(Enums.CouleurBot.ROUGE);
 
     @Test
     public void validationObjectifPanda() throws Exception {
+        ObjectifPanda objectifpanda = new ObjectifPanda(5, Enums.TypeParcelle.ROSE,2);
+        bot.addObjectif(objectifpanda);
 
-        bot.addObjectif(objectifPanda);
+        bot.getListBambou().add(new Bambou(Enums.TypeParcelle.ROSE));
+        assertFalse(objectifpanda.validation(bot));
 
-        bot.getListBambou().add(bambou);
-        assertFalse(objectifPanda.validation(bot));
-
-        bot.getListBambou().add(bambou);
-        assertTrue(objectifPanda.validation(bot));
+        bot.getListBambou().add(new Bambou(Enums.TypeParcelle.ROSE));
+        assertTrue(objectifpanda.validation(bot));
 
         ArrayList<Bambou> listBambouCompare = new ArrayList<>();
         assertEquals(listBambouCompare,bot.getListBambou());
 
     }
 
-}*/
+}

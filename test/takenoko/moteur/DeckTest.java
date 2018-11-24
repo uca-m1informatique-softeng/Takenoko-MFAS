@@ -1,25 +1,17 @@
-/*
 package takenoko.moteur;
 
-import org.junit.Test;
 import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
-import takenoko.moteur.objectifs.ObjectifParcelle;
-
+import org.junit.Test;
 import java.util.ArrayList;
 import static org.junit.Assert.*;
 
-*/
 /**
  * La classe test des decks
- *//*
-
+ */
 public class DeckTest {
     Deck deck = new Deck();
-    Parcelle parcelleJaune = new Parcelle();
-    Parcelle parcelleRose = new Parcelle();
-    Parcelle parcelleVerte = new Parcelle();
-
+    Parcelle parcelleJaune = new Parcelle(Enums.TypeParcelle.JAUNE);
 
     @Test
     public void initialiserDeckParcelle() throws Exception {
@@ -28,95 +20,20 @@ public class DeckTest {
         ArrayList<Parcelle> deckParcelles = new ArrayList<>();
 
         for (int i = 0;i < 11;i++){
-            parcelleVerte.setListBambou(new ArrayList<Bambou>());
-            parcelleVerte.setIrriguee(false);
-            parcelleVerte.setType(Enums.TypeParcelle.VERTE);
-            deckParcelles.add(parcelleVerte);
+            deckParcelles.add(new Parcelle(Enums.TypeParcelle.VERTE));
         }
         for (int i = 11;i < 18;i++){
-            parcelleRose.setListBambou(new ArrayList<Bambou>());
-            parcelleRose.setIrriguee(false);
-            parcelleRose.setType(Enums.TypeParcelle.ROSE);
-            deckParcelles.add(parcelleRose);
+            deckParcelles.add(new Parcelle(Enums.TypeParcelle.ROSE));
         }
         for (int i = 18;i < 27;i++){
-            parcelleJaune.setListBambou(new ArrayList<Bambou>());
-            parcelleJaune.setIrriguee(false);
-            parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
-            deckParcelles.add(parcelleJaune);
+            deckParcelles.add(new Parcelle(Enums.TypeParcelle.JAUNE));
         }
-        System.out.println(deckParcelles.size());
-        System.out.println(deckParcelles.get(0).getType());
-        for (int i =0 ; i<1;i++){
+        for (int i =0 ; i<27;i++){
             assertEquals(deck.getDeckParcelles().get(i).getType().toString(),deckParcelles.get(i).getType().toString());
         }
 
     }
 
-
-    @Test
-    public void initialiserDeckObjectifsParcelle() throws Exception{
-        deck.initialiserObjectifParcelle();
-
-        ArrayList<ObjectifParcelle> deckObjectifsParcelle = new ArrayList<>();
-
-        for (int i = 0; i < 3; i++) {
-            ObjectifParcelle objectifParcelle = new ObjectifParcelle();
-            objectifParcelle.setValeur(3);
-            objectifParcelle.setCouleur(Enums.TypeParcelle.JAUNE);
-            objectifParcelle.setType(i);
-            deckObjectifsParcelle.add(objectifParcelle);
-        }
-
-        for (int i = 0; i < 2; i++) {
-            ObjectifParcelle objectifParcelle4Jaune = new ObjectifParcelle();
-            objectifParcelle4Jaune.setValeur(4);
-            objectifParcelle4Jaune.setCouleur(Enums.TypeParcelle.JAUNE);
-            objectifParcelle4Jaune.setType(3);
-            deckObjectifsParcelle.add(objectifParcelle4Jaune);
-        }
-
-
-        for (int i = 0; i < 3; i++) {
-            ObjectifParcelle objectifParcelle = new ObjectifParcelle();
-            objectifParcelle.setValeur(2);
-            objectifParcelle.setCouleur(Enums.TypeParcelle.VERTE);
-            objectifParcelle.setType(i);
-            deckObjectifsParcelle.add(objectifParcelle);
-        }
-
-        for (int i = 0; i < 2; i++) {
-            ObjectifParcelle objectifParcelle4Vert = new ObjectifParcelle();
-            objectifParcelle4Vert.setValeur(3);
-            objectifParcelle4Vert.setCouleur(Enums.TypeParcelle.VERTE);
-            objectifParcelle4Vert.setType(3);
-            deckObjectifsParcelle.add(objectifParcelle4Vert);
-        }
-
-
-
-        for (int i = 0; i < 3; i++) {
-            ObjectifParcelle objectifParcelle = new ObjectifParcelle();
-            objectifParcelle.setValeur(4);
-            objectifParcelle.setCouleur(Enums.TypeParcelle.ROSE);
-            objectifParcelle.setType(i);
-            deckObjectifsParcelle.add(objectifParcelle);
-        }
-        for (int i = 0; i < 2; i++) {
-            ObjectifParcelle objectifParcelle4Rose = new ObjectifParcelle();
-            objectifParcelle4Rose.setValeur(5);
-            objectifParcelle4Rose.setCouleur(Enums.TypeParcelle.ROSE);
-            objectifParcelle4Rose.setType(3);
-            deckObjectifsParcelle.add(objectifParcelle4Rose);
-        }
-
-        for (int i =0 ; i<15;i++){
-            assertEquals(deck.getDeckObjectifsParcelle().get(i).getValeur(),deckObjectifsParcelle.get(i).getValeur());
-            assertEquals(deck.getDeckObjectifsParcelle().get(i).getCouleur(),deckObjectifsParcelle.get(i).getCouleur());
-            assertEquals(deck.getDeckObjectifsParcelle().get(i).getType(),deckObjectifsParcelle.get(i).getType());
-        }
-
-    }
 
 
     @Test
@@ -124,32 +41,23 @@ public class DeckTest {
         deck.initialiserObjectifsJardinier();
 
         ArrayList<ObjectifJardinier> deckObjectifsJardinier= new ArrayList<>();
+        deckObjectifsJardinier.add(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(6, Enums.TypeParcelle.JAUNE,4));
 
-        for (int i = 0;i<5;i++){
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(6);
-            objectifJardinier.setCouleur(Enums.TypeParcelle.JAUNE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
+        deckObjectifsJardinier.add(new ObjectifJardinier(7, Enums.TypeParcelle.ROSE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(7, Enums.TypeParcelle.ROSE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(7, Enums.TypeParcelle.ROSE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(7, Enums.TypeParcelle.ROSE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(7, Enums.TypeParcelle.ROSE,4));
 
-        }
-
-        for (int i = 5;i<10;i++){
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(7);
-            objectifJardinier.setCouleur(Enums.TypeParcelle.ROSE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
-        }
-        for (int i = 10;i<15;i++){
-
-            ObjectifJardinier objectifJardinier = new ObjectifJardinier();
-            objectifJardinier.setValeur(5);
-            objectifJardinier.setCouleur(Enums.TypeParcelle.VERTE);
-            objectifJardinier.setTailleBambou(4);
-            deckObjectifsJardinier.add(objectifJardinier);
-
-        }
+        deckObjectifsJardinier.add(new ObjectifJardinier(5,Enums.TypeParcelle.VERTE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(5,Enums.TypeParcelle.VERTE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(5,Enums.TypeParcelle.VERTE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(5,Enums.TypeParcelle.VERTE,4));
+        deckObjectifsJardinier.add(new ObjectifJardinier(5,Enums.TypeParcelle.VERTE,4));
 
 
         for (int i =0 ; i<15;i++){
@@ -164,51 +72,21 @@ public class DeckTest {
         deck.initialiserObjectifsPanda();
 
         ArrayList<ObjectifPanda> deckObjectifsPanda = new ArrayList<>();
-
-        for (int i = 0;i<4;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(4);
-            objectifPanda.setCouleur(Enums.TypeParcelle.JAUNE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
-        }
-
-        for (int i = 4;i<7;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(5);
-            objectifPanda.setCouleur(Enums.TypeParcelle.ROSE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
-        }
-        for (int i = 7;i<12;i++){
-            ObjectifPanda objectifPanda = new ObjectifPanda();
-            objectifPanda.setValeur(3);
-            objectifPanda.setCouleur(Enums.TypeParcelle.VERTE);
-            objectifPanda.setNombreBambou(2);
-
-            deckObjectifsPanda.add(objectifPanda);
-        }
-
-        ObjectifPanda objectifPandaJaune = new ObjectifPanda();
-        objectifPandaJaune.setValeur(6);
-        objectifPandaJaune.setCouleur(Enums.TypeParcelle.JAUNE);
-        objectifPandaJaune.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaJaune);
-
-        ObjectifPanda objectifPandaVert = new ObjectifPanda();
-        objectifPandaVert.setValeur(6);
-        objectifPandaVert.setCouleur(Enums.TypeParcelle.VERTE);
-        objectifPandaVert.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaVert);
-
-
-        ObjectifPanda objectifPandaRose = new ObjectifPanda();
-        objectifPandaRose.setValeur(6);
-        objectifPandaRose.setCouleur(Enums.TypeParcelle.ROSE);
-        objectifPandaRose.setNombreBambou(3);
-        deckObjectifsPanda.add(objectifPandaRose);
+        deckObjectifsPanda.add(new ObjectifPanda(4,Enums.TypeParcelle.JAUNE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(4,Enums.TypeParcelle.JAUNE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(4,Enums.TypeParcelle.JAUNE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(4,Enums.TypeParcelle.JAUNE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(5,Enums.TypeParcelle.ROSE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(5,Enums.TypeParcelle.ROSE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(5,Enums.TypeParcelle.ROSE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(3,Enums.TypeParcelle.VERTE,2));
+        deckObjectifsPanda.add(new ObjectifPanda(6, Enums.TypeParcelle.JAUNE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6, Enums.TypeParcelle.ROSE,3));
+        deckObjectifsPanda.add(new ObjectifPanda(6, Enums.TypeParcelle.VERTE,3));
 
         for (int i =0 ; i<15;i++){
             assertEquals(deck.getDeckObjectifsPanda().get(i).getValeur(),deckObjectifsPanda.get(i).getValeur());
@@ -244,7 +122,7 @@ public class DeckTest {
 
     @Test
     public void remettreParcellesDansDeck() throws Exception {
-        deck.initialiserDeckParcelle();
+        initialiserDeckParcelle();
         deck.piocherParcelle();
 
         ArrayList<Parcelle> listeARemettre = new ArrayList<>();
@@ -259,7 +137,6 @@ public class DeckTest {
 
     @Test
     public void piocheObjectifJardinier() throws Exception {
-        deck.initialiserObjectifsJardinier();
         assertEquals(deck.getDeckObjectifsJardinier().size(),15);
         deck.piocheObjectifJardinier();
         assertEquals(deck.getDeckObjectifsJardinier().size(),14);
@@ -271,7 +148,6 @@ public class DeckTest {
 
     @Test
     public void piocheObjectifPanda() throws Exception {
-        deck.initialiserObjectifsPanda();
         assertEquals(deck.getDeckObjectifsPanda().size(),15);
         deck.piocheObjectifPanda();
         assertEquals(deck.getDeckObjectifsPanda().size(),14);
@@ -281,14 +157,5 @@ public class DeckTest {
 
     }
 
-    @Test
-    public void piocheObjectifParcelle() throws Exception {
-        deck.initialiserObjectifParcelle();
-        assertEquals(deck.getDeckObjectifsParcelle().size(),15);
-        deck.piocheObjectifParcelle();
-        assertEquals(deck.getDeckObjectifsParcelle().size(),14);
-        deck.getDeckObjectifsParcelle().clear();
-        assertEquals(null,deck.piocheObjectifParcelle());
-        assertEquals(deck.getDeckObjectifsParcelle().size(),0);
-    }
-}*/
+
+}

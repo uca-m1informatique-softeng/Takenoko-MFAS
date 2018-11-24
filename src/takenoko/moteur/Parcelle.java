@@ -11,12 +11,17 @@ public class Parcelle {
     private TypeParcelle type;
     private ArrayList<Bambou> listBambou = new ArrayList<>();
 
+    /**
+     * Le constructeur
+     * @param type
+     */
+    public Parcelle(TypeParcelle type){
+        this.type = type;
+        }
+
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
-
-    /**
-     * @return
-     */
 
     public int getNbBambou(){
         return listBambou.size();
@@ -45,9 +50,7 @@ public class Parcelle {
      */
     public boolean pousserBambou(){
         if(listBambou.size() < 4 && type!=Enums.TypeParcelle.ETANG){
-            Bambou bambou = new Bambou();
-            bambou.setCouleur(this.type);
-            listBambou.add(bambou);
+            listBambou.add(new Bambou(this.type));
             return true;
         }
         return false;

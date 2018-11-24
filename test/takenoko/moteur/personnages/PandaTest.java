@@ -2,13 +2,13 @@
 package takenoko.moteur.personnages;
 
 import javafx.geometry.Point3D;
-import takenoko.moteur.*;
+import takenoko.moteur.Parcelle;
+import takenoko.moteur.Partie;
+import takenoko.moteur.Plateau;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
-
-import java.util.ArrayList;
 
 */
 /**
@@ -16,31 +16,15 @@ import java.util.ArrayList;
  *//*
 
 public class PandaTest {
-    Partie partie;
-    Plateau plateau ;
-    Parcelle parcelleVerte ;
-    Parcelle parcelleRose;
-
-    public void setup(){
-        this.partie = new Partie();
-        this.plateau = partie.getPlateau();
-        this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
-        parcelleVerte.setIrriguee(false);
-        parcelleVerte.setType(Enums.TypeParcelle.VERTE);
-        this.parcelleRose = new Parcelle();
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
-        parcelleRose.setIrriguee(false);
-        parcelleRose.setType(Enums.TypeParcelle.VERTE);
-
-    }
+    Partie partie=new Partie();
+    Plateau plateau = partie.getPlateau();
+    Parcelle parcelleVerte = new Parcelle(TypeParcelle.VERTE);
 
     @Test
     public void faireActionBambou() throws Exception {
-        setup();
-        plateau.poser(parcelleRose,new Point3D(0,1,-1));
-        plateau.poser(parcelleRose,new Point3D(1,0,-1));
-        plateau.poser(parcelleRose,new Point3D(1,-1,0));
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(0,1,-1));
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(1,0,-1));
+        plateau.poser(new Parcelle(TypeParcelle.ROSE),new Point3D(1,-1,0));
         plateau.poser(parcelleVerte,new Point3D(1,1,-2));
 
 

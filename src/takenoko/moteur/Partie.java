@@ -10,11 +10,19 @@ import java.util.ArrayList;
  * La classe partie
  */
 public class Partie {
-    private Plateau plateau = Plateau.getInstance();
-    private Jardinier jardinier = Jardinier.getInstance();
-    private Panda panda = Panda.getInstance();
-    private Deck deck = Deck.getInstance();
-    private boolean finDePartie = false;
+    private Plateau plateau;
+    private Jardinier jardinier;
+    private Panda panda;
+    private Deck deck;
+    private boolean finDePartie;
+
+    public Partie(){
+        plateau=Plateau.getInstance();
+        jardinier=Jardinier.getInstance();
+        panda=Panda.getInstance();
+        deck = Deck.getInstance();
+        finDePartie=false;
+    }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 

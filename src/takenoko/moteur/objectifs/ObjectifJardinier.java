@@ -1,5 +1,6 @@
 package takenoko.moteur.objectifs;
 
+import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.joueur.Joueur;
 import takenoko.moteur.Plateau;
@@ -13,6 +14,11 @@ import java.util.ArrayList;
 public class ObjectifJardinier extends Objectif{
 
     private int tailleBambou;
+
+    public ObjectifJardinier(int valeur, Enums.TypeParcelle couleur, int tailleBambou) {
+        super(couleur, valeur);
+        this.tailleBambou = tailleBambou;
+    }
 
 
     //////////////////////////////GETTER ET SETTER//////////////////////////////

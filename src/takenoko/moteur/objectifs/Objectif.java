@@ -13,6 +13,12 @@ public abstract class Objectif {
 
     private boolean valide = false;
 
+    public Objectif(Enums.TypeParcelle couleur, int valeur) {
+        this.couleur = couleur;
+        this.valeur = valeur;
+        this.valide = false;
+    }
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
     public int getValeur() {

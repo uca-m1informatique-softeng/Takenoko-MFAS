@@ -13,6 +13,9 @@ public final class Affichage {
 
     public static boolean  verbose=true;
 
+    public Affichage() {
+    }
+
 
     public static void setVerbose(boolean v) {
         verbose = v;

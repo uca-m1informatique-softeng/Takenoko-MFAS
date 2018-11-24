@@ -11,6 +11,12 @@ import java.util.Random;
 
 public class BotRandom extends Bot{
 
+
+    public BotRandom(Enums.CouleurBot couleur) {
+        super(couleur);
+    }
+
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**

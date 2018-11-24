@@ -15,11 +15,28 @@ import takenoko.moteur.Plateau;
 
 public class BotPanda extends Bot {
 
-    int choixchange = 0;
+    int choixchange;
+
+    public BotPanda (Enums.CouleurBot couleur){
+        super(couleur);
+        choixchange=0;
+    }
+
 
     private void switchchoix(){
         choixchange=(choixchange+1)%5;
     }
+
+    //////////////////////////////GETTER ET SETTER//////////////////////////////
+
+    public int getChoixchange() {
+        return choixchange;
+    }
+
+    public void setChoixchange(int choixchange) {
+        this.choixchange = choixchange;
+    }
+
 
 
     //////////////////////////////Méthodes//////////////////////////////
@@ -123,6 +140,8 @@ public class BotPanda extends Bot {
     public boolean choixValiderUnObjectif(){
         return super.choixValiderUnObjectif();
     }
+
+
 }
 
 
