@@ -117,7 +117,99 @@ public class IANormale extends Bot{
         return super.choixDeplacementJardinier(possibilites);
     }
 
+    @Override
+    public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
+        boolean boul = false ; // il n'y a pas de couleur voulue sur le plateau
 
+        Plateau plateau=Plateau.getInstance();
+        if(this.getListObjectifs().isEmpty()) {
+            return super.choixDeplacementPanda(possibilites);
+        }
+        Objectif objPanda=choixObjectifPrioritaire();
+        Enums.TypeParcelle coul = objPanda.getCouleur();
+
+        for (Point3D coordonne : plateau.getKeylist()) {
+            if (plateau.getParcelle(coordonne).getType() == coul && plateau.getParcelle(Panda.getInstance().getCoord()).getType() != coul){
+                boul = true;
+            }
+        }
+
+        // si la couleur dispo sur le plateeau on regarde s'il est accessible sinon on appelle la méthode
+        if (boul){
+            for (int maxBambou=4;maxBambou>0;maxBambou--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelle(coordonne).getType() == objPanda.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
+                }
+            }
+            return this.parcelleCommune();
+        }
+        else{
+
+            // à modifier
+            for (int maxBambou=4;maxBambou>0;maxBambou--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelle(coordonne).getType() == Enums.TypeParcelle.VERTE && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
+                }
+            }
+
+            for (int maxBambou=4;maxBambou>0;maxBambou--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelle(coordonne).getType() == JAUNE && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
+                }
+            }
+
+            for (int maxBambou=4;maxBambou>0;maxBambou--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelle(coordonne).getType() == ROSE && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
+                }
+            }
+
+            return super.choixDeplacementPanda(possibilites);
+        }
+
+    }
+
+    public Point3D rechercheParcelle(){
+        Point3D res = new Point3D(0,0,0) ; //facultatif
+        Plateau plateau=Plateau.getInstance();
+        Objectif objPanda=choixObjectifPrioritaire();
+        // Chercher la parcelle avec la couleur voulu //
+        for (int maxBambou=4;maxBambou>0;maxBambou--) {
+            for (Point3D coordonne : plateau.getKeylist()) {
+                if (plateau.getParcelle(coordonne).getType() == objPanda.getCouleur() && Plateau.getInstance().getParcelle(coordonne).getNbBambou() == maxBambou && plateau.getParcelle(Panda.getInstance().getCoord()).getType() != objPanda.getCouleur()) {
+                    res = coordonne;
+                }
+            }
+        }
+        return res;
+
+    }
+
+    public Point3D parcelleCommune(){
+        oldcoor = Panda.getInstance().getCoord();
+        Point3D destination = oldcoor; //facultatif
+        Panda.getInstance().setCoord(this.rechercheParcelle());
+        ArrayList<Point3D> destinationsPossibles = Panda.getInstance().destinationsPossibles();
+        // On replace le panda a sa position originelle
+        Panda.getInstance().setCoord(oldcoor);
+        ArrayList<Point3D> destinationsPossiblesold = Panda.getInstance().destinationsPossibles();
+
+        for (int i = 0; i <destinationsPossibles.size() ; i++) {
+            if(destinationsPossiblesold.contains(destinationsPossibles.get(i))){
+                destination = destinationsPossibles.get(i);
+                //Panda.getInstance().setCoord(destination);
+            }
+        }
+        return destination;
+    }
 
 
 }
