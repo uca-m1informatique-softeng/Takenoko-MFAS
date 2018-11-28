@@ -90,7 +90,34 @@ public class IANormale extends Bot{
     }
 
 
-    
+    /**
+     * Renvoie un choix d'action parmis une liste de possibilités
+     * @param possibilites
+     * @return
+     */
+    @Override
+    public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
+        if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
+
+        Enums.TypeParcelle couleur = couleurParcelleDestination(0);
+        if(possibilites.contains(premiereDestination)){
+            return premiereDestination;
+        }
+        if(possibilites.contains(deuxiemeDestination)){
+            return deuxiemeDestination;
+        }
+
+        for (int maxBambou=3;maxBambou>=0;maxBambou--){
+            for (Point3D coordonne : possibilites) {
+                if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                    return coordonne;
+                }
+            }
+        }
+        return super.choixDeplacementJardinier(possibilites);
+    }
+
+
 
 
 }
