@@ -34,6 +34,36 @@ public class IANormale extends Bot{
     }
 
 
+    /**
+     * Les differents choix du Botjardinier.
+     * @param possibilites
+     * @return
+     */
+    @Override
+    public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
+
+        Plateau plateau=Plateau.getInstance();
+
+        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER) && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10) {
+            return Enums.Action.PIOCHEROBJECTIFJARDINIER;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA) && !possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER ) && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10) {
+            return Enums.Action.PIOCHEROBJECTIFPANDA;
+        }
+        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE) && !plateau.parcellesAdjacentesMemeCouleur(this.couleurParcelleDestination(0))) {
+            return Enums.Action.PIOCHERPARCELLE;
+        }
+        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)) {
+            return Enums.Action.DEPLACERJARDINIER;
+        }
+        if(possibilites.contains(Enums.Action.DEPLACERPANDA)){
+            return Enums.Action.DEPLACERPANDA;
+        }
+        return null;
+    }
+
+
+
 
     /**
      * @param perso : 0 pour le jardinier sinon panda
@@ -209,6 +239,25 @@ public class IANormale extends Bot{
             }
         }
         return destination;
+    }
+
+    /**
+     * Renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités
+     * @param possibilites
+     * @param parcelle
+     * @return
+     */
+    @Override
+    public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
+        Plateau plateau=Plateau.getInstance();
+        for(int sizeMax=6;sizeMax>0;sizeMax--){
+            for (Point3D coordonne : possibilites){
+                if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
+                    return coordonne;
+                }
+            }
+        }
+        return super.choixCoordonnePoseParcelle(possibilites,parcelle);
     }
 
 
