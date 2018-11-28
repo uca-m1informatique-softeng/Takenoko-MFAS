@@ -1,4 +1,3 @@
-/*
 package takenoko.moteur.personnages;
 
 import javafx.geometry.Point3D;
@@ -12,10 +11,6 @@ import takenoko.moteur.Enums.TypeParcelle;
 
 import java.util.ArrayList;
 
-*/
-/**
- * La classe test du jardinier
- *//*
 
 public class JardinierTest {
     Partie partie=new Partie();
@@ -30,8 +25,7 @@ public class JardinierTest {
         plateau.poser(parcelleRose,new Point3D(1,-1,0));
 
         ArrayList<Point3D> exp = partie.getJardinier().ouPousserBambou(new Point3D(1,0,-1));
-        System.out.println(exp);
-        assertEquals(2,exp.size());
+        assertEquals(1,exp.size());
     }
 
 
@@ -50,4 +44,4 @@ public class JardinierTest {
     }
 
 
-    }*/
+    }

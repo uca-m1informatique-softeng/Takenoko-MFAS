@@ -11,7 +11,7 @@ public abstract class Objectif {
     private Enums.TypeParcelle couleur;
     private int valeur;
 
-    private boolean valide = false;
+    private boolean valide;
 
     public Objectif(Enums.TypeParcelle couleur, int valeur) {
         this.couleur = couleur;
@@ -41,13 +41,6 @@ public abstract class Objectif {
         this.valeur = valeur;
     }
     //////////////////////////////Méthodes//////////////////////////////
-
-    /**
-     * @return
-     */
-    public boolean isValide() {
-        return valide;
-    }
 
 
     /**

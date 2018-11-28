@@ -18,7 +18,7 @@ public class Plateau {
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
     private ArrayList<Joueur> listdesjoueurs;
-
+    Point3D premiereDestination, deuxiemeDestination;
     public Plateau() {
         resetPlateau();
     }
@@ -252,6 +252,22 @@ public class Plateau {
 
         Affichage.affichagePoseParcelle(parcelle,coordonne);
         Affichage.affichageNombreBambou(this,coordonne);
+    }
+
+    /**
+     * @param couleur
+     * @return true s'il y a deux parcelles de la même "couleur" adjacentes
+     */
+    public boolean parcellesAdjacentesMemeCouleur(Enums.TypeParcelle couleur){
+        Plateau plateau = Plateau.getInstance();
+        for(Point3D pt : plateau.getKeylist()){
+            if(plateau.getParcelle(pt).getType() == couleur && plateau.getParcelleVoisineMemeCouleur(pt).size() > 0){
+                premiereDestination = pt;
+                deuxiemeDestination = plateau.getParcelleVoisineMemeCouleur(pt).get(0);
+                return true;
+            }
+        }
+        return false;
     }
 
 

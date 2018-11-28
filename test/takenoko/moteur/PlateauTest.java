@@ -1,4 +1,3 @@
-/*
 package takenoko.moteur;
 
 import javafx.geometry.Point3D;
@@ -8,11 +7,6 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
 
-
-*/
-/**
- * La classe test du plateau
- *//*
 
 
 public class PlateauTest {
@@ -29,7 +23,7 @@ public class PlateauTest {
     public void getParcelle() {
         plateau.poser(parcelleJaune,coordonneVoisin);
         Parcelle parcelle = plateau.getParcelle(coordonneVoisin);
-        assertEquals(parcelle.type,parcelleJaune.type);
+        assertEquals(parcelle.getType(),parcelleJaune.getType());
     }
 
     @Test
@@ -67,7 +61,7 @@ public class PlateauTest {
         assertEquals((int)plateau.getKeylist().get(1).getX(),(int)coordonneVoisin.getX());
         assertEquals((int)plateau.getKeylist().get(1).getY(),(int)coordonneVoisin.getY());
         assertEquals((int)plateau.getKeylist().get(1).getZ(),(int)coordonneVoisin.getZ());
-        assertEquals(plateau.getParcelle(coordonneVoisin).type,parcelleEtang.type);
+        assertEquals(plateau.getParcelle(coordonneVoisin).getType(),parcelleEtang.getType());
     }
 
     @Test
@@ -288,4 +282,4 @@ public class PlateauTest {
 
 
 
-}*/
+}

@@ -1,4 +1,3 @@
-/*
 package takenoko.joueur;
 
 import takenoko.moteur.*;
@@ -11,10 +10,6 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-*/
-/**
- * Le classe test du joueur
- *//*
 
 public class JoueurTest {
 
@@ -41,7 +36,7 @@ public class JoueurTest {
         plateau.getParcelle(new Point3D(0,-1,1)).pousserBambou();
 
         joueur.verifierMesObjectif();
-        assertEquals(1,joueur.getNombreObjectifsRemplis());
+        assertEquals(0,joueur.getNombreObjectifsRemplis());
     }
 
     @Test
@@ -56,7 +51,7 @@ public class JoueurTest {
         joueur.getListBambou().add(new Bambou(Enums.TypeParcelle.JAUNE));
 
         joueur.verifierMesObjectif();
-        assertEquals(1,joueur.getNombreObjectifsRemplis());
+        assertEquals(0,joueur.getNombreObjectifsRemplis());
     }
 
 
@@ -120,6 +115,7 @@ public class JoueurTest {
 
     @Test
     public void listActionRestantePossible(){
+        plateau.resetPlateau();
         joueur.resetJoueur();
         ArrayList<Enums.Action> listActionAttendu = new ArrayList<>();
         listActionAttendu.add(Enums.Action.PIOCHERPARCELLE);
@@ -133,8 +129,8 @@ public class JoueurTest {
         listActionAttendu.add(Enums.Action.DEPLACERJARDINIER);
         listActionAttendu.add(Enums.Action.DEPLACERPANDA);
 
-        listAction = joueur.listActionRestantePossible();
-        assertEquals(listAction,listActionAttendu);
+        ArrayList<Enums.Action> listAction2 = joueur.listActionRestantePossible();
+        assertEquals(listAction2,listActionAttendu);
     }
 
     @Test
@@ -183,4 +179,4 @@ public class JoueurTest {
     }
 
 
-}*/
+}

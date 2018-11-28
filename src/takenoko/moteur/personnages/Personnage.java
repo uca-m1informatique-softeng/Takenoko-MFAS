@@ -5,9 +5,7 @@ import javafx.geometry.Point3D;
 
 import java.util.ArrayList;
 
-/**
- * C'est la classe du panda
- */
+
 public abstract class Personnage {
     private Point3D coord;
 

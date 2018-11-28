@@ -2,6 +2,7 @@ package takenoko.joueur;
 
 import takenoko.moteur.*;
 import takenoko.moteur.objectifs.Objectif;
+import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
 import takenoko.moteur.personnages.Jardinier;
 import takenoko.moteur.personnages.Panda;
@@ -17,14 +18,15 @@ import takenoko.moteur.Enums.CouleurBot;
 
 public class Joueur implements IA {
 
-    private ArrayList<Enums.Action> listAction = new ArrayList<>();;
+    private ArrayList<Enums.Action> listAction;
     private CouleurBot couleur;
-    private int nombreObjectifsRemplis = 0;
-    private ArrayList<Objectif> listObjectifs = new ArrayList<>();;
-    private ArrayList<Bambou> listBambou = new ArrayList<>();;
-    private int score = 0;
-    private int nbVictoire = 0;
-    private int nbObjectifPandarealise = 0;
+    private int nombreObjectifsRemplis;
+    private ArrayList<Objectif> listObjectifs;
+    private ArrayList<Bambou> listBambou;
+    private int score;
+    private int nbVictoire;
+    private int nbObjectifPandarealise;
+
 
     public Joueur(CouleurBot couleur) {
         this.couleur = couleur;
@@ -105,6 +107,7 @@ public class Joueur implements IA {
     public void setNbObjectifPandarealise(int nbObjectifPandarealise) {
         this.nbObjectifPandarealise = nbObjectifPandarealise;
     }
+
 
     //////////////////////////////Méthodes//////////////////////////////
 
@@ -450,5 +453,6 @@ public class Joueur implements IA {
     }
 
     public boolean choixValiderUnObjectif(){return false;}
+
 
 }
