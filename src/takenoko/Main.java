@@ -20,13 +20,14 @@ public class Main {
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
         BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
-        BotPanda botPanda = new BotPanda(CouleurBot.BLEU);
-        BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+        BotPanda botPanda = new BotPanda(CouleurBot.ROUGE);
+        //BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+        IANormale iaNormale = new IANormale(CouleurBot.BLEU);
 
 
         listeDesJoueurs.add(botJardinier);
+        listeDesJoueurs.add(iaNormale);
         listeDesJoueurs.add(botPanda);
-        listeDesJoueurs.add(botRandom);
         Affichage.setVerbose(true);
         Partie partie = new Partie();
         partie.jouer(listeDesJoueurs);

@@ -5,6 +5,7 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import takenoko.joueur.IANormale;
 import takenoko.joueur.Joueur;
 import takenoko.moteur.Enums.TypeParcelle;
 
@@ -258,12 +259,12 @@ public class Plateau {
      * @param couleur
      * @return true s'il y a deux parcelles de la même "couleur" adjacentes
      */
-    public boolean parcellesAdjacentesMemeCouleur(Enums.TypeParcelle couleur){
+    public boolean parcellesAdjacentesMemeCouleur(Enums.TypeParcelle couleur, IANormale ia){
         Plateau plateau = Plateau.getInstance();
         for(Point3D pt : plateau.getKeylist()){
             if(plateau.getParcelle(pt).getType() == couleur && plateau.getParcelleVoisineMemeCouleur(pt).size() > 0){
-                premiereDestination = pt;
-                deuxiemeDestination = plateau.getParcelleVoisineMemeCouleur(pt).get(0);
+                ia.setPremiereDestination(pt);
+                ia.setDeuxiemeDestination(plateau.getParcelleVoisineMemeCouleur(pt).get(0));
                 return true;
             }
         }

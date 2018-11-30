@@ -4,6 +4,7 @@ import javafx.geometry.Point3D;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.objectifs.Objectif;
+import takenoko.moteur.objectifs.ObjectifJardinier;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,10 @@ public class Bot extends Joueur {
      */
     @Override
     public Objectif choixObjectifPrioritaire() {
-        return this.getListObjectifs().get(0);
+        if(getListObjectifs().size()> 0) {
+            return this.getListObjectifs().get(0);
+        }
+        return new ObjectifJardinier(5, Enums.TypeParcelle.VERTE,4);
     }
 
     @Override

@@ -1,13 +1,10 @@
 package takenoko;
 
 
-import takenoko.joueur.BotJardinier;
-import takenoko.joueur.BotRandom;
-import takenoko.joueur.BotPanda;
+import takenoko.joueur.*;
 import takenoko.moteur.Affichage;
 import takenoko.moteur.Partie;
 import takenoko.moteur.Enums.CouleurBot;
-import takenoko.joueur.Joueur;
 
 import java.util.ArrayList;
 
@@ -21,13 +18,14 @@ public class Main2 {
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
         BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
-        BotPanda botPanda = new BotPanda(CouleurBot.BLEU);
+        IANormale iaNormale = new IANormale(CouleurBot.BLEU);
         BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+        //BotPanda botPanda= new BotPanda(CouleurBot.ROUGE);
 
 
 
-        listeDesJoueurs.add(botJardinier);
-        listeDesJoueurs.add(botPanda);
+        //listeDesJoueurs.add(botJardinier);
+        listeDesJoueurs.add(iaNormale);
         listeDesJoueurs.add(botRandom);
 
         Affichage.setVerbose(false);
