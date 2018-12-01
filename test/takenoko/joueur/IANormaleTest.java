@@ -152,4 +152,53 @@ public class IANormaleTest {
     }
 
 
+
+    @Test
+    public void ciblePanda() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleJ,new Point3D(0,1,-1));
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleR,new Point3D(0,-1,1));
+
+        assertEquals(ia.ciblePanda(plateau.getKeylist(), Enums.TypeParcelle.JAUNE),new Point3D(0,1,-1));
+    }
+
+    @Test
+    public void rechercheParcelle() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleR,new Point3D(2,-1,-1));
+        ia.addObjectif(getObjectifPandaV);
+        assertEquals(ia.rechercheParcelle(),new Point3D(1,-1,0));
+        ia.addObjectif(getObjectifPandaR);
+        assertEquals(ia.rechercheParcelle(),new Point3D(2,-1,-1));
+
+    }
+
+    @Test
+    public void parcelleCommune() {
+        plateau.resetPlateau();
+        Point3D dest =null;
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleV,new Point3D(0,-1,1));
+        plateau.poser(parcelleR,new Point3D(2,-1,-1));
+        ia.addObjectif(getObjectifPandaR);
+        ArrayList<Point3D> destination = Panda.getInstance().destinationsPossibles();
+        Panda.getInstance().setCoord(new Point3D(2,-1,-1));
+        ArrayList<Point3D> newdetination = Panda.getInstance().destinationsPossibles();
+        Panda.getInstance().setCoord(new Point3D(0,0,0));
+
+        for (int i = 0; i < newdetination.size(); i++) {
+            if(destination.contains(newdetination.get(i))){
+                dest = newdetination.get(i);
+                break;
+            }
+        }
+        assertEquals(ia.parcelleCommune(),dest);
+    }
+
+
 }
