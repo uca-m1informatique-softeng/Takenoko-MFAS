@@ -80,5 +80,76 @@ public class IANormaleTest {
         assertEquals(ia.choixParcellePioche(possiblités),parcelleV);
     }
 
+    @Test
+    public void choixCoordonnePoseParcelle() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleR,new Point3D(0,-1,1));
+
+        ArrayList<Point3D> possiblités = plateau.emplacementsAutorise();
+        assertEquals(ia.choixCoordonnePoseParcelle(possiblités,parcelleJ),new Point3D(0,1,-1));
+
+        plateau.poser(parcelleJ,new Point3D(0,1,-1));
+        possiblités.clear();
+        possiblités = plateau.emplacementsAutorise();
+        assertEquals(ia.choixCoordonnePoseParcelle(possiblités,parcelleJ),new Point3D(1,1,-2));
+    }
+
+    @Test
+    public void choixDeplacementJardinier() {
+        plateau.resetPlateau();
+        ia.addObjectif(objectifJardinierJ);
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleV,new Point3D(0,-1,1));
+        plateau.poser(parcelleR,new Point3D(2,-1,-1));
+        assertEquals(ia.choixDeplacementJardinier(Jardinier.getInstance().destinationsPossibles()),new Point3D(1,-1,0));
+
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        assertEquals(ia.choixDeplacementJardinier(Jardinier.getInstance().destinationsPossibles()),new Point3D(1,0,-1));
+
+        ia.addObjectif(objectifJardinierR);
+        assertEquals(ia.choixDeplacementJardinier(Jardinier.getInstance().destinationsPossibles()),new Point3D(1,0,-1));
+    }
+
+    @Test
+    public void couleurSurPlateau() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleJ,new Point3D(1,0,-1));
+        plateau.poser(parcelleV,new Point3D(1,-1,0));
+        plateau.poser(parcelleR,new Point3D(0,-1,1));
+
+        assertTrue(ia.couleurSurPlateau(Enums.TypeParcelle.ROSE));
+
+        Panda.getInstance().deplacer(new Point3D(0,-1,1));
+        assertFalse(ia.couleurSurPlateau(Enums.TypeParcelle.ROSE));
+    }
+
+    @Test
+    public void choixDeplacementPanda() {
+        plateau.resetPlateau();
+        ia.addObjectif(objectifJardinierR);
+        plateau.poser(parcelleV,new Point3D(0,-1,1));
+        plateau.poser(parcelleV,new Point3D(-1,0,1));
+        plateau.poser(parcelleV,new Point3D(-1,1,0));
+        plateau.poser(parcelleR,new Point3D(0,1,-1));
+
+        Panda.getInstance().setCoord(new Point3D(0,-1,1));
+        assertEquals(ia.choixDeplacementPanda(Panda.getInstance().destinationsPossibles()),new Point3D(0,1,-1));
+    }
+
+    @Test
+    public void choixDeplacementPanda2() {
+        plateau.resetPlateau();
+        ia.addObjectif(objectifJardinierR);
+        plateau.poser(parcelleV,new Point3D(0,-1,1));
+        plateau.poser(parcelleV,new Point3D(-1,0,1));
+        plateau.poser(parcelleR,new Point3D(-1,1,0));
+        plateau.poser(parcelleV,new Point3D(0,1,-1));
+
+        Panda.getInstance().setCoord(new Point3D(0,-1,1));
+        assertEquals(ia.choixDeplacementPanda(Panda.getInstance().destinationsPossibles()),new Point3D(0,1,-1));
+    }
+
 
 }
