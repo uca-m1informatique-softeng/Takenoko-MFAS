@@ -17,16 +17,18 @@ public class Main2 {
 
         ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
 
-        BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
+        //BotJardinier botJardinier = new BotJardinier(CouleurBot.VERT);
         IANormale iaNormale = new IANormale(CouleurBot.BLEU);
-        BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+        IANormale iaNormale2 = new IANormale(CouleurBot.ROUGE);
+
+        //BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
         //BotPanda botPanda= new BotPanda(CouleurBot.ROUGE);
 
 
 
         //listeDesJoueurs.add(botJardinier);
         listeDesJoueurs.add(iaNormale);
-        listeDesJoueurs.add(botRandom);
+        listeDesJoueurs.add(iaNormale2);
 
         Affichage.setVerbose(false);
         for (int i=0;i<1000;i++) {

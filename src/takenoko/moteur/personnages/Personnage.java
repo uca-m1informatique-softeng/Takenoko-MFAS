@@ -6,9 +6,15 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 
 
+/**
+ * La classe des personnages
+ */
 public abstract class Personnage {
     private Point3D coord;
 
+    /**
+     * Le constructeur
+     */
     public Personnage() {
         this.coord = new Point3D(0.0,0.0,0.0);
     }
@@ -26,7 +32,7 @@ public abstract class Personnage {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise le personnage
+     * Reinitialise le personnage
      */
     public void resetPersonnage(){
         this.coord = new Point3D(0.0,0.0,0.0);
@@ -68,7 +74,7 @@ public abstract class Personnage {
     }
 
     /**
-     * renvoie ce que doit faire un personnage quand il se deplace a une coordonne
+     * Renvoie ce que doit faire un personnage quand il se deplace a une coordonne
      * @param p
      * @return
      */

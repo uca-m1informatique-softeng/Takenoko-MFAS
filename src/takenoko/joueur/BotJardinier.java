@@ -17,6 +17,10 @@ public class BotJardinier extends Bot{
     int choixchange;
 
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public BotJardinier(Enums.CouleurBot couleur) {
         super(couleur);
         choixchange=0;
@@ -68,7 +72,7 @@ public class BotJardinier extends Bot{
     }
 
     /**
-     * Renvoie un choix d'action parmis une liste de possibilités
+     * La méthode qui retourne les possibilités pour déplacer le jardinier
      * @param possibilites
      * @return
      */
@@ -87,6 +91,7 @@ public class BotJardinier extends Bot{
     }
 
     /**
+     * La méthode qui retourne les possibilités pour piocher une parcelle
      * @param possibilites
      * @return
      */
@@ -105,6 +110,7 @@ public class BotJardinier extends Bot{
     }
 
     /**
+     * Renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     @Override
@@ -117,6 +123,10 @@ public class BotJardinier extends Bot{
         return super.choixObjectifPrioritaire();
     }
 
+    /**
+     * Renvoi un boolean pour valider un objectif
+     * @return
+     */
     @Override
     public boolean choixValiderUnObjectif(){
         return super.choixValiderUnObjectif();

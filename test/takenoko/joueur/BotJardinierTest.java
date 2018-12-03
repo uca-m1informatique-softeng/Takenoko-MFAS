@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import static org.junit.Assert.assertEquals;
 
 
-
+/**
+ * La classe test du BotJardinier
+ */
 public class BotJardinierTest {
     Partie partie=new Partie();
     Plateau plateau =partie.getPlateau();

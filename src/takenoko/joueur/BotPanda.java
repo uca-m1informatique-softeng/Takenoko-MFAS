@@ -17,6 +17,10 @@ public class BotPanda extends Bot {
 
     int choixchange;
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public BotPanda (Enums.CouleurBot couleur){
         super(couleur);
         choixchange=0;
@@ -42,6 +46,7 @@ public class BotPanda extends Bot {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du BotPanda
      * @param possibilites
      * @return
      */
@@ -69,6 +74,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * La méthode qui retourne les possibilités pour déplacer le jardinier
      * @param possibilites
      * @return
      */
@@ -85,6 +91,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * La méthode qui retourne les possibilités pour déplacer le panda
      * @param possibilites
      * @return
      */
@@ -106,6 +113,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * La méthode qui retourne les possibilités pour piocher une parcelle
      * @param possibilites
      * @return
      */
@@ -124,6 +132,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     @Override
@@ -136,6 +145,10 @@ public class BotPanda extends Bot {
         return super.choixObjectifPrioritaire();
     }
 
+    /**
+     * Renvoi un boolean pour valider un objectif
+     * @return
+     */
     @Override
     public boolean choixValiderUnObjectif(){
         return super.choixValiderUnObjectif();

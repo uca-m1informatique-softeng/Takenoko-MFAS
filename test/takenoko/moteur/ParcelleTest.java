@@ -6,6 +6,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+/**
+ * La classe test des Parcelles
+ */
 public class ParcelleTest {
 
     Parcelle parcelleRose = new Parcelle(TypeParcelle.ROSE);

@@ -10,6 +10,9 @@ import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
 
 
+/**
+ * La classe test du Panda
+ */
 public class PandaTest {
     Partie partie=new Partie();
     Plateau plateau = partie.getPlateau();

@@ -12,7 +12,11 @@ import java.util.ArrayList;
  *C'est la classe des bots
  */
 public class Bot extends Joueur {
-    
+
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public Bot(Enums.CouleurBot couleur) {
         super(couleur);
     }
@@ -83,6 +87,12 @@ public class Bot extends Joueur {
         return new ObjectifJardinier(5, Enums.TypeParcelle.VERTE,4);
     }
 
+    /**
+     * Renvoi un boolean pour valider un objectif
+     * @return
+     */
     @Override
-    public boolean choixValiderUnObjectif(){return true;}
+    public boolean choixValiderUnObjectif(){
+        return true;
+    }
 }

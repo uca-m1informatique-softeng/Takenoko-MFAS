@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * La classe test IANormale
+ */
 public class IANormaleTest {
     Plateau plateau = Plateau.getInstance() ;
     IANormale ia = new IANormale(Enums.CouleurBot.ROUGE);

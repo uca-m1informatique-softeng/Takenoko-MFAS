@@ -13,6 +13,12 @@ public class ObjectifPanda extends Objectif{
 
     int nombreBambou;
 
+    /**
+     * Le constructeur
+     * @param valeur
+     * @param couleur
+     * @param nombreBambou
+     */
     public ObjectifPanda(int valeur, Enums.TypeParcelle couleur, int nombreBambou) {
         super(couleur, valeur);
         this.nombreBambou = nombreBambou;

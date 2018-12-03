@@ -8,6 +8,10 @@ public class Bambou {
 
     private TypeParcelle couleur;
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public Bambou(TypeParcelle couleur) {
         this.couleur = couleur;
     }

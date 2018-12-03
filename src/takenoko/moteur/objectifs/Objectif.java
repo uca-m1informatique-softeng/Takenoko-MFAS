@@ -13,6 +13,11 @@ public abstract class Objectif {
 
     private boolean valide;
 
+    /**
+     * Le constructeur
+     * @param couleur
+     * @param valeur
+     */
     public Objectif(Enums.TypeParcelle couleur, int valeur) {
         this.couleur = couleur;
         this.valeur = valeur;

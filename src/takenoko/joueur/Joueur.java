@@ -15,7 +15,6 @@ import takenoko.moteur.Enums.CouleurBot;
 /**
  * La classe du joueur
  */
-
 public class Joueur implements IA {
 
     private ArrayList<Enums.Action> listAction;
@@ -28,6 +27,10 @@ public class Joueur implements IA {
     private int nbObjectifPandarealise;
 
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public Joueur(CouleurBot couleur) {
         this.couleur = couleur;
         this.nombreObjectifsRemplis=0;
@@ -112,7 +115,7 @@ public class Joueur implements IA {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * Supprime nb bambous d'une certaine couleur des bambous possedés par le joueur
+     * Supprime nombres de bambous d'une certaine couleur des bambous possedés par le joueur
      * @param couleur
      * @param nb
      */
@@ -127,14 +130,14 @@ public class Joueur implements IA {
     }
 
     /**
-     * reinitialise la liste des actions effectuees par le joueur dans un tour
+     * Reinitialise la liste des actions effectuees par le joueur dans un tour
      */
     public void resetListAction(){
         setListAction(new ArrayList<Enums.Action>());
     }
 
     /**
-     * ajoute une action dans la liste des actions réalisé par le joueur durant le tour
+     * Ajoute une action dans la liste des actions réalisé par le joueur durant le tour
      * @param action
      */
     public void addListAction(Enums.Action action){
@@ -144,7 +147,7 @@ public class Joueur implements IA {
 
 
     /**
-     * reinitialise le joueur pour commencer une nouvelle partie
+     * Reinitialise le joueur pour commencer une nouvelle partie
      */
     public void resetJoueur(){
         setNombreObjectifsRemplis(0);
@@ -214,7 +217,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie si une action est possible
+     * Vérifie si une action est possible
      * @param action
      * @return
      */
@@ -230,7 +233,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action du deplacement du panda est possible
+     * Vérifie que l'action du deplacement du panda est possible
      * @return
      */
     private final boolean verifActionDeplacerPanda(){
@@ -238,7 +241,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action du deplacement du jardinier est possible
+     * Vérifie que l'action du deplacement du jardinier est possible
      * @return
      */
     private final boolean verifActionDeplacerJardinier(){
@@ -246,7 +249,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action de poser une parcelle est possible
+     * Vérifie que l'action de poser une parcelle est possible
      * @return
      */
     private final boolean verifActionPoserParcelle(){
@@ -254,7 +257,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif panda est possible
+     * Vérifie que l'action de piocher un objectif panda est possible
      * @return
      */
     private final boolean verifActionPiocherObjPanda(){
@@ -262,7 +265,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif jardinier est possible
+     * Vérifie que l'action de piocher un objectif jardinier est possible
      * @return
      */
     private final boolean verifActionPiocherObjJardinier(){
@@ -324,7 +327,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * pose la parcelle dans le plateau
+     * Pose la parcelle dans le plateau
      * @param plateau
      * @param parcelle
      * @param coord
@@ -344,7 +347,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * deplace le jardinier
+     * Déplace le jardinier
      * @param jardinier
      * @param coord
      */
@@ -363,7 +366,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * deplace le panda
+     * Déplace le panda
      * @param panda
      * @param coord
      */
@@ -390,7 +393,7 @@ public class Joueur implements IA {
 
 
     /**
-     * ajoute une victoire au joueur
+     * Ajoute une victoire au joueur
      */
     public void addVictoire(){
         nbVictoire++;
@@ -398,7 +401,7 @@ public class Joueur implements IA {
 
 
     /**
-     * renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités
+     * Renvoie un choix de coordonne pour la pose des parcelles parmis une liste de possibilités
      * @param possibilites
      * @param parcelle
      * @return
@@ -409,7 +412,7 @@ public class Joueur implements IA {
 
 
     /**
-     * renvoie un choix de parcelle parmis une liste de possibilités
+     * Renvoie un choix de parcelle parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -418,7 +421,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * renvoie un choix de coordonne pour le deplacement du jardinier parmis une liste de possibilités
+     * Renvoie un choix de coordonne pour le deplacement du jardinier parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -427,7 +430,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * renvoie un choix de coordonne pour le deplacement du panda parmis une liste de possibilités
+     * Renvoie un choix de coordonne pour le deplacement du panda parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -436,7 +439,7 @@ public class Joueur implements IA {
     }
 
     /**
-     * renvoie un choix d'action parmis une liste de possibilités
+     * Renvoie un choix d'action parmis une liste de possibilités
      * @param possibilites
      * @return
      */
@@ -445,13 +448,17 @@ public class Joueur implements IA {
     }
 
     /**
-     * renvoie un objectif ciblé en priorité par le joueur
+     * Renvoie un objectif ciblé en priorité par le joueur
      * @return
      */
     public Objectif choixObjectifPrioritaire() {
         return null;
     }
 
+    /**
+     * Renvoi un boolean pour valider un objectif
+     * @return
+     */
     public boolean choixValiderUnObjectif(){return false;}
 
 

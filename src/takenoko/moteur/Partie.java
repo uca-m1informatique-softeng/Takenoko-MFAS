@@ -16,6 +16,9 @@ public class Partie {
     private Deck deck;
     private boolean finDePartie;
 
+    /**
+     * Le constructeur
+     */
     public Partie(){
         plateau=Plateau.getInstance();
         jardinier=Jardinier.getInstance();
@@ -58,16 +61,14 @@ public class Partie {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise la partie
+     * Reinitialise la partie
      * @param listJoueurs
      */
     public void resetPartie(ArrayList<Joueur> listJoueurs){
-
         plateau.resetPlateau();
         jardinier.resetPersonnage();
         panda.resetPersonnage();
         deck.resetDeck();
-
         for (Joueur joueurCourant: listJoueurs) {
             Affichage.affichageDebutTour(joueurCourant);
             joueurCourant.resetJoueur();
@@ -138,7 +139,7 @@ public class Partie {
     }
 
     /**
-     * calcule le ou les vainqueurs d'une partie
+     * Calcule le ou les vainqueurs d'une partie
      * @param listJoueurs
      */
     private void calculVainqueur(ArrayList <Joueur> listJoueurs){
@@ -153,15 +154,15 @@ public class Partie {
                 vainqueur.add(joueur);
             }
             else{
-                if (joueur.getScore()==vainqueurCourant.getScore())
-                {
-                    if(joueur.getNbObjectifPandarealise()>vainqueurCourant.getNbObjectifPandarealise())
-                    {   vainqueur.clear();
+                if (joueur.getScore()==vainqueurCourant.getScore()) {
+                    if(joueur.getNbObjectifPandarealise()>vainqueurCourant.getNbObjectifPandarealise()) {
+                        vainqueur.clear();
                         vainqueur.add(joueur);
                     }
                     else{
-                        if((joueur.getNbObjectifPandarealise()==vainqueurCourant.getNbObjectifPandarealise()))
+                        if((joueur.getNbObjectifPandarealise()==vainqueurCourant.getNbObjectifPandarealise())) {
                             vainqueur.add(joueur);
+                        }
                     }
                 }
             }

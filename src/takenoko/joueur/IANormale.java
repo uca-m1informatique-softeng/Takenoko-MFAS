@@ -16,9 +16,23 @@ import java.util.ArrayList;
 import static takenoko.moteur.Enums.TypeParcelle.JAUNE;
 import static takenoko.moteur.Enums.TypeParcelle.ROSE;
 
+/**
+ * La classe qui de notre IANormale
+ */
 public class IANormale extends Bot{
 
     private Point3D premiereDestination, deuxiemeDestination;
+
+    /**
+     * Le constructeur
+     * @param couleur
+     */
+    public IANormale(Enums.CouleurBot couleur) {
+        super(couleur);
+    }
+
+
+    //////////////////////////////GETTER ET SETTER//////////////////////////////
 
     public Point3D getPremiereDestination() {
         return premiereDestination;
@@ -36,13 +50,11 @@ public class IANormale extends Bot{
         this.deuxiemeDestination = deuxiemeDestination;
     }
 
-    public IANormale(Enums.CouleurBot couleur) {
-        super(couleur);
-    }
+    //////////////////////////////Méthodes//////////////////////////////
 
 
     /**
-     * Les differents choix du Botjardinier.
+     * Les differents choix de l'IANormale
      * @param possibilites
      * @return
      */
@@ -86,6 +98,10 @@ public class IANormale extends Bot{
     }
 
 
+    /**
+     * Renvoie un Objectif panda de la liste d'objectif
+     * @return
+     */
     public Objectif possedeObjectifPanda() {
         for(Objectif objectif:getListObjectifs()){
             if(objectif instanceof ObjectifPanda){
@@ -99,8 +115,9 @@ public class IANormale extends Bot{
 
 
     /**
+     * Renvoie la couleur de la parcelle la plus repésenté parmi ses objectifs jardinier ou panda
      * @param perso : 0 pour le jardinier sinon panda
-     * @return la couleur de parcelle la plus représenté parmi ses objectifs jardinier ou panda
+     * @return
      */
     public Enums.TypeParcelle couleurParcelleDestination(int perso){
         int vert = 0, jaune = 0, rose = 0;
@@ -140,6 +157,7 @@ public class IANormale extends Bot{
 
 
     /**
+     * La méthode qui retourne les possibilités pour piocher une parcelle
      * @param possibilites
      * @return
      */
@@ -175,13 +193,8 @@ public class IANormale extends Bot{
 
 
 
-
-
-
-
-
     /**
-     * Renvoie un choix d'action parmis une liste de possibilités
+     * La méthode qui retourne les possibilités pour déplacer le jardinier
      * @param possibilites
      * @return
      */
@@ -210,7 +223,11 @@ public class IANormale extends Bot{
     }
 
 
-
+    /**
+     * Renvoie un boolean pour savoir si la couleur existe sur le plateau
+     * @param couleur
+     * @return
+     */
     public boolean couleurSurPlateau(Enums.TypeParcelle couleur){
         Plateau plateau = Plateau.getInstance();
         for (Point3D coordonne : plateau.getKeylist()) {
@@ -224,17 +241,18 @@ public class IANormale extends Bot{
     }
 
 
-
-
+    /**
+     * La méthode qui retourne les possibilités pour déplacer le panda
+     * @param possibilites
+     * @return
+     */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
         Enums.TypeParcelle couleur = couleurParcelleDestination(1);
-
         Plateau plateau=Plateau.getInstance();
         if(this.getListObjectifs().isEmpty()) {
             return super.choixDeplacementPanda(possibilites);
         }
-
         boolean boul = couleurSurPlateau(couleur);
 
         // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
@@ -260,6 +278,12 @@ public class IANormale extends Bot{
         }
     }
 
+    /**
+     * La méthode qui renvoie le point où le panda va se déplacer
+     * @param possibilites
+     * @param couleur
+     * @return
+     */
     public Point3D ciblePanda(ArrayList<Point3D> possibilites, Enums.TypeParcelle couleur){
         for (int maxBambou = 1;maxBambou < 4; maxBambou++) {
             for (Point3D coordonne : possibilites) {
@@ -272,6 +296,10 @@ public class IANormale extends Bot{
         return null;
     }
 
+    /**
+     * Une méthode qui renvoie le point où se situe la parcelle
+     * @return
+     */
     public Point3D rechercheParcelle(){
         Point3D res = null;
         Plateau plateau = Plateau.getInstance();
@@ -290,6 +318,10 @@ public class IANormale extends Bot{
 
     }
 
+    /**
+     * La méthode qui renvoie la parcelle intermédiaire
+     * @return
+     */
     public Point3D parcelleCommune(){
         ArrayList<Point3D> destinationsPossibles = Panda.getInstance().destinationsPossibles();
         Point3D oldcoor = Panda.getInstance().getCoord();

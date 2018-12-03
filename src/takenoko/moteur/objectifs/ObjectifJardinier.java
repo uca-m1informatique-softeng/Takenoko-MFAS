@@ -10,11 +10,16 @@ import java.util.ArrayList;
 /**
  *La classe des objectifs du jardinier
  */
-
 public class ObjectifJardinier extends Objectif{
 
     private int tailleBambou;
 
+    /**
+     * Le constructeur
+     * @param valeur
+     * @param couleur
+     * @param tailleBambou
+     */
     public ObjectifJardinier(int valeur, Enums.TypeParcelle couleur, int tailleBambou) {
         super(couleur, valeur);
         this.tailleBambou = tailleBambou;
@@ -30,6 +35,8 @@ public class ObjectifJardinier extends Objectif{
     public void setTailleBambou(int tailleBambou) {
         this.tailleBambou = tailleBambou;
     }
+
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**

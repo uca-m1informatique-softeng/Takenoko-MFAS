@@ -18,6 +18,9 @@ public class Deck {
     private ArrayList<ObjectifPanda> deckObjectifsPanda = new ArrayList<>();
     private ArrayList<Parcelle> deckParcelles = new ArrayList<>();
 
+    /**
+     * Le constructeur
+     */
     public Deck() {
         deckObjectifsJardinier = new ArrayList<>();
         deckObjectifsPanda = new ArrayList<>();
@@ -57,6 +60,9 @@ public class Deck {
 
 
 
+    //////////////////////////////Méthodes//////////////////////////////
+
+
     public final static Deck getInstance() {
         if (Deck.instance == null) {
             Deck.instance = new Deck();
@@ -66,10 +72,8 @@ public class Deck {
         return Deck.instance;
     }
 
-    //////////////////////////////Méthodes//////////////////////////////
-
     /**
-     * reinitialise le deck
+     * Reinitialise le deck
      */
     public void resetDeck(){
         initialiserObjectifsJardinier();
@@ -79,7 +83,7 @@ public class Deck {
 
 
     /**
-     * initialise le deck des parcelles
+     * Initialise le deck des parcelles
      */
     public void initialiserDeckParcelle() {
         deckParcelles.clear();
@@ -103,15 +107,13 @@ public class Deck {
 
 
     /**
-     * initialise le deck des objectifs jardinier
+     * Initialise le deck des objectifs jardinier
      */
     public void initialiserObjectifsJardinier(){
         deckObjectifsJardinier.clear();
         for (int i = 0;i<5;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(6,TypeParcelle.JAUNE,4));
-
         }
-
         for (int i = 5;i<10;i++){
             deckObjectifsJardinier.add(new ObjectifJardinier(7,TypeParcelle.ROSE,4));
         }
@@ -124,7 +126,7 @@ public class Deck {
     }
 
     /**
-     * initialise le deck des objectifs panda
+     * Initialise le deck des objectifs panda
      */
     public void initialiserObjectifsPanda(){
 
@@ -132,19 +134,15 @@ public class Deck {
         for (int i = 0;i<4;i++){
             deckObjectifsPanda.add(new ObjectifPanda(4,TypeParcelle.JAUNE,2));
         }
-
         for (int i = 4;i<7;i++){
             deckObjectifsPanda.add(new ObjectifPanda(5,TypeParcelle.ROSE,2));
         }
         for (int i = 7;i<12;i++){
             deckObjectifsPanda.add(new ObjectifPanda(3,TypeParcelle.VERTE,2));
         }
-
         deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.JAUNE,3));
         deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.ROSE,3));
         deckObjectifsPanda.add(new ObjectifPanda(6,TypeParcelle.VERTE,3));
-
-
     }
 
 
@@ -210,7 +208,7 @@ public class Deck {
 
 
     /**
-     * renvoie si le deck des parcelles est vide
+     * Renvoie si le deck des parcelles est vide
      * @return
      */
     public boolean isDeckParcelleVide(){
@@ -218,7 +216,7 @@ public class Deck {
     }
 
     /**
-     * envoie si le deck des objectifs panda est vide
+     * Envoie si le deck des objectifs panda est vide
      * @return
      */
     public boolean isDeckObjectifPandaVide(){
@@ -226,7 +224,7 @@ public class Deck {
     }
 
     /**
-     * envoie si le deck des objectifs jardinier est vide
+     * Envoie si le deck des objectifs jardinier est vide
      * @return
      */
     public boolean isDeckObjectifJardinierVide(){

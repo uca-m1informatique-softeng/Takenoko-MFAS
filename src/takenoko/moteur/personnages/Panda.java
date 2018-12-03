@@ -11,15 +11,16 @@ public class Panda extends Personnage {
 
     private static Panda instance=null;
 
+    /**
+     * Le constructeur
+     */
     public Panda() {
         super();
     }
 
     //////////////////////////////Méthodes//////////////////////////////
 
-    /**
-     * @return
-     */
+
     public final static Panda getInstance() {
         if (Panda.instance == null) {
             Panda.instance = new Panda();

@@ -12,6 +12,9 @@ import takenoko.moteur.Enums.TypeParcelle;
 import java.util.ArrayList;
 
 
+/**
+ * La classe test Jardinier
+ */
 public class JardinierTest {
     Partie partie=new Partie();
     Plateau plateau = partie.getPlateau();

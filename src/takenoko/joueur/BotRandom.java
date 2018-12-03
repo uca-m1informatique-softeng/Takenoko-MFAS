@@ -6,12 +6,16 @@ import java.util.ArrayList;
 import java.util.Random;
 
 /**
- * La classe du bot Random(pour le moment elle n'est plus utiliser)
+ * La classe du bot Random
  */
 
 public class BotRandom extends Bot{
 
 
+    /**
+     * Le constructeur
+     * @param couleur
+     */
     public BotRandom(Enums.CouleurBot couleur) {
         super(couleur);
     }
@@ -20,6 +24,7 @@ public class BotRandom extends Bot{
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du BotRandom
      * @param possibilites
      * @return
      */

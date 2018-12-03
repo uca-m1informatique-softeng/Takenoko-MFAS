@@ -14,16 +14,15 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
+/**
+ * La classe test du Bot
+ */
 public class BotTest {
     Partie partie=new Partie();
     Plateau plateau =partie.getPlateau();
     Bot bot = new Bot(Enums.CouleurBot.ROUGE);
 
-    /*@Test
-    public void choixCoordonnePoseParcelle(){
-        ArrayList<Point3D> listeAttendue = plateau.emplacementsAutorise();
-        assertEquals(new Point3D(0,1,-1),bot.choixCoordonnePoseParcelle(listeAttendue,new Parcelle (Enums.TypeParcelle.JAUNE)));
-    }*/
+
 
 
     @Test

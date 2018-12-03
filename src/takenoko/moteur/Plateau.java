@@ -19,14 +19,15 @@ public class Plateau {
     private HashMap<Point3D, Parcelle> map;
     private ArrayList<Point3D> keylist;
     private ArrayList<Joueur> listdesjoueurs;
-    Point3D premiereDestination, deuxiemeDestination;
+
+    /**
+     * Le constructeur
+     */
     public Plateau() {
         resetPlateau();
     }
 
-    /**
-     * @return
-     */
+
     public final static Plateau getInstance() {
         if (Plateau.instance == null) {
             Plateau.instance = new Plateau();
@@ -36,9 +37,6 @@ public class Plateau {
     }
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
-
-
-
 
     public HashMap<Point3D, Parcelle> getMap() {
         return map;
@@ -64,7 +62,7 @@ public class Plateau {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise le plateau
+     * Reinitialise le plateau
      */
     public void resetPlateau(){
         Point3D coordonne = new Point3D(0,0,0);
@@ -78,7 +76,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie une parcelle pour une coordonne
+     * Renvoie une parcelle pour une coordonne
      * @param p
      * @return
      */
@@ -92,7 +90,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie toute les parcelles sur le plateau
+     * Renvoie toute les parcelles sur le plateau
      * @return
      */
     public ArrayList<Parcelle> getAllParcelle() {
@@ -192,7 +190,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie si une parcelle est occupée a une coordonne donnée
+     * Renvoie si une parcelle est occupée a une coordonne donnée
      * @param coordonne
      * @return
      */
@@ -256,8 +254,9 @@ public class Plateau {
     }
 
     /**
+     * La méthode qui renvoie True s'il y a deux parcelles de la même "couleur" adjacentes
      * @param couleur
-     * @return true s'il y a deux parcelles de la même "couleur" adjacentes
+     * @return
      */
     public boolean parcellesAdjacentesMemeCouleur(Enums.TypeParcelle couleur, IANormale ia){
         Plateau plateau = Plateau.getInstance();

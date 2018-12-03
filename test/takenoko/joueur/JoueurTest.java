@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 
+/**
+ * La classe test du Joueur
+ */
 public class JoueurTest {
 
     Partie partie=new Partie();

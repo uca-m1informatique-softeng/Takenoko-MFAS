@@ -8,7 +8,9 @@ import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
 
 
-
+/**
+ * La classe des test du Plateau
+ */
 public class PlateauTest {
     Partie partie = new Partie();
     Plateau plateau = partie.getPlateau();
