@@ -2,6 +2,7 @@ package takenoko.joueur;
 
 import javafx.geometry.Point3D;
 import javafx.print.PageLayout;
+import takenoko.moteur.Commande;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
@@ -19,9 +20,23 @@ import static takenoko.moteur.Enums.TypeParcelle.ROSE;
 /**
  * La classe qui de notre IANormale
  */
+
+import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.List;
+
 public class IANormale extends Bot{
 
     private Point3D premiereDestination, deuxiemeDestination;
+
+    private ArrayList<Commande> listCommandes = new ArrayList<>();
+    private ArrayList<Commande> listCommandes2 = new ArrayList<>();
+
+    private List<List<Integer>> permutations, permutations2;
+
+    private int iperm = 119; // dernier indice de permutations pour la 1ere partie des commandes
+
+    private int iperm2 = 23; //dernier indice de permutations pour la 2eme partie des commandes
 
     /**
      * Le constructeur
@@ -29,6 +44,7 @@ public class IANormale extends Bot{
      */
     public IANormale(Enums.CouleurBot couleur) {
         super(couleur);
+        initialiseCommandes();
     }
 
 
@@ -50,7 +66,53 @@ public class IANormale extends Bot{
         this.deuxiemeDestination = deuxiemeDestination;
     }
 
+    public void setIperm(int iperm) {
+        this.iperm = iperm;
+    }
+
+    public void setIperm2(int iperm2) {
+        this.iperm2 = iperm2;
+    }
     //////////////////////////////Méthodes//////////////////////////////
+
+    public void initialiseCommandes(){
+        listCommandes.add(new Commande(Enums.Action.PIOCHEROBJECTIFJARDINIER));
+        listCommandes.add(new Commande(Enums.Action.PIOCHEROBJECTIFPANDA));
+        listCommandes.add(new Commande(Enums.Action.PIOCHERPARCELLE));
+        listCommandes.add(new Commande(Enums.Action.DEPLACERJARDINIER));
+        listCommandes.add(new Commande(Enums.Action.DEPLACERPANDA));
+        permutations = permutations(listCommandes.size());
+
+        listCommandes2.add(new Commande(Enums.Action.PIOCHERPARCELLE));
+        listCommandes2.add(new Commande(Enums.Action.PIOCHEROBJECTIFJARDINIER));
+        listCommandes2.add(new Commande(Enums.Action.PIOCHEROBJECTIFPANDA));
+        listCommandes2.add(new Commande(Enums.Action.DEPLACERJARDINIER));
+        permutations2 = permutations(listCommandes2.size());
+    }
+
+
+    public void actualiseCommandes(ArrayList<Enums.Action> possibilites){
+        Plateau plateau=Plateau.getInstance();
+        Objectif objectif = possedeObjectifPanda();
+        listCommandes.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)
+                && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10);
+
+        listCommandes.get(1).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA)
+                && !possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER ) && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10);
+
+        listCommandes.get(2).setConditions(possibilites.contains(Enums.Action.PIOCHERPARCELLE)
+                && !plateau.parcellesAdjacentesMemeCouleur(this.couleurParcelleDestination(0), this));
+
+        listCommandes.get(3).setConditions(possibilites.contains(Enums.Action.DEPLACERJARDINIER));
+
+        listCommandes.get(4).setConditions(possibilites.contains(Enums.Action.DEPLACERPANDA)
+                && objectif != null && couleurSurPlateau(objectif.getCouleur()));
+
+        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHERPARCELLE) && plateau.getKeylist().size() < 20);
+        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER));
+        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA));
+        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.DEPLACERJARDINIER));
+    }
 
 
     /**
@@ -61,38 +123,19 @@ public class IANormale extends Bot{
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
 
-        Plateau plateau=Plateau.getInstance();
+//actualiser les conditions des commandes ici
+        actualiseCommandes(possibilites);
 
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER) && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10) {
-            return Enums.Action.PIOCHEROBJECTIFJARDINIER;
-        }
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA) && !possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER ) && this.getListObjectifs().size()+getNombreObjectifsRemplis() < 10) {
-            return Enums.Action.PIOCHEROBJECTIFPANDA;
-        }
-        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE) && !plateau.parcellesAdjacentesMemeCouleur(this.couleurParcelleDestination(0), this)) {
-            return Enums.Action.PIOCHERPARCELLE;
-        }
-        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)) {
-            return Enums.Action.DEPLACERJARDINIER;
-        }
-        Objectif objectif = possedeObjectifPanda();
-        if(possibilites.contains(Enums.Action.DEPLACERPANDA) && objectif != null && couleurSurPlateau(objectif.getCouleur())){
-            return Enums.Action.DEPLACERPANDA;
-
-        }
-        if(possibilites.contains(Enums.Action.PIOCHERPARCELLE) && plateau.getKeylist().size() < 20) {
-            return Enums.Action.PIOCHERPARCELLE;
+        for (int i = 0; i < listCommandes.size(); i++) {
+            if(listCommandes.get(permutations.get(iperm).get(i)).isConditions()){
+                return listCommandes.get(permutations.get(iperm).get(i)).getAction();
+            }
         }
 
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER)) {
-            return Enums.Action.PIOCHEROBJECTIFJARDINIER;
-        }
-
-        if(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA)) {
-            return Enums.Action.PIOCHEROBJECTIFPANDA;
-        }
-        if(possibilites.contains(Enums.Action.DEPLACERJARDINIER)){
-            return Enums.Action.DEPLACERJARDINIER;
+        for (int i = 0; i < listCommandes2.size(); i++) {
+            if(listCommandes2.get(permutations2.get(iperm2).get(i)).isConditions()){
+                return listCommandes2.get(permutations2.get(iperm2).get(i)).getAction();
+            }
         }
         return possibilites.get(0);
     }
@@ -331,13 +374,43 @@ public class IANormale extends Bot{
         // On replace le panda a sa position originelle
         Panda.getInstance().setCoord(oldcoor);
 
-        for (int i = 0; i < destinationsPossibles.size() ; i++) {
+        for (int i = 0; i < newDestinationsPossibles.size() ; i++) {
             if(destinationsPossibles.contains(newDestinationsPossibles.get(i))){
                 return newDestinationsPossibles.get(i);
             }
         }
 
         return destinationsPossibles.get(0);
+    }
+
+
+    public static List<List<Integer>> permutations(int n) { // could these be
+        // sets?
+        final List<List<Integer>> v=new ArrayList<>();
+        if(n<=1) {
+            List<Integer> a=new ArrayList<>(1);
+            a.add(0);
+            v.add(a);
+        } else {
+            final List<List<Integer>> v1=permutations(n-1);
+            int nMius1Factorial=v1.size();
+            for(int i=0;i<nMius1Factorial;i++) {
+                List<Integer> a=v1.get(i);
+                Integer[] aa=a.toArray(new Integer[0]);
+                for(int j=0;j<n;j++) { // copy a, inserting n at a2[j]
+                    Integer[] a2a=new Integer[n];
+                    // System.out.println("size of a: "+a.size());
+                    // System.out.println("size of a2: "+a2a.length);
+                    // System.out.println("j="+j);
+                    System.arraycopy(aa,0,a2a,0,j);
+                    a2a[j]=n-1;
+                    // System.out.println("j="+j+", j+1="+(j+1)+", n="+(n-j-1));
+                    System.arraycopy(aa,j,a2a,j+1,n-j-1);
+                    v.add(Arrays.asList(a2a));
+                }
+            }
+        }
+        return v;
     }
 
 

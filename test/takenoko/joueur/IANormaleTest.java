@@ -2,9 +2,7 @@ package takenoko.joueur;
 
 import javafx.geometry.Point3D;
 import org.junit.jupiter.api.Test;
-import takenoko.moteur.Enums;
-import takenoko.moteur.Parcelle;
-import takenoko.moteur.Plateau;
+import takenoko.moteur.*;
 import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
 import takenoko.moteur.personnages.Jardinier;
@@ -202,6 +200,54 @@ public class IANormaleTest {
         }
         assertEquals(ia.parcelleCommune(),dest);
     }
+/*
+    @Test
+    public void permutationsChoixTypeAction() {
+        BotJardinier botJardinier = new BotJardinier(Enums.CouleurBot.VERT);
+        IANormale iaNormale2 = new IANormale(Enums.CouleurBot.VERT);
+        BotPanda botPanda= new BotPanda(Enums.CouleurBot.VERT);
+        BotRandom botRandom = new BotRandom(Enums.CouleurBot.BLEU);
 
+        permutations(botRandom); // ratio victoires : 1000 res1 = 119 , res2 23
+        permutations(botJardinier);// ratio victoires : 1000 res1 = 119 , res2 22
+        permutations(botPanda); //ratio victoires : 986 res1 = 71 , res2 21
+        permutations(iaNormale2);  //ratio victoires : 326 res1 = 116 , res2 4
+    }
+
+    public void permutations(Joueur joueur) {
+        plateau.resetPlateau();
+        int nbVictoires = 0;
+        int res1 = -1;
+        int res2 = -1;
+
+        for (int i = 0; i < 120; i++) {
+
+            ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
+
+
+            listeDesJoueurs.add(joueur);
+            listeDesJoueurs.add(ia);
+            Affichage.setVerbose(false);
+            for (int k = 0; k < 24; k++) {
+                ia.setNbVictoire(0);
+                joueur.setNbVictoire(0);
+
+                for (int j = 0; j < 1000; j++) {
+                    Partie partie = new Partie();
+                    ia.setIperm(i);
+                    ia.setIperm2(k);
+                    partie.jouer(listeDesJoueurs);
+                }
+                if (ia.getNbVictoire() - joueur.getNbVictoire() >= nbVictoires) {
+                    nbVictoires = ia.getNbVictoire() - joueur.getNbVictoire();
+                    res1 = i;
+                    res2 = k;
+                }
+            }
+
+        }
+        System.out.println("ratio victoires : " + nbVictoires + " res1 = " + res1 + " , res2 " + res2);
+    }
+*/
 
 }
