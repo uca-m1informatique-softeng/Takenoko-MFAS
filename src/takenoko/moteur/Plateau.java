@@ -8,6 +8,7 @@ import java.util.HashMap;
 import takenoko.joueur.IANormale;
 import takenoko.joueur.Joueur;
 import takenoko.moteur.Enums.TypeParcelle;
+import takenoko.moteur.personnages.Panda;
 
 /**
  *C'est la classe du plateau
@@ -259,11 +260,10 @@ public class Plateau {
      * @return
      */
     public boolean parcellesAdjacentesMemeCouleur(Enums.TypeParcelle couleur, IANormale ia){
-        Plateau plateau = Plateau.getInstance();
-        for(Point3D pt : plateau.getKeylist()){
-            if(plateau.getParcelle(pt).getType() == couleur && plateau.getParcelleVoisineMemeCouleur(pt).size() > 0){
+        for(Point3D pt : getKeylist()){
+            if(getParcelle(pt).getType() == couleur && getParcelleVoisineMemeCouleur(pt).size() > 0){
                 ia.setPremiereDestination(pt);
-                ia.setDeuxiemeDestination(plateau.getParcelleVoisineMemeCouleur(pt).get(0));
+                ia.setDeuxiemeDestination(getParcelleVoisineMemeCouleur(pt).get(0));
                 return true;
             }
         }
@@ -271,6 +271,21 @@ public class Plateau {
     }
 
 
+    /**
+     * Renvoie un boolean pour savoir si la couleur existe sur le plateau
+     * @param couleur
+     * @return
+     */
+    public boolean couleurSurPlateau(Enums.TypeParcelle couleur){
+        for (Point3D coordonne : getKeylist()) {
+            Parcelle parcelle = getParcelle(coordonne);
+            if (parcelle.getType() == couleur && parcelle.getNbBambou() > 0 && Panda.getInstance().getCoord() != coordonne){
+                return true;
+
+            }
+        }
+        return false;
+    }
 
 
 }

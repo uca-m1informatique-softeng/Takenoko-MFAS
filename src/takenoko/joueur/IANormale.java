@@ -1,23 +1,23 @@
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
+import takenoko.joueur.utilitaire.Utilitaire;
 import takenoko.moteur.Commande;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
 import takenoko.moteur.objectifs.Objectif;
-import takenoko.moteur.objectifs.ObjectifJardinier;
-import takenoko.moteur.objectifs.ObjectifPanda;
 import takenoko.moteur.personnages.Panda;
-import java.util.ArrayList;
-import static takenoko.moteur.Enums.TypeParcelle.JAUNE;
-import static takenoko.moteur.Enums.TypeParcelle.ROSE;
-import java.util.Arrays;
 import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  * La classe qui de notre IANormale
  */
+
+
+
 public class IANormale extends Bot{
 
     private Point3D premiereDestination, deuxiemeDestination;
@@ -31,24 +31,6 @@ public class IANormale extends Bot{
 
     private int iperm2 = 23; //dernier indice de permutations pour la 2eme partie des commandes
 
-    private boolean jardinier =true , panda = true , parcellepioche = true , parcellepose = true;
-
-    public void setJardinierBool(boolean b){
-        this.jardinier = b;
-    }
-
-    public void setPandaBool(boolean b){
-        this.panda = b;
-    }
-
-    public void setParcellepioche(boolean b){
-        this.parcellepioche = b;
-    }
-
-    public void setParcellepose(boolean b){
-        this.parcellepose = b;
-    }
-
     /**
      * Le constructeur
      * @param couleur
@@ -57,6 +39,7 @@ public class IANormale extends Bot{
         super(couleur);
         initialiseCommandes();
     }
+
 
     //////////////////////////////GETTER ET SETTER//////////////////////////////
 
@@ -83,7 +66,6 @@ public class IANormale extends Bot{
     public void setIperm2(int iperm2) {
         this.iperm2 = iperm2;
     }
-
     //////////////////////////////Méthodes//////////////////////////////
 
     public void initialiseCommandes(){
@@ -92,13 +74,13 @@ public class IANormale extends Bot{
         listCommandes.add(new Commande(Enums.Action.PIOCHERPARCELLE));
         listCommandes.add(new Commande(Enums.Action.DEPLACERJARDINIER));
         listCommandes.add(new Commande(Enums.Action.DEPLACERPANDA));
-        permutations = permutations(listCommandes.size());
+        permutations = Utilitaire.permutations(listCommandes.size());
 
         listCommandes2.add(new Commande(Enums.Action.PIOCHERPARCELLE));
         listCommandes2.add(new Commande(Enums.Action.PIOCHEROBJECTIFJARDINIER));
         listCommandes2.add(new Commande(Enums.Action.PIOCHEROBJECTIFPANDA));
         listCommandes2.add(new Commande(Enums.Action.DEPLACERJARDINIER));
-        permutations2 = permutations(listCommandes2.size());
+        permutations2 = Utilitaire.permutations(listCommandes2.size());
     }
 
 
@@ -117,12 +99,12 @@ public class IANormale extends Bot{
         listCommandes.get(3).setConditions(possibilites.contains(Enums.Action.DEPLACERJARDINIER));
 
         listCommandes.get(4).setConditions(possibilites.contains(Enums.Action.DEPLACERPANDA)
-                && objectif != null && couleurSurPlateau(objectif.getCouleur()));
+                && objectif != null && plateau.couleurSurPlateau(objectif.getCouleur()));
 
         listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHERPARCELLE) && plateau.getKeylist().size() < 20);
-        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER));
-        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA));
-        listCommandes2.get(0).setConditions(possibilites.contains(Enums.Action.DEPLACERJARDINIER));
+        listCommandes2.get(1).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFJARDINIER));
+        listCommandes2.get(2).setConditions(possibilites.contains(Enums.Action.PIOCHEROBJECTIFPANDA));
+        listCommandes2.get(3).setConditions(possibilites.contains(Enums.Action.DEPLACERJARDINIER));
     }
 
 
@@ -134,7 +116,6 @@ public class IANormale extends Bot{
     @Override
     public Enums.Action choixTypeAction(ArrayList<Enums.Action> possibilites) {
 
-//actualiser les conditions des commandes ici
         actualiseCommandes(possibilites);
 
         for (int i = 0; i < listCommandes.size(); i++) {
@@ -153,76 +134,16 @@ public class IANormale extends Bot{
 
 
     /**
-     * Renvoie un Objectif panda de la liste d'objectif
-     * @return
-     */
-    public Objectif possedeObjectifPanda() {
-        for(Objectif objectif:getListObjectifs()){
-            if(objectif instanceof ObjectifPanda){
-                return objectif;
-            }
-        }
-        return null;
-    }
-
-
-
-
-    /**
-     * Renvoie la couleur de la parcelle la plus repésenté parmi ses objectifs jardinier ou panda
-     * @param perso : 0 pour le jardinier sinon panda
-     * @return
-     */
-    public Enums.TypeParcelle couleurParcelleDestination(int perso){
-        int vert = 0, jaune = 0, rose = 0;
-
-        for (Objectif objectif : getListObjectifs()) {
-            if ((perso == 0 && objectif instanceof ObjectifJardinier) || (perso != 0 && objectif instanceof ObjectifPanda)) {
-                switch (objectif.getCouleur()) {
-                    case VERTE:
-                        vert++;
-                        break;
-                    case JAUNE:
-                        jaune++;
-                        break;
-                    case ROSE:
-                        rose++;
-                        break;
-                    default:
-                }
-            }
-        }
-
-        if(rose >= vert && rose >= jaune){
-            return ROSE;
-        }
-        if(jaune > rose && jaune >= vert){
-            return JAUNE;
-        }
-        if(vert > rose && vert > jaune){
-            return Enums.TypeParcelle.VERTE;
-        }
-        return ROSE;
-    }
-
-
-
-
-
-
-    /**
      * La méthode qui retourne les possibilités pour piocher une parcelle
      * @param possibilites
      * @return
      */
     @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
-        if(parcellepioche) {
-            Enums.TypeParcelle couleur = couleurParcelleDestination(0);
-            for (Parcelle p : possibilites) {
-                if (p.getType() == couleur) {
-                    return p;
-                }
+        Enums.TypeParcelle couleur =  couleurParcelleDestination(0);
+        for(Parcelle p : possibilites){
+            if(p.getType() == couleur){
+                return p;
             }
         }
         return possibilites.get(0);
@@ -236,17 +157,14 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
-        if(parcellepose){
-            Plateau plateau=Plateau.getInstance();
-            for(int sizeMax=6;sizeMax>0;sizeMax--){
-                for (Point3D coordonne : possibilites){
-                    if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
-                        return coordonne;
-                    }
+        Plateau plateau=Plateau.getInstance();
+        for(int sizeMax=6;sizeMax>0;sizeMax--){
+            for (Point3D coordonne : possibilites){
+                if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
+                    return coordonne;
                 }
             }
         }
-
         return super.choixCoordonnePoseParcelle(possibilites,parcelle);
     }
 
@@ -257,51 +175,32 @@ public class IANormale extends Bot{
      * @param possibilites
      * @return
      */
-
     @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
         //if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
 
         Enums.TypeParcelle couleur = couleurParcelleDestination(0);
-        if(jardinier){
-            if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
-                if (possibilites.contains(premiereDestination)) {
-                    return premiereDestination;
-                }
-                if (possibilites.contains(deuxiemeDestination)) {
-                    return deuxiemeDestination;
-                }
+        if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
+            if (possibilites.contains(premiereDestination)) {
+                return premiereDestination;
             }
-
-            for (int maxBambou=3;maxBambou>=0;maxBambou--){
-                for (Point3D coordonne : possibilites) {
-                    if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
-                        return coordonne;
-                    }
-                }
+            if (possibilites.contains(deuxiemeDestination)) {
+                return deuxiemeDestination;
             }
         }
 
+        for (int maxBambou=3;maxBambou>=0;maxBambou--){
+            for (Point3D coordonne : possibilites) {
+                if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                    return coordonne;
+                }
+            }
+        }
         return super.choixDeplacementJardinier(possibilites);
     }
 
 
-    /**
-     * Renvoie un boolean pour savoir si la couleur existe sur le plateau
-     * @param couleur
-     * @return
-     */
-    public boolean couleurSurPlateau(Enums.TypeParcelle couleur){
-        Plateau plateau = Plateau.getInstance();
-        for (Point3D coordonne : plateau.getKeylist()) {
-            Parcelle parcelle = plateau.getParcelle(coordonne);
-            if (parcelle.getType() == couleur && parcelle.getNbBambou() > 0 && Panda.getInstance().getCoord() != coordonne){
-                return true;
 
-            }
-        }
-        return false;
-    }
 
 
     /**
@@ -311,36 +210,30 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
-        if(panda){
-            Enums.TypeParcelle couleur = couleurParcelleDestination(1);
-            Plateau plateau=Plateau.getInstance();
-            if(this.getListObjectifs().isEmpty()) {
-                return super.choixDeplacementPanda(possibilites);
-            }
-            boolean boul = couleurSurPlateau(couleur);
-
-            // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
-            if (boul){
-                for (int maxBambou = 1;maxBambou <= 4; maxBambou++){
-                    for (Point3D coordonne : possibilites){
-                        if(plateau.getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
-                            return coordonne;
-                        }
-                    }
-                }
-                return this.parcelleCommune();
-            }
-            else{
-                // à modifier
-                for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
-                    Point3D point3D = ciblePanda(possibilites, type);
-                    if(point3D != null){
-                        return point3D;
-                    }
-                }
-            }
+        Enums.TypeParcelle couleur = couleurParcelleDestination(1);
+        Plateau plateau=Plateau.getInstance();
+        if(this.getListObjectifs().isEmpty()) {
+            return super.choixDeplacementPanda(possibilites);
         }
-        return super.choixDeplacementPanda(possibilites);
+        boolean boul = plateau.couleurSurPlateau(couleur);
+
+        // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
+        if (boul){
+            Point3D point3D = ciblePanda(possibilites, couleur);
+            if(point3D != null){
+                return point3D;
+            }
+            return this.parcelleCommune();
+        }
+        else{
+            for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
+                Point3D point3D = ciblePanda(possibilites, type);
+                if(point3D != null){
+                    return point3D;
+                }
+            }
+            return super.choixDeplacementPanda(possibilites);
+        }
     }
 
     /**
@@ -406,30 +299,7 @@ public class IANormale extends Bot{
     }
 
 
-    public static List<List<Integer>> permutations(int n) {
-        final List<List<Integer>> v=new ArrayList<>();
-        if(n<=1) {
-            List<Integer> a=new ArrayList<>(1);
-            a.add(0);
-            v.add(a);
-        }
-        else {
-            final List<List<Integer>> v1=permutations(n-1);
-            int nMius1Factorial=v1.size();
-            for(int i=0;i<nMius1Factorial;i++) {
-                List<Integer> a=v1.get(i);
-                Integer[] aa=a.toArray(new Integer[0]);
-                for(int j=0;j<n;j++) { // copy a, inserting n at a2[j]
-                    Integer[] a2a=new Integer[n];
-                    System.arraycopy(aa,0,a2a,0,j);
-                    a2a[j]=n-1;
-                    System.arraycopy(aa,j,a2a,j+1,n-j-1);
-                    v.add(Arrays.asList(a2a));
-                }
-            }
-        }
-        return v;
-    }
+
 
 
 

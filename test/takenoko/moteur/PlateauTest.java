@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 import takenoko.moteur.Enums.TypeParcelle;
+import takenoko.moteur.personnages.Panda;
 
 
 /**
@@ -279,6 +280,18 @@ public class PlateauTest {
     }
 
 
+    @Test
+    public void couleurSurPlateau() {
+        plateau.resetPlateau();
+        plateau.poser(parcelleJaune,new Point3D(1,0,-1));
+        plateau.poser(parcelleVert,new Point3D(1,-1,0));
+        plateau.poser(parcelleRose,new Point3D(0,-1,1));
+
+        assertTrue(plateau.couleurSurPlateau(Enums.TypeParcelle.ROSE));
+
+        Panda.getInstance().deplacer(new Point3D(0,-1,1));
+        assertFalse(plateau.couleurSurPlateau(Enums.TypeParcelle.ROSE));
+    }
 
 
 

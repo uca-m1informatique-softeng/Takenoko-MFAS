@@ -11,6 +11,9 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 import takenoko.moteur.Enums.CouleurBot;
 
+import static takenoko.moteur.Enums.TypeParcelle.JAUNE;
+import static takenoko.moteur.Enums.TypeParcelle.ROSE;
+
 
 /**
  * La classe du joueur
@@ -460,6 +463,60 @@ public class Joueur implements IA {
      * @return
      */
     public boolean choixValiderUnObjectif(){return false;}
+
+
+
+
+
+    /**
+     * Renvoie un Objectif panda de la liste d'objectif
+     * @return
+     */
+    public Objectif possedeObjectifPanda() {
+        for(Objectif objectif:getListObjectifs()){
+            if(objectif instanceof ObjectifPanda){
+                return objectif;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Renvoie la couleur de la parcelle la plus repésenté parmi ses objectifs jardinier ou panda
+     * @param perso : 0 pour le jardinier sinon panda
+     * @return
+     */
+    public Enums.TypeParcelle couleurParcelleDestination(int perso){
+        int vert = 0, jaune = 0, rose = 0;
+
+        for (Objectif objectif : getListObjectifs()) {
+            if ((perso == 0 && objectif instanceof ObjectifJardinier) || (perso != 0 && objectif instanceof ObjectifPanda)) {
+                switch (objectif.getCouleur()) {
+                    case VERTE:
+                        vert++;
+                        break;
+                    case JAUNE:
+                        jaune++;
+                        break;
+                    case ROSE:
+                        rose++;
+                        break;
+                    default:
+                }
+            }
+        }
+
+        if(rose >= vert && rose >= jaune){
+            return ROSE;
+        }
+        if(jaune > rose && jaune >= vert){
+            return JAUNE;
+        }
+        if(vert > rose && vert > jaune){
+            return Enums.TypeParcelle.VERTE;
+        }
+        return ROSE;
+    }
 
 
 }
