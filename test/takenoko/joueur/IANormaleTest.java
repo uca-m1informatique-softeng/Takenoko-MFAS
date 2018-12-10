@@ -200,6 +200,140 @@ public class IANormaleTest {
         }
         assertEquals(ia.parcelleCommune(),dest);
     }
+
+
+//    @Test
+//    public void premierTest(){
+//        ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
+//
+//        BotJardinier botJardinier = new BotJardinier(Enums.CouleurBot.VERT);
+//        //IANormale iaNormale = new IANormale(Enums.CouleurBot.BLEU);
+//        //IANormale iaNormale2 = new IANormale(CouleurBot.ROUGE);
+//
+//        //BotRandom botRandom = new BotRandom(CouleurBot.ROUGE);
+//        //BotPanda botPanda= new BotPanda(Enums.CouleurBot.BLEU);
+//        ia.setIperm(71);
+//        ia.setIperm2(21);
+//
+//        listeDesJoueurs.add(ia);
+//        listeDesJoueurs.add(botPanda);
+//
+//        for (int j = 0; j < 5; j++) {
+//            if (j == 0) {
+//                System.out.println("------- SANS  JARDINIER ------- ");
+//                ia.setJardinierBool(false);
+//            }
+//            if(j==1){
+//                System.out.println("------- SANS PANDA ------- ");
+//                ia.setJardinierBool(true);
+//                ia.setPandaBool(false);
+//
+//            }
+//            if(j==2){
+//                System.out.println("------- SANS PIOCHE ------- ");
+//                ia.setPandaBool(true);
+//                ia.setParcellepioche(false);
+//
+//            }
+//            if(j==3){
+//                System.out.println("------- SANS POSE ------- ");
+//                ia.setParcellepioche(true);
+//                ia.setParcellepose(false);
+//            }
+//            if (j==4){
+//                System.out.println("------- BASE ------- ");
+//                ia.setParcellepose(true);
+//            }
+//            ia.setNbVictoire(0);
+//            botPanda.setNbVictoire(0);
+//            Affichage.setVerbose(false);
+//            for (int i=0;i<1000;i++) {
+//                Partie partie = new Partie();
+//                partie.jouer(listeDesJoueurs);
+//            }
+//
+//            Affichage.affichageResultatsPartie(listeDesJoueurs);
+//
+//
+//        }
+//
+//    }
+
+    public void Test (Joueur joueur,int x ,int y) {
+        ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
+
+        ia.setIperm(x);
+        ia.setIperm2(y);
+
+        listeDesJoueurs.add(ia);
+        listeDesJoueurs.add(joueur);
+
+        for (int j = 0; j < 5; j++) {
+            if (j == 0) {
+                System.out.println("------- SANS  JARDINIER ------- ");
+                ia.setJardinierBool(false);
+            }
+            if (j == 1) {
+                System.out.println("------- SANS PANDA ------- ");
+                ia.setJardinierBool(true);
+                ia.setPandaBool(false);
+
+            }
+            if (j == 2) {
+                System.out.println("------- SANS PIOCHE ------- ");
+                ia.setPandaBool(true);
+                ia.setParcellepioche(false);
+
+            }
+            if (j == 3) {
+                System.out.println("------- SANS POSE ------- ");
+                ia.setParcellepioche(true);
+                ia.setParcellepose(false);
+            }
+            if (j == 4) {
+                System.out.println("------- BASE ------- ");
+                ia.setParcellepose(true);
+            }
+            ia.setNbVictoire(0);
+            joueur.setNbVictoire(0);
+            Affichage.setVerbose(false);
+            for (int i = 0; i < 1000; i++) {
+                Partie partie = new Partie();
+                partie.jouer(listeDesJoueurs);
+            }
+
+            Affichage.affichageResultatsPartie(listeDesJoueurs);
+
+        }
+    }
+
+    @Test
+    public void TestJ(){
+        BotRandom botRandom = new BotRandom(Enums.CouleurBot.BLEU);
+        BotPanda botPanda= new BotPanda(Enums.CouleurBot.BLEU);
+        BotJardinier botJardinier = new BotJardinier(Enums.CouleurBot.BLEU);
+        IANormale iaNormale = new IANormale(Enums.CouleurBot.BLEU);
+
+        ///// Random /////
+        System.out.println("********** vs Bot Random **********");
+        Test(botRandom,119,23);
+        System.out.println();
+
+        ///// Jar /////
+        System.out.println("********** vs Bot Jardinier **********");
+        Test(botJardinier,119,22);
+
+        System.out.println();
+        ///// Pan /////
+        System.out.println("********** vs Bot Panda **********");
+        Test(botPanda,71,21);
+
+        System.out.println();
+        ///// Ia /////
+        System.out.println("********** vs Ia **********");
+        Test(iaNormale,116,4);
+    }
+
 /*
     @Test
     public void permutationsChoixTypeAction() {
@@ -214,6 +348,7 @@ public class IANormaleTest {
         permutations(iaNormale2);  //ratio victoires : 326 res1 = 116 , res2 4
     }
 
+
     public void permutations(Joueur joueur) {
         plateau.resetPlateau();
         int nbVictoires = 0;
@@ -221,10 +356,7 @@ public class IANormaleTest {
         int res2 = -1;
 
         for (int i = 0; i < 120; i++) {
-
             ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
-
-
             listeDesJoueurs.add(joueur);
             listeDesJoueurs.add(ia);
             Affichage.setVerbose(false);

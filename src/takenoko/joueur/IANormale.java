@@ -1,7 +1,6 @@
 package takenoko.joueur;
 
 import javafx.geometry.Point3D;
-import javafx.print.PageLayout;
 import takenoko.moteur.Commande;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
@@ -10,21 +9,15 @@ import takenoko.moteur.objectifs.Objectif;
 import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
 import takenoko.moteur.personnages.Panda;
-
-
 import java.util.ArrayList;
-
 import static takenoko.moteur.Enums.TypeParcelle.JAUNE;
 import static takenoko.moteur.Enums.TypeParcelle.ROSE;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * La classe qui de notre IANormale
  */
-
-import java.util.Arrays;
-import java.util.LinkedHashSet;
-import java.util.List;
-
 public class IANormale extends Bot{
 
     private Point3D premiereDestination, deuxiemeDestination;
@@ -38,6 +31,24 @@ public class IANormale extends Bot{
 
     private int iperm2 = 23; //dernier indice de permutations pour la 2eme partie des commandes
 
+    private boolean jardinier =true , panda = true , parcellepioche = true , parcellepose = true;
+
+    public void setJardinierBool(boolean b){
+        this.jardinier = b;
+    }
+
+    public void setPandaBool(boolean b){
+        this.panda = b;
+    }
+
+    public void setParcellepioche(boolean b){
+        this.parcellepioche = b;
+    }
+
+    public void setParcellepose(boolean b){
+        this.parcellepose = b;
+    }
+
     /**
      * Le constructeur
      * @param couleur
@@ -46,7 +57,6 @@ public class IANormale extends Bot{
         super(couleur);
         initialiseCommandes();
     }
-
 
     //////////////////////////////GETTER ET SETTER//////////////////////////////
 
@@ -73,6 +83,7 @@ public class IANormale extends Bot{
     public void setIperm2(int iperm2) {
         this.iperm2 = iperm2;
     }
+
     //////////////////////////////Méthodes//////////////////////////////
 
     public void initialiseCommandes(){
@@ -206,10 +217,12 @@ public class IANormale extends Bot{
      */
     @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
-        Enums.TypeParcelle couleur =  couleurParcelleDestination(0);
-        for(Parcelle p : possibilites){
-            if(p.getType() == couleur){
-                return p;
+        if(parcellepioche) {
+            Enums.TypeParcelle couleur = couleurParcelleDestination(0);
+            for (Parcelle p : possibilites) {
+                if (p.getType() == couleur) {
+                    return p;
+                }
             }
         }
         return possibilites.get(0);
@@ -223,14 +236,17 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
-        Plateau plateau=Plateau.getInstance();
-        for(int sizeMax=6;sizeMax>0;sizeMax--){
-            for (Point3D coordonne : possibilites){
-                if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
-                    return coordonne;
+        if(parcellepose){
+            Plateau plateau=Plateau.getInstance();
+            for(int sizeMax=6;sizeMax>0;sizeMax--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
+                        return coordonne;
+                    }
                 }
             }
         }
+
         return super.choixCoordonnePoseParcelle(possibilites,parcelle);
     }
 
@@ -241,27 +257,31 @@ public class IANormale extends Bot{
      * @param possibilites
      * @return
      */
+
     @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
         //if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
 
         Enums.TypeParcelle couleur = couleurParcelleDestination(0);
-        if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
-            if (possibilites.contains(premiereDestination)) {
-                return premiereDestination;
+        if(jardinier){
+            if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
+                if (possibilites.contains(premiereDestination)) {
+                    return premiereDestination;
+                }
+                if (possibilites.contains(deuxiemeDestination)) {
+                    return deuxiemeDestination;
+                }
             }
-            if (possibilites.contains(deuxiemeDestination)) {
-                return deuxiemeDestination;
-            }
-        }
 
-        for (int maxBambou=3;maxBambou>=0;maxBambou--){
-            for (Point3D coordonne : possibilites) {
-                if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
-                    return coordonne;
+            for (int maxBambou=3;maxBambou>=0;maxBambou--){
+                for (Point3D coordonne : possibilites) {
+                    if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
                 }
             }
         }
+
         return super.choixDeplacementJardinier(possibilites);
     }
 
@@ -291,34 +311,36 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
-        Enums.TypeParcelle couleur = couleurParcelleDestination(1);
-        Plateau plateau=Plateau.getInstance();
-        if(this.getListObjectifs().isEmpty()) {
-            return super.choixDeplacementPanda(possibilites);
-        }
-        boolean boul = couleurSurPlateau(couleur);
+        if(panda){
+            Enums.TypeParcelle couleur = couleurParcelleDestination(1);
+            Plateau plateau=Plateau.getInstance();
+            if(this.getListObjectifs().isEmpty()) {
+                return super.choixDeplacementPanda(possibilites);
+            }
+            boolean boul = couleurSurPlateau(couleur);
 
-        // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
-        if (boul){
-            for (int maxBambou = 1;maxBambou <= 4; maxBambou++){
-                for (Point3D coordonne : possibilites){
-                    if(plateau.getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
-                        return coordonne;
+            // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
+            if (boul){
+                for (int maxBambou = 1;maxBambou <= 4; maxBambou++){
+                    for (Point3D coordonne : possibilites){
+                        if(plateau.getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                            return coordonne;
+                        }
+                    }
+                }
+                return this.parcelleCommune();
+            }
+            else{
+                // à modifier
+                for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
+                    Point3D point3D = ciblePanda(possibilites, type);
+                    if(point3D != null){
+                        return point3D;
                     }
                 }
             }
-            return this.parcelleCommune();
         }
-        else{
-            // à modifier
-            for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
-                Point3D point3D = ciblePanda(possibilites, type);
-                if(point3D != null){
-                    return point3D;
-                }
-            }
-            return super.choixDeplacementPanda(possibilites);
-        }
+        return super.choixDeplacementPanda(possibilites);
     }
 
     /**
@@ -384,14 +406,14 @@ public class IANormale extends Bot{
     }
 
 
-    public static List<List<Integer>> permutations(int n) { // could these be
-        // sets?
+    public static List<List<Integer>> permutations(int n) {
         final List<List<Integer>> v=new ArrayList<>();
         if(n<=1) {
             List<Integer> a=new ArrayList<>(1);
             a.add(0);
             v.add(a);
-        } else {
+        }
+        else {
             final List<List<Integer>> v1=permutations(n-1);
             int nMius1Factorial=v1.size();
             for(int i=0;i<nMius1Factorial;i++) {
@@ -399,12 +421,8 @@ public class IANormale extends Bot{
                 Integer[] aa=a.toArray(new Integer[0]);
                 for(int j=0;j<n;j++) { // copy a, inserting n at a2[j]
                     Integer[] a2a=new Integer[n];
-                    // System.out.println("size of a: "+a.size());
-                    // System.out.println("size of a2: "+a2a.length);
-                    // System.out.println("j="+j);
                     System.arraycopy(aa,0,a2a,0,j);
                     a2a[j]=n-1;
-                    // System.out.println("j="+j+", j+1="+(j+1)+", n="+(n-j-1));
                     System.arraycopy(aa,j,a2a,j+1,n-j-1);
                     v.add(Arrays.asList(a2a));
                 }
