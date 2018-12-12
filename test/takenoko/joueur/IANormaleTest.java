@@ -189,8 +189,7 @@ public class IANormaleTest {
         }
         assertEquals(ia.parcelleCommune(),dest);
     }
-    /* Le test suivant permets de connaître l'ordre des commandes de la methode choixTypeAction */
-    /* Il est en commentaire car met 2H à s'exécuter */
+
 /*
     @Test
     public void permutationsChoixTypeAction() {

@@ -31,6 +31,10 @@ public class IANormale extends Bot{
 
     private int iperm2 = 23; //dernier indice de permutations pour la 2eme partie des commandes
 
+    private boolean jardinier =true , panda = true , parcellepioche = true , parcellepose = true;
+
+
+
     /**
      * Le constructeur
      * @param couleur
@@ -65,6 +69,22 @@ public class IANormale extends Bot{
 
     public void setIperm2(int iperm2) {
         this.iperm2 = iperm2;
+    }
+
+    public void setJardinierBool(boolean b){
+        this.jardinier = b;
+    }
+
+    public void setPandaBool(boolean b){
+        this.panda = b;
+    }
+
+    public void setParcellepioche(boolean b){
+        this.parcellepioche = b;
+    }
+
+    public void setParcellepose(boolean b){
+        this.parcellepose = b;
     }
     //////////////////////////////Méthodes//////////////////////////////
 
@@ -140,10 +160,12 @@ public class IANormale extends Bot{
      */
     @Override
     public Parcelle choixParcellePioche(ArrayList<Parcelle> possibilites){
-        Enums.TypeParcelle couleur =  couleurParcelleDestination(0);
-        for(Parcelle p : possibilites){
-            if(p.getType() == couleur){
-                return p;
+        if(parcellepioche) {
+            Enums.TypeParcelle couleur = couleurParcelleDestination(0);
+            for (Parcelle p : possibilites) {
+                if (p.getType() == couleur) {
+                    return p;
+                }
             }
         }
         return possibilites.get(0);
@@ -157,14 +179,17 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixCoordonnePoseParcelle(ArrayList<Point3D> possibilites,Parcelle parcelle) {
-        Plateau plateau=Plateau.getInstance();
-        for(int sizeMax=6;sizeMax>0;sizeMax--){
-            for (Point3D coordonne : possibilites){
-                if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
-                    return coordonne;
+        if(parcellepose){
+            Plateau plateau=Plateau.getInstance();
+            for(int sizeMax=6;sizeMax>0;sizeMax--){
+                for (Point3D coordonne : possibilites){
+                    if(plateau.getParcelleVoisineMemeCouleur(coordonne,parcelle).size()==sizeMax){
+                        return coordonne;
+                    }
                 }
             }
         }
+
         return super.choixCoordonnePoseParcelle(possibilites,parcelle);
     }
 
@@ -177,22 +202,22 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixDeplacementJardinier(ArrayList<Point3D> possibilites){
-        //if(this.getListObjectifs().isEmpty()) return super.choixDeplacementJardinier(possibilites);
-
         Enums.TypeParcelle couleur = couleurParcelleDestination(0);
-        if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
-            if (possibilites.contains(premiereDestination)) {
-                return premiereDestination;
+        if(jardinier){
+            if(Plateau.getInstance().parcellesAdjacentesMemeCouleur(couleur,this)) {
+                if (possibilites.contains(premiereDestination)) {
+                    return premiereDestination;
+                }
+                if (possibilites.contains(deuxiemeDestination)) {
+                    return deuxiemeDestination;
+                }
             }
-            if (possibilites.contains(deuxiemeDestination)) {
-                return deuxiemeDestination;
-            }
-        }
 
-        for (int maxBambou=3;maxBambou>=0;maxBambou--){
-            for (Point3D coordonne : possibilites) {
-                if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
-                    return coordonne;
+            for (int maxBambou=3;maxBambou>=0;maxBambou--){
+                for (Point3D coordonne : possibilites) {
+                    if (Plateau.getInstance().getParcelle(coordonne).getType() == couleur && Plateau.getInstance().getParcelle(coordonne).getNbBambou()==maxBambou){
+                        return coordonne;
+                    }
                 }
             }
         }
@@ -210,32 +235,33 @@ public class IANormale extends Bot{
      */
     @Override
     public Point3D choixDeplacementPanda(ArrayList<Point3D> possibilites) {
-        Enums.TypeParcelle couleur = couleurParcelleDestination(1);
-        Plateau plateau=Plateau.getInstance();
-        if(this.getListObjectifs().isEmpty()) {
-            return super.choixDeplacementPanda(possibilites);
-        }
-        boolean boul = plateau.couleurSurPlateau(couleur);
-
-        // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
-        if (boul){
-            Point3D point3D = ciblePanda(possibilites, couleur);
-            if(point3D != null){
-                return point3D;
+        if(panda){
+            Enums.TypeParcelle couleur = couleurParcelleDestination(1);
+            Plateau plateau=Plateau.getInstance();
+            if(this.getListObjectifs().isEmpty()) {
+                return super.choixDeplacementPanda(possibilites);
             }
-            return this.parcelleCommune();
-        }
-        else{
-            for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
-                Point3D point3D = ciblePanda(possibilites, type);
+            boolean boolplateaucouleur = plateau.couleurSurPlateau(couleur);
+
+            // si la couleur dispo sur le plateau on regarde s'il est accessible sinon on appelle la méthode
+            if (boolplateaucouleur){
+                Point3D point3D = ciblePanda(possibilites, couleur);
                 if(point3D != null){
                     return point3D;
                 }
+                return this.parcelleCommune();
             }
-            return super.choixDeplacementPanda(possibilites);
+            else{
+                for(Enums.TypeParcelle type : Enums.TypeParcelle.values()){
+                    Point3D point3D = ciblePanda(possibilites, type);
+                    if(point3D != null){
+                        return point3D;
+                    }
+                }
+            }
         }
+        return super.choixDeplacementPanda(possibilites);
     }
-
     /**
      * La méthode qui renvoie le point où le panda va se déplacer
      * @param possibilites
