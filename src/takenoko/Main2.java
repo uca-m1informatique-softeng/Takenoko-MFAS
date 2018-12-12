@@ -36,6 +36,8 @@ public class Main2 {
         IANormale iaNormale5 = new IANormale(CouleurBot.ROUGE);
 
         IAAvancee iaAvancee = new IAAvancee(CouleurBot.BLEU);
+        BotPanda botPanda2 = new BotPanda(CouleurBot.ROUGE);
+
 
 
         listeDesJoueurs.add(iaNormale);
@@ -51,7 +53,7 @@ public class Main2 {
         listeDesJoueurs4.add(iaNormale5);
 
         listeDesJoueurs5.add(iaAvancee);
-        listeDesJoueurs5.add(botPanda);
+        listeDesJoueurs5.add(botPanda2);
 
 
         iaNormale.setIperm(119);

@@ -5,6 +5,9 @@ import takenoko.moteur.*;
 
 import java.util.ArrayList;
 
+/**
+ * La classe principale pour prouver l'éfficaité de notre IA
+ */
 public class Main4 {
 
     public static void Test(Joueur joueur, int x, int y) {
