@@ -19,9 +19,9 @@ public class IAAvancee extends Bot{
 
     private List<List<Integer>> permutations, permutations2;
 
-    private int iperm = 119; // dernier indice de permutations pour la 1ere partie des commandes
+    private int iperm = 4; // dernier indice de permutations pour la 1ere partie des commandes
 
-    private int iperm2 = 5; //dernier indice de permutations pour la 2eme partie des commandes
+    private int iperm2 = 0; //dernier indice de permutations pour la 2eme partie des commandes
 
     /**
      * Le constructeur

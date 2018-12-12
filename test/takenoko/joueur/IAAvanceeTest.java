@@ -11,9 +11,9 @@ import java.util.ArrayList;
 public class IAAvanceeTest {
     Plateau plateau = Plateau.getInstance() ;
     IAAvancee iaAvancee = new IAAvancee(Enums.CouleurBot.ROUGE);
-
-    @Test
-    public void permutations() {
+// ce test est en commentaire car il met 1h à s'éxecuter.
+   /* @Test
+    public void permutations() { //nombre de victoires : 968 res1 = 4 , res2 = 0
         BotPanda botPanda= new BotPanda(Enums.CouleurBot.VERT);
         plateau.resetPlateau();
         int nbVictoires = 0;
@@ -47,6 +47,6 @@ public class IAAvanceeTest {
 
         }
         System.out.println("nombre de victoires : " + nbVictoires + " res1 = " + res1 + " , res2 = " + res2);
-    }
+    }*/
 
 }
