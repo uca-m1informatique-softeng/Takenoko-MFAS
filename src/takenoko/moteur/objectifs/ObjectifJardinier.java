@@ -11,8 +11,7 @@ import java.util.ArrayList;
 /**
  * La classe des objectifs du jardinier
  */
-@Component
-@Scope("prototype")
+
 public class ObjectifJardinier extends Objectif{
 
     private int tailleBambou;

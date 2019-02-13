@@ -12,8 +12,7 @@ import java.util.ArrayList;
 /**
  * La classe des objectifs parcelle
  */
-@Component
-@Scope("prototype")
+
 public class ObjectifParcelle extends Objectif {
 
     private int type; //0 pour droit ; 1 pour courbé //2 pour triangle //3 pour 4 parcelles

@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
-@Primary
 public class Joueur implements IA {
 
     private ArrayList<Enums.Action> listAction = new ArrayList<>();;

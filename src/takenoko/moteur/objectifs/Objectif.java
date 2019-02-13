@@ -8,8 +8,7 @@ import takenoko.joueur.Joueur;
 /**
  * La classe des objectifs
  */
-@Component
-@Primary
+
 public abstract class Objectif {
 
     private Enums.TypeParcelle couleur;

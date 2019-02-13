@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * C'est la classe du panda
  */
 @Component
-@Primary
 public abstract class Personnage {
     private Point3D coord = new Point3D(0.0,0.0,0.0);;
 
