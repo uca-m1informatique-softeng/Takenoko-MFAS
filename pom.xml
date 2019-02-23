@@ -13,8 +13,8 @@
     </properties>
 
     <build>
-        <sourceDirectory>src</sourceDirectory> <!-- CHANGE ME -->
-        <testSourceDirectory>test</testSourceDirectory> <!-- CHANGE ME -->
+        <sourceDirectory>src/main/java</sourceDirectory> <!-- CHANGE ME -->
+        <testSourceDirectory>src/test/java</testSourceDirectory> <!-- CHANGE ME -->
 
         <plugins>
 
@@ -95,6 +95,18 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
             <version>5.0.9.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-junit</artifactId>
+            <version>4.0.0</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
