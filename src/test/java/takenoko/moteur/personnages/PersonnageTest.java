@@ -3,7 +3,7 @@ package takenoko.moteur.personnages;
 import takenoko.moteur.*;
 import takenoko.moteur.personnages.Jardinier;
 import javafx.geometry.Point3D;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 
