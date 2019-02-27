@@ -16,11 +16,13 @@ public class PoserParcelleStepDefs {
 
     @Given("^Un Plateau de départ avec (\\d+) Parcelle$")
     public void un_Plateau_de_départ_avec_Parcelle(int arg1) throws Exception {
+        plateau.resetPlateau();
         assertEquals(arg1, plateau.getKeylist().size());
     }
 
     @When("^Je pose une Parcelle sur le Plateau$")
     public void je_pose_une_Parcelle_sur_le_Plateau() throws Exception {
+        plateau.resetPlateau();
         plateau.poser(parcelle ,new Point3D(1,0,-1));
         assertTrue(plateau.getKeylist().size() != 1);
     }

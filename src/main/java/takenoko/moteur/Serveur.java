@@ -37,4 +37,11 @@ public class Serveur {
         plateau.poser(stock.StockParcelle.get(parcelle-1),stock.StockPoint.get(position-1));
         return "Parcelle posee avec succes";
     }
+
+    @Path("/Final")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String Final(){
+        return "Coordonnes de la parcelle posee : " +plateau.getKeylist().get(1).toString() +" / Couleur de la parcelle : "+plateau.getParcelle(plateau.getKeylist().get(1)).getType();
+    }
 }
