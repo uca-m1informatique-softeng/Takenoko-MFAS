@@ -27,17 +27,18 @@ public class ObjectifJardinierTest {
         this.bot = new Bot();
         bot.setCouleur(Enums.CouleurBot.ROUGE);
         this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
         parcelleJaune.setIrriguee(false);
         parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
         this.objectifJardinier = new ObjectifJardinier();
         objectifJardinier.setCouleur(Enums.TypeParcelle.JAUNE);
         objectifJardinier.setValeur(6);
         objectifJardinier.setTailleBambou(4);
+        bot.resetJoueur();
     }
 
     @Test
     public void validationObjectifJardinier() throws Exception {
+        plateau.resetPlateau();
         bot.addObjectif(objectifJardinier);
 
         plateau.poser(parcelleJaune,new Point3D(0,1,-1));

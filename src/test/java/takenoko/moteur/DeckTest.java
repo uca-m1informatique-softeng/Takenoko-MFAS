@@ -25,19 +25,16 @@ public class DeckTest {
         ArrayList<Parcelle> deckParcelles = new ArrayList<>();
 
         for (int i = 0;i < 11;i++){
-            parcelleVerte.setListBambou(new ArrayList<Bambou>());
             parcelleVerte.setIrriguee(false);
             parcelleVerte.setType(Enums.TypeParcelle.VERTE);
             deckParcelles.add(parcelleVerte);
         }
         for (int i = 11;i < 18;i++){
-            parcelleRose.setListBambou(new ArrayList<Bambou>());
             parcelleRose.setIrriguee(false);
             parcelleRose.setType(Enums.TypeParcelle.ROSE);
             deckParcelles.add(parcelleRose);
         }
         for (int i = 18;i < 27;i++){
-            parcelleJaune.setListBambou(new ArrayList<Bambou>());
             parcelleJaune.setIrriguee(false);
             parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
             deckParcelles.add(parcelleJaune);

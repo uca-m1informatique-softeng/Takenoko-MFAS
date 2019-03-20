@@ -26,27 +26,21 @@ public class JardinierTest {
         this.partie = new Partie();
         this.plateau = partie.getPlateau();
         this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
         parcelleVerte.setIrriguee(false);
         parcelleVerte.setType(Enums.TypeParcelle.VERTE);
         this.parcelleRose = new Parcelle();
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
         parcelleRose.setIrriguee(false);
         parcelleRose.setType(TypeParcelle.ROSE);
         this.parcelleVerteAdjacenteIrrigue = new Parcelle();
-        parcelleVerteAdjacenteIrrigue.setListBambou(new ArrayList<Bambou>());
         parcelleVerteAdjacenteIrrigue.setIrriguee(true);
         parcelleVerteAdjacenteIrrigue.setType(Enums.TypeParcelle.VERTE);
         this.parcelleVerteAdjacenteNonIrrigue = new Parcelle();
-        parcelleVerteAdjacenteNonIrrigue.setListBambou(new ArrayList<Bambou>());
         parcelleVerteAdjacenteNonIrrigue.setIrriguee(false);
         parcelleVerteAdjacenteNonIrrigue.setType(Enums.TypeParcelle.VERTE);
         this.parcelleVerteIrrigueDestination =new Parcelle();
-        parcelleVerteIrrigueDestination.setListBambou(new ArrayList<Bambou>());
         parcelleVerteIrrigueDestination.setIrriguee(true);
         parcelleVerteIrrigueDestination.setType(Enums.TypeParcelle.VERTE);
         this.parcelleVerteNonAdjacenteIrrigue =new Parcelle();
-        parcelleVerteNonAdjacenteIrrigue.setListBambou(new ArrayList<Bambou>());
         parcelleVerteNonAdjacenteIrrigue.setIrriguee(true);
         parcelleVerteNonAdjacenteIrrigue.setType(Enums.TypeParcelle.VERTE);
 

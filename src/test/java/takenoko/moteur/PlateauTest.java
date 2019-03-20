@@ -30,19 +30,15 @@ public class PlateauTest {
         this.coordonneCentre = new Point3D(0,0,0);
         this.coordonneVoisin = new Point3D(1,0,-1);
         this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
         parcelleJaune.setIrriguee(false);
         parcelleJaune.setType(TypeParcelle.JAUNE);
         this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
         parcelleVerte.setIrriguee(false);
         parcelleVerte.setType(Enums.TypeParcelle.VERTE);
         this.parcelleRose = new Parcelle();
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
         parcelleRose.setIrriguee(false);
         parcelleRose.setType(Enums.TypeParcelle.VERTE);
         this.parcelleEtang = new Parcelle();
-        parcelleEtang.setListBambou(new ArrayList<Bambou>());
         parcelleEtang.setIrriguee(true);
         parcelleEtang.setType(TypeParcelle.ETANG);
 

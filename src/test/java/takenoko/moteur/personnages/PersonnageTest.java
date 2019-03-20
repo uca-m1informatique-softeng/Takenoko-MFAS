@@ -28,11 +28,9 @@ public class PersonnageTest {
         this.jardinier = partie.getJardinier();
         this.panda = partie.getPanda();
         this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
         parcelleJaune.setIrriguee(false);
         parcelleJaune.setType(TypeParcelle.JAUNE);
         this.parcelleEtang = new Parcelle();
-        parcelleEtang.setListBambou(new ArrayList<Bambou>());
         parcelleEtang.setIrriguee(true);
         parcelleEtang.setType(TypeParcelle.ETANG);
 

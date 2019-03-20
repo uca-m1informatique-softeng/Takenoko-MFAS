@@ -31,11 +31,9 @@ public class ObjectifParcelleTest {
         this.bot = new Bot();
         bot.setCouleur(Enums.CouleurBot.ROUGE);
         this.parcelleRose = new Parcelle();
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
         parcelleRose.setIrriguee(false);
         parcelleRose.setType(Enums.TypeParcelle.ROSE);
         this.parcelleRose2 = new Parcelle();
-        parcelleRose2.setListBambou(new ArrayList<Bambou>());
         parcelleRose2.setIrriguee(false);
         parcelleRose2.setType(Enums.TypeParcelle.ROSE);
         this.objectifparcellecourbé= new ObjectifParcelle();
@@ -54,6 +52,7 @@ public class ObjectifParcelleTest {
         objectifparcelle4.setCouleur(Enums.TypeParcelle.ROSE);
         objectifparcelle4.setValeur(4);
         objectifparcelle4.setType(3);
+        bot.resetJoueur();
     }
 
     @Test

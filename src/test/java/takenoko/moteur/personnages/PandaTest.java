@@ -22,11 +22,9 @@ public class PandaTest {
         this.partie = new Partie();
         this.plateau = partie.getPlateau();
         this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
         parcelleVerte.setIrriguee(false);
         parcelleVerte.setType(Enums.TypeParcelle.VERTE);
         this.parcelleRose = new Parcelle();
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
         parcelleRose.setIrriguee(false);
         parcelleRose.setType(Enums.TypeParcelle.VERTE);
 

@@ -41,15 +41,12 @@ public class BotParcelleTest {
         this.parcelleJaune = new Parcelle();
         this.parcelleJaune2 = new Parcelle();
         this.parcelleVerte = new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
         parcelleVerte.setIrriguee(false);
         parcelleVerte.setType(Enums.TypeParcelle.VERTE);
         this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
         parcelleJaune.setIrriguee(false);
         parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
         this.parcelleJaune2 = new Parcelle();
-        parcelleJaune2.setListBambou(new ArrayList<Bambou>());
         parcelleJaune2.setIrriguee(false);
         parcelleJaune2.setType(Enums.TypeParcelle.JAUNE);
         this.objectifPandaJaune = new ObjectifPanda();

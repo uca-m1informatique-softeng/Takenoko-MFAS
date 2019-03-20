@@ -32,11 +32,9 @@ public class BotTest {
         this.bot = new Bot();
         bot.setCouleur(Enums.CouleurBot.ROUGE);
         this.parcelleJaune = new Parcelle();
-        parcelleJaune.setListBambou(new ArrayList<Bambou>());
         parcelleJaune.setIrriguee(false);
         parcelleJaune.setType(Enums.TypeParcelle.JAUNE);
         this.parcelleVerte= new Parcelle();
-        parcelleVerte.setListBambou(new ArrayList<Bambou>());
         parcelleVerte.setIrriguee(false);
         parcelleVerte.setType(Enums.TypeParcelle.VERTE);
         this.objectifJardinier = new ObjectifJardinier();

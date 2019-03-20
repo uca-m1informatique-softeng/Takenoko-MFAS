@@ -23,7 +23,6 @@ public class ParcelleTest {
     public void setUp() {
         parcelleRose.setType(TypeParcelle.ROSE);
         parcelleRose.setIrriguee(false);
-        parcelleRose.setListBambou(new ArrayList<Bambou>());
 
     }
     @Test
@@ -36,13 +35,13 @@ public class ParcelleTest {
         parcelleRose.setIrriguee(true);
         assertTrue(parcelleRose.pousserBambou());
         assertTrue(parcelleRose.pousserBambou());
-        tailleBambou = parcelleRose.getListBambou().size();
+        tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,2);
 
         assertTrue(parcelleRose.pousserBambou());
         assertTrue(parcelleRose.pousserBambou());
         assertFalse(parcelleRose.pousserBambou());
-        tailleBambou = parcelleRose.getListBambou().size();
+        tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,4);
 
     }
@@ -52,18 +51,18 @@ public class ParcelleTest {
         parcelleRose.setIrriguee(true);
 
         assertFalse(parcelleRose.mangerBambou());
-        int tailleBambou = parcelleRose.getListBambou().size();
+        int tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,0);
 
         parcelleRose.pousserBambou();
         parcelleRose.pousserBambou();
 
         assertTrue(parcelleRose.mangerBambou());
-        tailleBambou = parcelleRose.getListBambou().size();
+        tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,1);
 
         assertTrue(parcelleRose.mangerBambou());
-        tailleBambou = parcelleRose.getListBambou().size();
+        tailleBambou = parcelleRose.getNbBambou();
         assertEquals(tailleBambou,0);
     }
 
