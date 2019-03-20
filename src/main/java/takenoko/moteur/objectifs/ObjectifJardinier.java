@@ -2,8 +2,8 @@ package takenoko.moteur.objectifs;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import takenoko.joueur.Bot;
 import takenoko.moteur.Parcelle;
-import takenoko.joueur.Joueur;
 import takenoko.moteur.Plateau;
 
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ObjectifJardinier extends Objectif{
      * @return
      */
     @Override
-    public boolean validation(Joueur joueur){
+    public boolean validation(Bot joueur){
         Plateau plateau=Plateau.getInstance();
         ArrayList<Parcelle> parcellesPlateau=plateau.getAllParcelle();
         for(int i = 0; i < parcellesPlateau.size(); i++){

@@ -1,5 +1,6 @@
 package takenoko;
 
+import takenoko.joueur.Bot;
 import takenoko.joueur.BotJardinier;
 import takenoko.joueur.BotPanda;
 import takenoko.moteur.Affichage;
@@ -11,7 +12,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import takenoko.joueur.BotParcelle;
-import takenoko.joueur.Joueur;
 
 import java.util.ArrayList;
 
@@ -37,7 +37,7 @@ public class Main {
 
     private void deroulePartie( Partie partie, BotJardinier botJardinier,BotPanda botPanda, BotParcelle botParcelle) {
 
-        ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
+        ArrayList <Bot> listeDesJoueurs=new ArrayList<Bot>();
 
         botJardinier.setCouleur(CouleurBot.VERT);
         botPanda.setCouleur(CouleurBot.BLEU);

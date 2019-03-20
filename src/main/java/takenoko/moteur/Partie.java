@@ -1,6 +1,6 @@
 package takenoko.moteur;
 
-import takenoko.joueur.Joueur;
+import takenoko.joueur.Bot;
 import takenoko.moteur.personnages.Jardinier;
 import takenoko.moteur.personnages.Panda;
 import org.springframework.context.annotation.Scope;
@@ -16,6 +16,15 @@ import java.util.ArrayList;
 
 public class Partie {
     private Plateau plateau = Plateau.getInstance();
+
+    public boolean isFinDePartie() {
+        return finDePartie;
+    }
+
+    public void setFinDePartie(boolean finDePartie) {
+        this.finDePartie = finDePartie;
+    }
+
     private Jardinier jardinier = Jardinier.getInstance();
     private Panda panda = Panda.getInstance();
     private Deck deck = Deck.getInstance();
@@ -58,14 +67,14 @@ public class Partie {
      * reinitialise la partie
      * @param listJoueurs
      */
-    public void resetPartie(ArrayList<Joueur> listJoueurs){
+    public void resetPartie(ArrayList<Bot> listJoueurs){
 
         plateau.resetPlateau();
         jardinier.resetPersonnage();
         panda.resetPersonnage();
         deck.resetDeck();
 
-        for (Joueur joueurCourant: listJoueurs) {
+        for (Bot joueurCourant: listJoueurs) {
             Affichage.affichageDebutTour(joueurCourant);
             joueurCourant.resetJoueur();
             Affichage.affichageFinTour(joueurCourant);
@@ -76,7 +85,7 @@ public class Partie {
      * Le déroulement de la partie
      * @param listJoueurs
      */
-    public void jouer(ArrayList<Joueur> listJoueurs){
+    public void jouer(ArrayList<Bot> listJoueurs){
 
         //initialisation de la Partie
         resetPartie(listJoueurs);
@@ -88,7 +97,7 @@ public class Partie {
         //coeur du jeu
         while (!finDePartie) {
             for (int i=0;i<listJoueurs.size();i++) {
-                Joueur joueurCourant=listJoueurs.get(i);
+                Bot joueurCourant=listJoueurs.get(i);
                 Affichage.affichageDebutTour(joueurCourant);
 
                 //premiere action
@@ -116,7 +125,7 @@ public class Partie {
         }
         // dernier tour
         for (int i=0;i<premierTermine;i++) {
-            Joueur joueurCourant=listJoueurs.get(i);
+            Bot joueurCourant=listJoueurs.get(i);
             Affichage.affichageDebutTour(joueurCourant);
             //premiere action
             joueurCourant.choixAction();
@@ -136,13 +145,13 @@ public class Partie {
      * calcule le ou les vainqueurs d'une partie
      * @param listJoueurs
      */
-    private void calculVainqueur(ArrayList <Joueur> listJoueurs){
-        ArrayList<Joueur> vainqueur=new ArrayList<>();
+    private void calculVainqueur(ArrayList <Bot> listJoueurs){
+        ArrayList<Bot> vainqueur=new ArrayList<>();
         vainqueur.add(listJoueurs.get(0));
         //recup vainqueur
         for (int i=1;i<listJoueurs.size();i++) {
-            Joueur joueur=listJoueurs.get(i);
-            Joueur vainqueurCourant=vainqueur.get(0);
+            Bot joueur=listJoueurs.get(i);
+            Bot vainqueurCourant=vainqueur.get(0);
             if (joueur.getScore()>vainqueurCourant.getScore()) {
                 vainqueur.clear();
                 vainqueur.add(joueur);
@@ -162,7 +171,7 @@ public class Partie {
             }
         }
 
-        for (Joueur joueur:vainqueur){
+        for (Bot joueur:vainqueur){
             joueur.addVictoire();
         }
         Affichage.affichageFinPartie(vainqueur);

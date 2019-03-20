@@ -1,11 +1,11 @@
 package takenoko;
 
 
+import takenoko.joueur.Bot;
 import takenoko.joueur.BotJardinier;
 import takenoko.moteur.Affichage;
 import takenoko.moteur.Partie;
 import takenoko.moteur.Enums.CouleurBot;
-import takenoko.joueur.Joueur;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Main3 {
 
     public static void main(String[] args) {
 
-        ArrayList <Joueur> listeDesJoueurs=new ArrayList<Joueur>();
+        ArrayList <Bot> listeDesJoueurs=new ArrayList<Bot>();
 
         BotJardinier botJardinierVert = new BotJardinier();
         BotJardinier botJardinierBleu = new BotJardinier();

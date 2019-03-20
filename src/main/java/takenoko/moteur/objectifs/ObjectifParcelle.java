@@ -2,7 +2,7 @@ package takenoko.moteur.objectifs;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import takenoko.joueur.Joueur;
+import takenoko.joueur.Bot;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
 
@@ -50,7 +50,7 @@ public class ObjectifParcelle extends Objectif {
      * @return
      */
     @Override
-    public boolean validation(Joueur joueur){
+    public boolean validation(Bot joueur){
         Plateau plateau=Plateau.getInstance();
         ArrayList<Point3D> pointsPlateau = plateau.getKeylist();
 

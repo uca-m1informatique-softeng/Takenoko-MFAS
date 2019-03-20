@@ -10,7 +10,7 @@ import takenoko.moteur.Enums.TypeParcelle;
 public class Parcelle {
     private TypeParcelle type;
     private boolean irriguee;
-    private ArrayList<Bambou> listBambou = new ArrayList<>();
+    private int nbBambou=0;
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
@@ -27,19 +27,14 @@ public class Parcelle {
     }
 
     public int getNbBambou(){
-        return listBambou.size();
+        return nbBambou;
+    }
+
+    public void setNbBambou(int nb){
+        nbBambou=nb;
     }
 
     public TypeParcelle getType() { return type; }
-
-
-    public ArrayList<Bambou> getListBambou() {
-        return listBambou;
-    }
-
-    public void setListBambou(ArrayList<Bambou> listBambou) {
-        this.listBambou = listBambou;
-    }
 
     public void setType(TypeParcelle type) {
         this.type = type;
@@ -52,10 +47,8 @@ public class Parcelle {
      * La methode qui permet de faire pousser le bambou
      */
     public boolean pousserBambou(){
-        if(listBambou.size() < 4 && isIrriguee() && type!=Enums.TypeParcelle.ETANG){
-            Bambou bambou = new Bambou();
-            bambou.setCouleur(this.type);
-            listBambou.add(bambou);
+        if(nbBambou < 4 && isIrriguee() && type!=Enums.TypeParcelle.ETANG){
+            nbBambou++;
             return true;
         }
         return false;
@@ -65,9 +58,9 @@ public class Parcelle {
      * La methode qui permet d'enlever du bambou
      */
     public boolean mangerBambou(){
-        int nombreBambou = listBambou.size();
+        int nombreBambou = nbBambou;
         if(nombreBambou > 0){
-            listBambou.remove(0);
+            nbBambou--;
             return true;
         }
         return false;

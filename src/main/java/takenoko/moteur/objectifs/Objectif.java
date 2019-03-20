@@ -2,8 +2,8 @@ package takenoko.moteur.objectifs;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
+import takenoko.joueur.Bot;
 import takenoko.moteur.Enums;
-import takenoko.joueur.Joueur;
 
 /**
  * La classe des objectifs
@@ -52,7 +52,7 @@ public abstract class Objectif {
      * @param joueur
      * @return
      */
-    public boolean validation(Joueur joueur){
+    public boolean validation(Bot joueur){
         return valide;
     }
 }

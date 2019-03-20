@@ -139,6 +139,14 @@ public class BotPanda extends Bot {
         }
         return super.choixObjectifPrioritaire();
     }
+
+    public int getChoixchange() {
+        return choixchange;
+    }
+
+    public void setChoixchange(int choixchange) {
+        this.choixchange = choixchange;
+    }
 }
 
 

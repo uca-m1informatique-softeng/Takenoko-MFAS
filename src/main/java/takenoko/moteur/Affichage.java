@@ -1,7 +1,7 @@
 package takenoko.moteur;
 
 import javafx.geometry.Point3D;
-import takenoko.joueur.Joueur;
+import takenoko.joueur.Bot;
 import takenoko.moteur.objectifs.Objectif;
 
 import java.util.ArrayList;
@@ -56,7 +56,7 @@ public final class Affichage {
      * affiche le debut du tour
      * @param joueurCourant
      */
-    public static void affichageDebutTour(Joueur joueurCourant){
+    public static void affichageDebutTour(Bot joueurCourant){
         if (!verbose){
             return;
         }
@@ -67,7 +67,7 @@ public final class Affichage {
      * affiche la fin du tour
      * @param joueurCourant
      */
-    public static void affichageFinTour(Joueur joueurCourant){
+    public static void affichageFinTour(Bot joueurCourant){
         if (!verbose){
             return;
         }
@@ -78,7 +78,7 @@ public final class Affichage {
      * affiche la realisation de l'objectif empereur par le joueur
      * @param joueur
      */
-    public static void affichageEmpereur(Joueur joueur){
+    public static void affichageEmpereur(Bot joueur){
         if (!verbose){
             return;
         }
@@ -99,19 +99,19 @@ public final class Affichage {
      * affiche la fin de la partie
      * @param vainqueur
      */
-    public static void affichageFinPartie(ArrayList<Joueur> vainqueur){
+    public static void affichageFinPartie(ArrayList<Bot> vainqueur){
         if (!verbose){
             return;
         }
         if (vainqueur.size()>1){
             System.out.println("\nC'est une egalité");
-            for(Joueur joueur:vainqueur){
+            for(Bot joueur:vainqueur){
                 System.out.println(joueurEnCouleur(joueur)+" fait égalité avec " + joueur.getScore() + " points.");
             }
             System.out.println("");
         }
         else {
-            Joueur joueur=vainqueur.get(0);
+            Bot joueur=vainqueur.get(0);
             System.out.println("\n"+joueurEnCouleur(joueur)+" gagne avec " + joueur.getScore() + " points.\n");
         }
 
@@ -122,7 +122,7 @@ public final class Affichage {
      * @param joueurcourant
      * @param objectif
      */
-    public static void affichageObjectifReussi(Joueur joueurcourant, Objectif objectif) {
+    public static void affichageObjectifReussi(Bot joueurcourant, Objectif objectif) {
         if (!verbose) {
             return;
         }
@@ -169,8 +169,8 @@ public final class Affichage {
      * affiche le nombre de victoires pour chaque joueur dans une liste de joueur
      * @param list
      */
-    public static void affichageResultatsPartie(ArrayList<Joueur> list) {
-        for (Joueur joueur:list){
+    public static void affichageResultatsPartie(ArrayList<Bot> list) {
+        for (Bot joueur:list){
             System.out.println("Le joueur " + joueurEnCouleur(joueur)+ " à "+joueur.getNbVictoire()+ " victoire(s)");
         }
 
@@ -460,7 +460,7 @@ public final class Affichage {
      * @param joueur
      * @return
      */
-    public static String joueurEnCouleur(Joueur joueur){
+    public static String joueurEnCouleur(Bot joueur){
         return initCouleurJoueur(joueur)+joueur.getCouleur()+resetCouleur();
     }
 
@@ -477,7 +477,7 @@ public final class Affichage {
      * @param joueurCourant
      * @return
      */
-    public static String initCouleurJoueur(Joueur joueurCourant){
+    public static String initCouleurJoueur(Bot joueurCourant){
         switch(joueurCourant.getCouleur()){
             case BLEU :
                 return "\u001B[34m";
