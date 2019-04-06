@@ -31,6 +31,7 @@ public class BotPanda extends Bot {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du Botpanda.
      * @param possibilites
      * @return
      */
@@ -73,6 +74,7 @@ public class BotPanda extends Bot {
     }
 
     /**
+     * Renvoie un choix d'action parmis une liste de possibilités
      * @param possibilites
      * @return
      */

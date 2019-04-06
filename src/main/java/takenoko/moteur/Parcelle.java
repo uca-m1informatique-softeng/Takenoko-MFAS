@@ -1,6 +1,5 @@
 package takenoko.moteur;
 
-import java.util.ArrayList;
 import takenoko.moteur.Enums.TypeParcelle;
 
 

@@ -1,7 +1,6 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+
 import takenoko.joueur.Bot;
 
 import java.util.ArrayList;
@@ -37,8 +36,7 @@ public class ObjectifPanda extends Objectif{
 
         int nbBambouJ=joueur.getNbBambouDeCouleur(this.getCouleur());
 
-        if (nbBambouJ >= nombreBambou)
-        {
+        if (nbBambouJ >= nombreBambou) {
             joueur.supprBambou(this.getCouleur(),nombreBambou);
             setValide(true);
             return true;

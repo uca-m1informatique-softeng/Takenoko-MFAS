@@ -1,7 +1,6 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
+
 import takenoko.joueur.Bot;
 import takenoko.moteur.Enums;
 

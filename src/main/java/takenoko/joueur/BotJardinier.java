@@ -20,9 +20,6 @@ public class BotJardinier extends Bot{
 
     int choixchange = 0;
 
-    /**
-     *
-     */
     private void switchchoix(){
         choixchange=(choixchange+1)%2;
     }

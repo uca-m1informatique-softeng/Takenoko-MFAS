@@ -73,7 +73,7 @@ public class Plateau {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise le plateau
+     * Réinitialise le plateau
      */
     public void resetPlateau(){
         Point3D coordonne = new Point3D(0,0,0);
@@ -103,7 +103,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie une parcelle pour une coordonne
+     * Renvoie une parcelle pour une coordonne
      * @param p
      * @return
      */
@@ -117,7 +117,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie une irrigation pour une coordonne
+     * Renvoie une irrigation pour une coordonne
      * @param p
      * @return
      */
@@ -131,7 +131,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie toute les parcelles sur le plateau
+     * Renvoie toute les parcelles sur le plateau
      * @return
      */
     public ArrayList<Parcelle> getAllParcelle() {
@@ -143,7 +143,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie toute les irigations sur le plateau
+     * Renvoie toute les irigations sur le plateau
      * @return
      */
     public ArrayList<Parcelle> getAllIrrigation() {
@@ -155,7 +155,7 @@ public class Plateau {
     }
 
     /**
-     * retourne les coordonnes autour des coordonnes d'une parcelle
+     * Retourne les coordonnes autour des coordonnes d'une parcelle
      * @param coordonne
      * @return
      */
@@ -195,7 +195,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie le sens de l'irrigation des coordonne d'une irrigation
+     * Renvoie le sens de l'irrigation des coordonne d'une irrigation
      * @param coordonne
      * @return
      */
@@ -238,7 +238,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie les irrigation voisine d'une coordonne d'irrigation
+     * Renvoie les irrigation voisine d'une coordonne d'irrigation
      * @param coordonne
      * @return
      */
@@ -300,7 +300,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie les irrigations voisine libre a partir d'une coordonne d'irrigation
+     * Renvoie les irrigations voisine libre a partir d'une coordonne d'irrigation
      * @param coordonne
      * @return
      */
@@ -333,7 +333,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie les irrigation voisine d'une coordonne d'irrigation
+     * Renvoie les irrigation voisine d'une coordonne d'irrigation
      * @param coordonne
      * @return
      */
@@ -381,7 +381,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie si une parcelle est occupée a une coordonne donnée
+     * Renvoie si une parcelle est occupée a une coordonne donnée
      * @param coordonne
      * @return
      */
@@ -390,7 +390,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie si une irrigation est occupée a une coordonne donnée
+     * Renvoie si une irrigation est occupée a une coordonne donnée
      * @param coordonne
      * @return
      */
@@ -399,7 +399,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie les coordonnes des parcelles adjacentes a une irrigation
+     * Renvoie les coordonnes des parcelles adjacentes a une irrigation
      * @param coordonne
      * @return
      */
@@ -447,7 +447,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie si il est possible de poser une irrigation a une coordonne
+     * Renvoie si il est possible de poser une irrigation a une coordonne
      * @param coordonne
      * @return
      */
@@ -458,8 +458,7 @@ public class Plateau {
         ArrayList<Point3D>listdePoints=getcoordonneParcelleAdjacenteIrrigation(coordonne);
         boolean parcellePresente=false;
         for(Point3D coordParcelle:listdePoints){
-            if(getParcelle(coordParcelle)!= null)
-            {
+            if(getParcelle(coordParcelle)!= null) {
                 parcellePresente=true;
                 break;
             }
@@ -497,7 +496,7 @@ public class Plateau {
     }
 
     /**
-     * renvoie la liste des emplacement ou on peut poser une irrigation
+     * Renvoie la liste des emplacement ou on peut poser une irrigation
      * @return
      */
     public ArrayList<Point3D> emplacementsAutoriseIrrigation(){
@@ -549,7 +548,7 @@ public class Plateau {
     }
 
     /**
-     * la methode qui parmet de poser une irrigation
+     * La methode qui parmet de poser une irrigation
      * @param irrigation
      * @param coordonne
      */
@@ -618,7 +617,7 @@ public class Plateau {
 
 
     /**
-     * renvoie la parcelle suivante permettant de completer un motif donnee
+     * Renvoie la parcelle suivante permettant de completer un motif donnee
      * @param pointCourant
      * @param couleurObjectif
      * @param i

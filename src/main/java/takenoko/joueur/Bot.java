@@ -140,7 +140,7 @@ public class Bot implements IA {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * Supprime nb bambous d'une certaine couleur des bambous possedés par le joueur
+     * Supprime nb bambous d'une certaine couleur des bambous possedés par le joueur.
      * @param couleur
      * @param nb
      */
@@ -149,14 +149,14 @@ public class Bot implements IA {
     }
 
     /**
-     * reinitialise la liste des actions effectuees par le joueur dans un tour
+     * Reinitialise la liste des actions effectuees par le joueur dans un tour.
      */
     public void resetListAction(){
         setListAction(new ArrayList<Enums.Action>());
     }
 
     /**
-     * ajoute une action dans la liste des actions réalisé par le joueur durant le tour
+     * Ajoute une action dans la liste des actions réalisé par le joueur durant le tour.
      * @param action
      */
     public void addListAction(Enums.Action action){
@@ -166,7 +166,7 @@ public class Bot implements IA {
 
 
     /**
-     * reinitialise le joueur pour commencer une nouvelle partie
+     * Reinitialise le joueur pour commencer une nouvelle partie.
      */
     public void resetJoueur(){
         setNombreObjectifsRemplis(0);
@@ -193,7 +193,7 @@ public class Bot implements IA {
     }
 
     /**
-     * ajoute une irrigation à la liste des irrigations du joueur
+     * Ajoute une irrigation à la liste des irrigations du joueur
      * @param irrigation
      */
     public void addIrrigation (Irrigation irrigation){
@@ -253,7 +253,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie si une action est possible
+     * Vérifie si une action est possible
      * @param action
      * @return
      */
@@ -271,7 +271,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action du deplacement du panda est possible
+     * Vérifie que l'action du deplacement du panda est possible
      * @return
      */
     private final boolean verifActionDeplacerPanda(){
@@ -279,7 +279,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action du deplacement du jardinier est possible
+     * Vérifie que l'action du deplacement du jardinier est possible
      * @return
      */
     private final boolean verifActionDeplacerJardinier(){
@@ -287,7 +287,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action de poser une parcelle est possible
+     * Vérifie que l'action de poser une parcelle est possible
      * @return
      */
     private final boolean verifActionPoserParcelle(){
@@ -295,7 +295,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif panda est possible
+     * Vérifie que l'action de piocher un objectif panda est possible
      * @return
      */
     private final boolean verifActionPiocherObjPanda(){
@@ -303,7 +303,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif jardinier est possible
+     * Vérifie que l'action de piocher un objectif jardinier est possible
      * @return
      */
     private final boolean verifActionPiocherObjJardinier(){
@@ -311,7 +311,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action de piocher un objectif parcelle est possible
+     * Vérifie que l'action de piocher un objectif parcelle est possible
      * @return
      */
     private final boolean verifActionPiocherObjParcelle(){
@@ -319,7 +319,7 @@ public class Bot implements IA {
     }
 
     /**
-     * verifie que l'action de poser une irrigation est possible
+     * Vérifie que l'action de poser une irrigation est possible
      * @return
      */
     private final boolean verifActionPoserIrrigation(){
@@ -389,7 +389,7 @@ public class Bot implements IA {
     }
 
     /**
-     * pose la parcelle dans le plateau
+     * Pose la parcelle dans le plateau
      * @param plateau
      * @param parcelle
      * @param coord
@@ -409,7 +409,7 @@ public class Bot implements IA {
     }
 
     /**
-     * deplace le jardinier
+     * Déplace le jardinier
      * @param jardinier
      * @param coord
      */
@@ -428,7 +428,7 @@ public class Bot implements IA {
     }
 
     /**
-     * deplace le panda
+     * Déplace le panda
      * @param panda
      * @param coord
      */
@@ -439,7 +439,7 @@ public class Bot implements IA {
     }
 
     /**
-     * permet de piohcer une irrigation
+     * Permet de piohcer une irrigation
      * @return
      */
     public final Irrigation piocheUneIrrigation(){
@@ -447,7 +447,7 @@ public class Bot implements IA {
     }
 
     /**
-     * c'est la methode qui permet de poser une irrigation
+     * C'est la methode qui permet de poser une irrigation
      */
     public final void actionPoseIrrigation(){
         Plateau plateau = Plateau.getInstance();
@@ -490,7 +490,7 @@ public class Bot implements IA {
 
 
     /**
-     * ajoute une victoire au joueur
+     * Ajoute une victoire au joueur
      */
     public void addVictoire(){
         nbVictoire++;

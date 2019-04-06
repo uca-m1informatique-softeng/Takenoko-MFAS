@@ -1,7 +1,6 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
+
 import takenoko.joueur.Bot;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
@@ -26,6 +25,7 @@ public class ObjectifJardinier extends Objectif{
     public void setTailleBambou(int tailleBambou) {
         this.tailleBambou = tailleBambou;
     }
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**

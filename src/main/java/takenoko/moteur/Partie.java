@@ -64,7 +64,7 @@ public class Partie {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise la partie
+     * Réinitialise la partie
      * @param listJoueurs
      */
     public void resetPartie(ArrayList<Bot> listJoueurs){
@@ -117,8 +117,7 @@ public class Partie {
                 joueurCourant.resetListAction();
             }
             compteurTour++;
-            if (compteurTour>100)
-            {
+            if (compteurTour>100) {
                 finDePartie=true;
                 Affichage.affichagePartieAnnule();
             }
@@ -156,11 +155,10 @@ public class Partie {
                 vainqueur.clear();
                 vainqueur.add(joueur);
             }
-            else{
-                if (joueur.getScore()==vainqueurCourant.getScore())
-                {
-                    if(joueur.getNbObjectifPandarealise()>vainqueurCourant.getNbObjectifPandarealise())
-                    {   vainqueur.clear();
+            else {
+                if (joueur.getScore()==vainqueurCourant.getScore()) {
+                    if(joueur.getNbObjectifPandarealise()>vainqueurCourant.getNbObjectifPandarealise()) {
+                        vainqueur.clear();
                         vainqueur.add(joueur);
                     }
                     else{

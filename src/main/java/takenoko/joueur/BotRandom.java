@@ -17,6 +17,7 @@ public class BotRandom extends Bot{
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du Botrandom.
      * @param possibilites
      * @return
      */

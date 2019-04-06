@@ -1,6 +1,6 @@
 package takenoko.moteur;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
 import takenoko.moteur.objectifs.Objectif;
 import takenoko.moteur.objectifs.ObjectifJardinier;
 import takenoko.moteur.objectifs.ObjectifPanda;
@@ -71,7 +71,7 @@ public class Deck {
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
-     * reinitialise le deck
+     * Réinitialise le deck
      */
     public void resetDeck(){
         initialiserObjectifsJardinier();
@@ -81,7 +81,7 @@ public class Deck {
     }
 
     /**
-     * initialise le deck des objectifs parcelles
+     * Initialise le deck des objectifs parcelles
      */
 
     public void initialiserObjectifParcelle() {
@@ -140,7 +140,7 @@ public class Deck {
     }
 
     /**
-     * initialise le deck des parcelles
+     * Initialise le deck des parcelles
      */
     public void initialiserDeckParcelle() {
         deckParcelles.clear();
@@ -166,7 +166,7 @@ public class Deck {
     }
 
     /**
-     * initialise le deck des objectifs jardinier
+     * Initialise le deck des objectifs jardinier
      */
     public void initialiserObjectifsJardinier(){
         deckObjectifsJardinier.clear();
@@ -201,7 +201,7 @@ public class Deck {
     }
 
     /**
-     * initialise le deck des objectifs panda
+     * Initialise le deck des objectifs panda
      */
     public void initialiserObjectifsPanda(){
 
@@ -333,7 +333,7 @@ public class Deck {
     }
 
     /**
-     * renvoie si le deck des parcelles est vide
+     * Renvoie si le deck des parcelles est vide
      * @return
      */
     public boolean isDeckParcelleVide(){
@@ -341,7 +341,7 @@ public class Deck {
     }
 
     /**
-     * envoie si le deck des objectifs panda est vide
+     * Envoie si le deck des objectifs panda est vide
      * @return
      */
     public boolean isDeckObjectifPandaVide(){
@@ -349,7 +349,7 @@ public class Deck {
     }
 
     /**
-     * envoie si le deck des objectifs jardinier est vide
+     * Envoie si le deck des objectifs jardinier est vide
      * @return
      */
     public boolean isDeckObjectifJardinierVide(){
@@ -357,7 +357,7 @@ public class Deck {
     }
 
     /**
-     * envoie si le deck des objectifs parcelle est vide
+     * Envoie si le deck des objectifs parcelle est vide
      * @return
      */
     public boolean isDeckObjectifParcelleVide(){

@@ -30,7 +30,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * action du jardinier lorsque il arrive a une coordonne
+     * Action du jardinier lorsque il arrive a une coordonne
      * @param point3D
      * @return
      */
@@ -49,7 +49,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * donne la liste des coordonne ou le bambou doit pousser suite au deplacement du jardinier
+     * Donne la liste des coordonne ou le bambou doit pousser suite au deplacement du jardinier
      * @param point3D
      * @return
      */

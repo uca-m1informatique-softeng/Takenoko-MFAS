@@ -28,6 +28,7 @@ public class BotParcelle extends Bot{
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
+     * Les differents choix du Botparcelle.
      * @param possibilites
      * @return
      */

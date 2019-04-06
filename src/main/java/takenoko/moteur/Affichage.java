@@ -19,7 +19,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la pose d'une parcelle
+     * Affiche la pose d'une parcelle
      * @param parcelle
      * @param coordonne
      */
@@ -31,7 +31,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la pioche d'un objectif
+     * Affiche la pioche d'un objectif
      * @param objectif
      */
     public static void affichagePiocheObjectif(Objectif objectif){
@@ -42,7 +42,7 @@ public final class Affichage {
     }
 
     /**
-     * affichage la pose d'une irrigation
+     * Affichage la pose d'une irrigation
      * @param coordonne
      */
     public static void affichagePoseIrrigation(Point3D coordonne) {
@@ -53,7 +53,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche le debut du tour
+     * Affiche le debut du tour
      * @param joueurCourant
      */
     public static void affichageDebutTour(Bot joueurCourant){
@@ -64,7 +64,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la fin du tour
+     * Affiche la fin du tour
      * @param joueurCourant
      */
     public static void affichageFinTour(Bot joueurCourant){
@@ -75,7 +75,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la realisation de l'objectif empereur par le joueur
+     * Affiche la realisation de l'objectif empereur par le joueur
      * @param joueur
      */
     public static void affichageEmpereur(Bot joueur){
@@ -86,7 +86,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la fin d'une partie a cause d'un nombre de coup trop élevé
+     * Affiche la fin d'une partie a cause d'un nombre de coup trop élevé
      */
     public static void affichagePartieAnnule(){
         if (!verbose){
@@ -96,7 +96,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche la fin de la partie
+     * Affiche la fin de la partie
      * @param vainqueur
      */
     public static void affichageFinPartie(ArrayList<Bot> vainqueur){
@@ -118,7 +118,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche qu'un objectif a été validé
+     * Affiche qu'un objectif a été validé
      * @param joueurcourant
      * @param objectif
      */
@@ -130,7 +130,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche le nombre de bambou sur une parcelle
+     * Affiche le nombre de bambou sur une parcelle
      * @param plateau
      * @param pointBambou
      */
@@ -142,7 +142,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche l'emplacement du jardinier
+     * Affiche l'emplacement du jardinier
      * @param coord
      * @param plateau
      */
@@ -154,7 +154,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche l'emplacement du panda
+     * Affiche l'emplacement du panda
      * @param coord
      * @param plateau
      */
@@ -166,7 +166,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche le nombre de victoires pour chaque joueur dans une liste de joueur
+     * Affiche le nombre de victoires pour chaque joueur dans une liste de joueur
      * @param list
      */
     public static void affichageResultatsPartie(ArrayList<Bot> list) {
@@ -177,7 +177,7 @@ public final class Affichage {
     }
 
     /**
-     * affiche le nombre de victoires pour chaque joueur dans une liste de joueur
+     * Affiche le nombre de victoires pour chaque joueur dans une liste de joueur
      */
     public static void affichagePlateau() {
         System.out.println(grilleString());
@@ -185,7 +185,7 @@ public final class Affichage {
 
 
     /**
-     * renvoie une matrice de parcelle
+     * Renvoie une matrice de parcelle
      * @return
      **/
     private static Point3D[][] grilleParcelleSimple(){
@@ -221,7 +221,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie la hauteur et la largeur de la hashmap du plateau
+     * Renvoie la hauteur et la largeur de la hashmap du plateau
      * @return
      * @param keylist
      **/
@@ -247,7 +247,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie la convertion d'une coordonne 3D en coordonne 2D
+     * Renvoie la convertion d'une coordonne 3D en coordonne 2D
      * @return
      * @param x
      * @param z
@@ -257,7 +257,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie l'ecart entre le min et le max
+     * Renvoie l'ecart entre le min et le max
      * @return
      * @param min
      * @param max
@@ -267,7 +267,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour la grille
+     * Renvoie une string pour la grille
      * @return
      */
     private static StringBuilder grilleString(){
@@ -290,13 +290,11 @@ public final class Affichage {
                 }
                 result.append("\n");}
         }
-
-
         return result;
     }
 
     /**
-     * renvoie la ligne a laquelle se trouve la parcelle etang
+     * Renvoie la ligne a laquelle se trouve la parcelle etang
      **/
     private static int ligneDeLaParcelleEtang() {
         Point3D[][] grilleParcelle=grilleParcelleSimple();
@@ -312,7 +310,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour une ligne
+     * Renvoie une string pour une ligne
      * @return
      * @param plateau
      * @param coord
@@ -327,8 +325,6 @@ public final class Affichage {
         }
         result.append(ligneNb(nbligne,coord,parcellecourante,listirrig,plateau));
 
-
-
         if(nbligne==3) {
             result.append(resetCouleur()+" ");
         }
@@ -342,7 +338,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour une ligne de ligne de parcelle
+     * Renvoie une string pour une ligne de ligne de parcelle
      * @return
      * @param nbligne
      * @param coord
@@ -389,7 +385,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string initialiser la couleur de la parcelle
+     * Renvoie une string initialiser la couleur de la parcelle
      * @param parcellecourante
      * @return
      */
@@ -417,7 +413,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour une coordonne
+     * Renvoie une string pour une coordonne
      * @param coord
      * @return
      */
@@ -432,7 +428,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour l'irrigation d'une parcelle
+     * Renvoie une string pour l'irrigation d'une parcelle
      * @param parcelle
      * @return
      */
@@ -447,7 +443,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string pour une coordonne
+     * Renvoie une string pour une coordonne
      * @param point
      * @return
      */
@@ -456,7 +452,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie une string avec de la couleur pour un joueur
+     * Renvoie une string avec de la couleur pour un joueur
      * @param joueur
      * @return
      */
@@ -465,7 +461,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie le carcatere de reinitialisation de la couleur
+     * Renvoie le carcatere de reinitialisation de la couleur
      * @return
      */
     public static String resetCouleur(){
@@ -473,7 +469,7 @@ public final class Affichage {
     }
 
     /**
-     * renvoie le caractere initialisant la couleur
+     * Renvoie le caractere initialisant la couleur
      * @param joueurCourant
      * @return
      */

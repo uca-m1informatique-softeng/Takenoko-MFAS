@@ -28,7 +28,7 @@ public class Panda extends Personnage {
     }
 
     /**
-     * action du panda lorsque il arrive a une coordonne
+     * Action du panda lorsque il arrive a une coordonne
      * @param p
      * @return
      */

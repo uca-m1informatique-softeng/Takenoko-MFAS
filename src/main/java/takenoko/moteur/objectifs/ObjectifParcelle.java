@@ -1,7 +1,5 @@
 package takenoko.moteur.objectifs;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 import takenoko.joueur.Bot;
 import takenoko.moteur.Plateau;
 import javafx.geometry.Point3D;
