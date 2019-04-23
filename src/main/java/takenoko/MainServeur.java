@@ -6,11 +6,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import takenoko.serveur.Jeu;
+import takenoko.serveur.JeuServeur;
 import takenoko.serveur.Serveur;
 
 
-
+/**
+ * C'est la classe principal du serveur
+ */
 @SpringBootApplication
 public class MainServeur {
 
@@ -20,7 +22,7 @@ public class MainServeur {
     Serveur serveur;
 
     @Autowired
-    Jeu jeu;
+    JeuServeur jeuServeur;
 
     public static void main (String[] args){
         SpringApplication.run(MainServeur.class, args);
@@ -31,7 +33,7 @@ public class MainServeur {
         return args -> {
             System.out.println("Démarrage du serveur sur le port " + serveur.getPort());
             while(!serveur.isPartiePrete()){}
-            jeu.jouer();
+            jeuServeur.jouer();
         };
     }
 }

@@ -6,8 +6,11 @@ import takenoko.joueur.Bot;
 import takenoko.moteur.Partie;
 import java.util.ArrayList;
 
+/**
+ * C'est la classe du JeuServeur
+ */
 @Component
-public class Jeu {
+public class JeuServeur {
 
     @Autowired
     private ArrayList<Bot> listJoueur;

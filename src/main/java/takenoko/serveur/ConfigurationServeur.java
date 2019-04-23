@@ -5,6 +5,9 @@ import org.springframework.context.annotation.Configuration;
 import takenoko.joueur.Bot;
 import java.util.ArrayList;
 
+/**
+ * C'est la classe de configuration du Serveur
+ */
 @Configuration
 public class ConfigurationServeur{
 
