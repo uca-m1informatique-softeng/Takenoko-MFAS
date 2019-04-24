@@ -12,57 +12,121 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Client {
 
-    private int ID;
+    private int identifiant;
 
-    private int CLIENT;
+    private int client;
 
-    private RestTemplate server;
+    private RestTemplate serveur;
 
-    private String HTTP_SERVER;
+    private String SERVEUR_HTTP;
 
-    private String HTTP_CLIENT;
+    private String CLIENT_HTTP;
 
     private int portClient;
     private String hostClient;
+
+
 
     private int portServeur;
     private String hostServeur;
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
-    public int getID(){
-        return this.ID;
+    public int getIdentifiant() {
+        return identifiant;
     }
 
-    public int getPort(){
+    public void setIdentifiant(int identifiant) {
+        this.identifiant = identifiant;
+    }
+
+    public int getClient() {
+        return client;
+    }
+
+    public void setClient(int client) {
+        this.client = client;
+    }
+
+    public RestTemplate getServeur() {
+        return serveur;
+    }
+
+    public void setServeur(RestTemplate serveur) {
+        this.serveur = serveur;
+    }
+
+    public String getSERVEUR_HTTP() {
+        return SERVEUR_HTTP;
+    }
+
+    public void setSERVEUR_HTTP(String SERVEUR_HTTP) {
+        this.SERVEUR_HTTP = SERVEUR_HTTP;
+    }
+
+    public String getCLIENT_HTTP() {
+        return CLIENT_HTTP;
+    }
+
+    public void setCLIENT_HTTP(String CLIENT_HTTP) {
+        this.CLIENT_HTTP = CLIENT_HTTP;
+    }
+
+    public int getPortClient() {
         return portClient;
     }
 
-    public int getClient(){
-        return CLIENT;
+    public void setPortClient(int portClient) {
+        this.portClient = portClient;
     }
+
+    public String getHostClient() {
+        return hostClient;
+    }
+
+    public void setHostClient(String hostClient) {
+        this.hostClient = hostClient;
+    }
+
+    public int getPortServeur() {
+        return portServeur;
+    }
+
+    public void setPortServeur(int portServeur) {
+        this.portServeur = portServeur;
+    }
+
+    public String getHostServeur() {
+        return hostServeur;
+    }
+
+    public void setHostServeur(String hostServeur) {
+        this.hostServeur = hostServeur;
+    }
+
 
     //////////////////////////////Méthodes//////////////////////////////
 
+
     /**
      * Le constructeur
-     * @param SERVER_PORT
-     * @param SERVER_HOST
-     * @param CLIENT_PORT
-     * @param CLIENT_HOST
+     * @param portServeur
+     * @param hostServeur
+     * @param portClient
+     * @param hostClient
      */
-    public Client(@Qualifier("SERVER_PORT") int SERVER_PORT, @Qualifier("SERVER_HOST") String SERVER_HOST , @Qualifier("CLIENT_PORT") int CLIENT_PORT, @Qualifier("CLIENT_HOST") String CLIENT_HOST){
-        this.server = new RestTemplate();
+    public Client(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur , @Qualifier("portClient") int portClient, @Qualifier("hostClient") String hostClient){
+        this.serveur = new RestTemplate();
 
 
-        this.hostServeur = SERVER_HOST;
-        this.portServeur = SERVER_PORT;
+        this.hostServeur = hostServeur;
+        this.portServeur = portServeur;
 
-        this.hostClient = CLIENT_HOST;
-        this.portClient = CLIENT_PORT;
+        this.hostClient = hostClient;
+        this.portClient = portClient;
 
-        this.HTTP_SERVER = "http://" + SERVER_HOST + ":" + SERVER_PORT;
-        this.HTTP_CLIENT = "http://" + CLIENT_HOST + ":" + CLIENT_PORT;
+        this.SERVEUR_HTTP = "http://" + hostServeur + ":" + portServeur;
+        this.CLIENT_HTTP = "http://" + hostClient + ":" + portClient;
     }
 
 

@@ -11,29 +11,29 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigurationClient implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
 
-    @Bean("CLIENT_PORT")
-    public int clientPort(){
+    @Bean("portClient")
+    public int portClient(){
         return 8088;
     }
 
-    @Bean("CLIENT_HOST")
-    public String clientHost(){
+    @Bean("hostClient")
+    public String hostClient(){
         return "localhost";
     }
 
-    @Bean("SERVER_PORT")
-    public int serverPort(){
+    @Bean("hostServeur")
+    public int serveur(){
         return 8080;
     }
 
-    @Bean("SERVER_HOST")
-    public String serverHost(){
+    @Bean("hostServeur")
+    public String hostServeur(){
         return "localhost";
     }
 
     @Override
-    public void customize(ConfigurableServletWebServerFactory server) {
-        server.setPort(clientPort());
+    public void customize(ConfigurableServletWebServerFactory serveur) {
+        serveur.setPort(portClient());
     }
 
 }
