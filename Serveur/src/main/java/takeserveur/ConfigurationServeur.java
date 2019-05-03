@@ -1,9 +1,9 @@
-package takenoko.serveur;
+package takeserveur;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import takenoko.joueur.Bot;
 import java.util.ArrayList;
+import takenoko.joueur.Bot;
 
 /**
  * C'est la classe de configuration du Serveur

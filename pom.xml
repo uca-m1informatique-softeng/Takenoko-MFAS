@@ -3,8 +3,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>Takenoko-MFAS</groupId> <!-- CHANGE ME -->
-    <artifactId>Takenoko-MFAS</artifactId> <!-- CHANGE ME -->
-    <version>0.1-SNAPSHOT</version> <!-- CHANGE ME -->
+    <artifactId>Takenoko-MFAS</artifactId>
+    <packaging>pom</packaging> <!-- CHANGE ME -->
+    <version>0.1-SNAPSHOT</version>
+    <modules>
+        <module>Client</module>
+        <module>Commun</module>
+        <module>Serveur</module>
+    </modules> <!-- CHANGE ME -->
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> <!-- CHANGE ME IF NEEDED, other : ISO-8859-1 -->
@@ -12,54 +18,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
-    <build>
-        <sourceDirectory>src/main/java</sourceDirectory> <!-- CHANGE ME -->
-        <testSourceDirectory>src/test/java</testSourceDirectory> <!-- CHANGE ME -->
 
-        <plugins>
-
-
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <mainClass>takenoko.MainServeur</mainClass>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-
-                <executions>
-                <execution>
-                    <id>Main</id>
-                    <goals>
-                        <goal>java</goal>
-                    </goals>
-                    <configuration>
-                        <mainClass>takenoko.Main</mainClass>
-                    </configuration>
-                </execution>
-
-
-
-                </executions>
-                <configuration>
-                    <mainClass>main.MainServeur</mainClass>
-                </configuration>
-            </plugin>
-
-        </plugins>
-    </build>
 
     <dependencies>
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->

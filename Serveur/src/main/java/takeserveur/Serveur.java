@@ -1,4 +1,4 @@
-package takenoko.serveur;
+package takeserveur;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
