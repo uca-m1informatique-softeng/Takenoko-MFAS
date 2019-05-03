@@ -1,4 +1,4 @@
-package takenoko.client;
+package takeclient;
 
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;

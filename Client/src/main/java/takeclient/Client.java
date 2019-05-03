@@ -1,4 +1,4 @@
-package takenoko.client;
+package takeclient;
 
 
 import org.springframework.beans.factory.annotation.Qualifier;
