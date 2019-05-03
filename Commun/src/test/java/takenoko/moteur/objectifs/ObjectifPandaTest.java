@@ -5,8 +5,6 @@ import org.junit.Test;
 import takenoko.joueur.Bot;
 import takenoko.moteur.Enums;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 /**

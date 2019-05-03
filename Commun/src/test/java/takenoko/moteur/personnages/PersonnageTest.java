@@ -1,7 +1,6 @@
 package takenoko.moteur.personnages;
 
-import takenoko.moteur.*;
-import takenoko.moteur.personnages.Jardinier;
+
 import javafx.geometry.Point3D;
 import org.junit.Test;
 
@@ -9,7 +8,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import takenoko.moteur.Enums.TypeParcelle;
-import takenoko.moteur.personnages.Panda;
+import takenoko.moteur.*;
 
 /**
  * La classe test des personnages

@@ -6,9 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import takenoko.joueur.Bot;
 import takenoko.moteur.*;
-import takenoko.moteur.objectifs.ObjectifJardinier;
-
-import java.util.ArrayList;
 
 /**
  * La classe test des objectifs jardinier

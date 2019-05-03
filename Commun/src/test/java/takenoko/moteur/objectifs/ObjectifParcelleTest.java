@@ -6,8 +6,6 @@ import org.junit.Test;
 import takenoko.joueur.Bot;
 import takenoko.moteur.*;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 /**

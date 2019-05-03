@@ -1,13 +1,10 @@
 package takenoko.moteur.personnages;
 
 import javafx.geometry.Point3D;
-import takenoko.moteur.*;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-import takenoko.moteur.Enums.TypeParcelle;
-
-import java.util.ArrayList;
+import takenoko.moteur.*;
 
 /**
  * La classe test du panda

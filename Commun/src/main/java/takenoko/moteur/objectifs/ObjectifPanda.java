@@ -3,8 +3,6 @@ package takenoko.moteur.objectifs;
 
 import takenoko.joueur.Bot;
 
-import java.util.ArrayList;
-
 /**
  * La classe des objectifs du panda
  */
