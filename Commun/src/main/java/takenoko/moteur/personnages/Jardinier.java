@@ -22,7 +22,7 @@ public class Jardinier extends Personnage {
     /**
      * @return
      */
-    public final static Jardinier getInstance() {
+    public static final Jardinier getInstance() {
         if (Jardinier.instance == null) {
             Jardinier.instance = new Jardinier();
         }
@@ -30,7 +30,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * Action du jardinier lorsque il arrive a une coordonne
+     * Action du jardinier lorsqu'il arrive a une coordonnée
      * @param point3D
      * @return
      */
@@ -49,7 +49,7 @@ public class Jardinier extends Personnage {
     }
 
     /**
-     * Donne la liste des coordonne ou le bambou doit pousser suite au deplacement du jardinier
+     * Donne la liste des coordonnées où le bambou doit pousser suite au déplacement du jardinier
      * @param point3D
      * @return
      */

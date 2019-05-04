@@ -21,6 +21,10 @@ public class ObjectifPanda extends Objectif{
     public void setNombreBambou(int nombreBambou) {
         this.nombreBambou = nombreBambou;
     }
+
+    public String toString() {
+        return "manger "+nombreBambou+" bambou(s) "+this.getCouleur();
+    }
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
@@ -42,7 +46,5 @@ public class ObjectifPanda extends Objectif{
         return false;
     }
 
-    public String toString() {
-        return "manger "+nombreBambou+" bambou(s) "+this.getCouleur();
-    }
+
 }

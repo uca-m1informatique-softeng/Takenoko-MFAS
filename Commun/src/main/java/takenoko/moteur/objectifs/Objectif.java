@@ -36,14 +36,12 @@ public abstract class Objectif {
     public void setValeur(int valeur) {
         this.valeur = valeur;
     }
-    //////////////////////////////Méthodes//////////////////////////////
 
-    /**
-     * @return
-     */
     public boolean isValide() {
         return valide;
     }
+    //////////////////////////////Méthodes//////////////////////////////
+
 
 
     /**

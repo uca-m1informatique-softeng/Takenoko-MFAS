@@ -7,7 +7,7 @@ import javafx.geometry.Point3D;
 import java.util.ArrayList;
 
 /**
- * C'est la classe du panda
+ * C'est la classe du personnage
  */
 @Component
 public abstract class Personnage {

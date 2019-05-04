@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 
 /**
- * La classe du BotParcelle
+ * La classe test du BotParcelle
  */
 public class BotParcelleTest {
 

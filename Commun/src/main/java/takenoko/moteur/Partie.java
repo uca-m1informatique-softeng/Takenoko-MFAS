@@ -141,13 +141,12 @@ public class Partie {
     }
 
     /**
-     * calcule le ou les vainqueurs d'une partie
+     * Calcule le ou les vainqueurs d'une partie
      * @param listJoueurs
      */
     private void calculVainqueur(ArrayList <Bot> listJoueurs){
         ArrayList<Bot> vainqueur=new ArrayList<>();
         vainqueur.add(listJoueurs.get(0));
-        //recup vainqueur
         for (int i=1;i<listJoueurs.size();i++) {
             Bot joueur=listJoueurs.get(i);
             Bot vainqueurCourant=vainqueur.get(0);
@@ -162,13 +161,13 @@ public class Partie {
                         vainqueur.add(joueur);
                     }
                     else{
-                        if((joueur.getNbObjectifPandarealise()==vainqueurCourant.getNbObjectifPandarealise()))
+                        if((joueur.getNbObjectifPandarealise()==vainqueurCourant.getNbObjectifPandarealise())) {
                             vainqueur.add(joueur);
+                        }
                     }
                 }
             }
         }
-
         for (Bot joueur:vainqueur){
             joueur.addVictoire();
         }

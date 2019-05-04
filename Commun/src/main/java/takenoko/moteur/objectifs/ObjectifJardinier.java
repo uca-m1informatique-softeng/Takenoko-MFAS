@@ -26,6 +26,10 @@ public class ObjectifJardinier extends Objectif{
         this.tailleBambou = tailleBambou;
     }
 
+    public String toString() {
+        return "faire pousser "+tailleBambou+" bambou(s) "+this.getCouleur();
+    }
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
@@ -47,8 +51,6 @@ public class ObjectifJardinier extends Objectif{
         return false;
     }
 
-    public String toString() {
-        return "faire pousser "+tailleBambou+" bambou(s) "+this.getCouleur();
-    }
+
 }
 

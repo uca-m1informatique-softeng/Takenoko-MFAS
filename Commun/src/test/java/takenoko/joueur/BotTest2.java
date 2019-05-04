@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import static org.junit.Assert.*;
 
 /**
- * Le classe test du joueur
+ * Le classe test du Bot2
  */
 public class BotTest2 {
 
@@ -183,9 +183,9 @@ public class BotTest2 {
         joueur.resetJoueur();
         joueur.addNbBambouDeCouleur(Enums.TypeParcelle.JAUNE,1);
         joueur.addNbBambouDeCouleur(Enums.TypeParcelle.JAUNE,1);
-        assertEquals(joueur.getNbBambouDeCouleur(Enums.TypeParcelle.JAUNE), 2);
+        assertEquals(2,joueur.getNbBambouDeCouleur(Enums.TypeParcelle.JAUNE));
         joueur.supprBambou(Enums.TypeParcelle.JAUNE,2);
-        assertEquals(joueur.getNbBambouDeCouleur(Enums.TypeParcelle.JAUNE), 0);
+        assertEquals(0,joueur.getNbBambouDeCouleur(Enums.TypeParcelle.JAUNE));
 
     }
 
@@ -210,27 +210,27 @@ public class BotTest2 {
     @Test
     public void actionPiocheObjectifJardinier(){
         joueur.resetJoueur();
-        assertEquals(joueur.getListObjectifs().size(), 3);
+        assertEquals(3,joueur.getListObjectifs().size());
         joueur.actionPiocheObjectifJardinier();
-        assertEquals(joueur.getListObjectifs().size(), 4);
+        assertEquals(4,joueur.getListObjectifs().size());
 
     }
 
     @Test
     public void actionPiocheObjectifPanda(){
         joueur.resetJoueur();
-        assertEquals(joueur.getListObjectifs().size(), 3);
+        assertEquals(3,joueur.getListObjectifs().size());
         joueur.actionPiocheObjectifPanda();
-        assertEquals(joueur.getListObjectifs().size(), 4);
+        assertEquals(4,joueur.getListObjectifs().size());
 
     }
 
     @Test
     public void actionPiocheObjectifParcelle(){
         joueur.resetJoueur();
-        assertEquals(joueur.getListObjectifs().size(), 3);
+        assertEquals(3,joueur.getListObjectifs().size());
         joueur.actionPiocheObjectifParcelle();
-        assertEquals(joueur.getListObjectifs().size(), 4);
+        assertEquals(4,joueur.getListObjectifs().size());
 
     }
 

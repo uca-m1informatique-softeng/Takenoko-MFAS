@@ -14,17 +14,20 @@ public class Client {
 
     private int identifiant;
 
-    private int client;
+
+
+    private int nomClient;
 
     private RestTemplate serveur;
 
-    private String SERVEUR_HTTP;
 
-    private String CLIENT_HTTP;
+
+    private String serveurHTTP;
+
+    private String clientHTTP;
 
     private int portClient;
     private String hostClient;
-
 
 
     private int portServeur;
@@ -40,13 +43,30 @@ public class Client {
         this.identifiant = identifiant;
     }
 
-    public int getClient() {
-        return client;
+    public int getNomClient() {
+        return nomClient;
     }
 
-    public void setClient(int client) {
-        this.client = client;
+    public void setNomClient(int nomClient) {
+        this.nomClient = nomClient;
     }
+
+    public String getServeurHTTP() {
+        return serveurHTTP;
+    }
+
+    public void setServeurHTTP(String serveurHTTP) {
+        this.serveurHTTP = serveurHTTP;
+    }
+
+    public String getClientHTTP() {
+        return clientHTTP;
+    }
+
+    public void setClientHTTP(String clientHTTP) {
+        this.clientHTTP = clientHTTP;
+    }
+
 
     public RestTemplate getServeur() {
         return serveur;
@@ -56,21 +76,6 @@ public class Client {
         this.serveur = serveur;
     }
 
-    public String getSERVEUR_HTTP() {
-        return SERVEUR_HTTP;
-    }
-
-    public void setSERVEUR_HTTP(String SERVEUR_HTTP) {
-        this.SERVEUR_HTTP = SERVEUR_HTTP;
-    }
-
-    public String getCLIENT_HTTP() {
-        return CLIENT_HTTP;
-    }
-
-    public void setCLIENT_HTTP(String CLIENT_HTTP) {
-        this.CLIENT_HTTP = CLIENT_HTTP;
-    }
 
     public int getPortClient() {
         return portClient;
@@ -125,8 +130,8 @@ public class Client {
         this.hostClient = hostClient;
         this.portClient = portClient;
 
-        this.SERVEUR_HTTP = "http://" + hostServeur + ":" + portServeur;
-        this.CLIENT_HTTP = "http://" + hostClient + ":" + portClient;
+        this.serveurHTTP = "http://" + hostServeur + ":" + portServeur;
+        this.clientHTTP = "http://" + hostClient + ":" + portClient;
     }
 
 

@@ -1,12 +1,18 @@
 # Takenoko-MFAS
 
-Gestion de projet du semestre 2 de M1 Informatique
+## Gestion de projet du semestre 2 de M1 Informatique
+
+L’objectif est de poursuivre l’apprentissage du Génie Logiciel commencé au semestre 1 dans les cours Projet de Développement et Génie Logiciel. Les notions clés abordées dans ce cours sont :
+
+   -l'architecture logicielle pour l'interopérabilité (Web Services, architecture REST, principes stateful/stateless)
+   -les tests d'intégration et l'approche BDD (Behavior-Driven Development)
+   -l’intégration continue et le déploiement automatique (serveur d'intégration continue, containerisation)
 
 Lancer les mains : mvn exec:java@Main (C'est le Main qui lance une partie entre 3 joueurs implémentés avec Spring) 
-                   mvn exec:java@takeserveur.MainServeur(C'est le serveur) 
+                   mvn exec:java@MainServeur(C'est le serveur) 
                   
 
-Résumer des Milestones:
+## Résumer des Milestones:
 
 FEV27 Client & Serveur : Nous avons corrigé les erreurs du Spring, implémenter Travis et Cucumber et nous avons réalisé un début de REST.
 

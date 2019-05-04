@@ -29,10 +29,7 @@ public class Main {
 
     @Bean
     public CommandLineRunner commandLineRunner(@Autowired Partie partie, @Autowired BotJardinier botJardinier, @Autowired BotPanda botPanda, @Autowired BotParcelle botParcelle) {
-        return args -> {
-                deroulePartie(partie, botJardinier,botPanda,botParcelle);
-
-        };
+        return args -> deroulePartie(partie, botJardinier,botPanda,botParcelle);
     }
 
     private void deroulePartie( Partie partie, BotJardinier botJardinier,BotPanda botPanda, BotParcelle botParcelle) {

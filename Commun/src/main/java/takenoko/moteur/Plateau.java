@@ -23,16 +23,8 @@ public class Plateau {
     private HashMap<Point3D, Irrigation> mapIrrigation;
     private ArrayList<Point3D> keylistIrrigation;
 
-    /**
-     * @return
-     */
-    public final static Plateau getInstance() {
-        if (Plateau.instance == null) {
-            Plateau.instance = new Plateau();
-            Plateau.instance.resetPlateau();
-        }
-        return Plateau.instance;
-    }
+
+
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
@@ -71,6 +63,14 @@ public class Plateau {
 
 
     //////////////////////////////Méthodes//////////////////////////////
+
+    public static final Plateau getInstance() {
+        if (Plateau.instance == null) {
+            Plateau.instance = new Plateau();
+            Plateau.instance.resetPlateau();
+        }
+        return Plateau.instance;
+    }
 
     /**
      * Réinitialise le plateau
@@ -564,7 +564,6 @@ public class Plateau {
                 }
             }
         }
-
         Affichage.affichagePoseIrrigation(coordonne);
     }
 
@@ -626,8 +625,7 @@ public class Plateau {
     public boolean parcelleSuivanteMotif(Point3D pointCourant, TypeParcelle couleurObjectif,int i){
         ArrayList<Point3D> pointsVoisin = getParcelleVoisine(pointCourant);
         ArrayList<Point3D> pointsVoisinOccupe = getParcelleVoisineOccupe(pointCourant);
-        if(pointsVoisinOccupe.contains(pointsVoisin.get(i)) && getParcelle(pointsVoisin.get(i)).getType() == couleurObjectif
-                && getParcelle(pointsVoisin.get(i)).isIrriguee()) {
+        if(pointsVoisinOccupe.contains(pointsVoisin.get(i)) && getParcelle(pointsVoisin.get(i)).getType() == couleurObjectif && getParcelle(pointsVoisin.get(i)).isIrriguee()) {
             return true;
         }
         return false;

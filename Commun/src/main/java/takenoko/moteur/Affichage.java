@@ -53,7 +53,7 @@ public final class Affichage {
     }
 
     /**
-     * Affiche le debut du tour
+     * Affiche le début du tour
      * @param joueurCourant
      */
     public static void affichageDebutTour(Bot joueurCourant){
@@ -75,7 +75,7 @@ public final class Affichage {
     }
 
     /**
-     * Affiche la realisation de l'objectif empereur par le joueur
+     * Affiche la réalisation de l'objectif empereur par le joueur
      * @param joueur
      */
     public static void affichageEmpereur(Bot joueur){
@@ -385,7 +385,7 @@ public final class Affichage {
     }
 
     /**
-     * Renvoie une string initialiser la couleur de la parcelle
+     * Renvoie une string qui initialise la couleur de la parcelle
      * @param parcellecourante
      * @return
      */
@@ -413,7 +413,7 @@ public final class Affichage {
     }
 
     /**
-     * Renvoie une string pour une coordonne
+     * Renvoie une string pour une coordonnée
      * @param coord
      * @return
      */
@@ -443,7 +443,7 @@ public final class Affichage {
     }
 
     /**
-     * Renvoie une string pour une coordonne
+     * Renvoie une string pour une coordonnée
      * @param point
      * @return
      */
@@ -461,7 +461,7 @@ public final class Affichage {
     }
 
     /**
-     * Renvoie le carcatere de reinitialisation de la couleur
+     * Renvoie le caractère de reinitialisation de la couleur
      * @return
      */
     public static String resetCouleur(){
@@ -469,7 +469,7 @@ public final class Affichage {
     }
 
     /**
-     * Renvoie le caractere initialisant la couleur
+     * Renvoie le caractère initialisant la couleur
      * @param joueurCourant
      * @return
      */

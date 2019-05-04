@@ -59,7 +59,11 @@ public class Deck {
         this.deckParcelles = deckParcelles;
     }
 
-    public final static Deck getInstance() {
+
+
+    //////////////////////////////Méthodes//////////////////////////////
+
+    public static final Deck getInstance() {
         if (Deck.instance == null) {
             Deck.instance = new Deck();
             Deck.instance.resetDeck();
@@ -67,8 +71,6 @@ public class Deck {
 
         return Deck.instance;
     }
-
-    //////////////////////////////Méthodes//////////////////////////////
 
     /**
      * Réinitialise le deck

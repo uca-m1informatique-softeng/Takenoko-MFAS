@@ -17,9 +17,6 @@
             <artifactId>Commun</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
-
-
-
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -76,6 +73,9 @@
                 <executions>
                     <execution>
                         <id>MainServeur</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
                         <configuration>
                             <mainClass>takeserveur.MainServeur</mainClass>
                         </configuration>
