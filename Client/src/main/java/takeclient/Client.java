@@ -21,7 +21,6 @@ public class Client {
     private RestTemplate serveur;
 
 
-
     private String serveurHTTP;
 
     private String clientHTTP;
@@ -123,7 +122,6 @@ public class Client {
     public Client(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur , @Qualifier("portClient") int portClient, @Qualifier("hostClient") String hostClient){
         this.serveur = new RestTemplate();
 
-
         this.hostServeur = hostServeur;
         this.portServeur = portServeur;
 
@@ -132,6 +130,13 @@ public class Client {
 
         this.serveurHTTP = "http://" + hostServeur + ":" + portServeur;
         this.clientHTTP = "http://" + hostClient + ":" + portClient;
+    }
+
+    public boolean connect(){
+        identifiant  =serveur.getForObject(serveurHTTP + "/nouvelle-connexion" , Integer.class);
+        if(this.identifiant < 0)
+            return false;
+        return true;
     }
 
 
