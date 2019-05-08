@@ -72,4 +72,10 @@ public class Serveur {
         if(nbClientReady >= nbClient) {return true;}
         return false;
     }
+
+    @RequestMapping("/nouvelle-connexion")
+    public Integer acceptConnection(){
+        System.out.println("connexion...");
+        return 1;
+    }
 }

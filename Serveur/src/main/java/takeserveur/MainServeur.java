@@ -30,8 +30,8 @@ public class MainServeur {
     public CommandLineRunner commandLineRunner() {
         return args -> {
             System.out.println("Démarrage du serveur sur le port " + serveur.getPort());
-            while(!serveur.isPartiePrete()){}
-            jeuServeur.jouer();
+            /*while(!serveur.isPartiePrete()){}
+            jeuServeur.jouer();*/
         };
     }
 }

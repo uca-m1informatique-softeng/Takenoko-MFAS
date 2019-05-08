@@ -21,7 +21,7 @@ public class ConfigurationClient implements WebServerFactoryCustomizer<Configura
         return "localhost";
     }
 
-    @Bean("hostServeur")
+    @Bean("portServeur")
     public int serveur(){
         return 8080;
     }
