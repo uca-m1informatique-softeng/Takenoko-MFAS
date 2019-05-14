@@ -1,8 +1,11 @@
 package takeserveur;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import takenoko.joueur.Bot;
+import takenoko.moteur.Affichage;
+import takenoko.moteur.Deck;
 import takenoko.moteur.Partie;
 import java.util.ArrayList;
 
@@ -11,18 +14,38 @@ import java.util.ArrayList;
  */
 @Component
 public class JeuServeur {
-
     @Autowired
-    private ArrayList<Bot> listJoueur;
     private Partie partie;
 
-    //remplacer partie.jouer par une partie en communication avec le serveur
     @Autowired
     private Serveur serveur;
 
-    public void jouer(){
-        System.out.println("Début de la partie");
-        partie.jouer(listJoueur);
+    @Autowired
+    private Deck deck;
+
+    @Autowired
+    private ArrayList<Bot> joueurs;
+
+
+    @Autowired
+    @Qualifier("client")
+    private int client;
+
+    public void jouerTour(){
+        System.out.println("++++++ Début de la partie ++++++");
+        ArrayList<Bot> temp = new ArrayList<>();
+        temp.add(joueurs.get(0));
+        partie.jouer(temp);
+        Affichage.affichagePlateau();
+
+    }
+
+    public void piocher(){
+        joueurs.get(0).piocheUneParcelle();
+    }
+
+    public Deck getDeck(){
+        return deck.getInstance() ;
     }
 
 }

@@ -1,6 +1,7 @@
 package takeserveur;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import java.util.ArrayList;
 import takenoko.joueur.Bot;
@@ -9,6 +10,7 @@ import takenoko.joueur.Bot;
  * C'est la classe de configuration du Serveur
  */
 @Configuration
+@ComponentScan({"takenoko.moteur","takenoko.joueur"})
 public class ConfigurationServeur{
 
     @Bean("portServeur")

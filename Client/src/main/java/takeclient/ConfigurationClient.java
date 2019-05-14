@@ -3,12 +3,14 @@ package takeclient;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
  * C'est la classe de configuration du client
  */
 @Configuration
+@ComponentScan({"takenoko.moteur","takenoko.joueur"})
 public class ConfigurationClient implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
 
     @Bean("portClient")

@@ -1,7 +1,9 @@
 package takeserveur;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 /**
  * C'est la classe du serveur
@@ -9,17 +11,22 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class Serveur {
 
-
     private int nbClient;
 
     private int nbClientReady;
 
-
-
     private int portServeur;
     private String hostServeur;
 
+    private RestTemplate client;
+
+    private JSONObject deck;
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
+
+    public void setDeck(JSONObject jDeck){
+        deck = jDeck;
+    }
 
     public int getNbClient() {
         return nbClient;
@@ -60,22 +67,38 @@ public class Serveur {
      * @param nbClient
      */
     public Serveur(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur, @Qualifier("client") int nbClient ){
+        this.client = new RestTemplate();
         this.portServeur = portServeur;
+
         this.hostServeur = hostServeur;
         this.nbClient = nbClient;
         this.nbClientReady = 0;
+        this.deck = new JSONObject();
     }
 
 
 
     public boolean isPartiePrete(){
-        if(nbClientReady >= nbClient) {return true;}
+        if(nbClientReady >= nbClient) {
+            return true;
+        }
         return false;
     }
 
     @RequestMapping("/nouvelle-connexion")
     public Integer acceptConnection(){
         System.out.println("connexion...");
+        this.nbClientReady = 1;
         return 1;
+    }
+
+    @RequestMapping("/deck")
+    public String sendDeck(){
+        return deck.toString();
+    }
+
+
+    public boolean init(){
+        return client.getForObject("http://localhost:8088/debut", Boolean.class);
     }
 }

@@ -342,21 +342,21 @@ public class Deck {
         ArrayList<ObjectifJardinier> ParcelleNew1 = new ArrayList<>();
         ParcelleNew1.addAll(deckObjectifsJardinier);
         JSONObject JsObJar = new JSONObject();
-        for (int i = 0; i < ParcelleNew.size(); i++) {
+        for (int i = 0; i < ParcelleNew1.size(); i++) {
             JsObJar.put(i+"",ParcelleNew1.get(i).toJson());
         }
 
         ArrayList<ObjectifPanda> ParcelleNew2 = new ArrayList<>();
         ParcelleNew2.addAll(deckObjectifsPanda);
         JSONObject JsObPan = new JSONObject();
-        for (int i = 0; i < ParcelleNew.size(); i++) {
+        for (int i = 0; i < ParcelleNew2.size(); i++) {
             JsObPan.put(i+"",ParcelleNew2.get(i).toJson());
         }
 
         ArrayList<ObjectifParcelle> ParcelleNew3 = new ArrayList<>();
         ParcelleNew3.addAll(deckObjectifsParcelle);
         JSONObject JsObPar = new JSONObject();
-        for (int i = 0; i < ParcelleNew.size(); i++) {
+        for (int i = 0; i < ParcelleNew3.size(); i++) {
             JsObPar.put(i+"",ParcelleNew3.get(i).toJson());
         }
 

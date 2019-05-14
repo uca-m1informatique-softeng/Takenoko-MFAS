@@ -1,6 +1,7 @@
 package takeclient;
 
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -12,11 +13,10 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Client {
 
+    int client;
+
     private int identifiant;
 
-
-
-    private int nomClient;
 
     private RestTemplate serveur;
 
@@ -32,6 +32,8 @@ public class Client {
     private int portServeur;
     private String hostServeur;
 
+    private JeuClient jeuClient;
+
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
     public int getIdentifiant() {
@@ -40,14 +42,6 @@ public class Client {
 
     public void setIdentifiant(int identifiant) {
         this.identifiant = identifiant;
-    }
-
-    public int getNomClient() {
-        return nomClient;
-    }
-
-    public void setNomClient(int nomClient) {
-        this.nomClient = nomClient;
     }
 
     public String getServeurHTTP() {
@@ -138,6 +132,28 @@ public class Client {
             return false;
         return true;
     }
+
+    public JSONObject getDeck() throws Exception{
+        return new JSONObject(serveur.getForObject(serveurHTTP + "/deck", String.class));
+    }
+
+
+    @RequestMapping("/debut")
+    public boolean Debut() throws Exception{
+        jeuClient.init();
+        return true;
+    }
+
+    @RequestMapping("/piocher")
+    public boolean pio() throws Exception{
+        jeuClient.piocher();
+        return true;
+    }
+
+    public int getClient() {
+        return client;
+    }
+
 
 
 
