@@ -1,6 +1,7 @@
 package takenoko.moteur.objectifs;
 
 
+import org.json.JSONObject;
 import takenoko.joueur.Bot;
 import takenoko.moteur.Enums;
 
@@ -52,5 +53,21 @@ public abstract class Objectif {
     public boolean validation(Bot joueur){
         return valide;
     }
+
+    public Enums.TypeParcelle FromJson(JSONObject obj){
+        if (obj.getString("couleur")=="vert"){
+            return Enums.TypeParcelle.VERTE;
+        }
+        if (obj.getString("couleur")=="jaune"){
+            return Enums.TypeParcelle.JAUNE;
+        }
+        if (obj.getString("couleur")=="rose"){
+            return Enums.TypeParcelle.ROSE;
+        }
+
+        return Enums.TypeParcelle.ETANG;
+
+    }
+
 }
 

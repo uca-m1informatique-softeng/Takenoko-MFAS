@@ -15,7 +15,27 @@
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
+        <plugins>
 
+            <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.6.0</version>
+
+            <executions>
+            <execution>
+                <id>Main</id>
+                <goals>
+                    <goal>java</goal>
+                </goals>
+                <configuration>
+                    <mainClass>takenoko.Main</mainClass>
+                </configuration>
+            </execution>
+            </executions>
+            </plugin>
+
+        </plugins>
     </build>
 
     <dependencies>
@@ -77,6 +97,11 @@
             <artifactId>spring-boot-test</artifactId>
             <version>2.1.0.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20180813</version>
         </dependency>
     </dependencies>
 

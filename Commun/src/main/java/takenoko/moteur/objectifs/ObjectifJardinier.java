@@ -1,7 +1,9 @@
 package takenoko.moteur.objectifs;
 
 
+import org.json.JSONObject;
 import takenoko.joueur.Bot;
+import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
 
@@ -50,6 +52,27 @@ public class ObjectifJardinier extends Objectif{
         }
         return false;
     }
+
+    public JSONObject toJson(){
+        JSONObject object = new JSONObject();
+        object.put("valeur", this.getValeur());
+        object.put("tailleBambou", tailleBambou);
+        String couleur = "";
+        if (this.getCouleur() == Enums.TypeParcelle.VERTE){
+            couleur = "vert";
+        }
+        if (this.getCouleur() == Enums.TypeParcelle.JAUNE){
+            couleur = "jaune";
+        }
+        if (this.getCouleur() == Enums.TypeParcelle.ROSE){
+            couleur = "rose";
+        }
+        object.put("couleur",couleur);
+
+        return object;
+    }
+
+
 
 
 }

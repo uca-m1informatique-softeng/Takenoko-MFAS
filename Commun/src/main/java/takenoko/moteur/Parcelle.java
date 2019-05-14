@@ -1,5 +1,6 @@
 package takenoko.moteur;
 
+import org.json.JSONObject;
 import takenoko.moteur.Enums.TypeParcelle;
 
 
@@ -63,6 +64,44 @@ public class Parcelle {
             return true;
         }
         return false;
+    }
+
+
+    /////////// JSON ////////////
+
+    public JSONObject toJson(){
+        JSONObject parcelle = new JSONObject();
+        String couleur = "";
+        if (this.getType() == TypeParcelle.VERTE){
+            couleur = "vert";
+        }
+        if (this.getType() == TypeParcelle.JAUNE){
+            couleur = "jaune";
+        }
+        if (this.getType() == TypeParcelle.ROSE){
+            couleur = "rose";
+        }
+        if (this.getType() == TypeParcelle.ETANG){
+            couleur = "etang";
+        }
+
+        parcelle.put("couleur",couleur);
+        return parcelle;
+    }
+
+    public Enums.TypeParcelle FromJson(JSONObject obj){
+        if (obj.getString("couleur")=="vert"){
+            return TypeParcelle.VERTE;
+        }
+        if (obj.getString("couleur")=="jaune"){
+            return TypeParcelle.JAUNE;
+        }
+        if (obj.getString("couleur")=="rose"){
+            return TypeParcelle.ROSE;
+        }
+
+        return TypeParcelle.ETANG;
+
     }
 
 }
