@@ -1,5 +1,5 @@
 FROM java:8
 WORKDIR /
-ADD takenoko.jar takenoko.jar
+ADD Commun.jar Commun.jar
 EXPOSE 8080
-CMD java - jar takenoko.jar
+CMD java -jar Commun.jar
