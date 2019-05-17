@@ -1,10 +1,16 @@
 package takeclient;
 
 
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 /**
@@ -17,9 +23,9 @@ public class Client {
 
     private int identifiant;
 
+    private String nomClient;
 
     private RestTemplate serveur;
-
 
     private String serveurHTTP;
 
@@ -28,10 +34,10 @@ public class Client {
     private int portClient;
     private String hostClient;
 
-
     private int portServeur;
     private String hostServeur;
 
+    @Autowired
     private JeuClient jeuClient;
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
@@ -42,6 +48,14 @@ public class Client {
 
     public void setIdentifiant(int identifiant) {
         this.identifiant = identifiant;
+    }
+
+    public String getNomClient() {
+        return nomClient;
+    }
+
+    public void setNomClient(String nomClient) {
+        this.nomClient = nomClient;
     }
 
     public String getServeurHTTP() {
@@ -115,6 +129,7 @@ public class Client {
      */
     public Client(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur , @Qualifier("portClient") int portClient, @Qualifier("hostClient") String hostClient){
         this.serveur = new RestTemplate();
+        this.nomClient = "test";
 
         this.hostServeur = hostServeur;
         this.portServeur = portServeur;
@@ -125,6 +140,7 @@ public class Client {
         this.serveurHTTP = "http://" + hostServeur + ":" + portServeur;
         this.clientHTTP = "http://" + hostClient + ":" + portClient;
     }
+
 
     public boolean connect(){
         identifiant  =serveur.getForObject(serveurHTTP + "/nouvelle-connexion" , Integer.class);
@@ -137,26 +153,39 @@ public class Client {
         return new JSONObject(serveur.getForObject(serveurHTTP + "/deck", String.class));
     }
 
+    public JSONObject getPlateau() throws Exception{
+        return new JSONObject(serveur.getForObject(serveurHTTP + "/plateau", String.class));
+    }
+
+    public JSONObject getJardinier() throws Exception{
+        return new JSONObject(serveur.getForObject(serveurHTTP + "/jardinier", String.class));
+    }
+
+    public JSONObject getPanda() throws Exception{
+        return new JSONObject(serveur.getForObject(serveurHTTP + "/panda", String.class));
+    }
+
 
     @RequestMapping("/debut")
-    public boolean Debut() throws Exception{
-        jeuClient.init();
-        return true;
+    public int Debut() throws Exception{
+        return jeuClient.init();
     }
 
     @RequestMapping("/piocher")
-    public boolean pio() throws Exception{
-        jeuClient.piocher();
+    public boolean pio_poser() throws Exception{
+        jeuClient.piocher_poser();
         return true;
     }
+
+    @RequestMapping("/partie")
+    public boolean partie() throws Exception{
+        jeuClient.par();
+        return true;
+    }
+
+
 
     public int getClient() {
         return client;
     }
-
-
-
-
-
-
 }

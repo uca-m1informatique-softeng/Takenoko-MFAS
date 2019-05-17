@@ -10,7 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>Client</artifactId>
-
     <dependencies>
         <dependency>
             <groupId>Takenoko-MFAS</groupId>
@@ -55,10 +54,11 @@
             <version>2.1.4.RELEASE</version>
 
         </dependency>
+
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/java</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory> <!-- CHANGE ME -->
         <plugins>
 
             <plugin>
@@ -86,7 +86,6 @@
             </plugin>
 
         </plugins>
-
     </build>
 
 
