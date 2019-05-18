@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 
 /**
@@ -22,6 +21,10 @@ public class Client {
     int client;
 
     private int identifiant;
+
+    private int bot;
+
+    private boolean type ;
 
     private String nomClient;
 
@@ -37,8 +40,7 @@ public class Client {
     private int portServeur;
     private String hostServeur;
 
-    @Autowired
-    private JeuClient jeuClient;
+
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
@@ -117,6 +119,8 @@ public class Client {
     }
 
 
+
+
     //////////////////////////////Méthodes//////////////////////////////
 
 
@@ -134,6 +138,9 @@ public class Client {
         this.hostServeur = hostServeur;
         this.portServeur = portServeur;
 
+        this.type = false;
+        this.bot = 4;
+
         this.hostClient = hostClient;
         this.portClient = portClient;
 
@@ -149,6 +156,14 @@ public class Client {
         return true;
     }
 
+    public boolean envoie(){
+        int n = serveur.getForObject(serveurHTTP + "/type_bot" , Integer.class);
+        if(n < 0){
+            return false;
+        }
+        return true;
+    }
+
     public JSONObject getDeck() throws Exception{
         return new JSONObject(serveur.getForObject(serveurHTTP + "/deck", String.class));
     }
@@ -157,35 +172,57 @@ public class Client {
         return new JSONObject(serveur.getForObject(serveurHTTP + "/plateau", String.class));
     }
 
-    public JSONObject getJardinier() throws Exception{
-        return new JSONObject(serveur.getForObject(serveurHTTP + "/jardinier", String.class));
-    }
 
-    public JSONObject getPanda() throws Exception{
-        return new JSONObject(serveur.getForObject(serveurHTTP + "/panda", String.class));
+    public String getScore() throws Exception{
+        return serveur.getForObject(serveurHTTP + "/partie", String.class);
     }
 
 
-    @RequestMapping("/debut")
-    public int Debut() throws Exception{
-        return jeuClient.init();
+    @RequestMapping("/panda")
+    public Integer panda(){
+        setBot(1);
+        return bot;
     }
 
-    @RequestMapping("/piocher")
-    public boolean pio_poser() throws Exception{
-        jeuClient.piocher_poser();
-        return true;
+    @RequestMapping("/jardinier")
+    public Integer jardinier(){
+        setBot(2);
+        return bot;
     }
 
-    @RequestMapping("/partie")
-    public boolean partie() throws Exception{
-        jeuClient.par();
-        return true;
+    @RequestMapping("/parcelle")
+    public Integer parcelle(){
+        setBot(3);
+        return bot;
+    }
+    @RequestMapping("/random")
+    public Integer random(){
+        setBot(4);
+        return bot;
+    }
+
+
+
+    @RequestMapping("/type")
+    public String type(){
+        this.type = true;
+        return bot+"";
+    }
+
+    @RequestMapping("/mon_score")
+    public String score() throws Exception{
+        return getScore();
     }
 
 
 
     public int getClient() {
         return client;
+    }
+    public boolean getType() {
+        return type;
+    }
+    public int setBot(int i) {
+        return this.bot = i;
     }
 }

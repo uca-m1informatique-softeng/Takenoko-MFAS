@@ -25,6 +25,11 @@ public class MainClient {
             boolean connected = client.connect();
             if(connected){
                 System.out.println("Connection acceptée, ID : " + client.getIdentifiant());
+
+                while(!client.getType()){
+
+                }
+                client.envoie();
             }
             else {
                 System.out.println("Connection refusée");

@@ -1,6 +1,7 @@
 package takeserveur;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -15,12 +16,17 @@ public class Serveur {
 
     private int nbClientReady;
 
+    private int debut;
+
     private int portServeur;
     private String hostServeur;
 
     private RestTemplate client;
 
     private JSONObject deck;
+
+    @Autowired
+    private JeuServeur jeuServeur;
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
@@ -73,13 +79,14 @@ public class Serveur {
         this.hostServeur = hostServeur;
         this.nbClient = nbClient;
         this.nbClientReady = 0;
+        this.debut = 0;
         this.deck = new JSONObject();
     }
 
 
 
     public boolean isPartiePrete(){
-        if(nbClientReady >= nbClient) {
+        if(nbClientReady >= nbClient && debut>0) {
             return true;
         }
         return false;
@@ -92,13 +99,28 @@ public class Serveur {
         return 1;
     }
 
+    @RequestMapping("/type_bot")
+    public Integer type_bot(){
+        System.out.println("envoie du type");
+        this.debut = 1;
+        return 1;
+    }
+
+    @RequestMapping("/partie")
+    public String partie() throws Exception{
+
+        return jeuServeur.game(type().intValue());
+    }
+
+    public Integer type(){
+        return Integer.parseInt(client.getForObject("http://localhost:8088/type",String.class));
+    }
+
     @RequestMapping("/deck")
     public String sendDeck(){
         return deck.toString();
     }
 
 
-    public boolean init(){
-        return client.getForObject("http://localhost:8088/debut", Boolean.class);
-    }
+
 }
