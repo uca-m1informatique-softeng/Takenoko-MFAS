@@ -12,6 +12,8 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Serveur {
 
+
+
     private int nbClient;
 
     private int nbClientReady;
@@ -30,10 +32,6 @@ public class Serveur {
 
     //////////////////////////////GETTER et SETTER//////////////////////////////
 
-    public void setDeck(JSONObject jDeck){
-        deck = jDeck;
-    }
-
     public int getNbClient() {
         return nbClient;
     }
@@ -50,21 +48,46 @@ public class Serveur {
         this.nbClientReady = nbClientReady;
     }
 
-    public int getPort(){
-        return portServeur;
+    public int getDebut() {
+        return debut;
     }
 
-    public String getHost() {
-        return  hostServeur;
+    public void setDebut(int debut) {
+        this.debut = debut;
+    }
+
+    public int getPortServeur() {
+        return portServeur;
     }
 
     public void setPortServeur(int portServeur) {
         this.portServeur = portServeur;
     }
 
+    public String getHostServeur() {
+        return hostServeur;
+    }
+
     public void setHostServeur(String hostServeur) {
         this.hostServeur = hostServeur;
     }
+
+    public RestTemplate getClient() {
+        return client;
+    }
+
+    public void setClient(RestTemplate client) {
+        this.client = client;
+    }
+
+    public JSONObject getDeck() {
+        return deck;
+    }
+
+    public void setDeck(JSONObject deck) {
+        this.deck = deck;
+    }
+    //////////////////////////////Méthodes//////////////////////////////
 
     /**
      * Le constructeur
@@ -84,7 +107,9 @@ public class Serveur {
     }
 
 
-
+    /**
+     * @return
+     */
     public boolean isPartiePrete(){
         if(nbClientReady >= nbClient && debut>0) {
             return true;
@@ -92,6 +117,9 @@ public class Serveur {
         return false;
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/nouvelle-connexion")
     public Integer acceptConnection(){
         System.out.println("connexion...");
@@ -99,6 +127,9 @@ public class Serveur {
         return 1;
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/type_bot")
     public Integer type_bot(){
         System.out.println("envoie du type");
@@ -106,16 +137,26 @@ public class Serveur {
         return 1;
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/partie")
     public String partie() throws Exception{
 
         return jeuServeur.game(type().intValue());
     }
 
+    /**
+     * @return
+     */
     public Integer type(){
         return Integer.parseInt(client.getForObject("http://localhost:8088/type",String.class));
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/deck")
     public String sendDeck(){
         return deck.toString();

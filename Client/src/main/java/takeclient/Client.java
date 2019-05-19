@@ -1,12 +1,8 @@
 package takeclient;
 
 
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
@@ -18,13 +14,13 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Client {
 
+
+
     int client;
-
     private int identifiant;
-
     private int bot;
 
-    private boolean type ;
+    private boolean type;
 
     private String nomClient;
 
@@ -41,8 +37,15 @@ public class Client {
     private String hostServeur;
 
 
-
     //////////////////////////////GETTER et SETTER//////////////////////////////
+
+    public int getClient() {
+        return client;
+    }
+
+    public void setClient(int client) {
+        this.client = client;
+    }
 
     public int getIdentifiant() {
         return identifiant;
@@ -52,12 +55,36 @@ public class Client {
         this.identifiant = identifiant;
     }
 
+    public int getBot() {
+        return bot;
+    }
+
+    public int setBot(int i) {
+        return this.bot = i;
+    }
+
+    public boolean getType() {
+        return type;
+    }
+
+    public void setType(boolean type) {
+        this.type = type;
+    }
+
     public String getNomClient() {
         return nomClient;
     }
 
     public void setNomClient(String nomClient) {
         this.nomClient = nomClient;
+    }
+
+    public RestTemplate getServeur() {
+        return serveur;
+    }
+
+    public void setServeur(RestTemplate serveur) {
+        this.serveur = serveur;
     }
 
     public String getServeurHTTP() {
@@ -75,16 +102,6 @@ public class Client {
     public void setClientHTTP(String clientHTTP) {
         this.clientHTTP = clientHTTP;
     }
-
-
-    public RestTemplate getServeur() {
-        return serveur;
-    }
-
-    public void setServeur(RestTemplate serveur) {
-        this.serveur = serveur;
-    }
-
 
     public int getPortClient() {
         return portClient;
@@ -119,8 +136,6 @@ public class Client {
     }
 
 
-
-
     //////////////////////////////Méthodes//////////////////////////////
 
 
@@ -131,7 +146,7 @@ public class Client {
      * @param portClient
      * @param hostClient
      */
-    public Client(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur , @Qualifier("portClient") int portClient, @Qualifier("hostClient") String hostClient){
+    public Client(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur, @Qualifier("portClient") int portClient, @Qualifier("hostClient") String hostClient) {
         this.serveur = new RestTemplate();
         this.nomClient = "test";
 
@@ -149,80 +164,109 @@ public class Client {
     }
 
 
-    public boolean connect(){
-        identifiant  =serveur.getForObject(serveurHTTP + "/nouvelle-connexion" , Integer.class);
-        if(this.identifiant < 0)
+    /**
+     * @return
+     */
+    public boolean connect() {
+        identifiant = serveur.getForObject(serveurHTTP + "/nouvelle-connexion", Integer.class);
+        if (this.identifiant < 0)
             return false;
         return true;
     }
 
-    public boolean envoie(){
-        int n = serveur.getForObject(serveurHTTP + "/type_bot" , Integer.class);
-        if(n < 0){
+    /**
+     * @return
+     */
+    public boolean envoie() {
+        int n = serveur.getForObject(serveurHTTP + "/type_bot", Integer.class);
+        if (n < 0) {
             return false;
         }
         return true;
     }
 
-    public JSONObject getDeck() throws Exception{
+    /**
+     * @return
+     * @throws Exception
+     */
+    public JSONObject getDeck() throws Exception {
         return new JSONObject(serveur.getForObject(serveurHTTP + "/deck", String.class));
     }
 
-    public JSONObject getPlateau() throws Exception{
+    /**
+     * @return
+     * @throws Exception
+     */
+    public JSONObject getPlateau() throws Exception {
         return new JSONObject(serveur.getForObject(serveurHTTP + "/plateau", String.class));
     }
 
 
-    public String getScore() throws Exception{
+    /**
+     * @return
+     * @throws Exception
+     */
+    public String getScore() throws Exception {
         return serveur.getForObject(serveurHTTP + "/partie", String.class);
     }
 
 
+    /**
+     * @return
+     */
     @RequestMapping("/panda")
-    public Integer panda(){
+    public Integer panda() {
         setBot(1);
         return bot;
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/jardinier")
-    public Integer jardinier(){
+    public Integer jardinier() {
         setBot(2);
         return bot;
     }
 
+    /**
+     * @return
+     */
     @RequestMapping("/parcelle")
-    public Integer parcelle(){
+    public Integer parcelle() {
         setBot(3);
         return bot;
     }
+
+    /**
+     * @return
+     */
     @RequestMapping("/random")
-    public Integer random(){
+    public Integer random() {
         setBot(4);
         return bot;
     }
 
 
-
+    /**
+     * @return
+     */
     @RequestMapping("/type")
-    public String type(){
+    public String type() {
         this.type = true;
-        return bot+"";
+        return bot + "";
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("/mon_score")
-    public String score() throws Exception{
+    public String score() throws Exception {
         return getScore();
     }
 
-
-
-    public int getClient() {
-        return client;
-    }
-    public boolean getType() {
-        return type;
-    }
-    public int setBot(int i) {
-        return this.bot = i;
-    }
 }
+
+
+
