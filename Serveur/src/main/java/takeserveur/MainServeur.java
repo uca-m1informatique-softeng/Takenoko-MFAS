@@ -29,7 +29,7 @@ public class MainServeur {
     @Bean
     public CommandLineRunner commandLineRunner() {
         return args -> {
-            System.out.println("Démarrage du serveur sur le port "+ serveur.getPort());
+            System.out.println("Démarrage du serveur sur le port "+ serveur.getPortServeur());
             serveur.setDeck(jeuServeur.getDeck().versJson());
             while(!serveur.isPartiePrete()){
             }
