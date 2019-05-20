@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import takenoko.joueur.*;
-import takenoko.moteur.Affichage;
 import takenoko.moteur.Deck;
 import takenoko.moteur.Enums;
 import takenoko.moteur.Partie;
@@ -32,19 +31,12 @@ public class JeuServeur {
     @Qualifier("client")
     private int client;
 
-    /* public void jouerTour(){
-         System.out.println("++++++ Début de la partie ++++++");
-         ArrayList<Bot> temp = new ArrayList<>();
-         temp.add(joueurs.get(0));
-         partie.jouer(temp);
-         Affichage.affichagePlateau();
 
-     }
-
-     public void piocher(){
-         joueurs.get(0).piocheUneParcelle();
-     }
- */
+    /**
+     * Le jeu
+     * @param a
+     * @return
+     */
     public String game(Integer a){
 
         partie = new Partie();

@@ -6,15 +6,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
-
-
 /**
  * C'est la classe du Client
  */
 @RestController
 public class Client {
-
-
 
     int client;
     private int identifiant;
@@ -165,6 +161,7 @@ public class Client {
 
 
     /**
+     * La connexion du client
      * @return
      */
     public boolean connect() {
@@ -175,6 +172,7 @@ public class Client {
     }
 
     /**
+     *
      * @return
      */
     public boolean envoie() {
@@ -183,22 +181,6 @@ public class Client {
             return false;
         }
         return true;
-    }
-
-    /**
-     * @return
-     * @throws Exception
-     */
-    public JSONObject getDeck() throws Exception {
-        return new JSONObject(serveur.getForObject(serveurHTTP + "/deck", String.class));
-    }
-
-    /**
-     * @return
-     * @throws Exception
-     */
-    public JSONObject getPlateau() throws Exception {
-        return new JSONObject(serveur.getForObject(serveurHTTP + "/plateau", String.class));
     }
 
 
@@ -212,6 +194,7 @@ public class Client {
 
 
     /**
+     * Le bot panda
      * @return
      */
     @RequestMapping("/panda")
@@ -221,6 +204,7 @@ public class Client {
     }
 
     /**
+     * Le bot jardinier
      * @return
      */
     @RequestMapping("/jardinier")
@@ -230,6 +214,7 @@ public class Client {
     }
 
     /**
+     * Le bot parcelle
      * @return
      */
     @RequestMapping("/parcelle")
@@ -239,6 +224,7 @@ public class Client {
     }
 
     /**
+     * Le bot random
      * @return
      */
     @RequestMapping("/random")
@@ -258,6 +244,7 @@ public class Client {
     }
 
     /**
+     * Renvoie le score
      * @return
      * @throws Exception
      */

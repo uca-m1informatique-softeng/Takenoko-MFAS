@@ -2,6 +2,9 @@
 
 ## Berriri Mehdi, Bounab Fayçal, Djema Sofiane
 
+Faute de temps et de problème d'organisation nous n'avons malheureusement 
+pas implémenté le Docker ni les différents builds sur Travis .
+
 ### 1. Docker
 
 ### 2. Travis

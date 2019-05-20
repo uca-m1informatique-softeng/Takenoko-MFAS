@@ -13,21 +13,37 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan({"takenoko.moteur","takenoko.joueur"})
 public class ConfigurationClient implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
 
+    /**
+     * Le port du client
+     * @return
+     */
     @Bean("portClient")
     public int portClient(){
         return 8088;
     }
 
+    /**
+     * L'hôte du client
+     * @return
+     */
     @Bean("hostClient")
     public String hostClient(){
         return "localhost";
     }
 
+    /**
+     * Le serveur
+     * @return
+     */
     @Bean("portServeur")
     public int serveur(){
         return 8080;
     }
 
+    /**
+     * L'hôte du serveur
+     * @return
+     */
     @Bean("hostServeur")
     public String hostServeur(){
         return "localhost";

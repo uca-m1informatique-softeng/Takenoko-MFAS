@@ -12,8 +12,6 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class Serveur {
 
-
-
     private int nbClient;
 
     private int nbClientReady;
@@ -87,6 +85,8 @@ public class Serveur {
     public void setDeck(JSONObject deck) {
         this.deck = deck;
     }
+
+
     //////////////////////////////Méthodes//////////////////////////////
 
     /**
@@ -108,6 +108,7 @@ public class Serveur {
 
 
     /**
+     * Retourne True si la partie est prete
      * @return
      */
     public boolean isPartiePrete(){
@@ -155,6 +156,7 @@ public class Serveur {
     }
 
     /**
+     * Renvois le deck
      * @return
      */
     @RequestMapping("/deck")

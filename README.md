@@ -20,4 +20,8 @@ Nous avons supprimé et/ou corrigé quelques éléments
 du code (anti-pattern "Joueur") , aussi on a commencé à implementer des classes serveur 
 et client (qui ne peuvent pas comuniquer entre elles parce qu'on n'a pas réussi le découpage 
 du code en plusieurs parties ), il y des tests cucumber avec spring (sur les méthodes 
-de pioche de parcelles et d'objectifs) et vu que nous avons pris du retard sur le Rest le Docker n'a pas été fait.
+de pioche de parcelles et d'objectifs) et vu que nous avons pris du retard sur le Rest, le Docker n'a pas été fait.
+
+
+### MAI22 Client & Finalisation :
+Nous avons bien découper notre projet en 3 parties(Client,Commun et Serveur)

@@ -1,18 +1,14 @@
-package takenokoServeurCucumber;
+package takeserveurcucumber;
 
-import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.springframework.http.HttpStatus;
-import takeserveur.Serveur;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static sun.nio.cs.Surrogate.is;
 
 
-public class testStepDefs extends testSpring{
+public class ServeurStepDefs extends ServeurSpring {
 
 
     @Given("^aucun client n est connecte$")
