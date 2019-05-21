@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 public class Serveur {
 
     private int nbClient;
-
+    private String résultat;
     private int nbClientReady;
 
     private int debut;
@@ -86,6 +86,14 @@ public class Serveur {
         this.deck = deck;
     }
 
+    public String getRésultat() {
+        return résultat;
+    }
+
+    public void setRésultat(String résultat) {
+        this.résultat = résultat;
+    }
+
 
     //////////////////////////////Méthodes//////////////////////////////
 
@@ -98,7 +106,7 @@ public class Serveur {
     public Serveur(@Qualifier("portServeur") int portServeur, @Qualifier("hostServeur") String hostServeur, @Qualifier("client") int nbClient ){
         this.client = new RestTemplate();
         this.portServeur = portServeur;
-
+        this.résultat = "";
         this.hostServeur = hostServeur;
         this.nbClient = nbClient;
         this.nbClientReady = 0;
@@ -124,7 +132,7 @@ public class Serveur {
     @RequestMapping("/nouvelle-connexion")
     public Integer acceptConnection(){
         System.out.println("connexion...");
-        this.nbClientReady = 1;
+        this.nbClientReady ++;
         return 1;
     }
 
@@ -134,7 +142,7 @@ public class Serveur {
     @RequestMapping("/type_bot")
     public Integer type_bot(){
         System.out.println("envoie du type");
-        this.debut = 1;
+        this.debut ++;
         return 1;
     }
 
@@ -144,17 +152,26 @@ public class Serveur {
      */
     @RequestMapping("/partie")
     public String partie() throws Exception{
+        setRésultat(jeuServeur.game(type().intValue(),type2().intValue()));
+        return résultat;
+    }
 
-        return jeuServeur.game(type().intValue());
+    @RequestMapping("/resultat")
+    public String res(){
+        return getRésultat();
     }
 
     /**
      * @return
      */
     public Integer type(){
-        return Integer.parseInt(client.getForObject("http://localhost:8088/type",String.class));
+        return Integer.parseInt(client.getForObject("http://192.168.43.13:8088/type",String.class));
     }
 
+
+    public Integer type2(){
+        return Integer.parseInt(client.getForObject("http://192.168.43.154:8089/type",String.class));
+    }
     /**
      * Renvois le deck
      * @return

@@ -37,7 +37,7 @@ public class JeuServeur {
      * @param a
      * @return
      */
-    public String game(Integer a){
+    public String game(Integer a,Integer b){
 
         partie = new Partie();
 

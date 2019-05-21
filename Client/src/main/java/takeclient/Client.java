@@ -189,7 +189,7 @@ public class Client {
      * @throws Exception
      */
     public String getScore() throws Exception {
-        return serveur.getForObject(serveurHTTP + "/partie", String.class);
+        return serveur.getForObject(serveurHTTP + "/resultat", String.class);
     }
 
 

@@ -46,7 +46,7 @@ public class ConfigurationClient implements WebServerFactoryCustomizer<Configura
      */
     @Bean("hostServeur")
     public String hostServeur(){
-        return "localhost";
+        return "192.168.43.154";
     }
 
     @Override
