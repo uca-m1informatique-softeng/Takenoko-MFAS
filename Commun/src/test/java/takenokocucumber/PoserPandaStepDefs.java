@@ -13,6 +13,7 @@ public class PoserPandaStepDefs extends PoserPandaSpring {
 
     @Given("^La parcelle posée a (\\d+) bambou$")
     public void parcelle_posee(int arg1) throws Exception {
+        plateau.resetPlateau();
         init();
         assertEquals(arg1, plateau.getParcelle(new Point3D(1,0,-1)).getNbBambou());
     }

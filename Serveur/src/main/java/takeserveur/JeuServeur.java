@@ -43,7 +43,7 @@ public class JeuServeur {
 
         ArrayList <Bot> listeDesJoueurs=new ArrayList<>();
 
-
+        //Création du bot pour le joueur 1
         if(a == 1){
             joueurs.add(new BotPanda());
             joueurs.get(0).setCouleur(Enums.CouleurBot.ROUGE);}
@@ -59,14 +59,30 @@ public class JeuServeur {
             joueurs.get(0).setCouleur(Enums.CouleurBot.BLEU);
         }
 
+        //Création du bot pour le joueur 2
+
+        if(b== 1){
+            joueurs.add(new BotPanda());
+            joueurs.get(1).setCouleur(Enums.CouleurBot.VERT);}
+
+        else if(b == 2){
+            joueurs.add(new BotJardinier());
+            joueurs.get(1).setCouleur(Enums.CouleurBot.ROUGE);}
+        else if (b == 3){
+            joueurs.add(new BotParcelle());
+            joueurs.get(1).setCouleur(Enums.CouleurBot.BLEU);}
+        else {
+            joueurs.add(new BotRandom());
+            joueurs.get(1).setCouleur(Enums.CouleurBot.VERT);
+        }
 
         listeDesJoueurs.add(joueurs.get(0));
-        BotRandom adversaire = new BotRandom();
-        adversaire.setCouleur(Enums.CouleurBot.VERT);
-        listeDesJoueurs.add(adversaire);
+        listeDesJoueurs.add(joueurs.get(1));
         partie.jouer(listeDesJoueurs);
 
-        return  "Score du client : " + listeDesJoueurs.get(0).getScore()+"  -  Score du BotRandom : "+listeDesJoueurs.get(1).getScore();
+        String res =  "Score du Joueur 1 : " + listeDesJoueurs.get(0).getScore()+"  -  Score du Joueur 2 : "+listeDesJoueurs.get(1).getScore();
+
+        return res;
 
     }
 

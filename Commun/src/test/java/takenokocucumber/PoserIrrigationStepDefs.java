@@ -12,6 +12,7 @@ public class PoserIrrigationStepDefs extends PoserIrrigationSpring {
     @Given("^Le plateau de départ contient (\\d+) Parcelle$")
     public void plateau_avant(int arg1) throws Exception {
         deck.resetDeck();
+        plateau.resetPlateau();
         assertEquals(arg1, plateau.getAllParcelle().size());
     }
 

@@ -14,15 +14,15 @@ import takenoko.moteur.personnages.Panda;
 @ContextConfiguration()
 public class PoserPandaSpring {
 
-    static Plateau plateau = Plateau.getInstance();
-    static Parcelle parcelle = new Parcelle();
+     Plateau plateau = Plateau.getInstance();
+
+     Parcelle parcelle = new Parcelle();
     Panda panda= new Panda();
     Point3D point =  new Point3D(1,0,-1);
 
     public void init(){
         plateau.resetPlateau();
         plateau.poser(parcelle ,point);
-
     }
 
     public void deplacer_panda(){

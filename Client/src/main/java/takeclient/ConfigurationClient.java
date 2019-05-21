@@ -19,7 +19,7 @@ public class ConfigurationClient implements WebServerFactoryCustomizer<Configura
      */
     @Bean("portClient")
     public int portClient(){
-        return 8088;
+        return 8089;
     }
 
     /**

@@ -25,3 +25,5 @@ de pioche de parcelles et d'objectifs) et vu que nous avons pris du retard sur l
 
 ### MAI22 Client & Finalisation :
 Nous avons bien découper notre projet en 3 parties(Client,Commun et Serveur)
+Actuellement nous pouvons faire jouer une partie avec deux clients .
+Nous n'avons pas réussi à faire le Docker.

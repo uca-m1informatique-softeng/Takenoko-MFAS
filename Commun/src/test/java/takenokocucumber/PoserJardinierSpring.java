@@ -5,6 +5,7 @@ import javafx.geometry.Point3D;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import takenoko.Main;
+import takenoko.moteur.Enums;
 import takenoko.moteur.Parcelle;
 import takenoko.moteur.Plateau;
 import takenoko.moteur.personnages.Jardinier;
@@ -15,8 +16,8 @@ import takenoko.moteur.personnages.Jardinier;
 @ContextConfiguration()
 public class PoserJardinierSpring {
 
-    static Plateau plateau = Plateau.getInstance();
-    static Parcelle parcelle = new Parcelle();
+     Plateau plateau = Plateau.getInstance();
+     Parcelle parcelle = new Parcelle();
     Jardinier jardinier = new Jardinier();
     Point3D point =  new Point3D(1,0,-1);
 

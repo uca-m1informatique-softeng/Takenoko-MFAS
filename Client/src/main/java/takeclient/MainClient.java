@@ -27,15 +27,13 @@ public class MainClient {
             System.out.println("Démarrage du client sur le port " + client.getPortClient());
             boolean connected = client.connect();
             if(connected){
-                System.out.println("Connection acceptée, ID : " + client.getIdentifiant());
-
                 while(!client.getType()){
 
                 }
                 client.envoie();
             }
             else {
-                System.out.println("Connection refusée");
+                System.out.println("Connexion refusée");
             }
 
         };
